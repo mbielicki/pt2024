@@ -8,8 +8,27 @@ namespace CalculatorTest
         [TestMethod]
         public void TestAdd()
         {
-            int result = Calculator.add(2, 2);
+            Calculator calculator = new Calculator(); 
+            int result = calculator.add(2, 2);
             Assert.AreEqual(4, result);
+        }  
+        public void TestRemove()
+        {
+            Calculator calculator = new Calculator(); 
+            int result = calculator.remove(4, 2);
+            Assert.AreEqual(2, result);
+        }   
+        public void TestMultiply()
+        {
+            Calculator calculator = new Calculator(); 
+            int result = calculator.multiply(4, 2);
+            Assert.AreEqual(8, result);
+        }   
+        public void TestDivide()
+        {
+            Calculator calculator = new Calculator(); 
+            int result = calculator.divide(6, 2);
+            Assert.AreEqual(3, result);
         }
     }
 }

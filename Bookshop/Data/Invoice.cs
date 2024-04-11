@@ -15,7 +15,6 @@
         {
             if (books.Count == 0)
                 throw new NoBooksInInvoice();
-
             Id = id;
             Books = books;
             Customer = customer;

@@ -7,7 +7,7 @@ namespace BookshopTest.DataTest
     public class InMemoryStorageTest
     {
         [TestMethod]
-        public void AddToGetFromCatalogue()
+        public void AddGet()
         {
             int bookId = 321;
             string name = "Pan Tadeusz";
@@ -17,8 +17,8 @@ namespace BookshopTest.DataTest
             Book book = new Book(bookId, name, author, description, price);
 
             IStorage storage = new InMemoryStorage();
-            storage.addToCatalogue(book);
-            Assert.AreEqual(book, storage.getFromCatalogue(bookId));
+            storage.add(book);
+            Assert.AreEqual(book, storage.get(bookId));
         }
     }
 }

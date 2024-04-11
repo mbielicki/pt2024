@@ -4,8 +4,9 @@ namespace Bookshop.Data
 {
     public interface IStorage
     {
-        void addToCatalogue(Book book);
-        void removeFromCatalogue(int bookId);
-        Book? getFromCatalogue(int bookId);
+        void add(Book book);
+        void remove(int bookId);
+        Book get(int bookId);
+        void update(Book book);
     }
 }

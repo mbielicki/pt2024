@@ -1,4 +1,6 @@
-﻿namespace BookshopTest
+﻿using Bookshop.Data;
+
+namespace BookshopTest.DataTest
 {
     [TestClass]
     public class BookTest

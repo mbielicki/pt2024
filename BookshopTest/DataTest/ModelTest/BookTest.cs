@@ -1,6 +1,6 @@
-﻿using Bookshop.Data;
+﻿using Bookshop.Data.Model;
 
-namespace BookshopTest.DataTest
+namespace BookshopTest.DataTest.ModelTest
 {
     [TestClass]
     public class BookTest
@@ -21,6 +21,6 @@ namespace BookshopTest.DataTest
             Assert.AreEqual(book.Description, description);
             Assert.AreEqual(book.Price, price);
         }
-        
+
     }
 }

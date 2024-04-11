@@ -1,10 +1,11 @@
-﻿namespace Bookshop.Data
+﻿namespace Bookshop.Data.Model
 {
     public class Inventory
     {
         private Dictionary<Book, int> inventory;
 
-        public Inventory() {
+        public Inventory()
+        {
             inventory = new Dictionary<Book, int>();
         }
 
@@ -25,7 +26,7 @@
                 else inventory.Remove(book);
 
             }
-                
+
             else throw new NoSuchBookInInventory();
         }
 
@@ -36,7 +37,7 @@
         }
     }
 
-    public class NoSuchBookInInventory : Exception 
+    public class NoSuchBookInInventory : Exception
     {
 
     }

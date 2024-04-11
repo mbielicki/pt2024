@@ -1,4 +1,6 @@
-﻿namespace Bookshop.Data
+﻿using Bookshop.Data.Model;
+
+namespace Bookshop.Data
 {
     public interface IStorage
     {

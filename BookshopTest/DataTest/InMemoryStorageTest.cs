@@ -1,4 +1,5 @@
 ﻿using Bookshop.Data;
+using Bookshop.Data.Model;
 
 namespace BookshopTest.DataTest
 {

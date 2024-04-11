@@ -1,4 +1,4 @@
-﻿namespace Bookshop.Data
+﻿namespace Bookshop.Data.Model
 {
     public class NoBooksInInvoice : Exception
     {

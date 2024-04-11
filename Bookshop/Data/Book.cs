@@ -2,12 +2,11 @@
 {
     public class Book
     {
-        public int Id {  get; private set; }
+        public int? Id {  get; set; }
         public string Name { get; private set; }
-
-        public string Author { get; private set; }
-        public string Description { get; private set; }
-        public double Price { get; private set; }
+        public string Author { get; set; }
+        public string Description { get; set; }
+        public double Price { get; set; }
 
         public Book(int Id, string Name, string Author, string Description, double Price) {
             this.Id = Id;
@@ -15,6 +14,21 @@
             this.Author = Author;
             this.Description = Description;
             this.Price = Price;
+        }
+        public Book(string Name, string Author, string Description, double Price) 
+        {
+            this.Id = null;
+            this.Name = Name;
+            this.Author = Author;
+            this.Description = Description;
+            this.Price = Price;
+        }
+
+        public override bool Equals(object? obj)
+        {
+            if (obj == null || !(obj is Book)) 
+                return false;
+            return this.Id == ((Book) obj).Id;
         }
     }
 }

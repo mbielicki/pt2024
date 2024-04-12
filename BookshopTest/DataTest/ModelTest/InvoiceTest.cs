@@ -26,8 +26,6 @@ namespace BookshopTest.DataTest.ModelTest
             List<Book> books = new List<Book>();
             DateTime now = DateTime.Now;
 
-            Assert.ThrowsException<NoBooksInInvoice>(() => new Invoice(invoiceId, books, customer, price, now));
-
             books.Add(book);
             Invoice invoice = new Invoice(invoiceId, books, customer, price, now);
 

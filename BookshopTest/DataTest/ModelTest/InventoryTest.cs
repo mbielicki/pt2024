@@ -9,26 +9,21 @@ namespace BookshopTest.DataTest.ModelTest
         public void testInventory()
         {
             int bookId = 321;
-            string name = "Pan Tadeusz";
-            string author = "Adam Mickiewicz";
-            string description = "The Last Foray in Lithuania";
-            double price = 10;
-            Book book = new Book(bookId, name, author, description, price);
 
             Inventory inventory = new Inventory();
-            Assert.AreEqual(0, inventory.Count(book));
+            Assert.AreEqual(0, inventory.Count(bookId));
 
-            inventory.Add(book);
-            Assert.AreEqual(1, inventory.Count(book));
+            inventory.Add(bookId);
+            Assert.AreEqual(1, inventory.Count(bookId));
 
-            inventory.Add(book);
-            Assert.AreEqual(2, inventory.Count(book));
+            inventory.Add(bookId);
+            Assert.AreEqual(2, inventory.Count(bookId));
 
-            inventory.Remove(book);
-            Assert.AreEqual(1, inventory.Count(book));
+            inventory.Remove(bookId);
+            Assert.AreEqual(1, inventory.Count(bookId));
 
-            inventory.Remove(book);
-            Assert.ThrowsException<NoSuchBookInInventory>(() => inventory.Remove(book));
+            inventory.Remove(bookId);
+            Assert.ThrowsException<KeyNotFoundException>(() => inventory.Remove(bookId));
 
         }
     }

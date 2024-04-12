@@ -1,12 +1,12 @@
 ﻿using Bookshop.Data.Model;
 
-namespace Bookshop.Data
+namespace Bookshop.Logic
 {
-    public interface IStorage
+    public interface IService
     {
         int add(Book book);
         void remove(int bookId);
-        Book? get(Predicate<Book> query);
+        Book get(int bookId);
         void update(Book book);
     }
 }

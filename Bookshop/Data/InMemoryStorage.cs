@@ -1,4 +1,5 @@
 ﻿using Bookshop.Data.Model;
+using System.Net;
 
 namespace Bookshop.Data
 {
@@ -8,6 +9,7 @@ namespace Bookshop.Data
         List<Book> catalogue = new List<Book>();
         List<Customer> customers = new List<Customer>();
         List<Invoice> invoices = new List<Invoice>();
+        int nextBookId = 0;
 
         public void update(Book book)
         {
@@ -18,14 +20,17 @@ namespace Bookshop.Data
             bookToUpdate.Price = book.Price;
         }
 
-        public void add(Book book)
+        public int add(Book book)
         {
+            int bookId = nextBookId++;
+            book.Id = bookId;
             catalogue.Add(book);
+            return bookId;
         }
 
-        public Book get(int bookId)
+        public Book? get(Predicate<Book> query)
         {
-            return catalogue.Find(book => book.Id == bookId);
+            return catalogue.Find(query);
         }
 
         public void remove(int bookId)
@@ -39,5 +44,6 @@ namespace Bookshop.Data
                 }
             }
         }
+
     }
 }

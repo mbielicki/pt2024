@@ -16,16 +16,5 @@
             this.Description = Description;
             this.Price = Price;
         }
-
-        public override bool Equals(object? obj)
-        {
-            if (obj == null || obj is not Book) return false;
-            Book other = obj as Book;
-            return this.Id == other.Id
-                && this.Name == other.Name
-                && this.Author == other.Author
-                && this.Description == other.Description
-                && this.Price == other.Price;
-        }
     }
 }

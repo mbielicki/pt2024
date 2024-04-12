@@ -1,13 +1,13 @@
-﻿using Bookshop.Data;
+﻿using Bookshop.Data.API;
 using Bookshop.Data.Model;
 
 namespace Bookshop.Logic
 {
     internal class BookValidator
     {
-        private IStorage _storage;
+        private IBookshopStorage _storage;
 
-        public BookValidator(IStorage storage) 
+        public BookValidator(IBookshopStorage storage) 
         {
             _storage = storage;
         }
@@ -33,7 +33,7 @@ namespace Bookshop.Logic
 
         internal bool alreadyInStorage(Book book)
         {
-            return _storage.get(b => haveSameProperties(book, b)) != null;
+            return _storage.Catalogue.get(b => haveSameProperties(book, b)) != null;
         }
 
         internal bool incorrectProperties(Book book)

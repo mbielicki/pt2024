@@ -1,12 +1,12 @@
 ﻿using Bookshop.Data.Model;
 
-namespace Bookshop.Data
+namespace Bookshop.Data.API
 {
-    public interface IStorage
+    public interface IStorage<T>
     {
-        int add(Book book);
-        bool remove(int bookId);
-        Book? get(Predicate<Book> query);
-        void update(Book book);
+        ID add(T item);
+        bool remove(ID id);
+        T? get(Predicate<T> query);
+        void update(T newItem);
     }
 }

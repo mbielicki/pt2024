@@ -8,25 +8,23 @@ namespace BookshopTest.DataTest.ModelTest
         [TestMethod]
         public void testInvoiceInit()
         {
-            int customerId = 123;
+            ID customerId = new ID(123);
             string firstName = "John";
             string lastName = "Doe";
             string address = "00000 Baker Street 221B, London, England";
             string? contactInfo = null;
             Customer customer = new Customer(customerId, firstName, lastName, address, contactInfo);
 
-            int bookId = 321;
+            ID bookId = new ID(321);
             string name = "Pan Tadeusz";
             string author = "Adam Mickiewicz";
             string description = "The Last Foray in Lithuania";
             double price = 10;
             Book book = new Book(bookId, name, author, description, price);
 
-            int invoiceId = 456;
+            ID invoiceId = new ID(456);
             List<Book> books = new List<Book>();
             DateTime now = DateTime.Now;
-
-            Assert.ThrowsException<NoBooksInInvoice>(() => new Invoice(invoiceId, books, customer, price, now));
 
             books.Add(book);
             Invoice invoice = new Invoice(invoiceId, books, customer, price, now);

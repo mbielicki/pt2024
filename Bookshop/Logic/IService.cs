@@ -2,11 +2,11 @@
 
 namespace Bookshop.Logic
 {
-    public interface IService
+    public interface IService<I, T> where I : ID
     {
-        int add(Book book);
-        void remove(int bookId);
-        Book get(int bookId);
-        void update(Book newBook);
+        I add(T item);
+        void remove(I id);
+        T get(I id);
+        void update(T newItem);
     }
 }

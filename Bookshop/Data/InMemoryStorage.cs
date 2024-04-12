@@ -33,16 +33,17 @@ namespace Bookshop.Data
             return catalogue.Find(query);
         }
 
-        public void remove(int bookId)
+        public bool remove(int bookId)
         {
             foreach (Book book in catalogue)
             {
                 if (book.Id == bookId)
                 {
                     catalogue.Remove(book);
-                    break;
+                    return true;
                 }
             }
+            return false;
         }
 
     }

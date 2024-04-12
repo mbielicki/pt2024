@@ -1,5 +1,6 @@
 ﻿using Bookshop.Data;
 using Bookshop.Data.Model;
+using System.Net;
 
 namespace Bookshop.Logic
 {
@@ -15,7 +16,7 @@ namespace Bookshop.Logic
         public int add(Book book)
         {
             if (_validator.incorrectProperties(book))
-                throw new IncorrectBookProperties();
+                throw new InvalidBookProperties();
 
             if (_validator.alreadyInStorage(book))
                 throw new BookAlreadyExists();
@@ -27,18 +28,28 @@ namespace Bookshop.Logic
         {
             Book? result = _storage.get(b => b.Id == bookId);
             if (result == null) 
-                throw new IncorrectBookProperties();
+                throw new BookIdNotFound();
             return result;
         }
 
         public void remove(int bookId)
         {
-            throw new NotImplementedException();
+            if (_storage.remove(bookId)) return;
+            throw new BookIdNotFound();
         }
 
-        public void update(Book book)
+        public void update(Book newBook)
         {
-            throw new NotImplementedException();
+            if (_validator.incorrectProperties(newBook))
+                throw new InvalidBookProperties();
+            Book? result = _storage.get(b => b.Id == newBook.Id);
+            if (result == null)
+                throw new BookIdNotFound();
+
+            result.Name = newBook.Name;
+            result.Author = newBook.Author;
+            result.Description = newBook.Description;
+            result.Price = newBook.Price;
         }
     }
 }

@@ -7,6 +7,6 @@ namespace Bookshop.Logic
         int add(Book book);
         void remove(int bookId);
         Book get(int bookId);
-        void update(Book book);
+        void update(Book newBook);
     }
 }

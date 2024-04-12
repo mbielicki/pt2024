@@ -4,6 +4,7 @@
     {
     }
 
-    public class IncorrectBookProperties : Exception { }
+    public class InvalidBookProperties : Exception { }
+    public class BookIdNotFound : Exception { }
 
 }

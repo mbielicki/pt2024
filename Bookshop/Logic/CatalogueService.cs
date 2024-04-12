@@ -1,6 +1,5 @@
 ﻿using Bookshop.Data;
 using Bookshop.Data.Model;
-using System.Net;
 
 namespace Bookshop.Logic
 {

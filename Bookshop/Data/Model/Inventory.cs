@@ -30,9 +30,4 @@
             return inventory[bookId];
         }
     }
-
-    public class NoSuchBookInInventory : Exception
-    {
-
-    }
 }

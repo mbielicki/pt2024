@@ -1,9 +1,9 @@
-﻿using Bookshop.Data;
+﻿using Bookshop.Data.API;
 using Bookshop.Data.Model;
 
 namespace Bookshop.Logic
 {
-    public class CatalogueService : IService<BookID, Book>
+    public class CatalogueService : IService<ID, Book>
     {
         private IBookshopStorage _storage;
         private BookValidator _validator;
@@ -12,7 +12,7 @@ namespace Bookshop.Logic
             _storage = storage;
             _validator = new BookValidator(storage);
         }
-        public BookID add(Book book)
+        public ID add(Book book)
         {
             if (_validator.incorrectProperties(book))
                 throw new InvalidBookProperties();
@@ -23,7 +23,7 @@ namespace Bookshop.Logic
             return _storage.Catalogue.add(book);
         }
 
-        public Book get(BookID bookId)
+        public Book get(ID bookId)
         {
             Book? result = _storage.Catalogue.get(b => b.Id == bookId);
             if (result == null) 
@@ -31,7 +31,7 @@ namespace Bookshop.Logic
             return result;
         }
 
-        public void remove(BookID bookId)
+        public void remove(ID bookId)
         {
             if (_storage.Catalogue.remove(bookId)) return;
             throw new BookIdNotFound();

@@ -1,14 +1,14 @@
 ﻿namespace Bookshop.Data.Model
 {
-    public class Book
+    public class Book : HasId
     {
-        public BookID? Id { get; set; }
+        public ID? Id { get; set; }
         public string? Name { get; set; }
         public string? Author { get; set; }
         public string? Description { get; set; }
         public double? Price { get; set; }
-
-        public Book(BookID? Id = null, string? Name = null, string? Author = null, string? Description = null, double? Price = null)
+        
+        public Book(ID? Id = null, string? Name = null, string? Author = null, string? Description = null, double? Price = null)
         {
             this.Id = Id;
             this.Name = Name;

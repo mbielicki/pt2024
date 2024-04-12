@@ -8,7 +8,7 @@ namespace BookshopTest.DataTest.ModelTest
         [TestMethod]
         public void testCustomerInit()
         {
-            int id = 0;
+            ID id = new ID();
             string firstName = "John";
             string lastName = "Doe";
             string address = "00000 Baker Street 221B, London, England";

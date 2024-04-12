@@ -1,15 +1,15 @@
 ﻿namespace Bookshop.Data.Model
 {
-    public class Customer
+    public class Customer : HasId
     {
-        public int Id { get; private set; }
-        public string FirstName { get; private set; }
-        public string LastName { get; private set; }
-        public string? Address { get; private set; }
+        public ID Id { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public string? Address { get; set; }
 
-        public string? ContactInfo { get; private set; }
+        public string? ContactInfo { get; set; }
 
-        public Customer(int id, string firstName, string lastName, string? address, string? contactInfo)
+        public Customer(ID? id, string? firstName, string? lastName, string? address, string? contactInfo)
         {
             Id = id;
             FirstName = firstName;

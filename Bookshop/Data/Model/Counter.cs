@@ -1,4 +1,4 @@
-﻿namespace Bookshop.Data.API
+﻿namespace Bookshop.Data.Model
 {
     public class Counter<E>
     {

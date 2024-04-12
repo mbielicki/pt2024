@@ -1,10 +1,10 @@
-﻿using Bookshop.Data.API;
-using Bookshop.Data.Model;
+﻿using Bookshop.Data.Model;
 
-namespace Bookshop.Data
+namespace Bookshop.Data.API
 {
     public interface IBookshopStorage
     {
-        StorageAPI<BookID, Book> Catalogue { get; }
+        IStorage<Book> Catalogue { get; }
+        IStorage<Customer> Customers { get; }
     }
 }

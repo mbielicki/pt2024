@@ -19,5 +19,15 @@ namespace BookshopTest.DataTest.ModelTest
             Assert.AreNotEqual(book1, customer);
             Assert.AreNotEqual(book1, bookNull);
         }
+        [TestMethod]
+        public void testIncrement() 
+        {
+            ID book1 = new BookID(100);
+            ID book2 = new BookID(101);
+
+            Assert.AreNotEqual(book1, book2);
+            book1++;
+            Assert.AreEqual(book1, book2);
+        }
     }
 }

@@ -1,6 +1,4 @@
-﻿using System.Xml.Linq;
-
-namespace Bookshop.Data.API
+﻿namespace Bookshop.Data.API
 {
     public class Counter<E>
     {

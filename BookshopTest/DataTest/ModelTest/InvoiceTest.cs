@@ -15,7 +15,7 @@ namespace BookshopTest.DataTest.ModelTest
             string? contactInfo = null;
             Customer customer = new Customer(customerId, firstName, lastName, address, contactInfo);
 
-            int bookId = 321;
+            BookID bookId = new BookID(321);
             string name = "Pan Tadeusz";
             string author = "Adam Mickiewicz";
             string description = "The Last Foray in Lithuania";

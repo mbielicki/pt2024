@@ -2,10 +2,10 @@
 
 namespace Bookshop.Data
 {
-    public interface IStorage
+    public interface IBookshopStorage
     {
-        int add(Book book);
-        bool remove(int bookId);
+        BookID add(Book book);
+        bool remove(BookID bookId);
         Book? get(Predicate<Book> query);
         void update(Book book);
     }

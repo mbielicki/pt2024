@@ -2,13 +2,13 @@
 {
     public class Book
     {
-        public int? Id { get; set; }
+        public BookID? Id { get; set; }
         public string? Name { get; set; }
         public string? Author { get; set; }
         public string? Description { get; set; }
         public double? Price { get; set; }
 
-        public Book(int? Id = null, string? Name = null, string? Author = null, string? Description = null, double? Price = null)
+        public Book(BookID? Id = null, string? Name = null, string? Author = null, string? Description = null, double? Price = null)
         {
             this.Id = Id;
             this.Name = Name;

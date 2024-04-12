@@ -5,9 +5,9 @@ namespace Bookshop.Logic
 {
     internal class BookValidator
     {
-        private IStorage _storage;
+        private IBookshopStorage _storage;
 
-        public BookValidator(IStorage storage) 
+        public BookValidator(IBookshopStorage storage) 
         {
             _storage = storage;
         }

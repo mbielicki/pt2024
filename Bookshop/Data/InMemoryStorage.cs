@@ -1,18 +1,14 @@
 ﻿using Bookshop.Data.API;
 using Bookshop.Data.Model;
-using Bookshop.Logic;
-using System.Net;
-using System.Reflection.Metadata;
-
 namespace Bookshop.Data
 {
-    public class InMemoryStorage : IStorage
+    public class InMemoryStorage : IBookshopStorage
     {
-        Counter<int> inventory = new Counter<int>();
+        Counter<BookID> inventory = new Counter<BookID>();
         List<Book> catalogue = new List<Book>();
         List<Customer> customers = new List<Customer>();
         List<Invoice> invoices = new List<Invoice>();
-        int nextBookId = 0;
+        BookID nextBookId = new BookID(0);
 
         //public StorageAPI Catalogue = StorageAPIFactory(catalogue);
 
@@ -43,9 +39,9 @@ namespace Bookshop.Data
             bookToUpdate.Price = book.Price;
         }
 
-        public int add(Book book)
+        public BookID add(Book book)
         {
-            int bookId = nextBookId++;
+            BookID bookId = nextBookId++;
             book.Id = bookId;
             catalogue.Add(book);
             return bookId;
@@ -56,7 +52,7 @@ namespace Bookshop.Data
             return catalogue.Find(query);
         }
 
-        public bool remove(int bookId)
+        public bool remove(BookID bookId)
         {
             foreach (Book book in catalogue)
             {

@@ -10,8 +10,8 @@ namespace BookshopTest.LogicTest
         [TestMethod]
         public void testAddGet()
         {
-            IStorage storage = new InMemoryStorage();
-            IService catalogue = new CatalogueService(storage);
+            IBookshopStorage storage = new InMemoryStorage();
+            IService<BookID, Book> catalogue = new CatalogueService(storage);
 
             string name = "Pan Tadeusz";
             string author = "Adam Mickiewicz";
@@ -19,7 +19,7 @@ namespace BookshopTest.LogicTest
             double price = 10;
             Book book = new Book(null, name, author, description, price);
 
-            int id = catalogue.add(book);
+            BookID id = catalogue.add(book);
             Assert.AreEqual(id, catalogue.get(id).Id);
 
             Book identicalBook = new Book(null, name, author, description, price);
@@ -32,8 +32,8 @@ namespace BookshopTest.LogicTest
         [TestMethod]
         public void testUpdateRemove()
         {
-            IStorage storage = new InMemoryStorage();
-            IService catalogue = new CatalogueService(storage);
+            IBookshopStorage storage = new InMemoryStorage();
+            IService<BookID, Book> catalogue = new CatalogueService(storage);
 
             string name = "Pan Tadeusz";
             string author = "Adam Mickiewicz";
@@ -41,7 +41,7 @@ namespace BookshopTest.LogicTest
             double price = 10;
             Book book = new Book(null, name, author, description, price);
 
-            int id = catalogue.add(book);
+            BookID id = catalogue.add(book);
 
             Book newBook = new Book(id, name, author, description, price + 10);
             catalogue.update(newBook);

@@ -2,11 +2,11 @@
 
 namespace Bookshop.Data.API
 {
-    public interface StorageAPI<T>
+    public interface StorageAPI<I, T> where I : ID
     {
-        ID add(T item);
-        void remove(ID id);
-        T? get(Predicate<T> query);
-        void update(T item);
+        I add(T item);
+        bool remove(I id);
+        T get(Predicate<T> query);
+        void update(T newItem);
     }
 }

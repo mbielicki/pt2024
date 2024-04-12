@@ -20,12 +20,12 @@ namespace Bookshop.Logic
             if (_validator.alreadyInStorage(book))
                 throw new BookAlreadyExists();
 
-            return _storage.add(book);
+            return _storage.Catalogue.add(book);
         }
 
         public Book get(BookID bookId)
         {
-            Book? result = _storage.get(b => b.Id == bookId);
+            Book? result = _storage.Catalogue.get(b => b.Id == bookId);
             if (result == null) 
                 throw new BookIdNotFound();
             return result;
@@ -33,7 +33,7 @@ namespace Bookshop.Logic
 
         public void remove(BookID bookId)
         {
-            if (_storage.remove(bookId)) return;
+            if (_storage.Catalogue.remove(bookId)) return;
             throw new BookIdNotFound();
         }
 
@@ -41,7 +41,7 @@ namespace Bookshop.Logic
         {
             if (_validator.incorrectProperties(newBook))
                 throw new InvalidBookProperties();
-            Book? result = _storage.get(b => b.Id == newBook.Id);
+            Book? result = _storage.Catalogue.get(b => b.Id == newBook.Id);
             if (result == null)
                 throw new BookIdNotFound();
 

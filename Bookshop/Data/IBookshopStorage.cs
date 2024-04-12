@@ -1,12 +1,10 @@
-﻿using Bookshop.Data.Model;
+﻿using Bookshop.Data.API;
+using Bookshop.Data.Model;
 
 namespace Bookshop.Data
 {
     public interface IBookshopStorage
     {
-        BookID add(Book book);
-        bool remove(BookID bookId);
-        Book? get(Predicate<Book> query);
-        void update(Book book);
+        StorageAPI<BookID, Book> Catalogue { get; }
     }
 }

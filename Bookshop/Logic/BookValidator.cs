@@ -33,7 +33,7 @@ namespace Bookshop.Logic
 
         internal bool alreadyInStorage(Book book)
         {
-            return _storage.get(b => haveSameProperties(book, b)) != null;
+            return _storage.Catalogue.get(b => haveSameProperties(book, b)) != null;
         }
 
         internal bool incorrectProperties(Book book)

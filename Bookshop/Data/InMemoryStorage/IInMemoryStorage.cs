@@ -26,6 +26,11 @@ namespace Bookshop.Data.InMemoryStorage
             return _document.Find(query);
         }
 
+        public List<T> getAll(Predicate<T> query)
+        {
+            return _document.FindAll(query);
+        }
+
         public bool remove(ID id)
         {
             foreach (T item in _document)

@@ -21,11 +21,7 @@ namespace BookshopTest.DataTest.InMemoryStorage
         [TestMethod]
         public void testRemove()
         {
-            string name = "Pan Tadeusz";
-            string author = "Adam Mickiewicz";
-            string description = "The Last Foray in Lithuania";
-            double price = 10;
-            Book book = new Book(null, name, author, description, price);
+            Book book = DataGenerator.newBook();
 
             IBookshopStorage storage = new InMemoryBookshopStorage();
             ID bookId = storage.Catalogue.add(book);
@@ -36,19 +32,15 @@ namespace BookshopTest.DataTest.InMemoryStorage
         [TestMethod]
         public void testUpdate()
         {
-            string name = "Pan Tadeusz";
-            string author = "Adam Mickiewicz";
-            string description = "The Last Foray in Lithuania";
-            double price = 10;
-            Book book = new Book(null, name, author, description, price);
+            Book book = DataGenerator.newBook();
 
             IBookshopStorage storage = new InMemoryBookshopStorage();
             ID bookId = storage.Catalogue.add(book);
 
             double newPrice = 20;
-            Book newBook = new Book(bookId, name, author, description, newPrice);
+            Book newBook = new Book(bookId, book.Title, book.Author, book.Description, newPrice);
             storage.Catalogue.update(newBook);
-            Assert.AreEqual(book, storage.Catalogue.get(b => b.Id == bookId));
+            Assert.AreEqual(newPrice, storage.Catalogue.get(b => b.Id == bookId).Price);
         }
     }
 }

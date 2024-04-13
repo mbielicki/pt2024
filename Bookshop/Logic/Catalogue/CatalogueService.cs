@@ -15,10 +15,10 @@ namespace Bookshop.Logic.Catalogue
         public ID add(Book book)
         {
             if (_validator.incorrectProperties(book))
-                throw new InvalidBookProperties();
+                throw new InvalidItemProperties();
 
             if (_validator.alreadyInStorage(book))
-                throw new BookAlreadyExists();
+                throw new ItemAlreadyExists();
 
             return _storage.Catalogue.add(book);
         }
@@ -27,23 +27,23 @@ namespace Bookshop.Logic.Catalogue
         {
             Book? result = _storage.Catalogue.get(b => b.Id == bookId);
             if (result == null)
-                throw new BookIdNotFound();
+                throw new ItemIdNotFound();
             return result;
         }
 
         public void remove(ID bookId)
         {
             if (_storage.Catalogue.remove(bookId)) return;
-            throw new BookIdNotFound();
+            throw new ItemIdNotFound();
         }
 
         public void update(Book newBook)
         {
             if (_validator.incorrectProperties(newBook))
-                throw new InvalidBookProperties();
+                throw new InvalidItemProperties();
             Book? result = _storage.Catalogue.get(b => b.Id == newBook.Id);
             if (result == null)
-                throw new BookIdNotFound();
+                throw new ItemIdNotFound();
 
             result.Name = newBook.Name;
             result.Author = newBook.Author;

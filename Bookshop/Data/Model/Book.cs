@@ -8,7 +8,7 @@
         public string? Description { get; set; }
         public double? Price { get; set; }
         
-        public Book(ID? Id = null, string? Name = null, string? Author = null, string? Description = null, double? Price = null)
+        public Book(ID? Id, string? Name, string? Author, string? Description, double? Price)
         {
             this.Id = Id;
             this.Name = Name;

@@ -2,7 +2,7 @@
 using Bookshop.Data.InMemoryStorage;
 using Bookshop.Data.Model;
 
-namespace BookshopTest.DataTest
+namespace BookshopTest.DataTest.InMemoryStorageTest
 {
     [TestClass]
     public class InventoryTest
@@ -21,11 +21,11 @@ namespace BookshopTest.DataTest
             storage.Inventory.add(book1copy);
             storage.Inventory.add(book2);
 
-            Assert.AreEqual(2, storage.Inventory.get(book1));
-            Assert.AreEqual(1, storage.Inventory.get(book2));
-            Assert.AreEqual(0, storage.Inventory.get(book3));
+            Assert.AreEqual(2, storage.Inventory.count(book1));
+            Assert.AreEqual(1, storage.Inventory.count(book2));
+            Assert.AreEqual(0, storage.Inventory.count(book3));
         }
-        
+
         [TestMethod]
         public void testRemove()
         {
@@ -38,14 +38,14 @@ namespace BookshopTest.DataTest
             storage.Inventory.add(book1);
             storage.Inventory.add(book2);
 
-            storage.Inventory.remove(book1);
-            Assert.AreEqual(1, storage.Inventory.get(book1));
+            storage.Inventory.removeOne(book1);
+            Assert.AreEqual(1, storage.Inventory.count(book1));
 
-            storage.Inventory.remove(book1);
-            Assert.AreEqual(0, storage.Inventory.get(book1));
+            storage.Inventory.removeOne(book1);
+            Assert.AreEqual(0, storage.Inventory.count(book1));
 
-            storage.Inventory.remove(book1);
-            Assert.AreEqual(0, storage.Inventory.get(book1));
+            storage.Inventory.removeOne(book1);
+            Assert.AreEqual(0, storage.Inventory.count(book1));
         }
     }
 }

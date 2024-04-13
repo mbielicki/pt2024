@@ -1,13 +1,13 @@
 ﻿using Bookshop.Data.API;
 using Bookshop.Data.Model;
 
-namespace Bookshop.Logic
+namespace Bookshop.Logic.Catalogue
 {
-    public class CatalogueService : IService<ID, Book>
+    public class CatalogueService : IService<Book>
     {
         private IBookshopStorage _storage;
         private BookValidator _validator;
-        public CatalogueService(IBookshopStorage storage) 
+        public CatalogueService(IBookshopStorage storage)
         {
             _storage = storage;
             _validator = new BookValidator(storage);
@@ -15,10 +15,10 @@ namespace Bookshop.Logic
         public ID add(Book book)
         {
             if (_validator.incorrectProperties(book))
-                throw new InvalidBookProperties();
+                throw new InvalidItemProperties();
 
-            if (_validator.alreadyInStorage(book))
-                throw new BookAlreadyExists();
+            if (_validator.alreadyInCatalogue(book))
+                throw new ItemAlreadyExists();
 
             return _storage.Catalogue.add(book);
         }
@@ -26,24 +26,30 @@ namespace Bookshop.Logic
         public Book get(ID bookId)
         {
             Book? result = _storage.Catalogue.get(b => b.Id == bookId);
-            if (result == null) 
-                throw new BookIdNotFound();
+            if (result == null)
+                throw new ItemIdNotFound();
             return result;
+        }
+
+        public List<ID> getIds()
+        {
+            return _storage.Catalogue.getAll((i) => true).ConvertAll(i => i.Id);
+
         }
 
         public void remove(ID bookId)
         {
             if (_storage.Catalogue.remove(bookId)) return;
-            throw new BookIdNotFound();
+            throw new ItemIdNotFound();
         }
 
         public void update(Book newBook)
         {
             if (_validator.incorrectProperties(newBook))
-                throw new InvalidBookProperties();
+                throw new InvalidItemProperties();
             Book? result = _storage.Catalogue.get(b => b.Id == newBook.Id);
             if (result == null)
-                throw new BookIdNotFound();
+                throw new ItemIdNotFound();
 
             result.Name = newBook.Name;
             result.Author = newBook.Author;

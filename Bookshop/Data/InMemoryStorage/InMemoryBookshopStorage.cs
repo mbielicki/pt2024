@@ -14,6 +14,7 @@ namespace Bookshop.Data.InMemoryStorage
         public IStorage<Book> Catalogue { get; }
 
         public IStorage<Customer> Customers { get; }
+        public IStorage<Invoice> Invoices { get; }
 
         public IInventoryAPI Inventory {  get; }
 
@@ -21,6 +22,7 @@ namespace Bookshop.Data.InMemoryStorage
         {
             Catalogue = new CatalogueAPI(catalogue);
             Customers = new CustomersAPI(customers);
+            Invoices = new InvoicesAPI(invoices);
             Inventory = new InventoryAPI(inventory);
         }
     }

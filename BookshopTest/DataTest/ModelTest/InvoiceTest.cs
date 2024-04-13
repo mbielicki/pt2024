@@ -9,29 +9,19 @@ namespace BookshopTest.DataTest.ModelTest
         public void testInvoiceInit()
         {
             ID customerId = new ID(123);
-            string firstName = "John";
-            string lastName = "Doe";
-            string address = "00000 Baker Street 221B, London, England";
-            string? contactInfo = null;
-            Customer customer = new Customer(customerId, firstName, lastName, address, contactInfo);
-
             ID bookId = new ID(321);
-            string name = "Pan Tadeusz";
-            string author = "Adam Mickiewicz";
-            string description = "The Last Foray in Lithuania";
-            double price = 10;
-            Book book = new Book(bookId, name, author, description, price);
-
             ID invoiceId = new ID(456);
-            List<Book> books = new List<Book>();
+
+            Counter<ID> books = new Counter<ID>();
+            books.add(bookId);
+            double price = 50;
             DateTime now = DateTime.Now;
 
-            books.Add(book);
-            Invoice invoice = new Invoice(invoiceId, books, customer, price, now);
+            Invoice invoice = new Invoice(invoiceId, books, customerId, price, now);
 
             Assert.AreEqual(invoiceId, invoice.Id);
-            Assert.AreEqual(customerId, invoice.Customer.Id);
-            Assert.AreEqual(book.Name, invoice.Books[0].Name);
+            Assert.AreEqual(customerId, invoice.Customer);
+            Assert.AreEqual(1, invoice.Books.count(bookId));
             Assert.AreEqual(price, invoice.Price);
             Assert.AreEqual(now, invoice.DateTime);
         }

@@ -9,22 +9,32 @@ namespace Bookshop.Logic
     {
         IBookshopStorage _storage;
         public BuyService(IBookshopStorage storage) { _storage = storage; }
-        public void buy(ID customer, Counter<ID> books)
+        public ID buy(ID customer, Counter<ID> books)
         {
-            //CustomersService customers = new CustomersService(_storage);
-            //customers.get(customer);
+            CustomersService customers = new CustomersService(_storage);
+            customers.get(customer);
 
-            //foreach (var book in books)
-            //{
-            //    _storage.Inventory.count(book);
+            foreach (var idToNumber in books)
+            {
+                ID id = idToNumber.Key;
+                int numberToBuy = idToNumber.Value;
+                int numberInStock = _storage.Inventory.count(id);
 
-            //}
+                if (numberToBuy > numberInStock)
+                    throw new NotEnoughItemsInInventory();
+            }
 
-            //double price = checkPrice(books);
+            foreach (var idToNumber in books)
+            {
+                ID id = idToNumber.Key;
+                int numberToBuy = idToNumber.Value;
 
-            throw new NotImplementedException();
+                _storage.Inventory.remove(id, numberToBuy);
+            }
 
-
+            double price = checkPrice(books);
+            Invoice invoice = new Invoice(null, books, customer, price, DateTime.Now);
+            return _storage.Invoices.add(invoice);
         }
         public double checkPrice(Counter<ID> books)
         {

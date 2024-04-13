@@ -21,11 +21,21 @@ namespace Bookshop.Data.InMemoryStorage
             return _document.get(i => i == item);
         }
 
-        public bool remove(ID id)
+        public bool remove(ID item, int numberToBuy)
+        {
+            int count = _document.get(i => i == item);
+            if (numberToBuy > count) return false;
+
+            int newCount = count - numberToBuy;
+            _document.set(item, numberToBuy);
+            return true;
+        }
+
+        public bool removeOne(ID id)
         {
             try
             {
-                _document.remove(id);
+                _document.removeOne(id);
             } 
             catch (KeyNotFoundException)
             { 

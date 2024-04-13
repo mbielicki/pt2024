@@ -13,7 +13,7 @@ namespace Bookshop.Data.Model
             else
                 _counter.Add(element, 1);
         }
-        public void remove(E element)
+        public void removeOne(E element)
         {
             int newCount = _counter[element] - 1;
             set(element, newCount);
@@ -26,6 +26,10 @@ namespace Bookshop.Data.Model
                 if (query(pair.Key)) return pair.Value;
             }
             return 0;
+        }
+        public int count(E element)
+        {
+            return get(e => e.Equals(element));
         }
         public void set(E element, int newCount)
         {

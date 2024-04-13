@@ -12,16 +12,16 @@ namespace BookshopTest.DataTest.ModelTest
             ID bookId = new ID(321);
             ID invoiceId = new ID(456);
 
-            List<ID> books = new List<ID>();
+            Counter<ID> books = new Counter<ID>();
+            books.add(bookId);
             double price = 50;
             DateTime now = DateTime.Now;
 
-            books.Add(bookId);
             Invoice invoice = new Invoice(invoiceId, books, customerId, price, now);
 
             Assert.AreEqual(invoiceId, invoice.Id);
             Assert.AreEqual(customerId, invoice.Customer);
-            Assert.AreEqual(bookId, invoice.Books[0]);
+            Assert.AreEqual(1, invoice.Books.count(bookId));
             Assert.AreEqual(price, invoice.Price);
             Assert.AreEqual(now, invoice.DateTime);
         }

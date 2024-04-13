@@ -10,8 +10,8 @@ namespace BookshopTest.DataTest.InMemoryStorage
         [TestMethod]
         public void testAddGet()
         {
-            List<ID> books = new List<ID>();
-            books.Add(new ID(123));
+            Counter<ID> books = new Counter<ID>();
+            books.add(new ID(123));
             ID customer = new ID(321);
             double price = 40;
             DateTime dateTime = DateTime.Now;
@@ -27,8 +27,8 @@ namespace BookshopTest.DataTest.InMemoryStorage
         [TestMethod]
         public void testRemove()
         {
-            List<ID> books = new List<ID>();
-            books.Add(new ID(123));
+            Counter<ID> books = new Counter<ID>();
+            books.add(new ID(123));
             ID customer = new ID(321);
             double price = 40;
             DateTime dateTime = DateTime.Now;
@@ -45,8 +45,8 @@ namespace BookshopTest.DataTest.InMemoryStorage
         [TestMethod]
         public void testUpdate()
         {
-            List<ID> books = new List<ID>();
-            books.Add(new ID(123));
+            Counter<ID> books = new Counter<ID>();
+            books.add(new ID(123));
             ID customer = new ID(321);
             double price = 40;
             DateTime dateTime = DateTime.Now;

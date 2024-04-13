@@ -17,11 +17,11 @@ namespace BookshopTest.LogicTest
             ID bookId = new ID(321);
             ID invoiceId = new ID(456);
 
-            List<ID> books = new List<ID>();
+            Counter<ID> books = new Counter<ID>();
             double price = 50;
             DateTime now = DateTime.Now;
 
-            books.Add(bookId);
+            books.add(bookId);
             Invoice invoice = new Invoice(null, books, customerId, price, now);
             ID id = storage.Invoices.add(invoice);
 

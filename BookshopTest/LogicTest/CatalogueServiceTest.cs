@@ -12,7 +12,7 @@ namespace BookshopTest.LogicTest
         public void testAddGet()
         {
             IBookshopStorage storage = new InMemoryBookshopStorage();
-            IService<ID, Book> catalogue = new CatalogueService(storage);
+            IService<Book> catalogue = new CatalogueService(storage);
 
             string name = "Pan Tadeusz";
             string author = "Adam Mickiewicz";
@@ -34,7 +34,7 @@ namespace BookshopTest.LogicTest
         public void testUpdateRemove()
         {
             IBookshopStorage storage = new InMemoryBookshopStorage();
-            IService<ID, Book> catalogue = new CatalogueService(storage);
+            IService<Book> catalogue = new CatalogueService(storage);
 
             string name = "Pan Tadeusz";
             string author = "Adam Mickiewicz";

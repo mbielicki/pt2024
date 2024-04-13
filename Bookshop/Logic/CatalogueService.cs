@@ -3,7 +3,7 @@ using Bookshop.Data.Model;
 
 namespace Bookshop.Logic
 {
-    public class CatalogueService : IService<ID, Book>
+    public class CatalogueService : IService<Book>
     {
         private IBookshopStorage _storage;
         private BookValidator _validator;

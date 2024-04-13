@@ -16,7 +16,7 @@ namespace Bookshop.Data.InMemoryStorage
             _document.add(item);
         }
 
-        public int get(ID item)
+        public int count(ID item)
         {
             return _document.get(i => i == item);
         }

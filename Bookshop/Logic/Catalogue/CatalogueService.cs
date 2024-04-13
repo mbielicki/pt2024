@@ -17,7 +17,7 @@ namespace Bookshop.Logic.Catalogue
             if (_validator.incorrectProperties(book))
                 throw new InvalidItemProperties();
 
-            if (_validator.alreadyInStorage(book))
+            if (_validator.alreadyInCatalogue(book))
                 throw new ItemAlreadyExists();
 
             return _storage.Catalogue.add(book);

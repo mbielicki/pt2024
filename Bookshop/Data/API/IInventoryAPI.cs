@@ -6,6 +6,6 @@ namespace Bookshop.Data.API
     {
         void add(ID item);
         bool remove(ID item);
-        int get(ID item);
+        int count(ID item);
     }
 }

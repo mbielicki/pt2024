@@ -5,7 +5,7 @@ using Bookshop.Data.Model;
 namespace BookshopTest.DataTest
 {
     [TestClass]
-    public class InMemoryStorageTest
+    public class InMemoryStorageCatalogueTest
     {
         [TestMethod]
         public void testAddGet()

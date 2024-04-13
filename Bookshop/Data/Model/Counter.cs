@@ -1,4 +1,6 @@
-﻿namespace Bookshop.Data.Model
+﻿using System.Collections;
+
+namespace Bookshop.Data.Model
 {
     public class Counter<E>
     {
@@ -14,16 +16,22 @@
         public void remove(E element)
         {
             int newCount = _counter[element] - 1;
+            set(element, newCount);
+        }
+
+        public int get(Predicate<E> query)
+        {
+            foreach (var pair in _counter)
+            {
+                if (query(pair.Key)) return pair.Value;
+            }
+            return 0;
+        }
+        public void set(E element, int newCount)
+        {
             if (newCount > 0)
                 _counter[element] = newCount;
             else _counter.Remove(element);
         }
-
-        public int get(E element)
-        {
-            if (!_counter.ContainsKey(element)) return 0;
-            return _counter[element];
-        }
-
     }
 }

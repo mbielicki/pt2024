@@ -6,5 +6,6 @@ namespace Bookshop.Data.API
     {
         IStorage<Book> Catalogue { get; }
         IStorage<Customer> Customers { get; }
+        IInventoryAPI Inventory {  get; }
     }
 }

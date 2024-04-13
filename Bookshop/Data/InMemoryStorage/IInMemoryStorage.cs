@@ -6,7 +6,7 @@ namespace Bookshop.Data.InMemoryStorage
     internal abstract class IInMemoryStorage<T> : IStorage<T> where T : HasId
     {
         protected List<T> _document;
-        protected ID nextId = new ID();
+        int nextId = 0;
 
         public IInMemoryStorage(List<T> document)
         {
@@ -15,7 +15,7 @@ namespace Bookshop.Data.InMemoryStorage
 
         public ID add(T item)
         {
-            ID id = nextId.increment();
+            ID id = new ID(nextId++);
             item.Id = id;
             _document.Add(item);
             return id;

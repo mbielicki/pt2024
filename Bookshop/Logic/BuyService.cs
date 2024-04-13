@@ -1,5 +1,6 @@
 ﻿using Bookshop.Data.API;
 using Bookshop.Data.Model;
+using Bookshop.Logic.Catalogue;
 
 namespace Bookshop.Logic
 {
@@ -13,7 +14,15 @@ namespace Bookshop.Logic
         }
         public double checkPrice(List<ID> books)
         {
-            throw new NotImplementedException();
+            double totalPrice = 0;
+            CatalogueService catalogue = new CatalogueService(_storage);
+
+            foreach (var id in books)
+            {
+                totalPrice += (double) catalogue.get(id).Price;
+            }
+
+            return totalPrice;
         }
     }
 }

@@ -13,7 +13,7 @@ namespace BookshopTest.LogicTest
         public void testAddGet()
         {
             IBookshopStorage storage = new InMemoryBookshopStorage();
-            IService<Book> catalogue = new CatalogueService(storage);
+            CatalogueService catalogue = new CatalogueService(storage);
 
             string name = "Pan Tadeusz";
             string author = "Adam Mickiewicz";
@@ -35,7 +35,7 @@ namespace BookshopTest.LogicTest
         public void testUpdateRemove()
         {
             IBookshopStorage storage = new InMemoryBookshopStorage();
-            IService<Book> catalogue = new CatalogueService(storage);
+            CatalogueService catalogue = new CatalogueService(storage);
 
             string name = "Pan Tadeusz";
             string author = "Adam Mickiewicz";
@@ -51,6 +51,25 @@ namespace BookshopTest.LogicTest
 
             catalogue.remove(id);
             Assert.ThrowsException<ItemIdNotFound>(() => catalogue.remove(id));
+        }
+        [TestMethod]
+        public void testIdsDifferent() 
+        {
+            IBookshopStorage storage = new InMemoryBookshopStorage();
+            CatalogueService catalogue = new CatalogueService(storage);
+
+            string name = "Pan Tadeusz";
+            string author = "Adam Mickiewicz";
+            string description = "The Last Foray in Lithuania";
+            double price = 10;
+            Book book1 = new Book(null, name, author, description, price);
+            ID id1 = catalogue.add(book1);
+
+            Book book2 = new Book(null, "Dziady part III", author, "", price);
+            ID id2 = catalogue.add(book2);
+
+            Assert.AreEqual(id1, new ID(id1.Value));
+            Assert.AreNotEqual(id1, id2 );
         }
     }
 }

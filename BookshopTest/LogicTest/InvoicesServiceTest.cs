@@ -2,7 +2,6 @@
 using Bookshop.Data.InMemoryStorage;
 using Bookshop.Data.Model;
 using Bookshop.Logic;
-using Bookshop.Logic.Catalogue;
 
 namespace BookshopTest.LogicTest
 {

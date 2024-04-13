@@ -16,7 +16,7 @@ namespace BookshopTest.DataTest.ModelTest
             Book book = new Book(id, name, author, description, price);
 
             Assert.AreEqual(book.Id, id);
-            Assert.AreEqual(book.Name, name);
+            Assert.AreEqual(book.Title, name);
             Assert.AreEqual(book.Author, author);
             Assert.AreEqual(book.Description, description);
             Assert.AreEqual(book.Price, price);

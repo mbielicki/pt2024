@@ -51,7 +51,7 @@ namespace Bookshop.Logic.Catalogue
             if (result == null)
                 throw new ItemIdNotFound();
 
-            result.Name = newBook.Name;
+            result.Title = newBook.Title;
             result.Author = newBook.Author;
             result.Description = newBook.Description;
             result.Price = newBook.Price;

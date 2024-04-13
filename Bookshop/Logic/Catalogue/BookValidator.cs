@@ -23,7 +23,7 @@ namespace Bookshop.Logic.Catalogue
                 return a.Equals(b);
             }
 
-            bool nameOk = bothNullOrEqual(a.Name, b.Name);
+            bool nameOk = bothNullOrEqual(a.Title, b.Title);
             bool authorOk = bothNullOrEqual(a.Author, b.Author);
             bool descriptionOk = bothNullOrEqual(a.Description, b.Description);
             bool priceOk = bothNullOrEqual(a.Price, b.Price);
@@ -38,7 +38,7 @@ namespace Bookshop.Logic.Catalogue
 
         internal bool incorrectProperties(Book book)
         {
-            if (book.Name == null || book.Name == string.Empty) return true;
+            if (book.Title == null || book.Title == string.Empty) return true;
             if (book.Author == null || book.Author == string.Empty) return true;
             if (book.Price == null || book.Price <= 0) return true;
             return false;

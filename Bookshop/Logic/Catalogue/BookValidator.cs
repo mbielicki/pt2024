@@ -1,13 +1,13 @@
 ﻿using Bookshop.Data.API;
 using Bookshop.Data.Model;
 
-namespace Bookshop.Logic
+namespace Bookshop.Logic.Catalogue
 {
     internal class BookValidator
     {
         private IBookshopStorage _storage;
 
-        public BookValidator(IBookshopStorage storage) 
+        public BookValidator(IBookshopStorage storage)
         {
             _storage = storage;
         }

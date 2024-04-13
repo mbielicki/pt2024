@@ -1,13 +1,13 @@
 ﻿using Bookshop.Data.API;
 using Bookshop.Data.Model;
 
-namespace Bookshop.Logic
+namespace Bookshop.Logic.Catalogue
 {
     public class CatalogueService : IService<Book>
     {
         private IBookshopStorage _storage;
         private BookValidator _validator;
-        public CatalogueService(IBookshopStorage storage) 
+        public CatalogueService(IBookshopStorage storage)
         {
             _storage = storage;
             _validator = new BookValidator(storage);
@@ -26,7 +26,7 @@ namespace Bookshop.Logic
         public Book get(ID bookId)
         {
             Book? result = _storage.Catalogue.get(b => b.Id == bookId);
-            if (result == null) 
+            if (result == null)
                 throw new BookIdNotFound();
             return result;
         }

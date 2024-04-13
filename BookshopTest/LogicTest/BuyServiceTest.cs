@@ -26,7 +26,10 @@ namespace BookshopTest.LogicTest
             Book book2 = new Book(null, "Dziady part III", author, "", price2);    
             ID id2 = catalogue.add(book2);
 
-            List<ID> books = [id1, id2, id2];
+            Counter<ID> books = new Counter<ID>();
+            books.add(id1);
+            books.add(id2);
+            books.add(id2);
             double expectedPrice = price1 + price2 * 2;
 
             BuyService buyService = new BuyService(storage);

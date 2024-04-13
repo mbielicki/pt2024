@@ -32,6 +32,12 @@ namespace Bookshop.Logic.Customers
             return result;
         }
 
+        public List<ID> getIds()
+        {
+            return _storage.Customers.getAll((i) => true).ConvertAll(i => i.Id);
+
+        }
+
         public void remove(ID customerId)
         {
             if (_storage.Customers.remove(customerId)) return;

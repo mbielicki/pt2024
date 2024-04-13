@@ -23,7 +23,7 @@ namespace BookshopTest.LogicTest
             Customer customer = new Customer(null, firstName, lastName, address, contactInfo);
 
             ID id = customers.add(customer);
-            Assert.AreEqual(id, customers.get(id).Id);
+            Assert.AreEqual(id, customers.getIds()[0]);
 
             Customer identicalCustomer = new Customer(null, firstName, lastName, address, contactInfo);
             Assert.ThrowsException<ItemAlreadyExists>(() => customers.add(identicalCustomer));

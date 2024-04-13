@@ -22,7 +22,7 @@ namespace BookshopTest.LogicTest
             Book book = new Book(null, name, author, description, price);
 
             ID id = catalogue.add(book);
-            Assert.AreEqual(id, catalogue.get(id).Id);
+            Assert.AreEqual(id, catalogue.getIds()[0]);
 
             Book identicalBook = new Book(null, name, author, description, price);
             Assert.ThrowsException<ItemAlreadyExists>(() => catalogue.add(identicalBook));

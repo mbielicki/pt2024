@@ -10,11 +10,7 @@ namespace BookshopTest.DataTest
         [TestMethod]
         public void testAddGet()
         {
-            string name = "Pan Tadeusz";
-            string author = "Adam Mickiewicz";
-            string description = "The Last Foray in Lithuania";
-            double price = 10;
-            Book book = new Book(null, name, author, description, price);
+            Book book = DataGenerator.newBook();
 
             IBookshopStorage storage = new InMemoryBookshopStorage();
 

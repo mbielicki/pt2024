@@ -2,10 +2,10 @@
 using Bookshop.Data.InMemoryStorage;
 using Bookshop.Data.Model;
 
-namespace BookshopTest.DataTest
+namespace BookshopTest.DataTest.InMemoryStorage
 {
     [TestClass]
-    public class InMemoryStorageCatalogueTest
+    public class CatalogueTest
     {
         [TestMethod]
         public void testAddGet()
@@ -21,7 +21,7 @@ namespace BookshopTest.DataTest
             ID bookId = storage.Catalogue.add(book);
             Assert.AreEqual(book, storage.Catalogue.get(b => b.Id == bookId));
         }
-        
+
         [TestMethod]
         public void testRemove()
         {

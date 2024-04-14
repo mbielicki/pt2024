@@ -27,6 +27,8 @@ namespace Bookshop.Data.Model
             }
             return 0;
         }
+        public List<E> Keys => _counter.Keys.ToList();
+
         public int count(E element)
         {
             return get(e => e.Equals(element));

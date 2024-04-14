@@ -2,6 +2,7 @@
 using Bookshop.Data.InMemoryStorage;
 using Bookshop.Data.Model;
 using Bookshop.Logic;
+using Bookshop.Logic.Suppliers;
 
 namespace BookshopTest.LogicTest
 {
@@ -14,12 +15,23 @@ namespace BookshopTest.LogicTest
             IBookshopStorage storage = new InMemoryBookshopStorage();
             InventoryService inventory = new InventoryService(storage);
 
+            // Books
+            Counter<Book> books = new Counter<Book>();
             Book book = DataGenerator.newBook();
-            ID id = inventory.supply(book);
+            books.add(book);
+
+            // Supplier
+            SuppliersService suppliers = new SuppliersService(storage);
+            Supplier supplier = DataGenerator.newSupplier();
+            ID supplierId = suppliers.add(supplier);
+
+            // Supply
+            Counter<ID> ids = inventory.supply(books, supplierId, 100);
+            ID id = ids.Keys[0];
 
             Assert.AreEqual(1, inventory.count(id));
 
-            inventory.supply(book);
+            ids = inventory.supply(book, supplierId, 100);
             Assert.AreEqual(2, inventory.count(id));
 
             Book wrongBook = DataGenerator.copy(book);
@@ -28,7 +40,7 @@ namespace BookshopTest.LogicTest
 
             Assert.ThrowsException<IdenticalItemWithDifferentIdExists>(() =>
             {
-                inventory.supply(wrongBook);
+                inventory.supply(wrongBook, supplierId, 100);
             });  
 
         }

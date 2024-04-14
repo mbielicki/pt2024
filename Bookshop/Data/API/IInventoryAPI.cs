@@ -4,7 +4,8 @@ namespace Bookshop.Data.API
 {
     public interface IInventoryAPI
     {
-        void add(ID item);
+        void addOne(ID item);
+        void add(ID item, int numberToSupply);
         bool removeOne(ID item);
         bool remove(ID id, int numberToBuy);
         int count(ID item);

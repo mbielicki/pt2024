@@ -4,6 +4,7 @@ using Bookshop.Data.Model;
 using Bookshop.Logic;
 using Bookshop.Logic.Catalogue;
 using Bookshop.Logic.Customers;
+using Bookshop.Logic.Suppliers;
 
 namespace BookshopTest.LogicTest
 {
@@ -60,8 +61,11 @@ namespace BookshopTest.LogicTest
 
             // Make inventory
             InventoryService inventoryService = new InventoryService(storage);
-            inventoryService.supply(book1);
-            inventoryService.supply(book2);
+            SuppliersService suppliersService = new SuppliersService(storage);
+            Supplier supplier = DataGenerator.newSupplier();
+            ID supplierId = suppliersService.add(supplier);
+            inventoryService.supply(book1, supplierId, 100);
+            inventoryService.supply(book2, supplierId, 100);
 
             // Test NotEnoughItemsInInventory
             BuyService buyService = new BuyService(storage);
@@ -71,7 +75,7 @@ namespace BookshopTest.LogicTest
             });
 
             // Supply 
-            inventoryService.supply(book2);
+            inventoryService.supply(book2, supplierId, 100);
             ID invoiceId = buyService.buy(customerId, books);
 
             // Check invoice

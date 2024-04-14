@@ -11,9 +11,16 @@ namespace Bookshop.Data.InMemoryStorage
             _document = document;
         }
 
-        public void add(ID item)
+        public void addOne(ID item)
         {
             _document.add(item);
+        }
+        public void add(ID item, int numberToSupply)
+        {
+            int count = _document.get(i => i == item);
+
+            int newCount = count + numberToSupply;
+            _document.set(item, newCount);
         }
 
         public int count(ID item)
@@ -27,7 +34,7 @@ namespace Bookshop.Data.InMemoryStorage
             if (numberToBuy > count) return false;
 
             int newCount = count - numberToBuy;
-            _document.set(item, numberToBuy);
+            _document.set(item, newCount);
             return true;
         }
 

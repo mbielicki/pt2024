@@ -10,11 +10,15 @@ namespace Bookshop.Data.FileSystemStorage
 
         public override void update(Book book)
         {
-            Book bookToUpdate = get(b => b.Id == book.Id);
+            _document = Serialization.ReadFromXmlFile<List<Book>>(filePath);
+
+            Book bookToUpdate = get(b => b.Id.Equals(book.Id));
             bookToUpdate.Title = book.Title;
             bookToUpdate.Author = book.Author;
             bookToUpdate.Description = book.Description;
             bookToUpdate.Price = book.Price;
+
+            Serialization.WriteToXmlFile(filePath, _document);
         }
     }
 }

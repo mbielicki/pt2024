@@ -21,7 +21,7 @@ namespace BookshopTest.DataTest.InMemoryStorage
             IBookshopStorage storage = new InMemoryBookshopStorage();
 
             ID invoiceId = storage.Invoices.add(invoice);
-            Assert.AreEqual(invoice.DateTime, storage.Invoices.get(i => i.Id == invoiceId).DateTime);
+            Assert.AreEqual(invoice.DateTime, storage.Invoices.get(i => i.Id.Equals(invoiceId)).DateTime);
         }
 
         [TestMethod]
@@ -39,7 +39,7 @@ namespace BookshopTest.DataTest.InMemoryStorage
 
             ID invoiceId = storage.Invoices.add(invoice);
             storage.Invoices.remove(invoiceId);
-            Assert.IsNull(storage.Invoices.get(i => i.Id == invoiceId));
+            Assert.IsNull(storage.Invoices.get(i => i.Id.Equals(invoiceId)));
         }
 
         [TestMethod]
@@ -61,7 +61,7 @@ namespace BookshopTest.DataTest.InMemoryStorage
             Invoice newInvoice = new Invoice(invoiceId, books, customer, newPrice, dateTime);
 
             storage.Invoices.update(newInvoice);
-            Assert.AreEqual(newPrice, storage.Invoices.get(i => i.Id == invoiceId).Price);
+            Assert.AreEqual(newPrice, storage.Invoices.get(i => i.Id.Equals(invoiceId)).Price);
         }
     }
 }

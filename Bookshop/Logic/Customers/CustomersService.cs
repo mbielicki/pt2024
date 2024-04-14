@@ -26,7 +26,7 @@ namespace Bookshop.Logic.Customers
 
         public Customer get(ID customerId)
         {
-            Customer? result = _storage.Customers.get(c => c.Id == customerId);
+            Customer? result = _storage.Customers.get(c => c.Id.Equals(customerId));
             if (result == null)
                 throw new ItemIdNotFound();
             return result;
@@ -48,7 +48,7 @@ namespace Bookshop.Logic.Customers
         {
             if (_validator.incorrectProperties(newCustomer))
                 throw new InvalidItemProperties();
-            Customer? result = _storage.Customers.get(b => b.Id == newCustomer.Id);
+            Customer? result = _storage.Customers.get(b => b.Id.Equals(newCustomer.Id));
             if (result == null)
                 throw new ItemIdNotFound();
 

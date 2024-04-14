@@ -6,8 +6,8 @@ namespace Bookshop.Data.FileSystemStorage
     internal abstract class IFileSystemStorage<T> : IStorageAPI<T> where T : HasId
     {
         int nextId = 0;
-        List<T> _document;
-        readonly string filePath;
+        protected List<T> _document;
+        protected readonly string filePath;
 
         public IFileSystemStorage(string filePath)
         {
@@ -54,7 +54,7 @@ namespace Bookshop.Data.FileSystemStorage
             _document = Serialization.ReadFromXmlFile<List<T>>(filePath);
             foreach (T item in _document)
             {
-                if (item.Id == id)
+                if (item.Id.Equals(id))
                 {
                     _document.Remove(item);
                     Serialization.WriteToXmlFile(filePath, _document);

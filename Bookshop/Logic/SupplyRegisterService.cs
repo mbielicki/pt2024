@@ -9,7 +9,7 @@ namespace Bookshop.Logic
         public SupplyRegisterService(IBookshopStorage storage) { _storage = storage;  }
         public SupplyRegisterEntry get(ID id)
         {
-            SupplyRegisterEntry? result = _storage.SupplyRegister.get(i => i.Id == id);
+            SupplyRegisterEntry? result = _storage.SupplyRegister.get(i => i.Id.Equals(id));
             if (result == null)
                 throw new ItemIdNotFound();
             return result;

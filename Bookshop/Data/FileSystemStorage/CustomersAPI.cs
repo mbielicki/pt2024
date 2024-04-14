@@ -1,4 +1,5 @@
 ﻿using Bookshop.Data.Model;
+using System.Net;
 
 namespace Bookshop.Data.FileSystemStorage
 {
@@ -9,7 +10,7 @@ namespace Bookshop.Data.FileSystemStorage
         }
         public override void update(Customer newCustomer)
         {
-            Customer customerToUpdate = get(c => c.Id == newCustomer.Id);
+            Customer customerToUpdate = get(c => c.Id.Equals(newCustomer.Id));
             customerToUpdate.FirstName = newCustomer.FirstName;
             customerToUpdate.LastName = newCustomer.LastName;
             customerToUpdate.Address = newCustomer.Address;

@@ -9,7 +9,7 @@ namespace Bookshop.Data.InMemoryStorage
         }
         public override void update(Supplier newSupplier)
         {
-            Supplier supplierToUpdate = _document.Find(s => s.Id == newSupplier.Id);
+            Supplier supplierToUpdate = _document.Find(s => s.Id.Equals(newSupplier.Id));
             supplierToUpdate.FirstName = newSupplier.FirstName;
             supplierToUpdate.LastName = newSupplier.LastName;
             supplierToUpdate.Address = newSupplier.Address;

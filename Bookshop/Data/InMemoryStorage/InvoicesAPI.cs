@@ -9,7 +9,7 @@ namespace Bookshop.Data.InMemoryStorage
         }
         public override void update(Invoice newInvoice)
         {
-            Invoice invoiceToUpdate = _document.Find(i => i.Id == newInvoice.Id);
+            Invoice invoiceToUpdate = _document.Find(i => i.Id.Equals(newInvoice.Id));
             invoiceToUpdate.Books = newInvoice.Books;
             invoiceToUpdate.Customer = newInvoice.Customer;
             invoiceToUpdate.Price = newInvoice.Price;

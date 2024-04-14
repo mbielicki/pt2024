@@ -32,7 +32,7 @@ namespace BookshopTest.LogicTest
         [TestMethod]
         public void testUpdateRemove()
         {
-            IBookshopStorage storage = new InMemoryBookshopStorage();
+            IBookshopStorage storage = new FileSystemBookshopStorage();
             CatalogueService catalogue = new CatalogueService(storage);
 
             Book book = DataGenerator.newBook();

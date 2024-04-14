@@ -10,7 +10,7 @@ namespace Bookshop.Data.InMemoryStorage
 
         public override void update(Book book)
         {
-            Book bookToUpdate = _document.Find(b => b.Id == book.Id);
+            Book bookToUpdate = _document.Find(b => b.Id.Equals(book.Id));
             bookToUpdate.Title = book.Title;
             bookToUpdate.Author = book.Author;
             bookToUpdate.Description = book.Description;

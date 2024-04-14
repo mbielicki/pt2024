@@ -15,7 +15,7 @@ namespace BookshopTest.DataTest.InMemoryStorage
             IBookshopStorage storage = new InMemoryBookshopStorage();
 
             ID bookId = storage.Catalogue.add(book);
-            Assert.AreEqual(book, storage.Catalogue.get(b => b.Id == bookId));
+            Assert.AreEqual(book, storage.Catalogue.get(b => b.Id.Equals(bookId)));
         }
 
         [TestMethod]
@@ -26,7 +26,7 @@ namespace BookshopTest.DataTest.InMemoryStorage
             IBookshopStorage storage = new InMemoryBookshopStorage();
             ID bookId = storage.Catalogue.add(book);
             storage.Catalogue.remove(bookId);
-            Assert.IsNull(storage.Catalogue.get(b => b.Id == bookId));
+            Assert.IsNull(storage.Catalogue.get(b => b.Id.Equals(bookId)));
         }
 
         [TestMethod]
@@ -40,7 +40,7 @@ namespace BookshopTest.DataTest.InMemoryStorage
             double newPrice = 20;
             Book newBook = new Book(bookId, book.Title, book.Author, book.Description, newPrice);
             storage.Catalogue.update(newBook);
-            Assert.AreEqual(newPrice, storage.Catalogue.get(b => b.Id == bookId).Price);
+            Assert.AreEqual(newPrice, storage.Catalogue.get(b => b.Id.Equals(bookId)).Price);
         }
     }
 }

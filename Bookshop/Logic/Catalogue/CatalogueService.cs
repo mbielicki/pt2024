@@ -25,7 +25,7 @@ namespace Bookshop.Logic.Catalogue
 
         public Book get(ID bookId)
         {
-            Book? result = _storage.Catalogue.get(b => b.Id == bookId);
+            Book? result = _storage.Catalogue.get(b => b.Id.Equals(bookId));
             if (result == null)
                 throw new ItemIdNotFound();
             return result;
@@ -47,14 +47,11 @@ namespace Bookshop.Logic.Catalogue
         {
             if (_validator.incorrectProperties(newBook))
                 throw new InvalidItemProperties();
-            Book? result = _storage.Catalogue.get(b => b.Id == newBook.Id);
+            Book? result = _storage.Catalogue.get(b => b.Id.Equals(newBook.Id));
             if (result == null)
                 throw new ItemIdNotFound();
 
-            result.Title = newBook.Title;
-            result.Author = newBook.Author;
-            result.Description = newBook.Description;
-            result.Price = newBook.Price;
+            _storage.Catalogue.update(newBook);
         }
     }
 }

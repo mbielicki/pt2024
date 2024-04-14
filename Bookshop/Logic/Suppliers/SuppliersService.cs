@@ -26,7 +26,7 @@ namespace Bookshop.Logic.Suppliers
 
         public Supplier get(ID supplierId)
         {
-            Supplier? result = _storage.Suppliers.get(s => s.Id == supplierId);
+            Supplier? result = _storage.Suppliers.get(s => s.Id.Equals(supplierId));
             if (result == null)
                 throw new ItemIdNotFound();
             return result;
@@ -48,7 +48,7 @@ namespace Bookshop.Logic.Suppliers
         {
             if (_validator.incorrectProperties(newSupplier))
                 throw new InvalidItemProperties();
-            Supplier? result = _storage.Suppliers.get(s => s.Id == newSupplier.Id);
+            Supplier? result = _storage.Suppliers.get(s => s.Id.Equals(newSupplier.Id));
             if (result == null)
                 throw new ItemIdNotFound();
 

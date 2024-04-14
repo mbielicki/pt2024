@@ -9,7 +9,7 @@ namespace Bookshop.Data.InMemoryStorage
         }
         public override void update(SupplyRegisterEntry newEntry)
         {
-            SupplyRegisterEntry entryToUpdate = _document.Find(i => i.Id == newEntry.Id);
+            SupplyRegisterEntry entryToUpdate = _document.Find(i => i.Id.Equals(newEntry.Id));
             entryToUpdate.Books = newEntry.Books;
             entryToUpdate.Supplier = newEntry.Supplier;
             entryToUpdate.Price = newEntry.Price;

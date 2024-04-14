@@ -35,7 +35,7 @@ namespace Bookshop.Data.InMemoryStorage
         {
             foreach (T item in _document)
             {
-                if (item.Id == id)
+                if (item.Id.Equals(id))
                 {
                     _document.Remove(item);
                     return true;

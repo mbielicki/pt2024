@@ -9,7 +9,7 @@ namespace Bookshop.Data.InMemoryStorage
         }
         public override void update(Customer newCustomer)
         {
-            Customer customerToUpdate = _document.Find(c => c.Id == newCustomer.Id);
+            Customer customerToUpdate = _document.Find(c => c.Id.Equals(newCustomer.Id));
             customerToUpdate.FirstName = newCustomer.FirstName;
             customerToUpdate.LastName = newCustomer.LastName;
             customerToUpdate.Address = newCustomer.Address;

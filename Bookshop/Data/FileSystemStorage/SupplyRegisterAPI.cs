@@ -9,7 +9,7 @@ namespace Bookshop.Data.FileSystemStorage
         }
         public override void update(SupplyRegisterEntry newEntry)
         {
-            SupplyRegisterEntry entryToUpdate = get(i => i.Id == newEntry.Id);
+            SupplyRegisterEntry entryToUpdate = get(i => i.Id.Equals(newEntry.Id));
             entryToUpdate.Books = newEntry.Books;
             entryToUpdate.Supplier = newEntry.Supplier;
             entryToUpdate.Price = newEntry.Price;

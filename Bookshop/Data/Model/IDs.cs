@@ -10,9 +10,14 @@ namespace Bookshop.Data.Model
         ID? Id { get; set; }
     }
 
-    public class ID : IXmlSerializable
+    public interface HasValue
     {
-        public int Value { get; private set; }
+        public int Value { get; set; }
+    }
+
+    public class ID : HasValue
+    {
+        public int Value { get; set; }
         public ID(int value) {
             Value = value;
         }
@@ -38,25 +43,6 @@ namespace Bookshop.Data.Model
         public override string ToString()
         {
             return Value.ToString();
-        }
-
-        public XmlSchema? GetSchema()
-        {
-            return null;
-        }
-
-        public void ReadXml(XmlReader reader)
-        {
-            while (reader.Read())
-            {
-                if (reader.NodeType == XmlNodeType.Text)
-                    Value = int.Parse(reader.Value);
-            }
-        }
-
-        public void WriteXml(XmlWriter writer)
-        {
-            writer.WriteString(Value.ToString());
         }
     }
 }

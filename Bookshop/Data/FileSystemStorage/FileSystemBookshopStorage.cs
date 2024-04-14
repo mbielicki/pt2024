@@ -7,11 +7,12 @@ namespace Bookshop.Data.FileSystemStorage
     {
         //string inventory = "data/inventory.xml";
         Counter<ID> inventory = new Counter<ID>();
-        string catalogue = "data/catalogue.xml";
-        string customers = "data/customers.xml";
-        string suppliers = "data/suppliers.xml";
-        string invoices = "data/invoices.xml";
-        string supplyRegister = "data/supplyRegister.xml";
+        static string folderPath = "Generated Files\\BookshopFileSystemStorage\\";
+        string catalogue = folderPath + "catalogue.xml";
+        string customers = folderPath + "customers.xml";
+        string suppliers = folderPath + "suppliers.xml";
+        string invoices = folderPath + "invoices.xml";
+        string supplyRegister = folderPath + "supplyRegister.xml";
 
         public IInventoryAPI Inventory { get; }
         public IStorageAPI<Book> Catalogue { get; }

@@ -1,5 +1,4 @@
-﻿
-using Bookshop.Data.Model;
+﻿using Bookshop.Data.Model;
 
 namespace Bookshop.Data.FileSystemStorage
 {
@@ -11,7 +10,7 @@ namespace Bookshop.Data.FileSystemStorage
 
         public override void update(Book book)
         {
-            Book bookToUpdate = new Book(null, null, null, null, null); //_document.Find(b => b.Id == book.Id);
+            Book bookToUpdate = get(b => b.Id == book.Id);
             bookToUpdate.Title = book.Title;
             bookToUpdate.Author = book.Author;
             bookToUpdate.Description = book.Description;

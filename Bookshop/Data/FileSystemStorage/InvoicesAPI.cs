@@ -9,7 +9,7 @@ namespace Bookshop.Data.FileSystemStorage
         }
         public override void update(Invoice newInvoice)
         {
-            Invoice invoiceToUpdate = new Invoice(null, null, null, null, null); //_document.Find(i => i.Id == newInvoice.Id);
+            Invoice invoiceToUpdate = get(i => i.Id == newInvoice.Id);
             invoiceToUpdate.Books = newInvoice.Books;
             invoiceToUpdate.Customer = newInvoice.Customer;
             invoiceToUpdate.Price = newInvoice.Price;

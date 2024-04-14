@@ -1,5 +1,4 @@
-﻿using System.IO;
-using System.Xml.Serialization;
+﻿using System.Xml.Serialization;
 
 namespace Bookshop.Data.FileSystemStorage
 {
@@ -7,7 +6,6 @@ namespace Bookshop.Data.FileSystemStorage
     {
         public static void WriteToXmlFile<T>(string filePath, T objectToWrite, bool append = false) where T : new()
         {
-
             Directory.CreateDirectory(Path.GetDirectoryName(filePath));
             TextWriter writer = null;
             try

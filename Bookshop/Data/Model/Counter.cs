@@ -1,13 +1,12 @@
 ﻿using System.Collections;
 using System.IO;
 using System.Xml;
-using System.Xml.Linq;
 using System.Xml.Schema;
 using System.Xml.Serialization;
 
 namespace Bookshop.Data.Model
 {
-    public class Counter<E> : IEnumerable<KeyValuePair<E, int>>, IXmlSerializable where E : IXmlSerializable, new()
+    public class Counter<E> : IEnumerable<KeyValuePair<E, int>>, IXmlSerializable where E : HasValue, new()
     {
         private Dictionary<E, int> _counter = new Dictionary<E, int>();
 
@@ -18,11 +17,6 @@ namespace Bookshop.Data.Model
             else
                 _counter.Add(element, 1);
         }
-        //public void Add(object obj) // XmlSerializer
-        //{
-        //    KeyValuePair<E, int> pair = (KeyValuePair<E, int>)obj;
-        //    _counter.Add(pair.Key, pair.Value);
-        //}
         public void RemoveOne(E element)
         {
             int newCount = _counter[element] - 1;
@@ -66,23 +60,7 @@ namespace Bookshop.Data.Model
                 {
                     string id = reader.GetAttribute("id");
                     E identifier = new();
-
-                    MemoryStream stream = new MemoryStream();
-                    using (XmlWriter writer = XmlWriter.Create(stream))
-                    {
-                        writer.WriteStartDocument();
-                        writer.WriteStartElement("item");
-                        writer.WriteString(id);
-                        writer.WriteEndElement();
-                        writer.WriteEndDocument();
-                    }
-
-                    stream.Seek(0, SeekOrigin.Begin);
-
-                    using (XmlReader IdentifierReader = XmlReader.Create(stream))
-                    {
-                        identifier.ReadXml(IdentifierReader);
-                    }
+                    identifier.Value = int.Parse(id);
 
                     int count = reader.ReadElementContentAsInt();
                     _counter.Add(identifier, count);

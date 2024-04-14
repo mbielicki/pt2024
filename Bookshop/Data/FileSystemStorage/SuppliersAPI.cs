@@ -9,7 +9,7 @@ namespace Bookshop.Data.FileSystemStorage
         }
         public override void update(Supplier newSupplier)
         {
-            Supplier supplierToUpdate = new Supplier(null, null, null, null, null, null); //_document.Find(s => s.Id == newSupplier.Id);
+            Supplier supplierToUpdate = get(s => s.Id == newSupplier.Id);
             supplierToUpdate.FirstName = newSupplier.FirstName;
             supplierToUpdate.LastName = newSupplier.LastName;
             supplierToUpdate.Address = newSupplier.Address;

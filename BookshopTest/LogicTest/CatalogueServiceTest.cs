@@ -1,4 +1,5 @@
 ﻿using Bookshop.Data.API;
+using Bookshop.Data.FileSystemStorage;
 using Bookshop.Data.InMemoryStorage;
 using Bookshop.Data.Model;
 using Bookshop.Logic;
@@ -12,7 +13,7 @@ namespace BookshopTest.LogicTest
         [TestMethod]
         public void testAddGet()
         {
-            IBookshopStorage storage = new InMemoryBookshopStorage();
+            IBookshopStorage storage = new FileSystemBookshopStorage();
             CatalogueService catalogue = new CatalogueService(storage);
 
             Book book = DataGenerator.newBook();

@@ -1,5 +1,8 @@
 ﻿using Bookshop.Data.FileSystemStorage;
 using Bookshop.Data.Model;
+using Bookshop.Logic.Catalogue;
+using Bookshop.Logic;
+using Bookshop.Data.API;
 
 namespace BookshopTest.DataTest.FileSystemStorageTest
 {
@@ -9,19 +12,35 @@ namespace BookshopTest.DataTest.FileSystemStorageTest
         [TestMethod]
         public void testWriteToXmlFile()
         {
-            string file = "C:\\Users\\micha\\OneDrive\\Dokumenty\\sql\\c-sharp\\pt2024\\BookshopTest\\DataTest\\FileSystemStorageTest\\Generated Files\\temp.xml";
-            Counter<ID> counter = new Counter<ID>();
-            counter.Add(new ID(101));
-            counter.Add(new ID(102));
-            counter.Add(new ID(102));
-            counter.Add(new ID(103));
-            counter.Add(new ID(103));
-            counter.Add(new ID(103));
+            string file = "Generated Files\\BookshopFileSystemStorage\\temp.xml";
+            List<Book> books = new List<Book>();
+            Book a = DataGenerator.newBook();
+            a.Id = new ID(100);
+            books.Add(a);
+            Book b = DataGenerator.newBook();
+            b.Id = new ID(102);
+            books.Add(b);
 
-            Serialization.WriteToXmlFile(file, counter);
+            Serialization.WriteToXmlFile(file, books);
 
-            Counter<ID> read = Serialization.ReadFromXmlFile<Counter<ID>>(file);
-            Assert.AreEqual(3, read.Last().Value);
+            List<Book> read = Serialization.ReadFromXmlFile<List<Book>>(file);
+            Assert.AreEqual(books[1].Title, read.Last().Title);
+        }
+
+        [TestMethod]
+        public void testReadFromXmlFile() 
+        {
+            IBookshopStorage storage = new FileSystemBookshopStorage();
+
+            ID id1 = storage.Catalogue.add(DataGenerator.newBook());
+
+            Book book = DataGenerator.newBook();
+            ID id2 = storage.Catalogue.add(book);
+            book.Id = id2;
+
+            ID id3 = storage.Catalogue.add(DataGenerator.newBook());
+
+            Assert.AreEqual(book.Title, storage.Catalogue.get(b => b.Id.Equals(id2)).Title);
         }
     }
 }

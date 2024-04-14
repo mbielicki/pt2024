@@ -1,4 +1,5 @@
 ﻿using Bookshop.Data.API;
+using Bookshop.Data.FileSystemStorage;
 using Bookshop.Data.InMemoryStorage;
 using Bookshop.Data.Model;
 using Bookshop.Logic;
@@ -12,7 +13,7 @@ namespace BookshopTest.LogicTest
         [TestMethod]
         public void testAddGet()
         {
-            IBookshopStorage storage = new InMemoryBookshopStorage();
+            IBookshopStorage storage = new FileSystemBookshopStorage();
             CustomersService customers = new CustomersService(storage);
 
             Customer customer = DataGenerator.newCustomer();
@@ -32,7 +33,7 @@ namespace BookshopTest.LogicTest
         [TestMethod]
         public void testUpdateRemove()
         {
-            IBookshopStorage storage = new InMemoryBookshopStorage();
+            IBookshopStorage storage = new FileSystemBookshopStorage();
             CustomersService customers = new CustomersService(storage);
 
             Customer customer = DataGenerator.newCustomer();
@@ -40,8 +41,9 @@ namespace BookshopTest.LogicTest
 
             Customer newCustomer = DataGenerator.copy(customer);
             newCustomer.FirstName = "John";
-            customers.update(newCustomer);
+            newCustomer.Id = id;
 
+            customers.update(newCustomer);
             Assert.AreEqual(newCustomer.FirstName, customers.get(id).FirstName);
 
             customers.remove(id);

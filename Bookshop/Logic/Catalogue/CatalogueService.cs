@@ -47,11 +47,15 @@ namespace Bookshop.Logic.Catalogue
         {
             if (_validator.incorrectProperties(newBook))
                 throw new InvalidItemProperties();
-            Book? result = _storage.Catalogue.get(b => b.Id.Equals(newBook.Id));
-            if (result == null)
-                throw new ItemIdNotFound();
+            try
+            {
+                _storage.Catalogue.update(newBook);
 
-            _storage.Catalogue.update(newBook);
+            } catch (NullReferenceException)
+            {
+                throw new ItemIdNotFound();
+            }
+
         }
     }
 }

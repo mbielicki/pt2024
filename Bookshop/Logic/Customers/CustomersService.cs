@@ -48,15 +48,14 @@ namespace Bookshop.Logic.Customers
         {
             if (_validator.incorrectProperties(newCustomer))
                 throw new InvalidItemProperties();
-            Customer? result = _storage.Customers.get(b => b.Id.Equals(newCustomer.Id));
-            if (result == null)
+            try
+            {
+                _storage.Customers.update(newCustomer);
+            }
+            catch (NullReferenceException)
+            {
                 throw new ItemIdNotFound();
-
-            result.FirstName = newCustomer.FirstName;
-            result.LastName = newCustomer.LastName;
-            result.Address = newCustomer.Address;
-            result.ContactInfo = newCustomer.ContactInfo;
-
+            }
         }
     }
 }

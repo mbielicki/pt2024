@@ -48,16 +48,14 @@ namespace Bookshop.Logic.Suppliers
         {
             if (_validator.incorrectProperties(newSupplier))
                 throw new InvalidItemProperties();
-            Supplier? result = _storage.Suppliers.get(s => s.Id.Equals(newSupplier.Id));
-            if (result == null)
+            try
+            {
+                _storage.Suppliers.update(newSupplier);
+            }
+            catch (NullReferenceException)
+            {
                 throw new ItemIdNotFound();
-
-            result.FirstName = newSupplier.FirstName;
-            result.LastName = newSupplier.LastName;
-            result.CompanyName = newSupplier.CompanyName;
-            result.Address = newSupplier.Address;
-            result.ContactInfo = newSupplier.ContactInfo;
-
+            }
         }
     }
 }

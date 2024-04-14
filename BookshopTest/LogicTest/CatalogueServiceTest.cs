@@ -44,13 +44,16 @@ namespace BookshopTest.LogicTest
             catalogue.update(newBook);
             Assert.AreEqual(newBook.Price, catalogue.get(id).Price);
 
+            newBook.Id = new ID(id.Value + 1);
+            Assert.ThrowsException<ItemIdNotFound>(() => catalogue.update(newBook));
+
             catalogue.remove(id);
             Assert.ThrowsException<ItemIdNotFound>(() => catalogue.remove(id));
         }
         [TestMethod]
         public void testIdsDifferent() 
         {
-            IBookshopStorage storage = new InMemoryBookshopStorage();
+            IBookshopStorage storage = new FileSystemBookshopStorage();
             CatalogueService catalogue = new CatalogueService(storage);
 
             Book book1 = DataGenerator.newBook();

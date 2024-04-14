@@ -2,7 +2,7 @@
 
 namespace Bookshop.Data.API
 {
-    public interface IStorage<T>
+    public interface IStorageAPI<T>
     {
         ID add(T item);
         bool remove(ID id);

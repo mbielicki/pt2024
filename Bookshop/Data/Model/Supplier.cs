@@ -17,7 +17,6 @@
             CompanyName = companyName;
             Address = address;
             ContactInfo = contactInfo;
-            CompanyName = companyName;
         }
     }
 }

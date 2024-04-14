@@ -27,6 +27,18 @@ namespace BookshopTest
 
             return new Customer(null, firstName, lastName, address, contactInfo);
         }
+        public static Supplier newSupplier()
+        {
+            Random r = new Random();
+
+            string firstName = RandomName();
+            string lastName = RandomName();
+            string companyName = RandomName();
+            string address = RandomAddress();
+            string? contactInfo = r.Next(500_000_000, 800_000_000).ToString();
+
+            return new Supplier(null, firstName, lastName, companyName, address, contactInfo);
+        }
 
         internal static Book copy(Book book)
         {
@@ -37,6 +49,13 @@ namespace BookshopTest
             return new Customer(
                 customer.Id, customer.FirstName, customer.LastName, 
                 customer.Address, customer.ContactInfo
+                );
+        }
+        internal static Supplier copy(Supplier supplier)
+        {
+            return new Supplier(
+                supplier.Id, supplier.FirstName, supplier.LastName,
+                supplier.CompanyName, supplier.Address, supplier.ContactInfo
                 );
         }
 
@@ -119,5 +138,6 @@ namespace BookshopTest
 
             return Name;
         }
+
     }
 }

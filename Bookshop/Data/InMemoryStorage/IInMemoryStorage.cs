@@ -3,7 +3,7 @@ using Bookshop.Data.Model;
 
 namespace Bookshop.Data.InMemoryStorage
 {
-    internal abstract class IInMemoryStorage<T> : IStorage<T> where T : HasId
+    internal abstract class IInMemoryStorage<T> : IStorageAPI<T> where T : HasId
     {
         protected List<T> _document;
         int nextId = 0;

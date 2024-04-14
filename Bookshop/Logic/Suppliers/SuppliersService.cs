@@ -1,0 +1,63 @@
+﻿using Bookshop.Data.API;
+using Bookshop.Data.Model;
+
+namespace Bookshop.Logic.Suppliers
+{
+    public class SuppliersService : IService<Supplier>
+    {
+        private IBookshopStorage _storage;
+        private SupplierValidator _validator;
+        public SuppliersService(IBookshopStorage storage)
+        {
+            _storage = storage;
+            _validator = new SupplierValidator(storage);
+        }
+
+        public ID add(Supplier supplier)
+        {
+            if (_validator.incorrectProperties(supplier))
+                throw new InvalidItemProperties();
+
+            if (_validator.alreadyInStorage(supplier))
+                throw new ItemAlreadyExists();
+
+            return _storage.Suppliers.add(supplier);
+        }
+
+        public Supplier get(ID supplierId)
+        {
+            Supplier? result = _storage.Suppliers.get(s => s.Id == supplierId);
+            if (result == null)
+                throw new ItemIdNotFound();
+            return result;
+        }
+
+        public List<ID> getIds()
+        {
+            return _storage.Suppliers.getAll((i) => true).ConvertAll(i => i.Id);
+
+        }
+
+        public void remove(ID supplierId)
+        {
+            if (_storage.Suppliers.remove(supplierId)) return;
+            throw new ItemIdNotFound();
+        }
+
+        public void update(Supplier newSupplier)
+        {
+            if (_validator.incorrectProperties(newSupplier))
+                throw new InvalidItemProperties();
+            Supplier? result = _storage.Suppliers.get(s => s.Id == newSupplier.Id);
+            if (result == null)
+                throw new ItemIdNotFound();
+
+            result.FirstName = newSupplier.FirstName;
+            result.LastName = newSupplier.LastName;
+            result.CompanyName = newSupplier.CompanyName;
+            result.Address = newSupplier.Address;
+            result.ContactInfo = newSupplier.ContactInfo;
+
+        }
+    }
+}

@@ -1,25 +1,35 @@
 ﻿using System.Collections;
+using System.IO;
+using System.Xml;
+using System.Xml.Linq;
+using System.Xml.Schema;
+using System.Xml.Serialization;
 
 namespace Bookshop.Data.Model
 {
-    public class Counter<E> : IEnumerable<KeyValuePair<E, int>>
+    public class Counter<E> : IEnumerable<KeyValuePair<E, int>>, IXmlSerializable where E : IXmlSerializable, new()
     {
         private Dictionary<E, int> _counter = new Dictionary<E, int>();
 
-        public void add(E element)
+        public void Add(E element)
         {
             if (_counter.ContainsKey(element))
                 _counter[element]++;
             else
                 _counter.Add(element, 1);
         }
-        public void removeOne(E element)
+        //public void Add(object obj) // XmlSerializer
+        //{
+        //    KeyValuePair<E, int> pair = (KeyValuePair<E, int>)obj;
+        //    _counter.Add(pair.Key, pair.Value);
+        //}
+        public void RemoveOne(E element)
         {
             int newCount = _counter[element] - 1;
-            set(element, newCount);
+            Set(element, newCount);
         }
 
-        public int get(Predicate<E> query)
+        public int Get(Predicate<E> query)
         {
             foreach (var pair in _counter)
             {
@@ -29,15 +39,68 @@ namespace Bookshop.Data.Model
         }
         public List<E> Keys => _counter.Keys.ToList();
 
-        public int count(E element)
+        public int Count(E element)
         {
-            return get(e => e.Equals(element));
+            return Get(e => e.Equals(element));
         }
-        public void set(E element, int newCount)
+        public void Set(E element, int newCount)
         {
+            if (!_counter.ContainsKey(element))
+                _counter.Add(element, 0);
+
             if (newCount > 0)
                 _counter[element] = newCount;
             else _counter.Remove(element);
+        }
+
+        public XmlSchema? GetSchema()
+        {
+            return null;
+        }
+
+        public void ReadXml(XmlReader reader)
+        {
+            while (reader.Read())
+            {
+                if (reader.NodeType == XmlNodeType.Element && reader.Name == "item")
+                {
+                    string id = reader.GetAttribute("id");
+                    E identifier = new();
+
+                    MemoryStream stream = new MemoryStream();
+                    using (XmlWriter writer = XmlWriter.Create(stream))
+                    {
+                        writer.WriteStartDocument();
+                        writer.WriteStartElement("item");
+                        writer.WriteString(id);
+                        writer.WriteEndElement();
+                        writer.WriteEndDocument();
+                    }
+
+                    stream.Seek(0, SeekOrigin.Begin);
+
+                    using (XmlReader IdentifierReader = XmlReader.Create(stream))
+                    {
+                        identifier.ReadXml(IdentifierReader);
+                    }
+
+                    int count = reader.ReadElementContentAsInt();
+                    _counter.Add(identifier, count);
+                }
+            }
+        }
+
+        public void WriteXml(XmlWriter writer)
+        {
+            writer.WriteStartElement("Counter");
+            foreach (var pair in _counter)
+            {
+                writer.WriteStartElement("item");
+                writer.WriteAttributeString("id", pair.Key.ToString());
+                writer.WriteString(pair.Value.ToString());
+                writer.WriteEndElement();
+            }
+            writer.WriteEndElement();
         }
 
         public IEnumerator<KeyValuePair<E, int>> GetEnumerator()
@@ -49,6 +112,7 @@ namespace Bookshop.Data.Model
         {
             return (IEnumerator)GetEnumerator();
         }
+
 
         private class CounterEnum : IEnumerator<KeyValuePair<E, int>>
         {

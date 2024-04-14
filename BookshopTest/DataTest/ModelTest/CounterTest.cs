@@ -8,20 +8,20 @@ namespace BookshopTest.DataTest.ModelTest
         [TestMethod]
         public void testCounter()
         {
-            Counter<int> counter = new Counter<int> ();
+            Counter<ID> counter = new Counter<ID> ();
 
-            counter.add(25);
-            counter.add(3);
-            counter.add(25);
-            Assert.AreEqual(1, counter.get(num => num == 3));
-            Assert.AreEqual(2, counter.get(num => num == 25));
+            counter.Add(new ID(25));
+            counter.Add(new ID(3));
+            counter.Add(new ID(25));
+            Assert.AreEqual(1, counter.Get(num => num.Equals(new ID(3))));
+            Assert.AreEqual(2, counter.Get(num => num.Equals(new ID(25))));
 
-            counter.removeOne(25);
-            Assert.AreEqual(1, counter.get(num => num == 25));
-            counter.removeOne(25);
-            Assert.AreEqual(0, counter.get(num => num == 25));
+            counter.RemoveOne(new ID(25));
+            Assert.AreEqual(1, counter.Get(num => num.Equals(new ID(25))));
+            counter.RemoveOne(new ID(25));
+            Assert.AreEqual(0, counter.Get(num => num.Equals(new ID(25))));
             
-            Assert.ThrowsException<KeyNotFoundException>(() => counter.removeOne(25));
+            Assert.ThrowsException<KeyNotFoundException>(() => counter.RemoveOne(new ID(25)));
 
         }
     }

@@ -20,7 +20,7 @@ namespace BookshopTest.LogicTest
             double price = 50;
             DateTime now = DateTime.Now;
 
-            books.add(bookId);
+            books.Add(bookId);
             SupplyRegisterEntry entry = new SupplyRegisterEntry(null, books, supplierId, price, now);
             ID id = storage.SupplyRegister.add(entry);
 

@@ -17,5 +17,6 @@
             Address = address;
             ContactInfo = contactInfo;
         }
+        public Customer() { }
     }
 }

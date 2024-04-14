@@ -15,5 +15,6 @@
             Price = price;
             DateTime = dateTime;
         }
+        public SupplyRegisterEntry() { }
     }
 }

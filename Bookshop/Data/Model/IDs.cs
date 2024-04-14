@@ -1,11 +1,16 @@
-﻿namespace Bookshop.Data.Model
+﻿using System.Diagnostics.Metrics;
+using System.Xml;
+using System.Xml.Schema;
+using System.Xml.Serialization;
+
+namespace Bookshop.Data.Model
 {
-    public interface HasId
+    public interface HasId 
     {
         ID? Id { get; set; }
     }
 
-    public class ID
+    public class ID : IXmlSerializable
     {
         public int Value { get; private set; }
         public ID(int value) {
@@ -29,6 +34,29 @@
         public ID increment() { 
             Value ++;
             return this;
+        }
+        public override string ToString()
+        {
+            return Value.ToString();
+        }
+
+        public XmlSchema? GetSchema()
+        {
+            return null;
+        }
+
+        public void ReadXml(XmlReader reader)
+        {
+            while (reader.Read())
+            {
+                if (reader.NodeType == XmlNodeType.Text)
+                    Value = int.Parse(reader.Value);
+            }
+        }
+
+        public void WriteXml(XmlWriter writer)
+        {
+            writer.WriteString(Value.ToString());
         }
     }
 }

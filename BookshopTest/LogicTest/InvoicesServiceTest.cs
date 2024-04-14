@@ -20,7 +20,7 @@ namespace BookshopTest.LogicTest
             double price = 50;
             DateTime now = DateTime.Now;
 
-            books.add(bookId);
+            books.Add(bookId);
             Invoice invoice = new Invoice(null, books, customerId, price, now);
             ID id = storage.Invoices.add(invoice);
 

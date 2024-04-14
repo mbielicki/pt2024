@@ -18,5 +18,6 @@
             Address = address;
             ContactInfo = contactInfo;
         }
+        public Supplier() { }
     }
 }

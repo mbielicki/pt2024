@@ -24,9 +24,9 @@ namespace BookshopTest.LogicTest
             ID id2 = catalogue.add(book2);
 
             Counter<ID> books = new Counter<ID>();
-            books.add(id1);
-            books.add(id2);
-            books.add(id2);
+            books.Add(id1);
+            books.Add(id2);
+            books.Add(id2);
             double expectedPrice = (double)(book1.Price + book2.Price * 2);
 
             BuyService buyService = new BuyService(storage);
@@ -43,15 +43,15 @@ namespace BookshopTest.LogicTest
 
             // Make shopping list
             Book book1 = DataGenerator.newBook();
-            ID id1 = catalogue.add(book1);
+            ID bookId1 = catalogue.add(book1);
 
             Book book2 = DataGenerator.newBook();
-            ID id2 = catalogue.add(book2);
+            ID bookId2 = catalogue.add(book2);
 
             Counter<ID> books = new Counter<ID>();
-            books.add(id1);
-            books.add(id2);
-            books.add(id2);
+            books.Add(bookId1);
+            books.Add(bookId2);
+            books.Add(bookId2);
 
             // Make customer
             CustomersService customersService = new CustomersService(storage);
@@ -64,8 +64,8 @@ namespace BookshopTest.LogicTest
             SuppliersService suppliersService = new SuppliersService(storage);
             Supplier supplier = DataGenerator.newSupplier();
             ID supplierId = suppliersService.add(supplier);
-            inventoryService.supply(book1, supplierId, 100);
-            inventoryService.supply(book2, supplierId, 100);
+            inventoryService.supply(bookId1, supplierId, 100);
+            inventoryService.supply(bookId2, supplierId, 100);
 
             // Test NotEnoughItemsInInventory
             BuyService buyService = new BuyService(storage);
@@ -75,7 +75,7 @@ namespace BookshopTest.LogicTest
             });
 
             // Supply 
-            inventoryService.supply(book2, supplierId, 100);
+            inventoryService.supply(bookId2, supplierId, 100);
             ID invoiceId = buyService.buy(customerId, books);
 
             // Check invoice

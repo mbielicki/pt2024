@@ -16,5 +16,7 @@
             this.Description = Description;
             this.Price = Price;
         }
+
+        public Book() { }
     }
 }

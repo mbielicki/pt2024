@@ -3,7 +3,6 @@
     public class ItemAlreadyExists : Exception { }
     public class InvalidItemProperties : Exception { }
     public class ItemIdNotFound : Exception { }
-    public class IdenticalItemWithDifferentIdExists : Exception { }
     public class NotEnoughItemsInInventory : Exception { }
 
 }

@@ -13,7 +13,7 @@ namespace BookshopTest.DataTest.ModelTest
             ID invoiceId = new ID(456);
 
             Counter<ID> books = new Counter<ID>();
-            books.add(bookId);
+            books.Add(bookId);
             double price = 50;
             DateTime now = DateTime.Now;
 
@@ -21,7 +21,7 @@ namespace BookshopTest.DataTest.ModelTest
 
             Assert.AreEqual(invoiceId, invoice.Id);
             Assert.AreEqual(customerId, invoice.Customer);
-            Assert.AreEqual(1, invoice.Books.count(bookId));
+            Assert.AreEqual(1, invoice.Books.Count(bookId));
             Assert.AreEqual(price, invoice.Price);
             Assert.AreEqual(now, invoice.DateTime);
         }

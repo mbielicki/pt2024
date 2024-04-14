@@ -19,7 +19,7 @@ namespace BookshopTest.LogicTest
             Book book = DataGenerator.newBook();
             ID id = catalogue.add(book);
 
-            Assert.AreEqual(id, catalogue.getIds()[0]);
+            Assert.AreEqual(book.Author, catalogue.get(id).Author);
 
             Book identicalBook = DataGenerator.copy(book);
             Assert.ThrowsException<ItemAlreadyExists>(() => catalogue.add(identicalBook));
@@ -44,7 +44,8 @@ namespace BookshopTest.LogicTest
             catalogue.update(newBook);
             Assert.AreEqual(newBook.Price, catalogue.get(id).Price);
 
-            newBook.Id = new ID(id.Value + 1);
+            ID nonexistentId = new ID(catalogue.getIds().Count + 1_000);
+            newBook.Id = nonexistentId;
             Assert.ThrowsException<ItemIdNotFound>(() => catalogue.update(newBook));
 
             catalogue.remove(id);

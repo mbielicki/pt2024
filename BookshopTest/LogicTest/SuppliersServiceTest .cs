@@ -19,7 +19,7 @@ namespace BookshopTest.LogicTest
             Supplier supplier = DataGenerator.newSupplier();
 
             ID id = suppliers.add(supplier);
-            Assert.AreEqual(id, suppliers.getIds()[0]);
+            Assert.AreEqual(supplier.CompanyName, suppliers.get(id).CompanyName);
 
             Supplier identicalSupplier = DataGenerator.copy(supplier);
             Assert.ThrowsException<ItemAlreadyExists>(() => suppliers.add(identicalSupplier));

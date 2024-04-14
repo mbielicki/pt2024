@@ -19,7 +19,7 @@ namespace BookshopTest.LogicTest
             Customer customer = DataGenerator.newCustomer();
 
             ID id = customers.add(customer);
-            Assert.AreEqual(id, customers.getIds()[0]);
+            Assert.AreEqual(customer.FirstName, customers.get(id).FirstName);
 
             Customer identicalCustomer = DataGenerator.copy(customer);
             Assert.ThrowsException<ItemAlreadyExists>(() => customers.add(identicalCustomer));

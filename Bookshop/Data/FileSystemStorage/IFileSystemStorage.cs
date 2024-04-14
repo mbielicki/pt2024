@@ -1,5 +1,6 @@
 ﻿using Bookshop.Data.API;
 using Bookshop.Data.Model;
+using Bookshop.Logic;
 
 namespace Bookshop.Data.FileSystemStorage
 {
@@ -15,14 +16,15 @@ namespace Bookshop.Data.FileSystemStorage
             _document = new List<T>();
             try
             {
-                //_document = Serialization.ReadFromXmlFile<List<T>>(filePath);
-            } catch (Exception)
+                _document = Serialization.ReadFromXmlFile<List<T>>(filePath);
+            } catch (FileNotFoundException)
             {
                 _document = new List<T>();
                 Serialization.WriteToXmlFile(filePath, _document);
 
             }
-            Serialization.WriteToXmlFile(filePath, new List<T>());
+            nextId = _document.Count;
+            //Serialization.WriteToXmlFile(filePath, new List<T>()); // clear database on every start
         }
 
         public ID add(T item)

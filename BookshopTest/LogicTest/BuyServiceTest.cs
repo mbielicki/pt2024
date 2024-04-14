@@ -55,12 +55,7 @@ namespace BookshopTest.LogicTest
             // Make customer
             CustomersService customersService = new CustomersService(storage);
 
-            string firstName = "John";
-            string lastName = "Doe";
-            string address = "00000 Baker Street 221B, London, England";
-            string? contactInfo = null;
-
-            Customer customer = new Customer(null, firstName, lastName, address, contactInfo);
+            Customer customer = DataGenerator.newCustomer();
             ID customerId = customersService.add(customer);
 
             // Make inventory

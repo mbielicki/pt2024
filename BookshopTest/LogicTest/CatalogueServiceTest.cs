@@ -20,7 +20,7 @@ namespace BookshopTest.LogicTest
 
             Assert.AreEqual(id, catalogue.getIds()[0]);
 
-            Book identicalBook = DataGenerator.copyBook(book);
+            Book identicalBook = DataGenerator.copy(book);
             Assert.ThrowsException<ItemAlreadyExists>(() => catalogue.add(identicalBook));
 
             Book incorrectBook = DataGenerator.newBook();

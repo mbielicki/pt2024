@@ -10,55 +10,40 @@ namespace BookshopTest.DataTest.InMemoryStorage
         [TestMethod]
         public void testAddGet()
         {
-            string firstName = "John";
-            string lastName = "Doe";
-            string address = "00000 Baker Street 221B, London, England";
-            string? contactInfo = null;
-
-            Customer customer = new Customer(null, firstName, lastName, address, contactInfo);
-
             IBookshopStorage storage = new InMemoryBookshopStorage();
 
+            Customer customer = DataGenerator.newCustomer();
             ID customerId = storage.Customers.add(customer);
+
             Assert.AreEqual(customer.LastName, storage.Customers.get(c => c.Id == customerId).LastName);
         }
 
         [TestMethod]
         public void testRemove()
         {
-            string firstName = "John";
-            string lastName = "Doe";
-            string address = "00000 Baker Street 221B, London, England";
-            string? contactInfo = null;
-
-            Customer customer = new Customer(null, firstName, lastName, address, contactInfo);
-
             IBookshopStorage storage = new InMemoryBookshopStorage();
 
+            Customer customer = DataGenerator.newCustomer();
             ID customerId = storage.Customers.add(customer);
+
             storage.Customers.remove(customerId);
+
             Assert.IsNull(storage.Customers.get(c => c.Id == customerId));
         }
 
         [TestMethod]
         public void testUpdate()
         {
-            string firstName = "John";
-            string lastName = "Doe";
-            string address = "00000 Baker Street 221B, London, England";
-            string? contactInfo = null;
-
-            Customer customer = new Customer(null, firstName, lastName, address, contactInfo);
-
             IBookshopStorage storage = new InMemoryBookshopStorage();
 
+            Customer customer = DataGenerator.newCustomer();
             ID customerId = storage.Customers.add(customer);
 
-            string newContactInfo = "john.doe@example.com";
-            Customer newCustomer = new Customer(customerId, firstName, lastName, address, newContactInfo);
+            Customer newCustomer = DataGenerator.copy(customer);
+            newCustomer.ContactInfo = "john.doe@example.com";
 
             storage.Customers.update(newCustomer);
-            Assert.AreEqual(newContactInfo, storage.Customers.get(c => c.Id == customerId).ContactInfo);
+            Assert.AreEqual(newCustomer.ContactInfo, storage.Customers.get(c => c.Id == customerId).ContactInfo);
         }
     }
 }

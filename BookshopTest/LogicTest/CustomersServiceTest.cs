@@ -15,20 +15,17 @@ namespace BookshopTest.LogicTest
             IBookshopStorage storage = new InMemoryBookshopStorage();
             CustomersService customers = new CustomersService(storage);
 
-            string firstName = "John";
-            string lastName = "Doe";
-            string address = "00000 Baker Street 221B, London, England";
-            string? contactInfo = null;
-
-            Customer customer = new Customer(null, firstName, lastName, address, contactInfo);
+            Customer customer = DataGenerator.newCustomer();
 
             ID id = customers.add(customer);
             Assert.AreEqual(id, customers.getIds()[0]);
 
-            Customer identicalCustomer = new Customer(null, firstName, lastName, address, contactInfo);
+            Customer identicalCustomer = DataGenerator.copy(customer);
             Assert.ThrowsException<ItemAlreadyExists>(() => customers.add(identicalCustomer));
 
-            Customer incorrect = new Customer(null, firstName, "", address, contactInfo);
+            Customer incorrect = DataGenerator.newCustomer();
+            incorrect.LastName = "";
+
             Assert.ThrowsException<InvalidItemProperties>(() => customers.add(incorrect));
         }
 
@@ -38,16 +35,13 @@ namespace BookshopTest.LogicTest
             IBookshopStorage storage = new InMemoryBookshopStorage();
             CustomersService customers = new CustomersService(storage);
 
-            string firstName = "John";
-            string lastName = "Doe";
-            string address = "00000 Baker Street 221B, London, England";
-            string? contactInfo = null;
-
-            Customer customer = new Customer(null, firstName, lastName, address, contactInfo);
+            Customer customer = DataGenerator.newCustomer();
             ID id = customers.add(customer);
 
-            Customer newCustomer = new Customer(id, "Joan", lastName, address, contactInfo);
+            Customer newCustomer = DataGenerator.copy(customer);
+            newCustomer.FirstName = "John";
             customers.update(newCustomer);
+
             Assert.AreEqual(newCustomer.FirstName, customers.get(id).FirstName);
 
             customers.remove(id);

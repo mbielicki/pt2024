@@ -22,7 +22,7 @@ namespace BookshopTest.LogicTest
             inventory.supply(book);
             Assert.AreEqual(2, inventory.count(id));
 
-            Book wrongBook = DataGenerator.copyBook(book);
+            Book wrongBook = DataGenerator.copy(book);
             ID wrongId = new ID(id.Value + 1);
             wrongBook.Id = wrongId;
 

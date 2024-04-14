@@ -16,10 +16,44 @@ namespace BookshopTest
 
             return new Book(null, title, author, description, price);
         }
+        public static Customer newCustomer()
+        {
+            Random r = new Random();
 
-        internal static Book copyBook(Book book)
+            string firstName = RandomName();
+            string lastName = RandomName();
+            string address = RandomAddress();
+            string? contactInfo = r.Next(500_000_000, 800_000_000).ToString();
+
+            return new Customer(null, firstName, lastName, address, contactInfo);
+        }
+
+        internal static Book copy(Book book)
         {
             return new Book(book.Id, book.Title, book.Author, book.Description, book.Price);
+        }
+        internal static Customer copy(Customer customer)
+        {
+            return new Customer(
+                customer.Id, customer.FirstName, customer.LastName, 
+                customer.Address, customer.ContactInfo
+                );
+        }
+
+        static string RandomAddress()
+        {
+            Random r = new Random();
+            StringBuilder address = new StringBuilder();
+
+            address.Append(r.Next(1, 100));
+            address.Append(' ');
+            address.Append(RandomName());
+            address.Append(" Street, ");
+            address.Append(r.Next(10_000, 100_000));
+            address.Append(' ');
+            address.Append(RandomName());
+
+            return address.ToString();
         }
 
         static string LoremIpsum(int wordsNumber, int sentencesNumber)

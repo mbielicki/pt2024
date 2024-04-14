@@ -8,6 +8,7 @@ namespace Bookshop.Data.API
         IStorageAPI<Customer> Customers { get; }
         IStorageAPI<Supplier> Suppliers { get; }
         IStorageAPI<Invoice> Invoices { get; }
+        IStorageAPI<SupplyRegisterEntry> SupplyRegister { get; }
         IInventoryAPI Inventory {  get; }
     }
 }

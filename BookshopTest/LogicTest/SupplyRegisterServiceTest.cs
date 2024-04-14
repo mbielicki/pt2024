@@ -6,14 +6,14 @@ using Bookshop.Logic;
 namespace BookshopTest.LogicTest
 {
     [TestClass]
-    public class InvoicesServiceTest
+    public class SupplyRegisterServiceTest
     {
         [TestMethod]
         public void testGet()
         {
             IBookshopStorage storage = new InMemoryBookshopStorage();
 
-            ID customerId = new ID(123);
+            ID supplierId = new ID(123);
             ID bookId = new ID(321);
 
             Counter<ID> books = new Counter<ID>();
@@ -21,13 +21,13 @@ namespace BookshopTest.LogicTest
             DateTime now = DateTime.Now;
 
             books.add(bookId);
-            Invoice invoice = new Invoice(null, books, customerId, price, now);
-            ID id = storage.Invoices.add(invoice);
+            SupplyRegisterEntry entry = new SupplyRegisterEntry(null, books, supplierId, price, now);
+            ID id = storage.SupplyRegister.add(entry);
 
-            InvoicesService invoices = new InvoicesService(storage);
+            SupplyRegisterService register = new SupplyRegisterService(storage);
 
-            List<ID> ids = invoices.getIds();
-            Assert.AreEqual(price, invoices.get(ids[0]).Price);
+            List<ID> ids = register.getIds();
+            Assert.AreEqual(price, register.get(ids[0]).Price);
         }
     }
 }

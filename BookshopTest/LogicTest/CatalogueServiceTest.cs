@@ -15,19 +15,16 @@ namespace BookshopTest.LogicTest
             IBookshopStorage storage = new InMemoryBookshopStorage();
             CatalogueService catalogue = new CatalogueService(storage);
 
-            string name = "Pan Tadeusz";
-            string author = "Adam Mickiewicz";
-            string description = "The Last Foray in Lithuania";
-            double price = 10;
-            Book book = new Book(null, name, author, description, price);
-
+            Book book = DataGenerator.newBook();
             ID id = catalogue.add(book);
+
             Assert.AreEqual(id, catalogue.getIds()[0]);
 
-            Book identicalBook = new Book(null, name, author, description, price);
+            Book identicalBook = DataGenerator.copyBook(book);
             Assert.ThrowsException<ItemAlreadyExists>(() => catalogue.add(identicalBook));
 
-            Book incorrectBook = new Book(null, name, author, description, -1);
+            Book incorrectBook = DataGenerator.newBook();
+            incorrectBook.Price = -1;
             Assert.ThrowsException<InvalidItemProperties>(() => catalogue.add(incorrectBook));
         }
 
@@ -37,15 +34,12 @@ namespace BookshopTest.LogicTest
             IBookshopStorage storage = new InMemoryBookshopStorage();
             CatalogueService catalogue = new CatalogueService(storage);
 
-            string name = "Pan Tadeusz";
-            string author = "Adam Mickiewicz";
-            string description = "The Last Foray in Lithuania";
-            double price = 10;
-            Book book = new Book(null, name, author, description, price);
-
+            Book book = DataGenerator.newBook();
             ID id = catalogue.add(book);
 
-            Book newBook = new Book(id, name, author, description, price + 10);
+            Book newBook = DataGenerator.newBook();
+            newBook.Id = id;
+
             catalogue.update(newBook);
             Assert.AreEqual(newBook.Price, catalogue.get(id).Price);
 
@@ -58,14 +52,10 @@ namespace BookshopTest.LogicTest
             IBookshopStorage storage = new InMemoryBookshopStorage();
             CatalogueService catalogue = new CatalogueService(storage);
 
-            string name = "Pan Tadeusz";
-            string author = "Adam Mickiewicz";
-            string description = "The Last Foray in Lithuania";
-            double price = 10;
-            Book book1 = new Book(null, name, author, description, price);
+            Book book1 = DataGenerator.newBook();
             ID id1 = catalogue.add(book1);
 
-            Book book2 = new Book(null, "Dziady part III", author, "", price);
+            Book book2 = DataGenerator.newBook();
             ID id2 = catalogue.add(book2);
 
             Assert.AreEqual(id1, new ID(id1.Value));

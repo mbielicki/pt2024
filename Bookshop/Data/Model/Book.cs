@@ -8,10 +8,10 @@
         public string? Description { get; set; }
         public double? Price { get; set; }
         
-        public Book(ID? Id, string? Name, string? Author, string? Description, double? Price)
+        public Book(ID? Id, string? Title, string? Author, string? Description, double? Price)
         {
             this.Id = Id;
-            this.Title = Name;
+            this.Title = Title;
             this.Author = Author;
             this.Description = Description;
             this.Price = Price;

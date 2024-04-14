@@ -17,6 +17,11 @@ namespace BookshopTest
             return new Book(null, title, author, description, price);
         }
 
+        internal static Book copyBook(Book book)
+        {
+            return new Book(book.Id, book.Title, book.Author, book.Description, book.Price);
+        }
+
         static string LoremIpsum(int wordsNumber, int sentencesNumber)
         {
             StringBuilder result = new StringBuilder();

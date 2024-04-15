@@ -13,20 +13,19 @@ namespace Bookshop.Logic
         {
             return _storage.Inventory.count(book);
         }
-        public Counter<ID> supply(ID book, ID supplier, double price)
+        public void supply(ID book, ID supplier, double price)
         {
             Counter<ID> books = new Counter<ID>();
             books.Add(book);
-            return supply(books, supplier, price);
+            supply(books, supplier, price);
         }
-        public Counter<ID> supply(Counter<ID> books, ID supplier, double price)
+        public void supply(Counter<ID> books, ID supplier, double price)
         {
             SuppliersService suppliers = new SuppliersService(_storage);
             suppliers.get(supplier);
 
             CatalogueService catalogue = new CatalogueService(_storage);
 
-            Counter<ID> assignedIds = new Counter<ID>();
 
             foreach (var bookToNumber in books)
             {
@@ -36,17 +35,12 @@ namespace Bookshop.Logic
                 catalogue.get(book);
 
                 _storage.Inventory.add(book, number);
-
-                assignedIds.Add(book);
             }
 
             SupplyRegisterEntry registerEntry = new SupplyRegisterEntry(
-                null, assignedIds, supplier, price, DateTime.Now);
+                null, books, supplier, price, DateTime.Now);
 
             _storage.SupplyRegister.add(registerEntry);
-
-            return assignedIds;
-            
         }
 
     }

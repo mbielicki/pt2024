@@ -1,4 +1,5 @@
 ﻿using Bookshop.Data.API;
+using Bookshop.Data.FileSystemStorage;
 using Bookshop.Data.InMemoryStorage;
 using Bookshop.Data.Model;
 using Bookshop.Logic;
@@ -11,10 +12,11 @@ namespace BookshopTest.LogicTest
         [TestMethod]
         public void testGet()
         {
-            IBookshopStorage storage = new InMemoryBookshopStorage();
+            IBookshopStorage storage = new FileSystemBookshopStorage();
+            InvoicesService invoices = new InvoicesService(storage);
 
-            ID customerId = new ID(123);
-            ID bookId = new ID(321);
+            ID customerId = storage.Customers.add(DataGenerator.newCustomer());
+            ID bookId = storage.Catalogue.add(DataGenerator.newBook()); 
 
             Counter<ID> books = new Counter<ID>();
             double price = 50;
@@ -24,10 +26,8 @@ namespace BookshopTest.LogicTest
             Invoice invoice = new Invoice(null, books, customerId, price, now);
             ID id = storage.Invoices.add(invoice);
 
-            InvoicesService invoices = new InvoicesService(storage);
-
             List<ID> ids = invoices.getIds();
-            Assert.AreEqual(price, invoices.get(ids[0]).Price);
+            Assert.AreEqual(price, invoices.get(id).Price);
         }
     }
 }

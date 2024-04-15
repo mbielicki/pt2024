@@ -1,6 +1,8 @@
 ﻿using System.Collections;
+using System.ComponentModel.Design;
 using System.IO;
 using System.Xml;
+using System.Xml.Linq;
 using System.Xml.Schema;
 using System.Xml.Serialization;
 
@@ -54,16 +56,55 @@ namespace Bookshop.Data.Model
 
         public void ReadXml(XmlReader reader)
         {
+            if (reader.IsEmptyElement)
+            {
+                reader.Read();
+                return;
+            }
+            Console.WriteLine("start");
+            string inElement = "";
+            E identifier = new();
+            int count = 0;
             while (reader.Read())
             {
-                if (reader.NodeType == XmlNodeType.Element && reader.Name == "item")
+                switch (reader.NodeType)
                 {
-                    string id = reader.GetAttribute("id");
-                    E identifier = new();
-                    identifier.Value = int.Parse(id);
+                    case XmlNodeType.Element:
+                        Console.WriteLine("Start Element {0}", reader.Name);
+                        
+                        if (reader.Name == "item")
+                        {
+                            string id = reader.GetAttribute("id");
+                            identifier = new();
+                            identifier.Value = int.Parse(id);
 
-                    int count = reader.ReadElementContentAsInt();
-                    _counter.Add(identifier, count);
+                        }
+                        inElement = reader.Name;
+                        break;
+                    case XmlNodeType.Text:
+                        Console.WriteLine("Text Node: {0}",
+                                 reader.Value);
+                        if (inElement == "item")
+                        {
+                            count = int.Parse(reader.Value);
+                            _counter.Add(identifier, count);
+
+                        }
+                        break;
+                    case XmlNodeType.EndElement:
+                        Console.WriteLine("End Element {0}", reader.Name);
+                        if (reader.Name == "item") inElement = "";
+                        if (reader.Name == "Counter")
+                        {
+                            reader.Read();
+                            reader.Read();
+                            return;
+                        }
+                        break;
+                    default:
+                        Console.WriteLine("Other node {0} with value {1}",
+                                        reader.NodeType, reader.Value);
+                        break;
                 }
             }
         }

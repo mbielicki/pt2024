@@ -1,12 +1,11 @@
 ﻿using Bookshop.Data.API;
 using Bookshop.Data.Model;
-using Bookshop.Logic;
 
 namespace Bookshop.Data.FileSystemStorage
 {
     internal abstract class IFileSystemStorage<T> : IStorageAPI<T> where T : HasId
     {
-        int nextId = 0;
+        int nextId;
         protected List<T> _document;
         protected readonly string filePath;
 
@@ -17,13 +16,11 @@ namespace Bookshop.Data.FileSystemStorage
             try
             {
                 _document = Serialization.ReadFromXmlFile<List<T>>(filePath);
-            } catch (FileNotFoundException)
-            {
-                _document = new List<T>();
+                nextId = getAll((i) => true).ConvertAll(i => i.Id.Value).Max() + 1;
+            } catch (Exception) { 
                 Serialization.WriteToXmlFile(filePath, _document);
-
+                nextId = 0;
             }
-            nextId = _document.Count;
             //Serialization.WriteToXmlFile(filePath, new List<T>()); // clear database on every start
         }
 

@@ -17,7 +17,7 @@ namespace Bookshop.Data.InMemoryStorage
         }
         public void add(ID item, int numberToSupply)
         {
-            int count = _document.Get(i => i == item);
+            int count = _document.Get(i => i.Equals(item));
 
             int newCount = count + numberToSupply;
             _document.Set(item, newCount);
@@ -25,12 +25,12 @@ namespace Bookshop.Data.InMemoryStorage
 
         public int count(ID item)
         {
-            return _document.Get(i => i == item);
+            return _document.Get(i => i.Equals(item));
         }
 
         public bool remove(ID item, int numberToBuy)
         {
-            int count = _document.Get(i => i == item);
+            int count = _document.Get(i => i.Equals(item));
             if (numberToBuy > count) return false;
 
             int newCount = count - numberToBuy;

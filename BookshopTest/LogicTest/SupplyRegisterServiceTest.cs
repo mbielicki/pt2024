@@ -1,4 +1,5 @@
 ﻿using Bookshop.Data.API;
+using Bookshop.Data.FileSystemStorage;
 using Bookshop.Data.InMemoryStorage;
 using Bookshop.Data.Model;
 using Bookshop.Logic;
@@ -11,7 +12,8 @@ namespace BookshopTest.LogicTest
         [TestMethod]
         public void testGet()
         {
-            IBookshopStorage storage = new InMemoryBookshopStorage();
+            IBookshopStorage storage = new FileSystemBookshopStorage();
+            SupplyRegisterService register = new SupplyRegisterService(storage);
 
             ID supplierId = new ID(123);
             ID bookId = new ID(321);
@@ -24,10 +26,8 @@ namespace BookshopTest.LogicTest
             SupplyRegisterEntry entry = new SupplyRegisterEntry(null, books, supplierId, price, now);
             ID id = storage.SupplyRegister.add(entry);
 
-            SupplyRegisterService register = new SupplyRegisterService(storage);
 
-            List<ID> ids = register.getIds();
-            Assert.AreEqual(price, register.get(ids[0]).Price);
+            Assert.AreEqual(price, register.get(id).Price);
         }
     }
 }

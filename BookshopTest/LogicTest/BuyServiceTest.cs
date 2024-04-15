@@ -1,4 +1,5 @@
 ﻿using Bookshop.Data.API;
+using Bookshop.Data.FileSystemStorage;
 using Bookshop.Data.InMemoryStorage;
 using Bookshop.Data.Model;
 using Bookshop.Logic;
@@ -14,8 +15,9 @@ namespace BookshopTest.LogicTest
         [TestMethod]
         public void testCheckPrice()
         {
-            IBookshopStorage storage = new InMemoryBookshopStorage();
+            IBookshopStorage storage = new FileSystemBookshopStorage();
             CatalogueService catalogue = new CatalogueService(storage);
+            BuyService buyService = new BuyService(storage);
 
             Book book1 = DataGenerator.newBook();
             ID id1 = catalogue.add(book1);
@@ -29,7 +31,6 @@ namespace BookshopTest.LogicTest
             books.Add(id2);
             double expectedPrice = (double)(book1.Price + book2.Price * 2);
 
-            BuyService buyService = new BuyService(storage);
             double buyPrice = buyService.checkPrice(books);
 
             Assert.AreEqual(expectedPrice, buyPrice);
@@ -38,8 +39,12 @@ namespace BookshopTest.LogicTest
         [TestMethod]
         public void testBuy()
         {
-            IBookshopStorage storage = new InMemoryBookshopStorage();
+            IBookshopStorage storage = new FileSystemBookshopStorage();
             CatalogueService catalogue = new CatalogueService(storage);
+            CustomersService customersService = new CustomersService(storage);
+            InventoryService inventoryService = new InventoryService(storage);
+            SuppliersService suppliersService = new SuppliersService(storage);
+            BuyService buyService = new BuyService(storage);
 
             // Make shopping list
             Book book1 = DataGenerator.newBook();
@@ -54,21 +59,16 @@ namespace BookshopTest.LogicTest
             books.Add(bookId2);
 
             // Make customer
-            CustomersService customersService = new CustomersService(storage);
-
             Customer customer = DataGenerator.newCustomer();
             ID customerId = customersService.add(customer);
 
             // Make inventory
-            InventoryService inventoryService = new InventoryService(storage);
-            SuppliersService suppliersService = new SuppliersService(storage);
             Supplier supplier = DataGenerator.newSupplier();
             ID supplierId = suppliersService.add(supplier);
             inventoryService.supply(bookId1, supplierId, 100);
             inventoryService.supply(bookId2, supplierId, 100);
 
             // Test NotEnoughItemsInInventory
-            BuyService buyService = new BuyService(storage);
             Assert.ThrowsException<NotEnoughItemsInInventory>(() =>
             {
                 buyService.buy(customerId, books);

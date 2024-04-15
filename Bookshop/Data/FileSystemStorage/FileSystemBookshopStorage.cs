@@ -5,14 +5,13 @@ namespace Bookshop.Data.FileSystemStorage
 {
     public class FileSystemBookshopStorage : IBookshopStorage
     {
-        //string inventory = "data/inventory.xml";
-        Counter<ID> inventory = new Counter<ID>();
         static string folderPath = "Generated Files\\BookshopFileSystemStorage\\";
         string catalogue = folderPath + "catalogue.xml";
         string customers = folderPath + "customers.xml";
         string suppliers = folderPath + "suppliers.xml";
         string invoices = folderPath + "invoices.xml";
         string supplyRegister = folderPath + "supplyRegister.xml";
+        string inventory = folderPath + "inventory.xml";
 
         public IInventoryAPI Inventory { get; }
         public IStorageAPI<Book> Catalogue { get; }

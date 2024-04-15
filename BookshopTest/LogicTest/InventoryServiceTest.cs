@@ -1,4 +1,5 @@
 ﻿using Bookshop.Data.API;
+using Bookshop.Data.FileSystemStorage;
 using Bookshop.Data.InMemoryStorage;
 using Bookshop.Data.Model;
 using Bookshop.Logic;
@@ -13,27 +14,27 @@ namespace BookshopTest.LogicTest
         [TestMethod]
         public void testSupplyNewBook()
         {
-            IBookshopStorage storage = new InMemoryBookshopStorage();
+            IBookshopStorage storage = new FileSystemBookshopStorage();
             InventoryService inventory = new InventoryService(storage);
+            CatalogueService catalogue = new CatalogueService(storage);
+            SuppliersService suppliers = new SuppliersService(storage);
 
             // Books
-            CatalogueService catalogue = new CatalogueService(storage);
             Counter<ID> books = new Counter<ID>();
             Book book = DataGenerator.newBook();
             books.Add(catalogue.add(book));
 
             // Supplier
-            SuppliersService suppliers = new SuppliersService(storage);
             Supplier supplier = DataGenerator.newSupplier();
             ID supplierId = suppliers.add(supplier);
 
             // Supply
-            Counter<ID> ids = inventory.supply(books, supplierId, 100);
-            ID id = ids.Keys[0];
+            inventory.supply(books, supplierId, 100);
+            ID id = books.Keys[0];
 
             Assert.AreEqual(1, inventory.count(id));
 
-            ids = inventory.supply(id, supplierId, 100);
+            inventory.supply(id, supplierId, 100);
             Assert.AreEqual(2, inventory.count(id));
 
             Book wrongBook = DataGenerator.copy(book);

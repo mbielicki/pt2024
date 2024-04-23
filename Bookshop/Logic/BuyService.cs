@@ -9,10 +9,10 @@ namespace Bookshop.Logic
     {
         IBookshopStorage _storage;
         public BuyService(IBookshopStorage storage) { _storage = storage; }
-        public ID buy(ID customer, Counter<ID> books)
+        public ID buy(ID customerId, Counter<ID> books)
         {
             CustomersService customers = new CustomersService(_storage);
-            customers.get(customer);
+            Customer customer = customers.get(customerId);
 
             foreach (var idToNumber in books)
             {

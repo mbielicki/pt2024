@@ -1,9 +1,4 @@
-﻿using System.Diagnostics.Metrics;
-using System.Xml;
-using System.Xml.Schema;
-using System.Xml.Serialization;
-
-namespace Bookshop.Data.Model
+﻿namespace Bookshop.Data.Model
 {
     public interface HasId 
     {

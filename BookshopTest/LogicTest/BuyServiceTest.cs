@@ -39,7 +39,7 @@ namespace BookshopTest.LogicTest
         [TestMethod]
         public void testBuy()
         {
-            IBookshopStorage storage = new FileSystemBookshopStorage();
+            IBookshopStorage storage = new InMemoryBookshopStorage();
             CatalogueService catalogue = new CatalogueService(storage);
             CustomersService customersService = new CustomersService(storage);
             InventoryService inventoryService = new InventoryService(storage);

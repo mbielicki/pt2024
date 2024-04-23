@@ -3,11 +3,11 @@
     public class Invoice : HasId
     {
         public ID? Id { get; set; }
-        public ID? Customer { get; set; }
+        public Customer? Customer { get; set; }
         public double? Price { get; set; }
         public DateTime? DateTime { get; set; }
         public Counter<ID>? Books { get; set; }
-        public Invoice(ID? id, Counter<ID>? books, ID? customer, double? price, DateTime? dateTime)
+        public Invoice(ID? id, Counter<ID>? books, Customer? customer, double? price, DateTime? dateTime)
         {
             Id = id;
             Books = books;

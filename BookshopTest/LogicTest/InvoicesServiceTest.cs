@@ -15,7 +15,8 @@ namespace BookshopTest.LogicTest
             IBookshopStorage storage = new FileSystemBookshopStorage();
             InvoicesService invoices = new InvoicesService(storage);
 
-            ID customerId = storage.Customers.add(DataGenerator.newCustomer());
+            Customer customer = DataGenerator.newCustomer();
+            customer.Id = storage.Customers.add(customer);
             ID bookId = storage.Catalogue.add(DataGenerator.newBook()); 
 
             Counter<ID> books = new Counter<ID>();
@@ -23,10 +24,9 @@ namespace BookshopTest.LogicTest
             DateTime now = DateTime.Now;
 
             books.Add(bookId);
-            Invoice invoice = new Invoice(null, books, customerId, price, now);
+            Invoice invoice = new Invoice(null, books, customer, price, now);
             ID id = storage.Invoices.add(invoice);
 
-            List<ID> ids = invoices.getIds();
             Assert.AreEqual(price, invoices.get(id).Price);
         }
     }

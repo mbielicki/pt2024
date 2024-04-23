@@ -1,13 +1,13 @@
 ﻿namespace Bookshop.Data.Model
 {
-    public class Invoice : HasId
+    public class Invoice : Event
     {
         public ID? Id { get; set; }
         public Customer? Customer { get; set; }
         public double? Price { get; set; }
-        public DateTime? DateTime { get; set; }
+        public DateTime DateTime { get; set; }
         public Counter<ID>? Books { get; set; }
-        public Invoice(ID? id, Counter<ID>? books, Customer? customer, double? price, DateTime? dateTime)
+        public Invoice(ID? id, Counter<ID>? books, Customer? customer, double? price, DateTime dateTime)
         {
             Id = id;
             Books = books;

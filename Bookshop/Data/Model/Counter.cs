@@ -1,8 +1,5 @@
 ﻿using System.Collections;
-using System.ComponentModel.Design;
-using System.IO;
 using System.Xml;
-using System.Xml.Linq;
 using System.Xml.Schema;
 using System.Xml.Serialization;
 

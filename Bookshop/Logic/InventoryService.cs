@@ -19,10 +19,10 @@ namespace Bookshop.Logic
             books.Add(book);
             supply(books, supplier, price);
         }
-        public void supply(Counter<ID> books, ID supplier, double price)
+        public void supply(Counter<ID> books, ID supplierId, double price)
         {
             SuppliersService suppliers = new SuppliersService(_storage);
-            suppliers.get(supplier);
+            Supplier supplier = suppliers.get(supplierId);
 
             CatalogueService catalogue = new CatalogueService(_storage);
 

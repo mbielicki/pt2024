@@ -15,7 +15,7 @@ namespace BookshopTest.LogicTest
             IBookshopStorage storage = new FileSystemBookshopStorage();
             SupplyRegisterService register = new SupplyRegisterService(storage);
 
-            ID supplierId = new ID(123);
+            Supplier supplier = DataGenerator.newSupplier();
             ID bookId = new ID(321);
 
             Counter<ID> books = new Counter<ID>();
@@ -23,7 +23,7 @@ namespace BookshopTest.LogicTest
             DateTime now = DateTime.Now;
 
             books.Add(bookId);
-            SupplyRegisterEntry entry = new SupplyRegisterEntry(null, books, supplierId, price, now);
+            SupplyRegisterEntry entry = new SupplyRegisterEntry(null, books, supplier, price, now);
             ID id = storage.SupplyRegister.add(entry);
 
 

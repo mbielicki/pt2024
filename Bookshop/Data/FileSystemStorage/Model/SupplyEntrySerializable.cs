@@ -26,7 +26,7 @@ namespace Bookshop.Data.FileSystemStorage.Model
         {
             SupplyRegisterEntry newEntry = new SupplyRegisterEntry();
             newEntry.Id = Id;
-            newEntry.Supplier = suppliers.get(id => id == Supplier);
+            newEntry.Supplier = suppliers.get(s => s.Id.Equals(Supplier));
             newEntry.Price = Price;
             newEntry.DateTime = DateTime;
             newEntry.Books = new Counter<IBook>();
@@ -35,7 +35,7 @@ namespace Bookshop.Data.FileSystemStorage.Model
             {
                 ID id = idToNumber.Key;
                 int num = idToNumber.Value;
-                newEntry.Books.Set(catalogue.get(i => i == id), num);
+                newEntry.Books.Set(catalogue.get(b => b.Id.Equals(id)), num);
             }
             return newEntry;
         }
@@ -159,7 +159,9 @@ namespace Bookshop.Data.FileSystemStorage.Model
                 switch (reader.NodeType)
                 {
                     case XmlNodeType.Element:
-                        inElement = reader.Name;
+                        inElement = reader.Name; 
+                        if (inElement == "Books")
+                            ReadBooksXml(reader);
                         break;
                     case XmlNodeType.Text:
                         if (inElement == "Id")
@@ -170,18 +172,10 @@ namespace Bookshop.Data.FileSystemStorage.Model
                             Price = double.Parse(reader.Value);
                         else if (inElement == "DateTime")
                             DateTime = DateTime.Parse(reader.Value);
-                        else if (inElement == "Books")
-                            ReadBooksXml(reader);
                         break;
                     case XmlNodeType.EndElement:
                         Console.WriteLine("End Element {0}", reader.Name);
-                        if (reader.Name == "item") inElement = "";
-                        if (reader.Name == "Counter")
-                        {
-                            reader.Read();
-                            reader.Read();
-                            return;
-                        }
+                        inElement = "";
                         break;
                     default:
                         Console.WriteLine("Other node {0} with value {1}",

@@ -1,6 +1,7 @@
 ﻿using Bookshop.Data.API;
 using Bookshop.Data.FileSystemStorage.Model;
 using Bookshop.Data.Model;
+using System.Xml;
 using System.Xml.Serialization;
 
 namespace Bookshop.Data.FileSystemStorage
@@ -134,6 +135,112 @@ namespace Bookshop.Data.FileSystemStorage
                 list.Add(entrySerializable.toSupplyEntry(catalogue, suppliers));
             }
             return list;
+        }
+
+        private static void WriteCounterXml(XmlWriter writer, Counter<ID> counter)
+        {
+            writer.WriteStartElement("Counter");
+            foreach (var pair in counter)
+            {
+                writer.WriteStartElement("item");
+                writer.WriteAttributeString("id", pair.Key.ToString());
+                writer.WriteString(pair.Value.ToString());
+                writer.WriteEndElement();
+            }
+            writer.WriteEndElement();
+        }
+        public static void toXml(this Counter<ID> counter, string filePath, bool append = false)
+        {
+            Directory.CreateDirectory(Path.GetDirectoryName(filePath));
+            TextWriter writer = null;
+
+            try
+            {
+                writer = new StreamWriter(filePath, append);
+                XmlWriter xmlWriter = XmlWriter.Create(writer);
+                xmlWriter.WriteStartDocument();
+                WriteCounterXml(xmlWriter, counter);
+                xmlWriter.Close();
+            }
+            finally
+            {
+                if (writer != null)
+                    writer.Close();
+            }
+        }
+
+        private static void ReadCounterXml(XmlReader reader, Counter<ID> counter)
+        {
+            if (reader.IsEmptyElement)
+            {
+                reader.Read();
+                return;
+            }
+            Console.WriteLine("start");
+            string inElement = "";
+            ID identifier = new();
+            int count = 0;
+            while (reader.Read())
+            {
+                switch (reader.NodeType)
+                {
+                    case XmlNodeType.Element:
+                        Console.WriteLine("Start Element {0}", reader.Name);
+
+                        if (reader.Name == "item")
+                        {
+                            string id = reader.GetAttribute("id");
+                            identifier = new();
+                            identifier.Value = int.Parse(id);
+
+                        }
+                        inElement = reader.Name;
+                        break;
+                    case XmlNodeType.Text:
+                        Console.WriteLine("Text Node: {0}",
+                                 reader.Value);
+                        if (inElement == "item")
+                        {
+                            count = int.Parse(reader.Value);
+                            counter.Set(identifier, count);
+
+                        }
+                        break;
+                    case XmlNodeType.EndElement:
+                        Console.WriteLine("End Element {0}", reader.Name);
+                        if (reader.Name == "item") inElement = "";
+                        if (reader.Name == "Counter")
+                        {
+                            reader.Read();
+                            reader.Read();
+                            return;
+                        }
+                        break;
+                    default:
+                        Console.WriteLine("Other node {0} with value {1}",
+                                        reader.NodeType, reader.Value);
+                        break;
+                }
+            }
+        }
+
+        public static Counter<ID> ReadCounterIdXml(string filePath)
+        {
+            TextReader reader = null;
+            Counter<ID> counter = new Counter<ID>();
+            try
+            {
+                reader = new StreamReader(filePath);
+                XmlReader xmlReader = XmlReader.Create(reader);
+                ReadCounterXml(xmlReader, counter);
+            }
+            finally
+            {
+                if (reader != null)
+                    reader.Close();
+            }
+
+            return counter;
         }
     }
 }

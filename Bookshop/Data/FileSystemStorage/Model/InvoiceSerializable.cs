@@ -26,7 +26,7 @@ namespace Bookshop.Data.FileSystemStorage.Model
         {
             Invoice newInvoice = new Invoice();
             newInvoice.Id = Id;
-            newInvoice.Customer = customers.get(id => id == Customer);
+            newInvoice.Customer = customers.get(c => c.Id.Equals(Customer));
             newInvoice.Price = Price;
             newInvoice.DateTime = DateTime;
             newInvoice.Books = new Counter<IBook>();
@@ -35,7 +35,7 @@ namespace Bookshop.Data.FileSystemStorage.Model
             {
                 ID id = idToNumber.Key;
                 int num = idToNumber.Value;
-                newInvoice.Books.Set(catalogue.get(i => i == id), num);
+                newInvoice.Books.Set(catalogue.get(b => b.Id.Equals(id)), num);
             }
             return newInvoice;
         }
@@ -56,6 +56,7 @@ namespace Bookshop.Data.FileSystemStorage.Model
 
         public void ReadBooksXml(XmlReader reader)
         {
+            Books = new Counter<ID>();
             if (reader.IsEmptyElement)
             {
                 reader.Read();
@@ -159,29 +160,23 @@ namespace Bookshop.Data.FileSystemStorage.Model
                 switch (reader.NodeType)
                 {
                     case XmlNodeType.Element:
-                        inElement = reader.Name;
+                        inElement = reader.Name; 
+                        if (inElement == "Books")
+                            ReadBooksXml(reader);
                         break;
                     case XmlNodeType.Text:
                         if (inElement == "Id")
-                            Id.Value = int.Parse(reader.Value);
+                            Id = new ID(int.Parse(reader.Value));
                         else if (inElement == "Customer")
-                            Customer.Value = int.Parse(reader.Value);
+                            Customer = new ID(int.Parse(reader.Value));
                         else if (inElement == "Price")
                             Price = double.Parse(reader.Value);
                         else if (inElement == "DateTime")
                             DateTime = DateTime.Parse(reader.Value);
-                        else if (inElement == "Books")
-                            ReadBooksXml(reader);
                         break;
                     case XmlNodeType.EndElement:
                         Console.WriteLine("End Element {0}", reader.Name);
-                        if (reader.Name == "item") inElement = "";
-                        if (reader.Name == "Counter")
-                        {
-                            reader.Read();
-                            reader.Read();
-                            return;
-                        }
+                        inElement = "";
                         break;
                     default:
                         Console.WriteLine("Other node {0} with value {1}",

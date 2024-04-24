@@ -11,7 +11,7 @@ namespace Bookshop.Logic.Suppliers
         {
             _storage = storage;
         }
-        public bool haveSameProperties(Supplier? a, Supplier? b)
+        public bool haveSameProperties(ISupplier? a, ISupplier? b)
         {
             if (a == null || b == null) return false;
 
@@ -32,12 +32,12 @@ namespace Bookshop.Logic.Suppliers
             return firstNameOk && lastNameOk && companyNameOk && addressOk && contactInfoOk;
         }
 
-        internal bool alreadyInStorage(Supplier supplier)
+        internal bool alreadyInStorage(ISupplier supplier)
         {
             return _storage.Suppliers.get(s => haveSameProperties(supplier, s)) != null;
         }
 
-        internal bool incorrectProperties(Supplier supplier)
+        internal bool incorrectProperties(ISupplier supplier)
         {
             if (supplier.FirstName == null || supplier.FirstName == string.Empty) return true;
             if (supplier.LastName == null || supplier.LastName == string.Empty) return true;

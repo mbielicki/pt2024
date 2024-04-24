@@ -3,7 +3,7 @@ using Bookshop.Data.Model;
 
 namespace Bookshop.Logic.Suppliers
 {
-    public class SuppliersService : IService<Supplier>
+    public class SuppliersService : IService<ISupplier>
     {
         private IBookshopStorage _storage;
         private SupplierValidator _validator;
@@ -13,7 +13,7 @@ namespace Bookshop.Logic.Suppliers
             _validator = new SupplierValidator(storage);
         }
 
-        public ID add(Supplier supplier)
+        public ID add(ISupplier supplier)
         {
             if (_validator.incorrectProperties(supplier))
                 throw new InvalidItemProperties();
@@ -24,9 +24,9 @@ namespace Bookshop.Logic.Suppliers
             return _storage.Suppliers.add(supplier);
         }
 
-        public Supplier get(ID supplierId)
+        public ISupplier get(ID supplierId)
         {
-            Supplier? result = _storage.Suppliers.get(s => s.Id.Equals(supplierId));
+            ISupplier? result = _storage.Suppliers.get(s => s.Id.Equals(supplierId));
             if (result == null)
                 throw new ItemIdNotFound();
             return result;
@@ -44,7 +44,7 @@ namespace Bookshop.Logic.Suppliers
             throw new ItemIdNotFound();
         }
 
-        public void update(Supplier newSupplier)
+        public void update(ISupplier newSupplier)
         {
             if (_validator.incorrectProperties(newSupplier))
                 throw new InvalidItemProperties();

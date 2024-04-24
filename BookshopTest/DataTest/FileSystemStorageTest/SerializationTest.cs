@@ -1,8 +1,9 @@
-﻿using Bookshop.Data.FileSystemStorage;
-using Bookshop.Data.Model;
+﻿using static Bookshop.Data.FileSystemStorage.Serialization;
+using Bookshop.Data.FileSystemStorage;
 using Bookshop.Logic.Catalogue;
 using Bookshop.Logic;
 using Bookshop.Data.API;
+using Bookshop.Data.Model;
 
 namespace BookshopTest.DataTest.FileSystemStorageTest
 {
@@ -13,18 +14,31 @@ namespace BookshopTest.DataTest.FileSystemStorageTest
         public void testWriteToXmlFile()
         {
             string file = "Generated Files\\BookshopFileSystemStorage\\temp.xml";
-            List<Book> books = new List<Book>();
+
+            FileSystemBookshopStorage storage = new FileSystemBookshopStorage();
+
+            Counter<IBook> books = new Counter<IBook>();
             Book a = DataGenerator.newBook();
-            a.Id = new ID(100);
+            a.Id = storage.Catalogue.add(a);
             books.Add(a);
+            
             Book b = DataGenerator.newBook();
-            b.Id = new ID(102);
+            b.Id = storage.Catalogue.add(b);
             books.Add(b);
+            books.Add(a);
 
-            Serialization.WriteToXmlFile(file, books);
+            Customer customer = DataGenerator.newCustomer();
+            customer.Id = storage.Customers.add(customer);
 
-            List<Book> read = Serialization.ReadFromXmlFile<List<Book>>(file);
-            Assert.AreEqual(books[1].Title, read.Last().Title);
+
+            List<Invoice> invoices = new List<Invoice>();
+            invoices.Add(new Invoice(new ID(200), books, customer, 33.3, DateTime.Now));
+            invoices.Add(new Invoice(new ID(201), books, customer, 33.3, DateTime.Now));
+
+            invoices.toXml(file);
+
+            List<Invoice> read = ReadInvoicesXml(file, storage.Catalogue, storage.Customers);
+            Assert.AreEqual(invoices[1].Price, read.Last().Price);
         }
 
         [TestMethod]
@@ -34,7 +48,7 @@ namespace BookshopTest.DataTest.FileSystemStorageTest
 
             ID id1 = storage.Catalogue.add(DataGenerator.newBook());
 
-            Book book = DataGenerator.newBook();
+            IBook book = DataGenerator.newBook();
             ID id2 = storage.Catalogue.add(book);
             book.Id = id2;
 

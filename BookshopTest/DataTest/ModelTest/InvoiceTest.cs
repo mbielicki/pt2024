@@ -9,19 +9,19 @@ namespace BookshopTest.DataTest.ModelTest
         public void testInvoiceInit()
         {
             Customer customer = DataGenerator.newCustomer();
-            ID bookId = new ID(321);
+            IBook book = DataGenerator.newBook();
             ID invoiceId = new ID(456);
 
-            Counter<ID> books = new Counter<ID>();
-            books.Add(bookId);
+            Counter<IBook> books = new Counter<IBook>();
+            books.Add(book);
             double price = 50;
             DateTime now = DateTime.Now;
 
-            Invoice invoice = new Invoice(invoiceId, books, customer, price, now);
+            IInvoice invoice = new Invoice(invoiceId, books, customer, price, now);
 
             Assert.AreEqual(invoiceId, invoice.Id);
             Assert.AreEqual(customer, invoice.Customer);
-            Assert.AreEqual(1, invoice.Books.Count(bookId));
+            Assert.AreEqual(1, invoice.Books.Count(book));
             Assert.AreEqual(price, invoice.Price);
             Assert.AreEqual(now, invoice.DateTime);
         }

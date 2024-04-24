@@ -2,14 +2,14 @@
 
 namespace Bookshop.Data.InMemoryStorage
 {
-    internal class SuppliersAPI : IInMemoryStorage<Supplier>
+    internal class SuppliersAPI : IInMemoryStorage<ISupplier>
     {
-        public SuppliersAPI(List<Supplier> document) : base(document)
+        public SuppliersAPI(List<ISupplier> document) : base(document)
         {
         }
-        public override void update(Supplier newSupplier)
+        public override void update(ISupplier newSupplier)
         {
-            Supplier supplierToUpdate = _document.Find(s => s.Id.Equals(newSupplier.Id));
+            ISupplier supplierToUpdate = _document.Find(s => s.Id.Equals(newSupplier.Id));
             supplierToUpdate.FirstName = newSupplier.FirstName;
             supplierToUpdate.LastName = newSupplier.LastName;
             supplierToUpdate.Address = newSupplier.Address;

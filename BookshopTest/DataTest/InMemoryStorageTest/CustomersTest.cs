@@ -1,6 +1,6 @@
 ﻿using Bookshop.Data.API;
-using Bookshop.Data.InMemoryStorage;
 using Bookshop.Data.Model;
+using Bookshop.Data.InMemoryStorage;
 
 namespace BookshopTest.DataTest.InMemoryStorage
 {
@@ -12,7 +12,7 @@ namespace BookshopTest.DataTest.InMemoryStorage
         {
             IBookshopStorage storage = new InMemoryBookshopStorage();
 
-            Customer customer = DataGenerator.newCustomer();
+            ICustomer customer = DataGenerator.newCustomer();
             ID customerId = storage.Customers.add(customer);
 
             Assert.AreEqual(customer.LastName, storage.Customers.get(c => c.Id.Equals(customerId)).LastName);
@@ -23,7 +23,7 @@ namespace BookshopTest.DataTest.InMemoryStorage
         {
             IBookshopStorage storage = new InMemoryBookshopStorage();
 
-            Customer customer = DataGenerator.newCustomer();
+            ICustomer customer = DataGenerator.newCustomer();
             ID customerId = storage.Customers.add(customer);
 
             storage.Customers.remove(customerId);
@@ -36,10 +36,10 @@ namespace BookshopTest.DataTest.InMemoryStorage
         {
             IBookshopStorage storage = new InMemoryBookshopStorage();
 
-            Customer customer = DataGenerator.newCustomer();
+            ICustomer customer = DataGenerator.newCustomer();
             ID customerId = storage.Customers.add(customer);
 
-            Customer newCustomer = DataGenerator.copy(customer);
+            ICustomer newCustomer = DataGenerator.copy(customer);
             newCustomer.ContactInfo = "john.doe@example.com";
 
             storage.Customers.update(newCustomer);

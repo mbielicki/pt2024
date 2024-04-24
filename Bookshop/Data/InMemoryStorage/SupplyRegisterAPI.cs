@@ -2,14 +2,14 @@
 
 namespace Bookshop.Data.InMemoryStorage
 {
-    internal class SupplyRegisterAPI : IInMemoryStorage<SupplyRegisterEntry>
+    internal class SupplyRegisterAPI : IInMemoryStorage<ISupplyRegisterEntry>
     {
-        public SupplyRegisterAPI(List<SupplyRegisterEntry> document) : base(document)
+        public SupplyRegisterAPI(List<ISupplyRegisterEntry> document) : base(document)
         {
         }
-        public override void update(SupplyRegisterEntry newEntry)
+        public override void update(ISupplyRegisterEntry newEntry)
         {
-            SupplyRegisterEntry entryToUpdate = _document.Find(i => i.Id.Equals(newEntry.Id));
+            ISupplyRegisterEntry entryToUpdate = _document.Find(i => i.Id.Equals(newEntry.Id));
             entryToUpdate.Books = newEntry.Books;
             entryToUpdate.Supplier = newEntry.Supplier;
             entryToUpdate.Price = newEntry.Price;

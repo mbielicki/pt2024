@@ -1,6 +1,5 @@
 ﻿using Bookshop.Data.API;
 using Bookshop.Data.FileSystemStorage;
-using Bookshop.Data.InMemoryStorage;
 using Bookshop.Data.Model;
 using Bookshop.Logic;
 using Bookshop.Logic.Suppliers;
@@ -16,15 +15,15 @@ namespace BookshopTest.LogicTest
             IBookshopStorage storage = new FileSystemBookshopStorage();
             SuppliersService suppliers = new SuppliersService(storage);
 
-            Supplier supplier = DataGenerator.newSupplier();
+            ISupplier supplier = DataGenerator.newSupplier();
 
             ID id = suppliers.add(supplier);
             Assert.AreEqual(supplier.CompanyName, suppliers.get(id).CompanyName);
 
-            Supplier identicalSupplier = DataGenerator.copy(supplier);
+            ISupplier identicalSupplier = DataGenerator.copy(supplier);
             Assert.ThrowsException<ItemAlreadyExists>(() => suppliers.add(identicalSupplier));
 
-            Supplier incorrect = DataGenerator.newSupplier();
+            ISupplier incorrect = DataGenerator.newSupplier();
             incorrect.ContactInfo = "";
 
             Assert.ThrowsException<InvalidItemProperties>(() => suppliers.add(incorrect));
@@ -36,10 +35,10 @@ namespace BookshopTest.LogicTest
             IBookshopStorage storage = new FileSystemBookshopStorage();
             SuppliersService suppliers = new SuppliersService(storage);
 
-            Supplier supplier = DataGenerator.newSupplier();
+            ISupplier supplier = DataGenerator.newSupplier();
             ID id = suppliers.add(supplier);
 
-            Supplier newSupplier = DataGenerator.copy(supplier);
+            ISupplier newSupplier = DataGenerator.copy(supplier);
             newSupplier.ContactInfo = "supplier@company.com";
             suppliers.update(newSupplier);
 

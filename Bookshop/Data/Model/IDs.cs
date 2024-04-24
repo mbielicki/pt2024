@@ -1,6 +1,6 @@
 ﻿namespace Bookshop.Data.Model
 {
-    public interface HasId 
+    public interface HasId
     {
         ID? Id { get; set; }
     }
@@ -13,7 +13,8 @@
     public class ID : HasValue
     {
         public int Value { get; set; }
-        public ID(int value) {
+        public ID(int value)
+        {
             Value = value;
         }
         public ID()
@@ -31,8 +32,9 @@
         {
             return Value.GetHashCode();
         }
-        public ID increment() { 
-            Value ++;
+        public ID increment()
+        {
+            Value++;
             return this;
         }
         public override string ToString()

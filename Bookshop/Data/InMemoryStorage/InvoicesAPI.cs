@@ -2,14 +2,14 @@
 
 namespace Bookshop.Data.InMemoryStorage
 {
-    internal class InvoicesAPI : IInMemoryStorage<Invoice>
+    internal class InvoicesAPI : IInMemoryStorage<IInvoice>
     {
-        public InvoicesAPI(List<Invoice> document) : base(document)
+        public InvoicesAPI(List<IInvoice> document) : base(document)
         {
         }
-        public override void update(Invoice newInvoice)
+        public override void update(IInvoice newInvoice)
         {
-            Invoice invoiceToUpdate = _document.Find(i => i.Id.Equals(newInvoice.Id));
+            IInvoice invoiceToUpdate = _document.Find(i => i.Id.Equals(newInvoice.Id));
             invoiceToUpdate.Books = newInvoice.Books;
             invoiceToUpdate.Customer = newInvoice.Customer;
             invoiceToUpdate.Price = newInvoice.Price;

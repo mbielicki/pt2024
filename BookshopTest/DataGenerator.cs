@@ -40,18 +40,18 @@ namespace BookshopTest
             return new Supplier(null, firstName, lastName, companyName, address, contactInfo);
         }
 
-        internal static Book copy(Book book)
+        internal static Book copy(IBook book)
         {
             return new Book(book.Id, book.Title, book.Author, book.Description, book.Price);
         }
-        internal static Customer copy(Customer customer)
+        internal static Customer copy(ICustomer customer)
         {
             return new Customer(
                 customer.Id, customer.FirstName, customer.LastName, 
                 customer.Address, customer.ContactInfo
                 );
         }
-        internal static Supplier copy(Supplier supplier)
+        internal static Supplier copy(ISupplier supplier)
         {
             return new Supplier(
                 supplier.Id, supplier.FirstName, supplier.LastName,

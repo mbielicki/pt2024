@@ -4,11 +4,11 @@ namespace Bookshop.Data.API
 {
     public interface IBookshopStorage
     {
-        IStorageAPI<Book> Catalogue { get; }
-        IStorageAPI<Customer> Customers { get; }
-        IStorageAPI<Supplier> Suppliers { get; }
-        IStorageAPI<Invoice> Invoices { get; }
-        IStorageAPI<SupplyRegisterEntry> SupplyRegister { get; }
+        IStorageAPI<IBook> Catalogue { get; }
+        IStorageAPI<ICustomer> Customers { get; }
+        IStorageAPI<ISupplier> Suppliers { get; }
+        IStorageAPI<IInvoice> Invoices { get; }
+        IStorageAPI<ISupplyRegisterEntry> SupplyRegister { get; }
         IInventoryAPI Inventory {  get; }
     }
 }

@@ -14,20 +14,23 @@ namespace Bookshop.Data.FileSystemStorage
         string inventory = folderPath + "inventory.xml";
 
         public IInventoryAPI Inventory { get; }
-        public IStorageAPI<Book> Catalogue { get; }
-        public IStorageAPI<Customer> Customers { get; }
-        public IStorageAPI<Supplier> Suppliers { get; }
-        public IStorageAPI<Invoice> Invoices { get; }
-        public IStorageAPI<SupplyRegisterEntry> SupplyRegister { get; }
+        public IStorageAPI<IBook> Catalogue { get; }
+        public IStorageAPI<ICustomer> Customers { get; }
+        public IStorageAPI<ISupplier> Suppliers { get; }
+        public IStorageAPI<IInvoice> Invoices { get; }
+        public IStorageAPI<ISupplyRegisterEntry> SupplyRegister { get; }
 
 
         public FileSystemBookshopStorage()
         {
-            Catalogue = new CatalogueAPI(catalogue);
-            Customers = new CustomersAPI(customers);
-            Suppliers = new SuppliersAPI(suppliers);
-            Invoices = new InvoicesAPI(invoices);
-            SupplyRegister = new SupplyRegisterAPI(supplyRegister);
+            CatalogueAPI catalogueTemp = new CatalogueAPI(catalogue);
+            CustomersAPI customersTemp = new CustomersAPI(customers);
+            SuppliersAPI suppliersTemp = new SuppliersAPI(suppliers);
+            Catalogue = catalogueTemp;
+            Customers = customersTemp;
+            Suppliers = suppliersTemp;
+            Invoices = new InvoicesAPI(invoices, catalogueTemp, customersTemp);
+            SupplyRegister = new SupplyRegisterAPI(supplyRegister, catalogueTemp, suppliersTemp);
             Inventory = new InventoryAPI(inventory);
         }
     }

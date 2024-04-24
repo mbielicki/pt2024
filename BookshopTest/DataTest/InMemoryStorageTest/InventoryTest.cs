@@ -1,6 +1,6 @@
 ﻿using Bookshop.Data.API;
-using Bookshop.Data.InMemoryStorage;
 using Bookshop.Data.Model;
+using Bookshop.Data.InMemoryStorage;
 
 namespace BookshopTest.DataTest.InMemoryStorageTest
 {

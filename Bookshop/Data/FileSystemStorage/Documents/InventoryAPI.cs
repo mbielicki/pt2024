@@ -10,7 +10,7 @@ namespace Bookshop.Data.FileSystemStorage
         public InventoryAPI(string filePath)
         {
             this.filePath = filePath; 
-            _document = new Counter<ID> ();
+            _document = new Counter<ID>();
             try
             {
                 _document = Serialization.ReadFromXmlFile<Counter<ID>>(filePath);

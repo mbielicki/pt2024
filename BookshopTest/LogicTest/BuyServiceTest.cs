@@ -19,10 +19,10 @@ namespace BookshopTest.LogicTest
             CatalogueService catalogue = new CatalogueService(storage);
             BuyService buyService = new BuyService(storage);
 
-            Book book1 = DataGenerator.newBook();
+            IBook book1 = DataGenerator.newBook();
             ID id1 = catalogue.add(book1);
 
-            Book book2 = DataGenerator.newBook();
+            IBook book2 = DataGenerator.newBook();
             ID id2 = catalogue.add(book2);
 
             Counter<ID> books = new Counter<ID>();
@@ -47,10 +47,10 @@ namespace BookshopTest.LogicTest
             BuyService buyService = new BuyService(storage);
 
             // Make shopping list
-            Book book1 = DataGenerator.newBook();
+            IBook book1 = DataGenerator.newBook();
             ID bookId1 = catalogue.add(book1);
 
-            Book book2 = DataGenerator.newBook();
+            IBook book2 = DataGenerator.newBook();
             ID bookId2 = catalogue.add(book2);
 
             Counter<ID> books = new Counter<ID>();
@@ -59,11 +59,11 @@ namespace BookshopTest.LogicTest
             books.Add(bookId2);
 
             // Make customer
-            Customer customer = DataGenerator.newCustomer();
+            ICustomer customer = DataGenerator.newCustomer();
             ID customerId = customersService.add(customer);
 
             // Make inventory
-            Supplier supplier = DataGenerator.newSupplier();
+            ISupplier supplier = DataGenerator.newSupplier();
             ID supplierId = suppliersService.add(supplier);
             inventoryService.supply(bookId1, supplierId, 100);
             inventoryService.supply(bookId2, supplierId, 100);
@@ -80,7 +80,7 @@ namespace BookshopTest.LogicTest
 
             // Check invoice
             InvoicesService invoicesService = new InvoicesService(storage);
-            Invoice invoice = invoicesService.get(invoiceId);
+            IInvoice invoice = invoicesService.get(invoiceId);
 
             double price = buyService.checkPrice(books);
             Assert.AreEqual(price, invoice.Price);

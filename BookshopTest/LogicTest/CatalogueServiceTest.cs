@@ -1,6 +1,5 @@
 ﻿using Bookshop.Data.API;
 using Bookshop.Data.FileSystemStorage;
-using Bookshop.Data.InMemoryStorage;
 using Bookshop.Data.Model;
 using Bookshop.Logic;
 using Bookshop.Logic.Catalogue;
@@ -16,15 +15,15 @@ namespace BookshopTest.LogicTest
             IBookshopStorage storage = new FileSystemBookshopStorage();
             CatalogueService catalogue = new CatalogueService(storage);
 
-            Book book = DataGenerator.newBook();
+            IBook book = DataGenerator.newBook();
             ID id = catalogue.add(book);
 
             Assert.AreEqual(book.Author, catalogue.get(id).Author);
 
-            Book identicalBook = DataGenerator.copy(book);
+            IBook identicalBook = DataGenerator.copy(book);
             Assert.ThrowsException<ItemAlreadyExists>(() => catalogue.add(identicalBook));
 
-            Book incorrectBook = DataGenerator.newBook();
+            IBook incorrectBook = DataGenerator.newBook();
             incorrectBook.Price = -1;
             Assert.ThrowsException<InvalidItemProperties>(() => catalogue.add(incorrectBook));
         }
@@ -35,10 +34,10 @@ namespace BookshopTest.LogicTest
             IBookshopStorage storage = new FileSystemBookshopStorage();
             CatalogueService catalogue = new CatalogueService(storage);
 
-            Book book = DataGenerator.newBook();
+            IBook book = DataGenerator.newBook();
             ID id = catalogue.add(book);
 
-            Book newBook = DataGenerator.newBook();
+            IBook newBook = DataGenerator.newBook();
             newBook.Id = id;
 
             catalogue.update(newBook);
@@ -57,10 +56,10 @@ namespace BookshopTest.LogicTest
             IBookshopStorage storage = new FileSystemBookshopStorage();
             CatalogueService catalogue = new CatalogueService(storage);
 
-            Book book1 = DataGenerator.newBook();
+            IBook book1 = DataGenerator.newBook();
             ID id1 = catalogue.add(book1);
 
-            Book book2 = DataGenerator.newBook();
+            IBook book2 = DataGenerator.newBook();
             ID id2 = catalogue.add(book2);
 
             Assert.AreEqual(id1, new ID(id1.Value));

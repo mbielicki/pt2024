@@ -1,6 +1,6 @@
 ﻿using Bookshop.Data.API;
-using Bookshop.Data.InMemoryStorage;
 using Bookshop.Data.Model;
+using Bookshop.Data.InMemoryStorage;
 
 namespace BookshopTest.DataTest.InMemoryStorage
 {
@@ -10,8 +10,8 @@ namespace BookshopTest.DataTest.InMemoryStorage
         [TestMethod]
         public void testAddGet()
         {
-            Counter<ID> books = new Counter<ID>();
-            books.Add(new ID(123));
+            Counter<IBook> books = new Counter<IBook>();
+            books.Add(DataGenerator.newBook());
             Customer customer = DataGenerator.newCustomer();
             double price = 40;
             DateTime dateTime = DateTime.Now;
@@ -27,8 +27,8 @@ namespace BookshopTest.DataTest.InMemoryStorage
         [TestMethod]
         public void testRemove()
         {
-            Counter<ID> books = new Counter<ID>();
-            books.Add(new ID(123));
+            Counter<IBook> books = new Counter<IBook>();
+            books.Add(DataGenerator.newBook());
             Customer customer = DataGenerator.newCustomer();
             double price = 40;
             DateTime dateTime = DateTime.Now;
@@ -45,8 +45,8 @@ namespace BookshopTest.DataTest.InMemoryStorage
         [TestMethod]
         public void testUpdate()
         {
-            Counter<ID> books = new Counter<ID>();
-            books.Add(new ID(123));
+            Counter<IBook> books = new Counter<IBook>();
+            books.Add(DataGenerator.newBook());
             Customer customer = DataGenerator.newCustomer();
             double price = 40;
             DateTime dateTime = DateTime.Now;

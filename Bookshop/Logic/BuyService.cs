@@ -12,7 +12,8 @@ namespace Bookshop.Logic
         public ID buy(ID customerId, Counter<ID> books)
         {
             CustomersService customers = new CustomersService(_storage);
-            Customer customer = customers.get(customerId);
+            CatalogueService catalogue = new CatalogueService(_storage);
+            ICustomer customer = customers.get(customerId);
 
             foreach (var idToNumber in books)
             {
@@ -32,8 +33,17 @@ namespace Bookshop.Logic
                 _storage.Inventory.remove(id, numberToBuy);
             }
 
+            Counter<IBook> bookRefs = new Counter<IBook>();
+            foreach (var idToNumber in books)
+            {
+                ID id = idToNumber.Key;
+                int numberToBuy = idToNumber.Value;
+
+                bookRefs.Set(catalogue.get(id), numberToBuy);
+            }
+
             double price = checkPrice(books);
-            Invoice invoice = new Invoice(null, books, customer, price, DateTime.Now);
+            Invoice invoice = new Invoice(null, bookRefs, customer, price, DateTime.Now);
             return _storage.Invoices.add(invoice);
         }
         public double checkPrice(Counter<ID> books)

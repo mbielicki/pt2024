@@ -3,7 +3,7 @@ using Bookshop.Data.Model;
 
 namespace Bookshop.Logic.Catalogue
 {
-    public class CatalogueService : IService<Book>
+    public class CatalogueService : IService<IBook>
     {
         private IBookshopStorage _storage;
         private BookValidator _validator;
@@ -12,7 +12,7 @@ namespace Bookshop.Logic.Catalogue
             _storage = storage;
             _validator = new BookValidator(storage);
         }
-        public ID add(Book book)
+        public ID add(IBook book)
         {
             if (_validator.incorrectProperties(book))
                 throw new InvalidItemProperties();
@@ -23,9 +23,9 @@ namespace Bookshop.Logic.Catalogue
             return _storage.Catalogue.add(book);
         }
 
-        public Book get(ID bookId)
+        public IBook get(ID bookId)
         {
-            Book? result = _storage.Catalogue.get(b => b.Id.Equals(bookId));
+            IBook? result = _storage.Catalogue.get(b => b.Id.Equals(bookId));
             if (result == null)
                 throw new ItemIdNotFound();
             return result;
@@ -43,7 +43,7 @@ namespace Bookshop.Logic.Catalogue
             throw new ItemIdNotFound();
         }
 
-        public void update(Book newBook)
+        public void update(IBook newBook)
         {
             if (_validator.incorrectProperties(newBook))
                 throw new InvalidItemProperties();

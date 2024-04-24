@@ -6,18 +6,18 @@ namespace Bookshop.Data.InMemoryStorage
     public class InMemoryBookshopStorage : IBookshopStorage
     {
         Counter<ID> inventory = new Counter<ID>();
-        List<Book> catalogue = new List<Book>();
-        List<Customer> customers = new List<Customer>();
-        List<Supplier> suppliers = new List<Supplier>();
-        List<Invoice> invoices = new List<Invoice>();
-        List<SupplyRegisterEntry> supplyRegister = new List<SupplyRegisterEntry>();
+        List<IBook> catalogue = new List<IBook>();
+        List<ICustomer> customers = new List<ICustomer>();
+        List<ISupplier> suppliers = new List<ISupplier>();
+        List<IInvoice> invoices = new List<IInvoice>();
+        List<ISupplyRegisterEntry> supplyRegister = new List<ISupplyRegisterEntry>();
 
         public IInventoryAPI Inventory { get; }
-        public IStorageAPI<Book> Catalogue { get; }
-        public IStorageAPI<Customer> Customers { get; }
-        public IStorageAPI<Supplier> Suppliers { get; }
-        public IStorageAPI<Invoice> Invoices { get; }
-        public IStorageAPI<SupplyRegisterEntry> SupplyRegister { get; }
+        public IStorageAPI<IBook> Catalogue { get; }
+        public IStorageAPI<ICustomer> Customers { get; }
+        public IStorageAPI<ISupplier> Suppliers { get; }
+        public IStorageAPI<IInvoice> Invoices { get; }
+        public IStorageAPI<ISupplyRegisterEntry> SupplyRegister { get; }
 
 
         public InMemoryBookshopStorage()

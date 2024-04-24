@@ -1,6 +1,5 @@
 ﻿using Bookshop.Data.API;
 using Bookshop.Data.FileSystemStorage;
-using Bookshop.Data.InMemoryStorage;
 using Bookshop.Data.Model;
 using Bookshop.Logic;
 using Bookshop.Logic.Customers;
@@ -16,15 +15,15 @@ namespace BookshopTest.LogicTest
             IBookshopStorage storage = new FileSystemBookshopStorage();
             CustomersService customers = new CustomersService(storage);
 
-            Customer customer = DataGenerator.newCustomer();
+            ICustomer customer = DataGenerator.newCustomer();
 
             ID id = customers.add(customer);
             Assert.AreEqual(customer.FirstName, customers.get(id).FirstName);
 
-            Customer identicalCustomer = DataGenerator.copy(customer);
+            ICustomer identicalCustomer = DataGenerator.copy(customer);
             Assert.ThrowsException<ItemAlreadyExists>(() => customers.add(identicalCustomer));
 
-            Customer incorrect = DataGenerator.newCustomer();
+            ICustomer incorrect = DataGenerator.newCustomer();
             incorrect.LastName = "";
 
             Assert.ThrowsException<InvalidItemProperties>(() => customers.add(incorrect));
@@ -36,10 +35,10 @@ namespace BookshopTest.LogicTest
             IBookshopStorage storage = new FileSystemBookshopStorage();
             CustomersService customers = new CustomersService(storage);
 
-            Customer customer = DataGenerator.newCustomer();
+            ICustomer customer = DataGenerator.newCustomer();
             ID id = customers.add(customer);
 
-            Customer newCustomer = DataGenerator.copy(customer);
+            ICustomer newCustomer = DataGenerator.copy(customer);
             newCustomer.FirstName = "John";
             newCustomer.Id = id;
 

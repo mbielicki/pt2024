@@ -1,6 +1,17 @@
-﻿namespace Bookshop.Data.Model
+﻿using System;
+
+namespace Bookshop.Data.Model
 {
-    public class Customer : Person
+    public interface ICustomer : IPerson
+    {
+        public ID? Id { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public string Address { get; set; }
+        public string ContactInfo { get; set; }
+    }
+
+    public class Customer : ICustomer
     {
         public ID? Id { get; set; }
         public string FirstName { get; set; }

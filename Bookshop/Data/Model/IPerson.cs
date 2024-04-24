@@ -1,6 +1,6 @@
 ﻿namespace Bookshop.Data.Model
 {
-    public interface Person : HasId
+    public interface IPerson : HasId
     {
         string FirstName { get; set; }
         string LastName { get; set; }

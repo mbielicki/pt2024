@@ -2,15 +2,15 @@
 
 namespace Bookshop.Data.InMemoryStorage
 {
-    internal class CatalogueAPI : IInMemoryStorage<Book>
+    internal class CatalogueAPI : IInMemoryStorage<IBook>
     {
-        public CatalogueAPI(List<Book> document) : base(document)
+        public CatalogueAPI(List<IBook> document) : base(document)
         {
         }
 
-        public override void update(Book book)
+        public override void update(IBook book)
         {
-            Book bookToUpdate = _document.Find(b => b.Id.Equals(book.Id));
+            IBook bookToUpdate = _document.Find(b => b.Id.Equals(book.Id));
             bookToUpdate.Title = book.Title;
             bookToUpdate.Author = book.Author;
             bookToUpdate.Description = book.Description;

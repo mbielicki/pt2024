@@ -3,7 +3,7 @@ using Bookshop.Data.Model;
 
 namespace Bookshop.Logic.Customers
 {
-    public class CustomersService : IService<Customer>
+    public class CustomersService : IService<ICustomer>
     {
         private IBookshopStorage _storage;
         private CustomerValidator _validator;
@@ -13,7 +13,7 @@ namespace Bookshop.Logic.Customers
             _validator = new CustomerValidator(storage);
         }
 
-        public ID add(Customer customer)
+        public ID add(ICustomer customer)
         {
             if (_validator.incorrectProperties(customer))
                 throw new InvalidItemProperties();
@@ -24,9 +24,9 @@ namespace Bookshop.Logic.Customers
             return _storage.Customers.add(customer);
         }
 
-        public Customer get(ID customerId)
+        public ICustomer get(ID customerId)
         {
-            Customer? result = _storage.Customers.get(c => c.Id.Equals(customerId));
+            ICustomer? result = _storage.Customers.get(c => c.Id.Equals(customerId));
             if (result == null)
                 throw new ItemIdNotFound();
             return result;
@@ -44,7 +44,7 @@ namespace Bookshop.Logic.Customers
             throw new ItemIdNotFound();
         }
 
-        public void update(Customer newCustomer)
+        public void update(ICustomer newCustomer)
         {
             if (_validator.incorrectProperties(newCustomer))
                 throw new InvalidItemProperties();

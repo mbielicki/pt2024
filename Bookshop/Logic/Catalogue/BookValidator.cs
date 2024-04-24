@@ -11,7 +11,7 @@ namespace Bookshop.Logic.Catalogue
         {
             _storage = storage;
         }
-        public bool haveSameProperties(Book? a, Book? b)
+        public bool haveSameProperties(IBook? a, IBook? b)
         {
             if (a == null || b == null) return false;
 
@@ -31,12 +31,12 @@ namespace Bookshop.Logic.Catalogue
             return nameOk && authorOk && descriptionOk && priceOk;
         }
 
-        internal bool alreadyInCatalogue(Book book)
+        internal bool alreadyInCatalogue(IBook book)
         {
             return _storage.Catalogue.get(b => haveSameProperties(book, b)) != null;
         }
 
-        internal bool incorrectProperties(Book book)
+        internal bool incorrectProperties(IBook book)
         {
             if (book.Title == null || book.Title == string.Empty) return true;
             if (book.Author == null || book.Author == string.Empty) return true;

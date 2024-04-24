@@ -1,6 +1,5 @@
 ﻿using Bookshop.Data.API;
 using Bookshop.Data.FileSystemStorage;
-using Bookshop.Data.InMemoryStorage;
 using Bookshop.Data.Model;
 using Bookshop.Logic;
 
@@ -15,14 +14,15 @@ namespace BookshopTest.LogicTest
             IBookshopStorage storage = new FileSystemBookshopStorage();
             SupplyRegisterService register = new SupplyRegisterService(storage);
 
-            Supplier supplier = DataGenerator.newSupplier();
-            ID bookId = new ID(321);
+            ISupplier supplier = DataGenerator.newSupplier();
+            IBook book = DataGenerator.newBook();
+            ID bookId = storage.Catalogue.add(book);
 
-            Counter<ID> books = new Counter<ID>();
+            Counter<IBook> books = new Counter<IBook>();
             double price = 50;
             DateTime now = DateTime.Now;
 
-            books.Add(bookId);
+            books.Add(book);
             SupplyRegisterEntry entry = new SupplyRegisterEntry(null, books, supplier, price, now);
             ID id = storage.SupplyRegister.add(entry);
 

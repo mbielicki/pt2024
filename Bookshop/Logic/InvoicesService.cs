@@ -7,9 +7,9 @@ namespace Bookshop.Logic
     {
         IBookshopStorage _storage;
         public InvoicesService(IBookshopStorage storage) { _storage = storage;  }
-        public Invoice get(ID id)
+        public IInvoice get(ID id)
         {
-            Invoice? result = _storage.Invoices.get(i => i.Id.Equals(id));
+            IInvoice? result = _storage.Invoices.get(i => i.Id.Equals(id));
             if (result == null)
                 throw new ItemIdNotFound();
             return result;

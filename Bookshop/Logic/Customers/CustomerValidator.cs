@@ -11,7 +11,7 @@ namespace Bookshop.Logic.Customers
         {
             _storage = storage;
         }
-        public bool haveSameProperties(Customer? a, Customer? b)
+        public bool haveSameProperties(ICustomer? a, ICustomer? b)
         {
             if (a == null || b == null) return false;
 
@@ -31,12 +31,12 @@ namespace Bookshop.Logic.Customers
             return firstNameOk && lastNameOk && addressOk && contactInfoOk;
         }
 
-        internal bool alreadyInStorage(Customer customer)
+        internal bool alreadyInStorage(ICustomer customer)
         {
             return _storage.Customers.get(c => haveSameProperties(customer, c)) != null;
         }
 
-        internal bool incorrectProperties(Customer customer)
+        internal bool incorrectProperties(ICustomer customer)
         {
             if (customer.FirstName == null || customer.FirstName == string.Empty) return true;
             if (customer.LastName == null || customer.LastName == string.Empty) return true;

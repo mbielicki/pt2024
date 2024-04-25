@@ -1,10 +1,39 @@
-﻿using Bookshop.Data.Model;
+﻿using Bookshop.Data.API;
+using Bookshop.Data.Model;
 using System.Text;
 
 namespace BookshopTest
 {
     internal static class DataGenerator
     {
+        public static ICustomer newCustomer(IBookshopStorage storage)
+        {
+            Customer customer = newCustomer();
+            customer.Id = storage.Customers.add(customer);
+            return customer;
+        }
+        public static Counter<IBook> newBooks(IBookshopStorage storage)
+        {
+            Counter<IBook> books = new Counter<IBook>();
+            Random r = new Random();
+            int num = r.Next(2, 6);
+
+            for (int i = 0; i < num; i++)
+            {
+                Book book = newBook();
+                book.Id = storage.Catalogue.add(book);
+                books.Set(book, r.Next(1, 5));
+            }
+            return books;
+        }
+        public static Counter<IBook> newBooks()
+        {
+            Counter<IBook> books = new Counter<IBook>();
+            books.Add(newBook());
+            books.Add(newBook());
+            books.Set(newBook(), 3);
+            return books;
+        }
         public static Book newBook()
         {
             Random r = new Random();
@@ -47,7 +76,7 @@ namespace BookshopTest
         internal static Customer copy(ICustomer customer)
         {
             return new Customer(
-                customer.Id, customer.FirstName, customer.LastName, 
+                customer.Id, customer.FirstName, customer.LastName,
                 customer.Address, customer.ContactInfo
                 );
         }

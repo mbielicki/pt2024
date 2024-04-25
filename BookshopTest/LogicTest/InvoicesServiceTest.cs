@@ -14,20 +14,14 @@ namespace BookshopTest.LogicTest
             IBookshopStorage storage = new FileSystemBookshopStorage();
             InvoicesService invoices = new InvoicesService(storage);
 
-            ICustomer customer = DataGenerator.newCustomer();
-            customer.Id = storage.Customers.add(customer);
-            IBook book = DataGenerator.newBook();
-            ID bookId = storage.Catalogue.add(book); 
 
-            Counter<IBook> books = new Counter<IBook>();
-            double price = 50;
-            DateTime now = DateTime.Now;
+            //IEnumerable<IInvoice> invoicesList = EventGenerator.newInvoicesRandom(storage);
+            IEnumerable<IInvoice> invoicesList = EventGenerator.newInvoicesHardCoded(storage);
 
-            books.Add(book);
-            Invoice invoice = new Invoice(null, books, customer, price, now);
-            ID id = storage.Invoices.add(invoice);
+            IInvoice firstInvoice = invoicesList.First();
+            firstInvoice.Id = storage.Invoices.add(firstInvoice);
 
-            Assert.AreEqual(price, invoices.get(id).Price);
+            Assert.AreEqual(firstInvoice.Price, invoices.get(firstInvoice.Id).Price);
         }
     }
 }

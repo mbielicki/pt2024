@@ -6,31 +6,30 @@ namespace BookshopTest
 {
     internal static class EventGenerator
     {
-        public static IEnumerable<IInvoice> newInvoicesInStorage(IBookshopStorage storage)
+        public static IEnumerable<IInvoice> newInvoicesRandom(IBookshopStorage storage)
         {
             return new List<IInvoice>() {
-                new StorageInvoice(storage),
-                new StorageInvoice(storage),
-                new StorageInvoice(storage)
+                new RandomInvoice(storage),
+                new RandomInvoice(storage),
+                new RandomInvoice(storage)
             };
         }
-        public static IEnumerable<IInvoice> newInvoiceNoId()
+        public static IEnumerable<IInvoice> newInvoicesHardCoded(IBookshopStorage storage)
         {
             return new List<IInvoice>() {
-                new InvoiceNoId(),
-                new InvoiceNoId(),
-                new InvoiceNoId()
+                new InvoiceCustomizable(storage, 20, DateTime.Parse("20/03/2022 10:00:00")),
+                new InvoiceCustomizable(storage, 30, DateTime.Parse("25/04/2023 16:00:00")),
+                new InvoiceCustomizable(storage, 100, DateTime.Parse("10/05/2024 12:00:00"))
             };
         }
-        private class StorageInvoice : IInvoice
+        private class RandomInvoice : IInvoice
         {
-
             public ID? Id { get; set; }
             public ICustomer Customer { get; set; }
             public double Price { get; set; }
             public DateTime DateTime { get; set; }
             public Counter<IBook> Books { get; set; }
-            public StorageInvoice(IBookshopStorage storage)
+            public RandomInvoice(IBookshopStorage storage)
             {
                 Random r = new Random();
                 Books = newBooks(storage);
@@ -40,21 +39,20 @@ namespace BookshopTest
                 Id = storage.Invoices.add(this);
             }
         }
-        private class InvoiceNoId : IInvoice
+        private class InvoiceCustomizable : IInvoice
         {
             public ID? Id { get; set; }
             public ICustomer Customer { get; set; }
             public double Price { get; set; }
             public DateTime DateTime { get; set; }
             public Counter<IBook> Books { get; set; }
-            public InvoiceNoId()
+            public InvoiceCustomizable(IBookshopStorage storage, double price, DateTime time)
             {
-                Random r = new Random();
                 Id = null;
-                Books = newBooks();
-                Customer = newCustomer();
-                Price = r.NextDouble() * 100 + 10;
-                DateTime = DateTime.Now;
+                Books = newBooks(storage);
+                Customer = newCustomer(storage);
+                Price = price;
+                DateTime = time;
             }
         }
 

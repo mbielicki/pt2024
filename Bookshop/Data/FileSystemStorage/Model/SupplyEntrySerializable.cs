@@ -62,6 +62,7 @@ namespace Bookshop.Data.FileSystemStorage.Model
                 return;
             }
             Console.WriteLine("start");
+            Books = new Counter<ID>();
             string inElement = "";
             ID identifier = new();
             int count = 0;
@@ -165,9 +166,9 @@ namespace Bookshop.Data.FileSystemStorage.Model
                         break;
                     case XmlNodeType.Text:
                         if (inElement == "Id")
-                            Id.Value = int.Parse(reader.Value);
+                            Id = new ID(int.Parse(reader.Value));
                         else if (inElement == "Supplier")
-                            Supplier.Value = int.Parse(reader.Value);
+                            Supplier = new ID(int.Parse(reader.Value));
                         else if (inElement == "Price")
                             Price = double.Parse(reader.Value);
                         else if (inElement == "DateTime")

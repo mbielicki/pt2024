@@ -15,6 +15,7 @@ namespace BookshopTest.LogicTest
             SupplyRegisterService register = new SupplyRegisterService(storage);
 
             ISupplier supplier = DataGenerator.newSupplier();
+            supplier.Id = storage.Suppliers.add(supplier);
             IBook book = DataGenerator.newBook();
             ID bookId = storage.Catalogue.add(book);
 

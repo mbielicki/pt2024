@@ -62,7 +62,6 @@ namespace Bookshop.Data.FileSystemStorage.Model
                 reader.Read();
                 return;
             }
-            Console.WriteLine("start");
             string inElement = "";
             ID identifier = new();
             int count = 0;
@@ -71,8 +70,6 @@ namespace Bookshop.Data.FileSystemStorage.Model
                 switch (reader.NodeType)
                 {
                     case XmlNodeType.Element:
-                        Console.WriteLine("Start Element {0}", reader.Name);
-
                         if (reader.Name == "item")
                         {
                             string id = reader.GetAttribute("id");
@@ -83,8 +80,6 @@ namespace Bookshop.Data.FileSystemStorage.Model
                         inElement = reader.Name;
                         break;
                     case XmlNodeType.Text:
-                        Console.WriteLine("Text Node: {0}",
-                                 reader.Value);
                         if (inElement == "item")
                         {
                             count = int.Parse(reader.Value);
@@ -93,7 +88,6 @@ namespace Bookshop.Data.FileSystemStorage.Model
                         }
                         break;
                     case XmlNodeType.EndElement:
-                        Console.WriteLine("End Element {0}", reader.Name);
                         if (reader.Name == "item") inElement = "";
                         if (reader.Name == "Counter")
                         {
@@ -103,8 +97,6 @@ namespace Bookshop.Data.FileSystemStorage.Model
                         }
                         break;
                     default:
-                        Console.WriteLine("Other node {0} with value {1}",
-                                        reader.NodeType, reader.Value);
                         break;
                 }
             }
@@ -153,7 +145,6 @@ namespace Bookshop.Data.FileSystemStorage.Model
                 reader.Read();
                 return;
             }
-            Console.WriteLine("start");
             string inElement = "";
             while (reader.Read())
             {
@@ -175,12 +166,9 @@ namespace Bookshop.Data.FileSystemStorage.Model
                             DateTime = DateTime.Parse(reader.Value);
                         break;
                     case XmlNodeType.EndElement:
-                        Console.WriteLine("End Element {0}", reader.Name);
                         inElement = "";
                         break;
                     default:
-                        Console.WriteLine("Other node {0} with value {1}",
-                                        reader.NodeType, reader.Value);
                         break;
                 }
             }

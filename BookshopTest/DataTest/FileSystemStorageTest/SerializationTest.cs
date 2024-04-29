@@ -1,9 +1,8 @@
-﻿using static Bookshop.Data.FileSystemStorage.Serialization;
-using Bookshop.Data.FileSystemStorage;
-using Bookshop.Logic.Catalogue;
-using Bookshop.Logic;
-using Bookshop.Data.API;
-using Bookshop.Data.Model;
+﻿using static Bookshop.Model.Data.FileSystemStorage.Serialization;
+using Bookshop.Model.Data.API;
+using Bookshop.Model.Data.FileSystemStorage;
+using Bookshop.Model.Data.Model;
+using Bookshop.Model.Data.Model.Entities;
 
 namespace BookshopTest.DataTest.FileSystemStorageTest
 {

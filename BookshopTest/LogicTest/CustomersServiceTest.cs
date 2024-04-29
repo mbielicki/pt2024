@@ -1,8 +1,9 @@
-﻿using Bookshop.Data.API;
-using Bookshop.Data.FileSystemStorage;
-using Bookshop.Data.Model;
-using Bookshop.Logic;
-using Bookshop.Logic.Customers;
+﻿using Bookshop.Model.Data.FileSystemStorage;
+using Bookshop.Model.Data.API;
+using Bookshop.Model.Data.Model;
+using Bookshop.Model.Data.Model.Entities;
+using Bookshop.Model.Logic;
+using Bookshop.Model.Logic.Customers;
 
 namespace BookshopTest.LogicTest
 {

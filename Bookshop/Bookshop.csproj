@@ -9,6 +9,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Folder Include="Data\Database\" />
     <Folder Include="Model\" />
   </ItemGroup>
 

@@ -1,9 +1,9 @@
-﻿using Bookshop.ViewModel;
+﻿using Bookshop;
 using System.Configuration;
 using System.Data;
 using System.Windows;
 
-namespace Bookshop
+namespace linq2sqlTest
 {
     /// <summary>
     /// Interaction logic for App.xaml
@@ -12,13 +12,18 @@ namespace Bookshop
     {
         protected override void OnStartup(StartupEventArgs e)
         {
-            MainWindow = new MainWindow()
-            {
-                DataContext = new MainViewModel()
-            };
-            MainWindow.Show();
-
             base.OnStartup(e);
+
+            using (BookshopDataContext dataContext = new BookshopDataContext())
+            {
+                IQueryable<Book> books = from book in dataContext.Books
+                                         where book.BookId == 0
+                                         select book;
+
+                Book b = books.SingleOrDefault();
+
+            }
+
         }
     }
 

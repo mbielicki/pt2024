@@ -1,5 +1,4 @@
-﻿using Bookshop.Data.Model;
-using Bookshop.Data.Model.Entities;
+﻿using Bookshop;
 
 namespace BookshopTest.DataTest.ModelTest
 {
@@ -7,20 +6,18 @@ namespace BookshopTest.DataTest.ModelTest
     public class BookTest
     {
         [TestMethod]
-        public void testBookInit()
+        public void getBook()
         {
-            ID id = new ID(0);
-            string name = "Pan Tadeusz";
-            string author = "Adam Mickiewicz";
-            string description = "The Last Foray in Lithuania";
-            double price = 10;
-            Book book = new Book(id, name, author, description, price);
+            using(BookshopDataContext dataContext = new BookshopDataContext())
+            {
+                IQueryable<Book> books = from book in dataContext.Books 
+                            where book.BookId == 0 
+                            select book;
 
-            Assert.AreEqual(book.Id, id);
-            Assert.AreEqual(book.Title, name);
-            Assert.AreEqual(book.Author, author);
-            Assert.AreEqual(book.Description, description);
-            Assert.AreEqual(book.Price, price);
+                Book b = books.SingleOrDefault();
+
+                Assert.AreEqual(b.Author, "Adam Mickewicz");
+            }
         }
 
     }

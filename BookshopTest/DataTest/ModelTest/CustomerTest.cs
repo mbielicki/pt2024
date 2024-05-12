@@ -1,5 +1,5 @@
-﻿using Bookshop.Model.Data.Model;
-using Bookshop.Model.Data.Model.Entities;
+﻿using Bookshop.Data.Model;
+using Bookshop.Data.Model.Entities;
 
 namespace BookshopTest.DataTest.ModelTest
 {

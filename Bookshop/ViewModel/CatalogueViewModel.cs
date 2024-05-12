@@ -1,15 +1,9 @@
-﻿using Bookshop.Model.Data.API;
-using Bookshop.Model.Data.FileSystemStorage;
-using Bookshop.Model.Data.Model;
-using Bookshop.Model.Data.Model.Entities;
-using Bookshop.Model.Logic.Catalogue;
-using System;
-using System.Collections.Generic;
+﻿using Bookshop.Data.API;
+using Bookshop.Data.Model;
+using Bookshop.Data.Model.Entities;
+using Bookshop.Logic.Catalogue;
+using Bookshop.Data.FileSystemStorage;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Input;
 
 namespace Bookshop.ViewModel
 {

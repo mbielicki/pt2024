@@ -1,5 +1,6 @@
 ﻿using Bookshop.Data.API;
-using Bookshop.Data.Model;
+using Bookshop.Data.FileSystemStorage.Documents;
+using Bookshop.Data.Model.Entities;
 
 namespace Bookshop.Data.FileSystemStorage
 {

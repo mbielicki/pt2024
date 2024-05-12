@@ -1,4 +1,4 @@
-﻿using Bookshop.Data.Model;
+﻿using Bookshop.Data.Model.Entities;
 
 namespace Bookshop.Data.API
 {
@@ -9,6 +9,6 @@ namespace Bookshop.Data.API
         IStorageAPI<ISupplier> Suppliers { get; }
         IStorageAPI<IInvoice> Invoices { get; }
         IStorageAPI<ISupplyRegisterEntry> SupplyRegister { get; }
-        IInventoryAPI Inventory {  get; }
+        IInventoryAPI Inventory { get; }
     }
 }

@@ -5,7 +5,7 @@ namespace Bookshop.Data.InMemoryStorage
 {
     internal class InventoryAPI : IInventoryAPI
     {
-        Counter<ID> _document = new Counter<ID> ();
+        Counter<ID> _document = new Counter<ID>();
         public InventoryAPI(Counter<ID> document)
         {
             _document = document;
@@ -43,9 +43,9 @@ namespace Bookshop.Data.InMemoryStorage
             try
             {
                 _document.RemoveOne(id);
-            } 
+            }
             catch (KeyNotFoundException)
-            { 
+            {
                 return false;
             }
             return true;

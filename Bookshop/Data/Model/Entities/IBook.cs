@@ -1,6 +1,7 @@
 ﻿using System.Xml.Serialization;
+using Bookshop.Data.Model;
 
-namespace Bookshop.Data.Model
+namespace Bookshop.Data.Model.Entities
 {
     public interface IBook : HasId
     {

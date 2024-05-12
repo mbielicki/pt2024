@@ -1,7 +1,9 @@
 ﻿using Bookshop.Data.API;
+using Bookshop.Data.FileSystemStorage;
 using Bookshop.Data.Model;
+using Bookshop.Data.Model.Entities;
 
-namespace Bookshop.Data.FileSystemStorage
+namespace Bookshop.Data.FileSystemStorage.Documents
 {
     internal class CatalogueAPI : IStorageAPI<IBook>
     {

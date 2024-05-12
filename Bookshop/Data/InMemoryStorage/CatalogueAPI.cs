@@ -1,4 +1,4 @@
-﻿using Bookshop.Data.Model;
+﻿using Bookshop.Data.Model.Entities;
 
 namespace Bookshop.Data.InMemoryStorage
 {

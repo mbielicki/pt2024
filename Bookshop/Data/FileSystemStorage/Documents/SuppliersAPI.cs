@@ -1,7 +1,9 @@
 ﻿using Bookshop.Data.API;
+using Bookshop.Data.FileSystemStorage;
 using Bookshop.Data.Model;
+using Bookshop.Data.Model.Entities;
 
-namespace Bookshop.Data.FileSystemStorage
+namespace Bookshop.Data.FileSystemStorage.Documents
 {
     internal class SuppliersAPI : IStorageAPI<ISupplier>
     {
@@ -32,7 +34,7 @@ namespace Bookshop.Data.FileSystemStorage
             item.Id = id;
 
             _document = Serialization.ReadFromXmlFile<List<Supplier>>(filePath);
-            _document.Add(new Supplier(item.Id, item.FirstName, item.LastName, 
+            _document.Add(new Supplier(item.Id, item.FirstName, item.LastName,
                 item.CompanyName, item.Address, item.ContactInfo));
             Serialization.WriteToXmlFile(filePath, _document);
 

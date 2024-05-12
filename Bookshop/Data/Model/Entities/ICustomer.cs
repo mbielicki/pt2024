@@ -1,6 +1,7 @@
 ﻿using System;
+using Bookshop.Data.Model;
 
-namespace Bookshop.Data.Model
+namespace Bookshop.Data.Model.Entities
 {
     public interface ICustomer : IPerson
     {

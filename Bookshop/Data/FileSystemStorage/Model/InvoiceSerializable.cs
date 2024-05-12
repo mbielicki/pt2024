@@ -1,8 +1,9 @@
-﻿using Bookshop.Data.Model;
-using System.Xml.Schema;
+﻿using System.Xml.Schema;
 using System.Xml;
 using System.Xml.Serialization;
 using Bookshop.Data.API;
+using Bookshop.Data.Model;
+using Bookshop.Data.Model.Entities;
 
 namespace Bookshop.Data.FileSystemStorage.Model
 {
@@ -151,7 +152,7 @@ namespace Bookshop.Data.FileSystemStorage.Model
                 switch (reader.NodeType)
                 {
                     case XmlNodeType.Element:
-                        inElement = reader.Name; 
+                        inElement = reader.Name;
                         if (inElement == "Books")
                             ReadBooksXml(reader);
                         break;

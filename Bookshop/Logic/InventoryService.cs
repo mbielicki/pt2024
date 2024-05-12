@@ -1,5 +1,6 @@
 ﻿using Bookshop.Data.API;
 using Bookshop.Data.Model;
+using Bookshop.Data.Model.Entities;
 using Bookshop.Logic.Catalogue;
 using Bookshop.Logic.Suppliers;
 
@@ -8,7 +9,7 @@ namespace Bookshop.Logic
     public class InventoryService
     {
         IBookshopStorage _storage;
-        public InventoryService(IBookshopStorage storage) { _storage = storage;  }
+        public InventoryService(IBookshopStorage storage) { _storage = storage; }
         public int count(ID book)
         {
             return _storage.Inventory.count(book);

@@ -53,7 +53,7 @@ namespace Bookshop.Data.Model
 
         IEnumerator IEnumerable.GetEnumerator()
         {
-            return (IEnumerator)GetEnumerator();
+            return GetEnumerator();
         }
 
         private class CounterEnum : IEnumerator<KeyValuePair<E, int>>
@@ -69,7 +69,7 @@ namespace Bookshop.Data.Model
             public bool MoveNext()
             {
                 position++;
-                return (position < _dict.Length);
+                return position < _dict.Length;
             }
             public void Reset()
             {

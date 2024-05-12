@@ -1,4 +1,6 @@
-﻿namespace Bookshop.Data.Model
+﻿using Bookshop.Data.Model;
+
+namespace Bookshop.Data.Model.Entities
 {
     public interface ISupplyRegisterEntry : IEvent
     {

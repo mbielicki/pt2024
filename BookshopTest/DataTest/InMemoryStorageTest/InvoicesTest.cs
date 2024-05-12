@@ -1,7 +1,7 @@
-﻿using Bookshop.Model.Data.InMemoryStorage;
-using Bookshop.Model.Data.API;
-using Bookshop.Model.Data.Model;
-using Bookshop.Model.Data.Model.Entities;
+﻿using Bookshop.Data.InMemoryStorage;
+using Bookshop.Data.API;
+using Bookshop.Data.Model;
+using Bookshop.Data.Model.Entities;
 
 namespace BookshopTest.DataTest.InMemoryStorage
 {

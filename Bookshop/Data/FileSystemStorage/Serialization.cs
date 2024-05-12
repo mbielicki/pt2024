@@ -1,6 +1,7 @@
 ﻿using Bookshop.Data.API;
 using Bookshop.Data.FileSystemStorage.Model;
 using Bookshop.Data.Model;
+using Bookshop.Data.Model.Entities;
 using System.IO;
 using System.Xml;
 using System.Xml.Serialization;
@@ -73,7 +74,7 @@ namespace Bookshop.Data.FileSystemStorage
             {
                 var serializer = new XmlSerializer(typeof(List<InvoiceSerializable>));
                 reader = new StreamReader(filePath);
-                listSerializable = (List<InvoiceSerializable>) serializer.Deserialize(reader);
+                listSerializable = (List<InvoiceSerializable>)serializer.Deserialize(reader);
             }
             finally
             {

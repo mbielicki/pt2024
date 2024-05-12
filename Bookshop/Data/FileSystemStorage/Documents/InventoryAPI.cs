@@ -1,9 +1,10 @@
 ﻿using Bookshop.Data.API;
+using Bookshop.Data.FileSystemStorage;
 using Bookshop.Data.Model;
 using System.IO;
 using static Bookshop.Data.FileSystemStorage.Serialization;
 
-namespace Bookshop.Data.FileSystemStorage
+namespace Bookshop.Data.FileSystemStorage.Documents
 {
     internal class InventoryAPI : IInventoryAPI
     {
@@ -11,7 +12,7 @@ namespace Bookshop.Data.FileSystemStorage
         string filePath;
         public InventoryAPI(string filePath)
         {
-            this.filePath = filePath; 
+            this.filePath = filePath;
             _document = new Counter<ID>();
             try
             {
@@ -73,9 +74,9 @@ namespace Bookshop.Data.FileSystemStorage
                 _document = ReadCounterIdXml(filePath);
                 _document.RemoveOne(id);
                 _document.toXml(filePath);
-            } 
+            }
             catch (KeyNotFoundException)
-            { 
+            {
                 return false;
             }
             return true;

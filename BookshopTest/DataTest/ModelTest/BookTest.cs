@@ -1,4 +1,4 @@
-﻿using Bookshop;
+﻿using Bookshop.Data.Database;
 
 namespace BookshopTest.DataTest.ModelTest
 {
@@ -16,7 +16,7 @@ namespace BookshopTest.DataTest.ModelTest
 
                 Book b = books.SingleOrDefault();
 
-                Assert.AreEqual(b.Author, "Adam Mickewicz");
+                Assert.AreEqual(b.Author, "Adam Mickiewicz");
             }
         }
 

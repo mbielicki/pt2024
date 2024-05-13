@@ -12,7 +12,7 @@ namespace Bookshop.Data.Model.Entities
         string ContactInfo { get; set; }
     }
 
-    public class Supplier : ISupplier
+    public class iSupplier : ISupplier
     {
         public ID Id { get; set; }
         public string FirstName { get; set; }
@@ -21,7 +21,7 @@ namespace Bookshop.Data.Model.Entities
         public string Address { get; set; }
         public string ContactInfo { get; set; }
 
-        public Supplier(ID id, string firstName, string lastName, string companyName, string address, string contactInfo)
+        public iSupplier(ID id, string firstName, string lastName, string companyName, string address, string contactInfo)
         {
             Id = id;
             FirstName = firstName;
@@ -30,6 +30,6 @@ namespace Bookshop.Data.Model.Entities
             Address = address;
             ContactInfo = contactInfo;
         }
-        public Supplier() { }
+        public iSupplier() { }
     }
 }

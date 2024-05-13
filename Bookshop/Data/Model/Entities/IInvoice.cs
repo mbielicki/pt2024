@@ -11,14 +11,14 @@ namespace Bookshop.Data.Model.Entities
         Counter<IBook> Books { get; set; }
     }
 
-    public class Invoice : IInvoice
+    public class iInvoice : IInvoice
     {
         public ID Id { get; set; }
         public ICustomer Customer { get; set; }
         public double Price { get; set; }
         public DateTime DateTime { get; set; }
         public Counter<IBook> Books { get; set; }
-        public Invoice(ID id, Counter<IBook> books, ICustomer customer, double price, DateTime dateTime)
+        public iInvoice(ID id, Counter<IBook> books, ICustomer customer, double price, DateTime dateTime)
         {
             Id = id;
             Books = books;
@@ -27,6 +27,6 @@ namespace Bookshop.Data.Model.Entities
             DateTime = dateTime;
         }
 
-        public Invoice() { }
+        public iInvoice() { }
     }
 }

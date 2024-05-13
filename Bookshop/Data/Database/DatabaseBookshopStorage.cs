@@ -24,7 +24,7 @@ namespace Bookshop.Data.Database
 
         public DatabaseBookshopStorage()
         {
-            Catalogue = new CatalogueAPI(catalogue);
+            Catalogue = new CatalogueAPI();
             Customers = new CustomersAPI(customers);
             Suppliers = new SuppliersAPI(suppliers);
             Invoices = new InvoicesAPI(invoices);

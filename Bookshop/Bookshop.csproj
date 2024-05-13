@@ -13,7 +13,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Update="Data\Database\Bookshop.dbml">
+    <None Update="Data\Database\Model\Bookshop.dbml">
       <Generator>MSLinqToSQLGenerator</Generator>
       <LastGenOutput>Bookshop.designer.cs</LastGenOutput>
     </None>
@@ -28,7 +28,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="Data\Database\Bookshop.designer.cs">
+    <Compile Update="Data\Database\Model\Bookshop.designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
       <DependentUpon>Bookshop.dbml</DependentUpon>

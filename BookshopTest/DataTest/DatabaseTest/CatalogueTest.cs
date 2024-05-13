@@ -1,9 +1,9 @@
-﻿using Bookshop.Data.InMemoryStorage;
-using Bookshop.Data.API;
+﻿using Bookshop.Data.API;
 using Bookshop.Data.Model;
 using Bookshop.Data.Model.Entities;
+using Bookshop.Data.Database;
 
-namespace BookshopTest.DataTest.InMemoryStorage
+namespace BookshopTest.DataTest.DatabaseTest
 {
     [TestClass]
     public class CatalogueTest
@@ -13,7 +13,7 @@ namespace BookshopTest.DataTest.InMemoryStorage
         {
             iBook book = DataGenerator.newBook();
 
-            IBookshopStorage storage = new InMemoryBookshopStorage();
+            IBookshopStorage storage = new DatabaseBookshopStorage();
 
             ID bookId = storage.Catalogue.add(book);
             Assert.AreEqual(book, storage.Catalogue.get(b => b.Id.Equals(bookId)));
@@ -24,7 +24,7 @@ namespace BookshopTest.DataTest.InMemoryStorage
         {
             iBook book = DataGenerator.newBook();
 
-            IBookshopStorage storage = new InMemoryBookshopStorage();
+            IBookshopStorage storage = new DatabaseBookshopStorage();
             ID bookId = storage.Catalogue.add(book);
             storage.Catalogue.remove(bookId);
             Assert.IsNull(storage.Catalogue.get(b => b.Id.Equals(bookId)));
@@ -35,7 +35,7 @@ namespace BookshopTest.DataTest.InMemoryStorage
         {
             iBook book = DataGenerator.newBook();
 
-            IBookshopStorage storage = new InMemoryBookshopStorage();
+            IBookshopStorage storage = new DatabaseBookshopStorage();
             ID bookId = storage.Catalogue.add(book);
 
             double newPrice = 20;

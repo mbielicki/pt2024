@@ -9,7 +9,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Bookshop.Data.Database
+namespace Bookshop.Data.Database.Model
 {
 	using System.Data.Linq;
 	using System.Data.Linq.Mapping;

@@ -11,7 +11,7 @@ namespace Bookshop.Data.Model.Entities
         double Price { get; set; }
     }
 
-    public class Book : IBook
+    public class iBook : IBook
     {
         public ID Id { get; set; }
         public string Title { get; set; }
@@ -19,7 +19,7 @@ namespace Bookshop.Data.Model.Entities
         public string Description { get; set; }
         public double Price { get; set; }
 
-        public Book(ID Id, string Title, string Author, string Description, double Price)
+        public iBook(ID Id, string Title, string Author, string Description, double Price)
         {
             this.Id = Id;
             this.Title = Title;
@@ -28,6 +28,6 @@ namespace Bookshop.Data.Model.Entities
             this.Price = Price;
         }
 
-        public Book() { }
+        public iBook() { }
     }
 }

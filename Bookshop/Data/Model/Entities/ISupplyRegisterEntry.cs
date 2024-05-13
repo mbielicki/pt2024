@@ -12,14 +12,14 @@ namespace Bookshop.Data.Model.Entities
     }
 
 
-    public class SupplyRegisterEntry : ISupplyRegisterEntry
+    public class iSupplyRegisterEntry : ISupplyRegisterEntry
     {
         public ID Id { get; set; }
         public ISupplier Supplier { get; set; }
         public double Price { get; set; }
         public DateTime DateTime { get; set; }
         public Counter<IBook> Books { get; set; }
-        public SupplyRegisterEntry(ID id, Counter<IBook> books, ISupplier supplier, double price, DateTime dateTime)
+        public iSupplyRegisterEntry(ID id, Counter<IBook> books, ISupplier supplier, double price, DateTime dateTime)
         {
             Id = id;
             Books = books;
@@ -27,6 +27,6 @@ namespace Bookshop.Data.Model.Entities
             Price = price;
             DateTime = dateTime;
         }
-        public SupplyRegisterEntry() { }
+        public iSupplyRegisterEntry() { }
     }
 }

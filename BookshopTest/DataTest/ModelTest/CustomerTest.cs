@@ -15,7 +15,7 @@ namespace BookshopTest.DataTest.ModelTest
             string address = "00000 Baker Street 221B, London, England";
             string? contactInfo = null;
 
-            Customer customer = new Customer(id, firstName, lastName, address, contactInfo);
+            iCustomer customer = new iCustomer(id, firstName, lastName, address, contactInfo);
             Assert.AreEqual(id, customer.Id);
             Assert.AreEqual(firstName, customer.FirstName);
             Assert.AreEqual(lastName, customer.LastName);

@@ -6,7 +6,7 @@ namespace Bookshop.Data.API
     {
         ID add(T item);
         bool remove(ID id);
-        T get(Predicate<T> query);
+        T? get(Predicate<T> query);
         void update(T newItem);
         List<T> getAll(Predicate<T> query);
     }

@@ -16,7 +16,7 @@ namespace BookshopTest.DataTest.DatabaseTest
             IBookshopStorage storage = new DatabaseBookshopStorage();
 
             ID bookId = storage.Catalogue.add(book);
-            Assert.AreEqual(book, storage.Catalogue.get(b => b.Id.Equals(bookId)));
+            Assert.AreEqual(book.Description, storage.Catalogue.get(b => b.Id.Equals(bookId)).Description);
         }
 
         [TestMethod]

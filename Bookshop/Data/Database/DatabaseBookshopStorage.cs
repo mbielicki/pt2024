@@ -8,9 +8,6 @@ namespace Bookshop.Data.Database
     public class DatabaseBookshopStorage : IBookshopStorage
     {
         Counter<int> inventory = new Counter<int>();
-        List<IBook> catalogue = new List<IBook>();
-        List<ICustomer> customers = new List<ICustomer>();
-        List<ISupplier> suppliers = new List<ISupplier>();
         List<IInvoice> invoices = new List<IInvoice>();
         List<ISupplyRegisterEntry> supplyRegister = new List<ISupplyRegisterEntry>();
 
@@ -25,8 +22,8 @@ namespace Bookshop.Data.Database
         public DatabaseBookshopStorage()
         {
             Catalogue = new CatalogueAPI();
-            Customers = new CustomersAPI(customers);
-            Suppliers = new SuppliersAPI(suppliers);
+            Customers = new CustomersAPI();
+            Suppliers = new SuppliersAPI();
             Invoices = new InvoicesAPI(invoices);
             SupplyRegister = new SupplyRegisterAPI(supplyRegister);
             Inventory = new InventoryAPI(inventory);

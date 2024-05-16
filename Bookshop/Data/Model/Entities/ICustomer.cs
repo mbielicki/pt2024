@@ -21,5 +21,9 @@
             Address = address;
             ContactInfo = contactInfo;
         }
+
+        public SimpleCustomer()
+        {
+        }
     }
 }

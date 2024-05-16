@@ -23,5 +23,9 @@
             Address = address;
             ContactInfo = contactInfo;
         }
+
+        public SimpleSupplier()
+        {
+        }
     }
 }

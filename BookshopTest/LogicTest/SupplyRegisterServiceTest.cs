@@ -25,7 +25,7 @@ namespace BookshopTest.LogicTest
             DateTime now = DateTime.Now;
 
             books.Add(book);
-            iSupplyRegisterEntry entry = new iSupplyRegisterEntry(null, books, supplier, price, now);
+            SimpleSupplyRegisterEntry entry = new SimpleSupplyRegisterEntry(null, books, supplier, price, now);
             ID id = storage.SupplyRegister.add(entry);
 
 

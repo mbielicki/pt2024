@@ -44,7 +44,7 @@ namespace Bookshop.Logic
             }
 
             double price = checkPrice(books);
-            iInvoice invoice = new iInvoice(null, bookRefs, customer, price, DateTime.Now);
+            SimpleInvoice invoice = new SimpleInvoice(null, bookRefs, customer, price, DateTime.Now);
             return _storage.Invoices.add(invoice);
         }
         public double checkPrice(Counter<ID> books)

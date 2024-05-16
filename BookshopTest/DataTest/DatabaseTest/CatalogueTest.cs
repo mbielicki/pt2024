@@ -11,7 +11,7 @@ namespace BookshopTest.DataTest.DatabaseTest
         [TestMethod]
         public void testAddGet()
         {
-            iBook book = DataGenerator.newBook();
+            SimpleBook book = DataGenerator.newBook();
 
             IBookshopStorage storage = new DatabaseBookshopStorage();
 
@@ -22,7 +22,7 @@ namespace BookshopTest.DataTest.DatabaseTest
         [TestMethod]
         public void testRemove()
         {
-            iBook book = DataGenerator.newBook();
+            SimpleBook book = DataGenerator.newBook();
 
             IBookshopStorage storage = new DatabaseBookshopStorage();
             ID bookId = storage.Catalogue.add(book);
@@ -33,13 +33,13 @@ namespace BookshopTest.DataTest.DatabaseTest
         [TestMethod]
         public void testUpdate()
         {
-            iBook book = DataGenerator.newBook();
+            SimpleBook book = DataGenerator.newBook();
 
             IBookshopStorage storage = new DatabaseBookshopStorage();
             ID bookId = storage.Catalogue.add(book);
 
             double newPrice = 20;
-            iBook newBook = new iBook(bookId, book.Title, book.Author, book.Description, newPrice);
+            SimpleBook newBook = new SimpleBook(bookId, book.Title, book.Author, book.Description, newPrice);
             storage.Catalogue.update(newBook);
             Assert.AreEqual(newPrice, storage.Catalogue.get(b => b.Id.Equals(bookId)).Price);
         }

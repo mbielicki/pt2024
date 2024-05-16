@@ -14,7 +14,7 @@ namespace BookshopTest.DataTest.ModelTest
             string author = "Adam Mickiewicz";
             string description = "The Last Foray in Lithuania";
             double price = 10;
-            iBook book = new iBook(id, name, author, description, price);
+            SimpleBook book = new SimpleBook(id, name, author, description, price);
 
             Assert.AreEqual(book.Id, id);
             Assert.AreEqual(book.Title, name);

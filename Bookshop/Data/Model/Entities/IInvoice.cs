@@ -1,6 +1,4 @@
-﻿using Bookshop.Data.Model;
-
-namespace Bookshop.Data.Model.Entities
+﻿namespace Bookshop.Data.Model.Entities
 {
     public interface IInvoice : IEvent
     {
@@ -11,14 +9,14 @@ namespace Bookshop.Data.Model.Entities
         Counter<IBook> Books { get; set; }
     }
 
-    public class iInvoice : IInvoice
+    public class SimpleInvoice : IInvoice
     {
         public ID Id { get; set; }
         public ICustomer Customer { get; set; }
         public double Price { get; set; }
         public DateTime DateTime { get; set; }
         public Counter<IBook> Books { get; set; }
-        public iInvoice(ID id, Counter<IBook> books, ICustomer customer, double price, DateTime dateTime)
+        public SimpleInvoice(ID id, Counter<IBook> books, ICustomer customer, double price, DateTime dateTime)
         {
             Id = id;
             Books = books;
@@ -27,6 +25,6 @@ namespace Bookshop.Data.Model.Entities
             DateTime = dateTime;
         }
 
-        public iInvoice() { }
+        public SimpleInvoice() { }
     }
 }

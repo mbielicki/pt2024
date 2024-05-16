@@ -7,7 +7,7 @@ namespace Bookshop.Data.Model.Entities
     {
     }
 
-    public class iCustomer : ICustomer
+    public class SimpleCustomer : ICustomer
     {
         public ID Id { get; set; }
         public string FirstName { get; set; }
@@ -16,7 +16,7 @@ namespace Bookshop.Data.Model.Entities
 
         public string ContactInfo { get; set; }
 
-        public iCustomer(ID id, string firstName, string lastName, string address, string contactInfo)
+        public SimpleCustomer(ID id, string firstName, string lastName, string address, string contactInfo)
         {
             Id = id;
             FirstName = firstName;
@@ -24,6 +24,6 @@ namespace Bookshop.Data.Model.Entities
             Address = address;
             ContactInfo = contactInfo;
         }
-        public iCustomer() { }
+        public SimpleCustomer() { }
     }
 }

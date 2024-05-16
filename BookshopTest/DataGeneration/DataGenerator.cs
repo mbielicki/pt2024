@@ -9,7 +9,7 @@ namespace BookshopTest
     {
         public static ICustomer newCustomer(IBookshopStorage storage)
         {
-            iCustomer customer = newCustomer();
+            SimpleCustomer customer = newCustomer();
             customer.Id = storage.Customers.add(customer);
             return customer;
         }
@@ -21,7 +21,7 @@ namespace BookshopTest
 
             for (int i = 0; i < num; i++)
             {
-                iBook book = newBook();
+                SimpleBook book = newBook();
                 book.Id = storage.Catalogue.add(book);
                 books.Set(book, r.Next(1, 5));
             }
@@ -35,7 +35,7 @@ namespace BookshopTest
             books.Set(newBook(), 3);
             return books;
         }
-        public static iBook newBook()
+        public static SimpleBook newBook()
         {
             Random r = new Random();
 
@@ -44,9 +44,9 @@ namespace BookshopTest
             string description = LoremIpsum(5, 3);
             double price = r.Next(50) + 10;
 
-            return new iBook(null, title, author, description, price);
+            return new SimpleBook(null, title, author, description, price);
         }
-        public static iCustomer newCustomer()
+        public static SimpleCustomer newCustomer()
         {
             Random r = new Random();
 
@@ -55,9 +55,9 @@ namespace BookshopTest
             string address = RandomAddress();
             string? contactInfo = r.Next(500_000_000, 800_000_000).ToString();
 
-            return new iCustomer(null, firstName, lastName, address, contactInfo);
+            return new SimpleCustomer(null, firstName, lastName, address, contactInfo);
         }
-        public static iSupplier newSupplier()
+        public static SimpleSupplier newSupplier()
         {
             Random r = new Random();
 
@@ -67,23 +67,23 @@ namespace BookshopTest
             string address = RandomAddress();
             string? contactInfo = r.Next(500_000_000, 800_000_000).ToString();
 
-            return new iSupplier(null, firstName, lastName, companyName, address, contactInfo);
+            return new SimpleSupplier(null, firstName, lastName, companyName, address, contactInfo);
         }
 
-        internal static iBook copy(IBook book)
+        internal static SimpleBook copy(IBook book)
         {
-            return new iBook(book.Id, book.Title, book.Author, book.Description, book.Price);
+            return new SimpleBook(book.Id, book.Title, book.Author, book.Description, book.Price);
         }
-        internal static iCustomer copy(ICustomer customer)
+        internal static SimpleCustomer copy(ICustomer customer)
         {
-            return new iCustomer(
+            return new SimpleCustomer(
                 customer.Id, customer.FirstName, customer.LastName,
                 customer.Address, customer.ContactInfo
                 );
         }
-        internal static iSupplier copy(ISupplier supplier)
+        internal static SimpleSupplier copy(ISupplier supplier)
         {
-            return new iSupplier(
+            return new SimpleSupplier(
                 supplier.Id, supplier.FirstName, supplier.LastName,
                 supplier.CompanyName, supplier.Address, supplier.ContactInfo
                 );

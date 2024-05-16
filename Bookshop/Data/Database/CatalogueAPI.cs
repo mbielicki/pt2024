@@ -56,7 +56,7 @@ namespace Bookshop.Data.Database
 
         private IBook toIBook(Book book)
         {
-            IBook result = new iBook();
+            IBook result = new SimpleBook();
             result.Id = new ID(book.BookId);
             result.Title = book.Title;
             result.Author = book.Author;

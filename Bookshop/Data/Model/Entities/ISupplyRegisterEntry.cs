@@ -1,6 +1,4 @@
-﻿using Bookshop.Data.Model;
-
-namespace Bookshop.Data.Model.Entities
+﻿namespace Bookshop.Data.Model.Entities
 {
     public interface ISupplyRegisterEntry : IEvent
     {
@@ -12,14 +10,14 @@ namespace Bookshop.Data.Model.Entities
     }
 
 
-    public class iSupplyRegisterEntry : ISupplyRegisterEntry
+    public class SimpleSupplyRegisterEntry : ISupplyRegisterEntry
     {
         public ID Id { get; set; }
         public ISupplier Supplier { get; set; }
         public double Price { get; set; }
         public DateTime DateTime { get; set; }
         public Counter<IBook> Books { get; set; }
-        public iSupplyRegisterEntry(ID id, Counter<IBook> books, ISupplier supplier, double price, DateTime dateTime)
+        public SimpleSupplyRegisterEntry(ID id, Counter<IBook> books, ISupplier supplier, double price, DateTime dateTime)
         {
             Id = id;
             Books = books;
@@ -27,6 +25,6 @@ namespace Bookshop.Data.Model.Entities
             Price = price;
             DateTime = dateTime;
         }
-        public iSupplyRegisterEntry() { }
+        public SimpleSupplyRegisterEntry() { }
     }
 }

@@ -13,11 +13,11 @@ namespace BookshopTest.DataTest.DatabaseTest
         {
             Counter<IBook> books = new Counter<IBook>();
             books.Add(DataGenerator.newBook());
-            iCustomer customer = DataGenerator.newCustomer();
+            SimpleCustomer customer = DataGenerator.newCustomer();
             double price = 40;
             DateTime dateTime = DateTime.Now;
 
-            iInvoice invoice = new iInvoice(null, books, customer, price, dateTime);
+            SimpleInvoice invoice = new SimpleInvoice(null, books, customer, price, dateTime);
 
             IBookshopStorage storage = new InMemoryBookshopStorage();
 
@@ -30,11 +30,11 @@ namespace BookshopTest.DataTest.DatabaseTest
         {
             Counter<IBook> books = new Counter<IBook>();
             books.Add(DataGenerator.newBook());
-            iCustomer customer = DataGenerator.newCustomer();
+            SimpleCustomer customer = DataGenerator.newCustomer();
             double price = 40;
             DateTime dateTime = DateTime.Now;
 
-            iInvoice invoice = new iInvoice(null, books, customer, price, dateTime);
+            SimpleInvoice invoice = new SimpleInvoice(null, books, customer, price, dateTime);
 
             IBookshopStorage storage = new InMemoryBookshopStorage();
 
@@ -48,18 +48,18 @@ namespace BookshopTest.DataTest.DatabaseTest
         {
             Counter<IBook> books = new Counter<IBook>();
             books.Add(DataGenerator.newBook());
-            iCustomer customer = DataGenerator.newCustomer();
+            SimpleCustomer customer = DataGenerator.newCustomer();
             double price = 40;
             DateTime dateTime = DateTime.Now;
 
-            iInvoice invoice = new iInvoice(null, books, customer, price, dateTime);
+            SimpleInvoice invoice = new SimpleInvoice(null, books, customer, price, dateTime);
 
             IBookshopStorage storage = new InMemoryBookshopStorage();
 
             ID invoiceId = storage.Invoices.add(invoice);
 
             double newPrice = 40;
-            iInvoice newInvoice = new iInvoice(invoiceId, books, customer, newPrice, dateTime);
+            SimpleInvoice newInvoice = new SimpleInvoice(invoiceId, books, customer, newPrice, dateTime);
 
             storage.Invoices.update(newInvoice);
             Assert.AreEqual(newPrice, storage.Invoices.get(i => i.Id.Equals(invoiceId)).Price);

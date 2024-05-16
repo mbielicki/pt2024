@@ -9,7 +9,7 @@ namespace BookshopTest.DataTest.ModelTest
         [TestMethod]
         public void testInvoiceInit()
         {
-            iCustomer customer = DataGenerator.newCustomer();
+            SimpleCustomer customer = DataGenerator.newCustomer();
             IBook book = DataGenerator.newBook();
             ID invoiceId = new ID(456);
 
@@ -18,7 +18,7 @@ namespace BookshopTest.DataTest.ModelTest
             double price = 50;
             DateTime now = DateTime.Now;
 
-            IInvoice invoice = new iInvoice(invoiceId, books, customer, price, now);
+            IInvoice invoice = new SimpleInvoice(invoiceId, books, customer, price, now);
 
             Assert.AreEqual(invoiceId, invoice.Id);
             Assert.AreEqual(customer, invoice.Customer);

@@ -40,7 +40,7 @@ namespace Bookshop.Logic
             }
 
 
-            iSupplyRegisterEntry registerEntry = new iSupplyRegisterEntry(
+            SimpleSupplyRegisterEntry registerEntry = new SimpleSupplyRegisterEntry(
                 null, books, supplier, price, DateTime.Now);
 
             _storage.SupplyRegister.add(registerEntry);

@@ -1,7 +1,4 @@
-﻿using System.Xml.Serialization;
-using Bookshop.Data.Model;
-
-namespace Bookshop.Data.Model.Entities
+﻿namespace Bookshop.Data.Model.Entities
 {
     public interface IBook : HasId
     {
@@ -11,7 +8,7 @@ namespace Bookshop.Data.Model.Entities
         double Price { get; set; }
     }
 
-    public class iBook : IBook
+    public class SimpleBook : IBook
     {
         public ID Id { get; set; }
         public string Title { get; set; }
@@ -19,7 +16,7 @@ namespace Bookshop.Data.Model.Entities
         public string Description { get; set; }
         public double Price { get; set; }
 
-        public iBook(ID Id, string Title, string Author, string Description, double Price)
+        public SimpleBook(ID Id, string Title, string Author, string Description, double Price)
         {
             this.Id = Id;
             this.Title = Title;
@@ -28,6 +25,6 @@ namespace Bookshop.Data.Model.Entities
             this.Price = Price;
         }
 
-        public iBook() { }
+        public SimpleBook() { }
     }
 }

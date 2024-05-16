@@ -1,8 +1,6 @@
 ﻿using Bookshop.Data.API;
 using Bookshop.Data.Database.Model;
 using Bookshop.Data.Model.Entities;
-using System.Net;
-using System.Security.Cryptography.Pkcs;
 
 namespace Bookshop.Data.Database
 {

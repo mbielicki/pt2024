@@ -21,8 +21,13 @@ namespace BookshopTest.DataTest.DatabaseTest
 
             IBookshopStorage storage = new DatabaseBookshopStorage();
 
+            storage.Customers.add(customer);
+            foreach (var book in books)
+                storage.Catalogue.add(book.Key);
+
             int invoiceId = storage.Invoices.add(invoice);
-            Assert.AreEqual(invoice.DateTime, storage.Invoices.get(i => i.Id.Equals(invoiceId)).DateTime);
+
+            Assert.AreEqual(invoice.DateTime.ToString(), storage.Invoices.get(i => i.Id.Equals(invoiceId)).DateTime.ToString());
         }
 
         [TestMethod]
@@ -37,6 +42,10 @@ namespace BookshopTest.DataTest.DatabaseTest
             SimpleInvoice invoice = new SimpleInvoice(null, books, customer, price, dateTime);
 
             IBookshopStorage storage = new DatabaseBookshopStorage();
+
+            storage.Customers.add(customer);
+            foreach (var book in books)
+                storage.Catalogue.add(book.Key);
 
             int invoiceId = storage.Invoices.add(invoice);
             storage.Invoices.remove(invoiceId);
@@ -55,6 +64,10 @@ namespace BookshopTest.DataTest.DatabaseTest
             SimpleInvoice invoice = new SimpleInvoice(null, books, customer, price, dateTime);
 
             IBookshopStorage storage = new DatabaseBookshopStorage();
+
+            storage.Customers.add(customer);
+            foreach (var book in books)
+                storage.Catalogue.add(book.Key);
 
             int invoiceId = storage.Invoices.add(invoice);
 

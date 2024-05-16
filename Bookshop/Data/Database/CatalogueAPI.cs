@@ -1,7 +1,7 @@
 ﻿using Bookshop.Data.API;
 using Bookshop.Data.Database.Model;
-using Bookshop.Data.Model;
 using Bookshop.Data.Model.Entities;
+using static Bookshop.Data.Model.Converter;
 
 namespace Bookshop.Data.Database
 {
@@ -37,7 +37,7 @@ namespace Bookshop.Data.Database
             {
                 Func<Book, bool> predicate = (book) =>
                 {
-                    return query(toIBook(book));
+                    return query(book.ToIBook());
                 };
 
                 IEnumerable<Book> result = database.Books.Where(predicate);
@@ -50,30 +50,8 @@ namespace Bookshop.Data.Database
                 {
                     return null;
                 }
-                return toIBook(firstResult);
+                return firstResult.ToIBook();
             }
-        }
-
-        private IBook toIBook(Book book)
-        {
-            IBook result = new SimpleBook();
-            result.Id = book.BookId;
-            result.Title = book.Title;
-            result.Author = book.Author;
-            result.Description = book.Description;
-            result.Price = book.Price;
-
-            return result;
-        }
-
-        private List<IBook> toIBook(IEnumerable<Book> books)
-        {
-            List<IBook> result = new List<IBook>();
-            foreach (var book in books)
-            {
-                result.Add(toIBook(book));
-            }
-            return result;
         }
 
         public List<IBook> getAll(Predicate<IBook> query)
@@ -82,11 +60,11 @@ namespace Bookshop.Data.Database
             {
                 Func<Book, bool> predicate = (book) =>
                 {
-                    return query(toIBook(book));
+                    return query(book.ToIBook());
                 };
 
                 IEnumerable<Book> result = database.Books.Where(predicate);
-                return toIBook(result);
+                return result.ToIBook();
             }
         }
 

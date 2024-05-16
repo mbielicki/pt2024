@@ -22,5 +22,9 @@
             Price = price;
             DateTime = dateTime;
         }
+
+        public SimpleInvoice()
+        {
+        }
     }
 }

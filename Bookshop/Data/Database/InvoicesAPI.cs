@@ -1,6 +1,9 @@
 ﻿using Bookshop.Data.API;
 using Bookshop.Data.Database.Model;
 using Bookshop.Data.Model.Entities;
+using Bookshop.Data.Model;
+using System.Security.Cryptography;
+using Bookshop.Logic;
 
 namespace Bookshop.Data.Database
 {
@@ -10,7 +13,14 @@ namespace Bookshop.Data.Database
         {
             using (BookshopDataContext database = new BookshopDataContext())
             {
-                int newInvoiceId = database.Invoices.Max(i => i.InvoiceId) + 1;
+                int newInvoiceId;
+                try
+                {
+                    newInvoiceId = database.Invoices.Max(i => i.InvoiceId) + 1;
+                } catch (InvalidOperationException)
+                {
+                    newInvoiceId = 0;
+                }
                 Customer customer = (from c in database.Customers
                                     where c.CustomerId == modelItem.Customer.Id
                                     select c).Single();
@@ -72,18 +82,42 @@ namespace Bookshop.Data.Database
 
         private IInvoice toIInvoice(Invoice item)
         {
-            return new SimpleInvoice()
+            using (BookshopDataContext database = new BookshopDataContext())
             {
-                Id = item.InvoiceId,
-                FirstName = item.FirstName,
-                LastName = item.LastName,
-                Address = item.Address,
-                ContactInfo = item.ContactInfo
-            };
+                Counter<IBook> bookCounter = new Counter<IBook>();
+
+                IEnumerable<InvoiceBookList> dbBooks = from bl in database.InvoiceBookLists
+                                            where bl.Invoice == item.InvoiceId 
+                                            select bl;
+                foreach (var b in dbBooks)
+                {
+                    int bookId = b.Book;
+                    int count = b.Count;
+
+                    bookCounter.Set((from i in database.Books
+                                      where i.BookId == bookId
+                                      select i).Single().ToIBook(), count);
+                    
+                }
+
+                ICustomer customer = (from c in database.Customers
+                                    where c.CustomerId == item.Customer
+                                    select c).Single().ToICustomer();
+
+                return new SimpleInvoice()
+                {
+                    Id = item.InvoiceId,
+                    Books = bookCounter,
+                    Customer = customer,
+                    Price = item.Price,
+                    DateTime = item.DateTime
+                };
+            }
         }
 
         private List<IInvoice> toIInvoice(IEnumerable<Invoice> items)
         {
+
             List<IInvoice> result = new List<IInvoice>();
             foreach (var item in items)
             {
@@ -110,11 +144,18 @@ namespace Bookshop.Data.Database
         {
             using (BookshopDataContext database = new BookshopDataContext())
             {
+                var bookListEntries = from entry in database.InvoiceBookLists
+                               where entry.Invoice == id
+                               select entry;
+
+                foreach (var entry in bookListEntries)
+                {
+                    database.InvoiceBookLists.DeleteOnSubmit(entry);
+                }
 
                 var result = from item in database.Invoices
                                     where item.InvoiceId == id
                                     select item;
-
                 try
                 {
                     database.Invoices.DeleteOnSubmit(result.Single());
@@ -130,6 +171,7 @@ namespace Bookshop.Data.Database
 
         public void update(IInvoice modelItem)
         {
+
             using (BookshopDataContext database = new BookshopDataContext())
             {
                 var query = from i in database.Invoices
@@ -140,15 +182,36 @@ namespace Bookshop.Data.Database
                 {
                     Invoice dbInvoice = query.Single();
 
-                    dbInvoice.FirstName = modelItem.FirstName;
-                    dbInvoice.LastName = modelItem.LastName;
-                    dbInvoice.Address = modelItem.Address;
-                    dbInvoice.ContactInfo = modelItem.ContactInfo;
+                    dbInvoice.Customer = (int)modelItem.Customer.Id;
+                    dbInvoice.Price = modelItem.Price;
+                    dbInvoice.DateTime = modelItem.DateTime;
+
+                    var bookList = from entry in database.InvoiceBookLists
+                                   where entry.Invoice == modelItem.Id
+                                   select entry;
+
+                    database.InvoiceBookLists.DeleteAllOnSubmit(bookList);
+
+
+                    foreach (var bookNumber in modelItem.Books)
+                    {
+                        int bookId = (int)bookNumber.Key.Id;
+                        int numOfBooks = bookNumber.Value;
+
+                        InvoiceBookList ibList = new InvoiceBookList()
+                        {
+                            Invoice = (int)modelItem.Id,
+                            Book = bookId,
+                            Count = numOfBooks
+                        };
+
+                        database.InvoiceBookLists.InsertOnSubmit(ibList);
+                    }
 
                     database.SubmitChanges();
                 } catch (Exception ex)
                 {
-
+                    throw new ItemIdNotFound();
                 }
             }
         }

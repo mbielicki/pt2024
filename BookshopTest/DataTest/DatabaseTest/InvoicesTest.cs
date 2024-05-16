@@ -2,6 +2,7 @@
 using Bookshop.Data.API;
 using Bookshop.Data.Model;
 using Bookshop.Data.Model.Entities;
+using Bookshop.Data.Database;
 
 namespace BookshopTest.DataTest.DatabaseTest
 {
@@ -19,7 +20,7 @@ namespace BookshopTest.DataTest.DatabaseTest
 
             SimpleInvoice invoice = new SimpleInvoice(null, books, customer, price, dateTime);
 
-            IBookshopStorage storage = new InMemoryBookshopStorage();
+            IBookshopStorage storage = new DatabaseBookshopStorage();
 
             int invoiceId = storage.Invoices.add(invoice);
             Assert.AreEqual(invoice.DateTime, storage.Invoices.get(i => i.Id.Equals(invoiceId)).DateTime);
@@ -36,7 +37,7 @@ namespace BookshopTest.DataTest.DatabaseTest
 
             SimpleInvoice invoice = new SimpleInvoice(null, books, customer, price, dateTime);
 
-            IBookshopStorage storage = new InMemoryBookshopStorage();
+            IBookshopStorage storage = new DatabaseBookshopStorage();
 
             int invoiceId = storage.Invoices.add(invoice);
             storage.Invoices.remove(invoiceId);
@@ -54,7 +55,7 @@ namespace BookshopTest.DataTest.DatabaseTest
 
             SimpleInvoice invoice = new SimpleInvoice(null, books, customer, price, dateTime);
 
-            IBookshopStorage storage = new InMemoryBookshopStorage();
+            IBookshopStorage storage = new DatabaseBookshopStorage();
 
             int invoiceId = storage.Invoices.add(invoice);
 

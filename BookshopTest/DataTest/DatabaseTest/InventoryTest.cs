@@ -1,6 +1,7 @@
 ﻿using Bookshop.Data.InMemoryStorage;
 using Bookshop.Data.API;
 using Bookshop.Data.Model;
+using Bookshop.Data.Database;
 
 namespace BookshopTest.DataTest.DatabaseTest
 {
@@ -15,7 +16,7 @@ namespace BookshopTest.DataTest.DatabaseTest
             int book2 = 102;
             int book3 = 103;
 
-            IBookshopStorage storage = new InMemoryBookshopStorage();
+            IBookshopStorage storage = new DatabaseBookshopStorage();
 
             storage.Inventory.addOne(book1);
             storage.Inventory.addOne(book1copy);
@@ -32,7 +33,7 @@ namespace BookshopTest.DataTest.DatabaseTest
             int book1 = 101;
             int book2 = 102;
 
-            IBookshopStorage storage = new InMemoryBookshopStorage();
+            IBookshopStorage storage = new DatabaseBookshopStorage();
 
             storage.Inventory.addOne(book1);
             storage.Inventory.addOne(book1);

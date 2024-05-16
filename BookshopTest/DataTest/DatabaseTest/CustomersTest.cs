@@ -2,6 +2,7 @@
 using Bookshop.Data.API;
 using Bookshop.Data.Model;
 using Bookshop.Data.Model.Entities;
+using Bookshop.Data.Database;
 
 namespace BookshopTest.DataTest.DatabaseTest
 {
@@ -11,7 +12,7 @@ namespace BookshopTest.DataTest.DatabaseTest
         [TestMethod]
         public void testAddGet()
         {
-            IBookshopStorage storage = new InMemoryBookshopStorage();
+            IBookshopStorage storage = new DatabaseBookshopStorage();
 
             ICustomer customer = DataGenerator.newCustomer();
             int customerId = storage.Customers.add(customer);
@@ -22,7 +23,7 @@ namespace BookshopTest.DataTest.DatabaseTest
         [TestMethod]
         public void testRemove()
         {
-            IBookshopStorage storage = new InMemoryBookshopStorage();
+            IBookshopStorage storage = new DatabaseBookshopStorage();
 
             ICustomer customer = DataGenerator.newCustomer();
             int customerId = storage.Customers.add(customer);
@@ -35,7 +36,7 @@ namespace BookshopTest.DataTest.DatabaseTest
         [TestMethod]
         public void testUpdate()
         {
-            IBookshopStorage storage = new InMemoryBookshopStorage();
+            IBookshopStorage storage = new DatabaseBookshopStorage();
 
             ICustomer customer = DataGenerator.newCustomer();
             int customerId = storage.Customers.add(customer);

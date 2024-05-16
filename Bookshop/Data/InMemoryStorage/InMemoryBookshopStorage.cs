@@ -11,14 +11,14 @@ namespace Bookshop.Data.InMemoryStorage
         List<ICustomer> customers = new List<ICustomer>();
         List<ISupplier> suppliers = new List<ISupplier>();
         List<IInvoice> invoices = new List<IInvoice>();
-        List<ISupplyRegisterEntry> supplyRegister = new List<ISupplyRegisterEntry>();
+        List<ISupply> supplyRegister = new List<ISupply>();
 
         public IInventoryAPI Inventory { get; }
         public IStorageAPI<IBook> Catalogue { get; }
         public IStorageAPI<ICustomer> Customers { get; }
         public IStorageAPI<ISupplier> Suppliers { get; }
         public IStorageAPI<IInvoice> Invoices { get; }
-        public IStorageAPI<ISupplyRegisterEntry> SupplyRegister { get; }
+        public IStorageAPI<ISupply> Supply { get; }
 
 
         public InMemoryBookshopStorage()
@@ -27,7 +27,7 @@ namespace Bookshop.Data.InMemoryStorage
             Customers = new CustomersAPI(customers);
             Suppliers = new SuppliersAPI(suppliers);
             Invoices = new InvoicesAPI(invoices);
-            SupplyRegister = new SupplyRegisterAPI(supplyRegister);
+            Supply = new SupplyAPI(supplyRegister);
             Inventory = new InventoryAPI(inventory);
         }
     }

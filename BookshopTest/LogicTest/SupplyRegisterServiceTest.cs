@@ -25,8 +25,8 @@ namespace BookshopTest.LogicTest
             DateTime now = DateTime.Now;
 
             books.Add(book);
-            SimpleSupplyRegisterEntry entry = new SimpleSupplyRegisterEntry(null, books, supplier, price, now);
-            int id = storage.SupplyRegister.add(entry);
+            SimpleSupply entry = new SimpleSupply(null, books, supplier, price, now);
+            int id = storage.Supply.add(entry);
 
 
             Assert.AreEqual(price, register.get(id).Price);

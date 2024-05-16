@@ -39,7 +39,6 @@ namespace Bookshop.Data.Model
                 ContactInfo = item.ContactInfo
             };
         }
-
         public static List<ICustomer> ToICustomer(this IEnumerable<Customer> items)
         {
             List<ICustomer> result = new List<ICustomer>();
@@ -49,5 +48,29 @@ namespace Bookshop.Data.Model
             }
             return result;
         }
+
+        public static List<ISupplier> ToISupplier(this IEnumerable<Supplier> items)
+        {
+            List<ISupplier> result = new List<ISupplier>();
+            foreach (var item in items)
+            {
+                result.Add(ToISupplier(item));
+            }
+            return result;
+        }
+
+        public static ISupplier ToISupplier(this Supplier item)
+        {
+            return new SimpleSupplier()
+            {
+                Id = item.SupplierId,
+                FirstName = item.FirstName,
+                LastName = item.LastName,
+                CompanyName = item.CompanyName,
+                Address = item.Address,
+                ContactInfo = item.ContactInfo
+            };
+        }
+
     }
 }

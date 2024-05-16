@@ -10,7 +10,7 @@ namespace Bookshop.Logic
     {
         IBookshopStorage _storage;
         public BuyService(IBookshopStorage storage) { _storage = storage; }
-        public ID buy(ID customerId, Counter<ID> books)
+        public int buy(int customerId, Counter<int> books)
         {
             CustomersService customers = new CustomersService(_storage);
             CatalogueService catalogue = new CatalogueService(_storage);
@@ -18,7 +18,7 @@ namespace Bookshop.Logic
 
             foreach (var idToNumber in books)
             {
-                ID id = idToNumber.Key;
+                int id = idToNumber.Key;
                 int numberToBuy = idToNumber.Value;
                 int numberInStock = _storage.Inventory.count(id);
 
@@ -28,7 +28,7 @@ namespace Bookshop.Logic
 
             foreach (var idToNumber in books)
             {
-                ID id = idToNumber.Key;
+                int id = idToNumber.Key;
                 int numberToBuy = idToNumber.Value;
 
                 _storage.Inventory.remove(id, numberToBuy);
@@ -37,7 +37,7 @@ namespace Bookshop.Logic
             Counter<IBook> bookRefs = new Counter<IBook>();
             foreach (var idToNumber in books)
             {
-                ID id = idToNumber.Key;
+                int id = idToNumber.Key;
                 int numberToBuy = idToNumber.Value;
 
                 bookRefs.Set(catalogue.get(id), numberToBuy);
@@ -47,14 +47,14 @@ namespace Bookshop.Logic
             SimpleInvoice invoice = new SimpleInvoice(null, bookRefs, customer, price, DateTime.Now);
             return _storage.Invoices.add(invoice);
         }
-        public double checkPrice(Counter<ID> books)
+        public double checkPrice(Counter<int> books)
         {
             double totalPrice = 0;
             CatalogueService catalogue = new CatalogueService(_storage);
 
             foreach (var idToNumber in books)
             {
-                ID id = idToNumber.Key;
+                int id = idToNumber.Key;
                 int number = idToNumber.Value;
                 totalPrice += (double)catalogue.get(id).Price * number;
             }

@@ -17,7 +17,7 @@ namespace BookshopTest.LogicTest
             CatalogueService catalogue = new CatalogueService(storage);
 
             IBook book = DataGenerator.newBook();
-            ID id = catalogue.add(book);
+            int id = catalogue.add(book);
 
             Assert.AreEqual(book.Author, catalogue.get(id).Author);
 
@@ -36,7 +36,7 @@ namespace BookshopTest.LogicTest
             CatalogueService catalogue = new CatalogueService(storage);
 
             IBook book = DataGenerator.newBook();
-            ID id = catalogue.add(book);
+            int id = catalogue.add(book);
 
             IBook newBook = DataGenerator.newBook();
             newBook.Id = id;
@@ -44,7 +44,7 @@ namespace BookshopTest.LogicTest
             catalogue.update(newBook);
             Assert.AreEqual(newBook.Price, catalogue.get(id).Price);
 
-            ID nonexistentId = new ID(catalogue.getIds().Count + 1_000);
+            int nonexistentId = catalogue.getIds().Count + 1_000;
             newBook.Id = nonexistentId;
             Assert.ThrowsException<ItemIdNotFound>(() => catalogue.update(newBook));
 
@@ -58,12 +58,12 @@ namespace BookshopTest.LogicTest
             CatalogueService catalogue = new CatalogueService(storage);
 
             IBook book1 = DataGenerator.newBook();
-            ID id1 = catalogue.add(book1);
+            int id1 = catalogue.add(book1);
 
             IBook book2 = DataGenerator.newBook();
-            ID id2 = catalogue.add(book2);
+            int id2 = catalogue.add(book2);
 
-            Assert.AreEqual(id1, new ID(id1.Value));
+            Assert.AreEqual(id1, id1);
             Assert.AreNotEqual(id1, id2 );
         }
     }

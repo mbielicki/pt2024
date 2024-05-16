@@ -19,7 +19,7 @@ namespace BookshopTest.LogicTest
 
             ISupplier supplier = DataGenerator.newSupplier();
 
-            ID id = suppliers.add(supplier);
+            int id = suppliers.add(supplier);
             Assert.AreEqual(supplier.CompanyName, suppliers.get(id).CompanyName);
 
             ISupplier identicalSupplier = DataGenerator.copy(supplier);
@@ -38,7 +38,7 @@ namespace BookshopTest.LogicTest
             SuppliersService suppliers = new SuppliersService(storage);
 
             ISupplier supplier = DataGenerator.newSupplier();
-            ID id = suppliers.add(supplier);
+            int id = suppliers.add(supplier);
 
             ISupplier newSupplier = DataGenerator.copy(supplier);
             newSupplier.ContactInfo = "supplier@company.com";

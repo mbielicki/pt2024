@@ -1,13 +1,11 @@
-﻿using Bookshop.Data.Model;
-
-namespace Bookshop.Logic
+﻿namespace Bookshop.Logic
 {
     public interface IService<T>
     {
-        ID add(T item);
-        void remove(ID id);
-        T get(ID id);
+        int add(T item);
+        void remove(int id);
+        T get(int id);
         void update(T newItem);
-        List<ID> getIds();
+        List<int> getIds();
     }
 }

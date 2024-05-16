@@ -14,7 +14,7 @@ namespace BookshopTest.DataTest.DatabaseTest
             IBookshopStorage storage = new InMemoryBookshopStorage();
 
             ICustomer customer = DataGenerator.newCustomer();
-            ID customerId = storage.Customers.add(customer);
+            int customerId = storage.Customers.add(customer);
 
             Assert.AreEqual(customer.LastName, storage.Customers.get(c => c.Id.Equals(customerId)).LastName);
         }
@@ -25,7 +25,7 @@ namespace BookshopTest.DataTest.DatabaseTest
             IBookshopStorage storage = new InMemoryBookshopStorage();
 
             ICustomer customer = DataGenerator.newCustomer();
-            ID customerId = storage.Customers.add(customer);
+            int customerId = storage.Customers.add(customer);
 
             storage.Customers.remove(customerId);
 
@@ -38,7 +38,7 @@ namespace BookshopTest.DataTest.DatabaseTest
             IBookshopStorage storage = new InMemoryBookshopStorage();
 
             ICustomer customer = DataGenerator.newCustomer();
-            ID customerId = storage.Customers.add(customer);
+            int customerId = storage.Customers.add(customer);
 
             ICustomer newCustomer = DataGenerator.copy(customer);
             newCustomer.ContactInfo = "john.doe@example.com";

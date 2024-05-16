@@ -1,6 +1,6 @@
 ﻿namespace Bookshop.Data.Model.Entities
 {
-    public interface IBook : HasId
+    public interface IBook : IHasId
     {
         string Title { get; set; }
         string Author { get; set; }
@@ -10,13 +10,13 @@
 
     public class SimpleBook : IBook
     {
-        public ID Id { get; set; }
+        public int? Id { get; set; }
         public string Title { get; set; }
         public string Author { get; set; }
         public string Description { get; set; }
         public double Price { get; set; }
 
-        public SimpleBook(ID Id, string Title, string Author, string Description, double Price)
+        public SimpleBook(int? Id, string Title, string Author, string Description, double Price)
         {
             this.Id = Id;
             this.Title = Title;
@@ -25,6 +25,8 @@
             this.Price = Price;
         }
 
-        public SimpleBook() { }
+        public SimpleBook()
+        {
+        }
     }
 }

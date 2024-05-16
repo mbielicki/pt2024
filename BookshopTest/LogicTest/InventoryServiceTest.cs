@@ -20,17 +20,17 @@ namespace BookshopTest.LogicTest
             SuppliersService suppliers = new SuppliersService(storage);
 
             // Books
-            Counter<ID> books = new Counter<ID>();
+            Counter<int> books = new Counter<int>();
             IBook book = DataGenerator.newBook();
             books.Add(catalogue.add(book));
 
             // Supplier
             ISupplier supplier = DataGenerator.newSupplier();
-            ID supplierId = suppliers.add(supplier);
+            int supplierId = suppliers.add(supplier);
 
             // Supply
             inventory.supply(books, supplierId, 100);
-            ID id = books.Keys[0];
+            int id = books.Keys[0];
 
             Assert.AreEqual(1, inventory.count(id));
 
@@ -38,7 +38,7 @@ namespace BookshopTest.LogicTest
             Assert.AreEqual(2, inventory.count(id));
 
             IBook wrongBook = DataGenerator.copy(book);
-            ID wrongId = new ID(id.Value + 1);
+            int wrongId = id + 1;
 
             Assert.ThrowsException<ItemIdNotFound>(() =>
             {

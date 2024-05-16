@@ -10,17 +10,17 @@ namespace Bookshop.Logic
     {
         IBookshopStorage _storage;
         public InventoryService(IBookshopStorage storage) { _storage = storage; }
-        public int count(ID book)
+        public int count(int bookId)
         {
-            return _storage.Inventory.count(book);
+            return _storage.Inventory.count(bookId);
         }
-        public void supply(ID book, ID supplier, double price)
+        public void supply(int bookId, int supplierId, double price)
         {
-            Counter<ID> books = new Counter<ID>();
-            books.Add(book);
-            supply(books, supplier, price);
+            Counter<int> books = new Counter<int>();
+            books.Add(bookId);
+            supply(books, supplierId, price);
         }
-        public void supply(Counter<ID> bookIds, ID supplierId, double price)
+        public void supply(Counter<int> bookIds, int supplierId, double price)
         {
             SuppliersService suppliers = new SuppliersService(_storage);
             ISupplier supplier = suppliers.get(supplierId);
@@ -31,7 +31,7 @@ namespace Bookshop.Logic
 
             foreach (var bookToNumber in bookIds)
             {
-                ID book = bookToNumber.Key;
+                int book = bookToNumber.Key;
                 int number = bookToNumber.Value;
 
                 books.Set(catalogue.get(book), number);

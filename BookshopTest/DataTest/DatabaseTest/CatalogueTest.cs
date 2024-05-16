@@ -15,7 +15,7 @@ namespace BookshopTest.DataTest.DatabaseTest
 
             IBookshopStorage storage = new DatabaseBookshopStorage();
 
-            ID bookId = storage.Catalogue.add(book);
+            int bookId = storage.Catalogue.add(book);
             Assert.AreEqual(book.Description, storage.Catalogue.get(b => b.Id.Equals(bookId)).Description);
         }
 
@@ -25,7 +25,7 @@ namespace BookshopTest.DataTest.DatabaseTest
             SimpleBook book = DataGenerator.newBook();
 
             IBookshopStorage storage = new DatabaseBookshopStorage();
-            ID bookId = storage.Catalogue.add(book);
+            int bookId = storage.Catalogue.add(book);
             storage.Catalogue.remove(bookId);
             Assert.IsNull(storage.Catalogue.get(b => b.Id.Equals(bookId)));
         }
@@ -36,7 +36,7 @@ namespace BookshopTest.DataTest.DatabaseTest
             SimpleBook book = DataGenerator.newBook();
 
             IBookshopStorage storage = new DatabaseBookshopStorage();
-            ID bookId = storage.Catalogue.add(book);
+            int bookId = storage.Catalogue.add(book);
 
             double newPrice = 20;
             SimpleBook newBook = new SimpleBook(bookId, book.Title, book.Author, book.Description, newPrice);

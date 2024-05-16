@@ -20,8 +20,8 @@ namespace Bookshop.ViewModel
             IBookshopStorage storage = new InMemoryBookshopStorage();
             CatalogueService service = new CatalogueService(storage);
 
-            IEnumerable<ID> ids = service.getIds();
-            foreach (ID id in ids)
+            IEnumerable<int> ids = service.getIds();
+            foreach (int id in ids)
             {
                 _catalogue.Add(service.get(id));
             }

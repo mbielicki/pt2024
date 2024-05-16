@@ -2,22 +2,20 @@
 {
     public interface ISupplyRegisterEntry : IEvent
     {
-        ID Id { get; set; }
         ISupplier Supplier { get; set; }
         double Price { get; set; }
-        DateTime DateTime { get; set; }
         Counter<IBook> Books { get; set; }
     }
 
 
     public class SimpleSupplyRegisterEntry : ISupplyRegisterEntry
     {
-        public ID Id { get; set; }
+        public int? Id { get; set; }
         public ISupplier Supplier { get; set; }
         public double Price { get; set; }
         public DateTime DateTime { get; set; }
         public Counter<IBook> Books { get; set; }
-        public SimpleSupplyRegisterEntry(ID id, Counter<IBook> books, ISupplier supplier, double price, DateTime dateTime)
+        public SimpleSupplyRegisterEntry(int? id, Counter<IBook> books, ISupplier supplier, double price, DateTime dateTime)
         {
             Id = id;
             Books = books;
@@ -25,6 +23,5 @@
             Price = price;
             DateTime = dateTime;
         }
-        public SimpleSupplyRegisterEntry() { }
     }
 }

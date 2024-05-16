@@ -10,10 +10,10 @@ namespace BookshopTest.DataTest.DatabaseTest
         [TestMethod]
         public void testAddGet()
         {
-            ID book1 = new ID(101);
-            ID book1copy = new ID(101);
-            ID book2 = new ID(102);
-            ID book3 = new ID(103);
+            int book1 = 101;
+            int book1copy = 101;
+            int book2 = 102;
+            int book3 = 103;
 
             IBookshopStorage storage = new InMemoryBookshopStorage();
 
@@ -29,8 +29,8 @@ namespace BookshopTest.DataTest.DatabaseTest
         [TestMethod]
         public void testRemove()
         {
-            ID book1 = new ID(101);
-            ID book2 = new ID(102);
+            int book1 = 101;
+            int book2 = 102;
 
             IBookshopStorage storage = new InMemoryBookshopStorage();
 

@@ -8,7 +8,7 @@ namespace Bookshop.Logic
     {
         IBookshopStorage _storage;
         public SupplyRegisterService(IBookshopStorage storage) { _storage = storage; }
-        public ISupplyRegisterEntry get(ID id)
+        public ISupplyRegisterEntry get(int id)
         {
             ISupplyRegisterEntry? result = _storage.SupplyRegister.get(i => i.Id.Equals(id));
             if (result == null)
@@ -16,9 +16,9 @@ namespace Bookshop.Logic
             return result;
         }
 
-        public List<ID> getIds()
+        public List<int> getIds()
         {
-            return _storage.SupplyRegister.getAll((i) => true).ConvertAll(i => i.Id);
+            return _storage.SupplyRegister.getAll((i) => true).ConvertAll(i => (int) i.Id);
 
         }
     }

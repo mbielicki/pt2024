@@ -5,17 +5,17 @@ namespace Bookshop.Data.InMemoryStorage
 {
     internal class InventoryAPI : IInventoryAPI
     {
-        Counter<ID> _document = new Counter<ID>();
-        public InventoryAPI(Counter<ID> document)
+        Counter<int> _document = new Counter<int>();
+        public InventoryAPI(Counter<int> document)
         {
             _document = document;
         }
 
-        public void addOne(ID item)
+        public void addOne(int item)
         {
             _document.Add(item);
         }
-        public void add(ID item, int numberToSupply)
+        public void add(int item, int numberToSupply)
         {
             int count = _document.Get(i => i.Equals(item));
 
@@ -23,12 +23,12 @@ namespace Bookshop.Data.InMemoryStorage
             _document.Set(item, newCount);
         }
 
-        public int count(ID item)
+        public int count(int item)
         {
             return _document.Get(i => i.Equals(item));
         }
 
-        public bool remove(ID item, int numberToBuy)
+        public bool remove(int item, int numberToBuy)
         {
             int count = _document.Get(i => i.Equals(item));
             if (numberToBuy > count) return false;
@@ -38,7 +38,7 @@ namespace Bookshop.Data.InMemoryStorage
             return true;
         }
 
-        public bool removeOne(ID id)
+        public bool removeOne(int id)
         {
             try
             {

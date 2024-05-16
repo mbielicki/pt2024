@@ -18,7 +18,7 @@ namespace BookshopTest.LogicTest
             ISupplier supplier = DataGenerator.newSupplier();
             supplier.Id = storage.Suppliers.add(supplier);
             IBook book = DataGenerator.newBook();
-            ID bookId = storage.Catalogue.add(book);
+            int bookId = storage.Catalogue.add(book);
 
             Counter<IBook> books = new Counter<IBook>();
             double price = 50;
@@ -26,7 +26,7 @@ namespace BookshopTest.LogicTest
 
             books.Add(book);
             SimpleSupplyRegisterEntry entry = new SimpleSupplyRegisterEntry(null, books, supplier, price, now);
-            ID id = storage.SupplyRegister.add(entry);
+            int id = storage.SupplyRegister.add(entry);
 
 
             Assert.AreEqual(price, register.get(id).Price);

@@ -9,7 +9,7 @@ namespace BookshopTest.DataTest.ModelTest
         [TestMethod]
         public void testBookInit()
         {
-            ID id = new ID(0);
+            int id = 0;
             string name = "Pan Tadeusz";
             string author = "Adam Mickiewicz";
             string description = "The Last Foray in Lithuania";

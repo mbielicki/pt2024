@@ -21,7 +21,7 @@ namespace BookshopTest.LogicTest
             IInvoice firstInvoice = invoicesList.First();
             firstInvoice.Id = storage.Invoices.add(firstInvoice);
 
-            Assert.AreEqual(firstInvoice.Price, invoices.get(firstInvoice.Id).Price);
+            Assert.AreEqual(firstInvoice.Price, invoices.get((int) firstInvoice.Id).Price);
         }
     }
 }

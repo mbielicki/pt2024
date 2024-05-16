@@ -11,7 +11,7 @@ namespace BookshopTest.DataTest.ModelTest
         {
             SimpleCustomer customer = DataGenerator.newCustomer();
             IBook book = DataGenerator.newBook();
-            ID invoiceId = new ID(456);
+            int invoiceId = 456;
 
             Counter<IBook> books = new Counter<IBook>();
             books.Add(book);

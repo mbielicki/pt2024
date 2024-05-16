@@ -25,7 +25,7 @@ namespace BookshopTest
         }
         private class RandomInvoice : IInvoice
         {
-            public ID? Id { get; set; }
+            public int? Id { get; set; }
             public ICustomer Customer { get; set; }
             public double Price { get; set; }
             public DateTime DateTime { get; set; }
@@ -42,7 +42,7 @@ namespace BookshopTest
         }
         private class InvoiceCustomizable : IInvoice
         {
-            public ID? Id { get; set; }
+            public int? Id { get; set; }
             public ICustomer Customer { get; set; }
             public double Price { get; set; }
             public DateTime DateTime { get; set; }

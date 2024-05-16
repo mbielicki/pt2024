@@ -15,7 +15,7 @@ namespace Bookshop.Logic.Suppliers
             _validator = new SupplierValidator(storage);
         }
 
-        public ID add(ISupplier supplier)
+        public int add(ISupplier supplier)
         {
             if (_validator.incorrectProperties(supplier))
                 throw new InvalidItemProperties();
@@ -26,7 +26,7 @@ namespace Bookshop.Logic.Suppliers
             return _storage.Suppliers.add(supplier);
         }
 
-        public ISupplier get(ID supplierId)
+        public ISupplier get(int supplierId)
         {
             ISupplier? result = _storage.Suppliers.get(s => s.Id.Equals(supplierId));
             if (result == null)
@@ -34,13 +34,13 @@ namespace Bookshop.Logic.Suppliers
             return result;
         }
 
-        public List<ID> getIds()
+        public List<int> getIds()
         {
-            return _storage.Suppliers.getAll((i) => true).ConvertAll(i => i.Id);
+            return _storage.Suppliers.getAll((i) => true).ConvertAll(i => (int) i.Id);
 
         }
 
-        public void remove(ID supplierId)
+        public void remove(int supplierId)
         {
             if (_storage.Suppliers.remove(supplierId)) return;
             throw new ItemIdNotFound();

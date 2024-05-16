@@ -1,27 +1,20 @@
-﻿using Bookshop.Data.Model;
-
-namespace Bookshop.Data.Model.Entities
+﻿namespace Bookshop.Data.Model.Entities
 {
     public interface ISupplier : IPerson
     {
-        ID Id { get; set; }
-        string FirstName { get; set; }
-        string LastName { get; set; }
         string CompanyName { get; set; }
-        string Address { get; set; }
-        string ContactInfo { get; set; }
     }
 
     public class SimpleSupplier : ISupplier
     {
-        public ID Id { get; set; }
+        public int? Id { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string CompanyName { get; set; }
         public string Address { get; set; }
         public string ContactInfo { get; set; }
 
-        public SimpleSupplier(ID id, string firstName, string lastName, string companyName, string address, string contactInfo)
+        public SimpleSupplier(int? id, string firstName, string lastName, string companyName, string address, string contactInfo)
         {
             Id = id;
             FirstName = firstName;
@@ -30,6 +23,5 @@ namespace Bookshop.Data.Model.Entities
             Address = address;
             ContactInfo = contactInfo;
         }
-        public SimpleSupplier() { }
     }
 }

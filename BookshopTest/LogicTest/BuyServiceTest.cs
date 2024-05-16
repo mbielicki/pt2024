@@ -20,12 +20,12 @@ namespace BookshopTest.LogicTest
             BuyService buyService = new BuyService(storage);
 
             IBook book1 = DataGenerator.newBook();
-            ID id1 = catalogue.add(book1);
+            int id1 = catalogue.add(book1);
 
             IBook book2 = DataGenerator.newBook();
-            ID id2 = catalogue.add(book2);
+            int id2 = catalogue.add(book2);
 
-            Counter<ID> books = new Counter<ID>();
+            Counter<int> books = new Counter<int>();
             books.Add(id1);
             books.Add(id2);
             books.Add(id2);
@@ -48,23 +48,23 @@ namespace BookshopTest.LogicTest
 
             // Make shopping list
             IBook book1 = DataGenerator.newBook();
-            ID bookId1 = catalogue.add(book1);
+            int bookId1 = catalogue.add(book1);
 
             IBook book2 = DataGenerator.newBook();
-            ID bookId2 = catalogue.add(book2);
+            int bookId2 = catalogue.add(book2);
 
-            Counter<ID> books = new Counter<ID>();
+            Counter<int> books = new Counter<int>();
             books.Add(bookId1);
             books.Add(bookId2);
             books.Add(bookId2);
 
             // Make customer
             ICustomer customer = DataGenerator.newCustomer();
-            ID customerId = customersService.add(customer);
+            int customerId = customersService.add(customer);
 
             // Make inventory
             ISupplier supplier = DataGenerator.newSupplier();
-            ID supplierId = suppliersService.add(supplier);
+            int supplierId = suppliersService.add(supplier);
             inventoryService.supply(bookId1, supplierId, 100);
             inventoryService.supply(bookId2, supplierId, 100);
 
@@ -76,7 +76,7 @@ namespace BookshopTest.LogicTest
 
             // Supply 
             inventoryService.supply(bookId2, supplierId, 100);
-            ID invoiceId = buyService.buy(customerId, books);
+            int invoiceId = buyService.buy(customerId, books);
 
             // Check invoice
             InvoicesService invoicesService = new InvoicesService(storage);

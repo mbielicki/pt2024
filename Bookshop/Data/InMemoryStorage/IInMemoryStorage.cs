@@ -3,7 +3,7 @@ using Bookshop.Data.Model;
 
 namespace Bookshop.Data.InMemoryStorage
 {
-    internal abstract class IInMemoryStorage<T> : IStorageAPI<T> where T : HasId
+    internal abstract class IInMemoryStorage<T> : IStorageAPI<T> where T : IHasId
     {
         protected List<T> _document;
         int nextId = 0;
@@ -13,9 +13,9 @@ namespace Bookshop.Data.InMemoryStorage
             _document = document;
         }
 
-        public ID add(T item)
+        public int add(T item)
         {
-            ID id = new ID(nextId++);
+            int id = nextId++;
             item.Id = id;
             _document.Add(item);
             return id;
@@ -31,7 +31,7 @@ namespace Bookshop.Data.InMemoryStorage
             return _document.FindAll(query);
         }
 
-        public bool remove(ID id)
+        public bool remove(int id)
         {
             foreach (T item in _document)
             {

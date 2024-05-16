@@ -18,7 +18,7 @@ namespace BookshopTest.LogicTest
 
             ICustomer customer = DataGenerator.newCustomer();
 
-            ID id = customers.add(customer);
+            int id = customers.add(customer);
             Assert.AreEqual(customer.FirstName, customers.get(id).FirstName);
 
             ICustomer identicalCustomer = DataGenerator.copy(customer);
@@ -37,7 +37,7 @@ namespace BookshopTest.LogicTest
             CustomersService customers = new CustomersService(storage);
 
             ICustomer customer = DataGenerator.newCustomer();
-            ID id = customers.add(customer);
+            int id = customers.add(customer);
 
             ICustomer newCustomer = DataGenerator.copy(customer);
             newCustomer.FirstName = "John";

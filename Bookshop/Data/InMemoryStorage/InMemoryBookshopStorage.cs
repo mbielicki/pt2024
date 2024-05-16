@@ -6,7 +6,7 @@ namespace Bookshop.Data.InMemoryStorage
 {
     public class InMemoryBookshopStorage : IBookshopStorage
     {
-        Counter<ID> inventory = new Counter<ID>();
+        Counter<int> inventory = new Counter<int>();
         List<IBook> catalogue = new List<IBook>();
         List<ICustomer> customers = new List<ICustomer>();
         List<ISupplier> suppliers = new List<ISupplier>();

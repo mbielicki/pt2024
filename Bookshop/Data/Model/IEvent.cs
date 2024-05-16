@@ -1,6 +1,6 @@
 ﻿namespace Bookshop.Data.Model
 {
-    public interface IEvent : HasId
+    public interface IEvent : IHasId
     {
         DateTime DateTime { get; set; }
     }

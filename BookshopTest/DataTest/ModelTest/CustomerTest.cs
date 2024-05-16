@@ -1,5 +1,4 @@
-﻿using Bookshop.Data.Model;
-using Bookshop.Data.Model.Entities;
+﻿using Bookshop.Data.Model.Entities;
 
 namespace BookshopTest.DataTest.ModelTest
 {
@@ -9,7 +8,7 @@ namespace BookshopTest.DataTest.ModelTest
         [TestMethod]
         public void testCustomerInit()
         {
-            ID id = new ID();
+            int id = 0;
             string firstName = "John";
             string lastName = "Doe";
             string address = "00000 Baker Street 221B, London, England";

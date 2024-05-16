@@ -8,7 +8,7 @@ namespace Bookshop.Data.Database
     internal class CatalogueAPI : IStorageAPI<IBook>
     {
 
-        public ID add(IBook item)
+        public int add(IBook item)
         {
             using (BookshopDataContext database = new BookshopDataContext())
             {
@@ -26,8 +26,8 @@ namespace Bookshop.Data.Database
                 database.Books.InsertOnSubmit(newItem);
                 database.SubmitChanges();
 
-                item.Id = new ID(newId);
-                return item.Id;
+                item.Id = newId;
+                return (int) item.Id;
             }
         }
 
@@ -57,7 +57,7 @@ namespace Bookshop.Data.Database
         private IBook toIBook(Book book)
         {
             IBook result = new SimpleBook();
-            result.Id = new ID(book.BookId);
+            result.Id = book.BookId;
             result.Title = book.Title;
             result.Author = book.Author;
             result.Description = book.Description;
@@ -90,13 +90,13 @@ namespace Bookshop.Data.Database
             }
         }
 
-        public bool remove(ID id)
+        public bool remove(int id)
         {
             using (BookshopDataContext database = new BookshopDataContext())
             {
 
                 var result = from book in database.Books
-                                    where book.BookId == id.Value
+                                    where book.BookId == id
                                     select book;
 
                 try
@@ -117,7 +117,7 @@ namespace Bookshop.Data.Database
             using (BookshopDataContext database = new BookshopDataContext())
             {
                 var query = from b in database.Books
-                             where b.BookId == book.Id.Value
+                             where b.BookId == book.Id
                              select b;
 
                 try

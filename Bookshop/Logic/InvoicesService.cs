@@ -8,7 +8,7 @@ namespace Bookshop.Logic
     {
         IBookshopStorage _storage;
         public InvoicesService(IBookshopStorage storage) { _storage = storage; }
-        public IInvoice get(ID id)
+        public IInvoice get(int id)
         {
             IInvoice? result = _storage.Invoices.get(i => i.Id.Equals(id));
             if (result == null)
@@ -16,9 +16,9 @@ namespace Bookshop.Logic
             return result;
         }
 
-        public List<ID> getIds()
+        public List<int> getIds()
         {
-            return _storage.Invoices.getAll((i) => true).ConvertAll(i => i.Id);
+            return _storage.Invoices.getAll((i) => true).ConvertAll(i => (int) i.Id);
 
         }
     }

@@ -29,6 +29,48 @@ namespace BookshopTest.Data.SampleMockStorage
             Invoices = new InvoicesAPI(invoices);
             Supply = new SupplyAPI(supplyRegister);
             Inventory = new InventoryAPI(inventory);
+
+            AddSampleMockData();
+        }
+
+        private void AddSampleMockData()
+        {
+            IBook newBook = DataGenerator.newBook();
+            int bookId = Catalogue.add(newBook);
+
+            ICustomer newCustomer = DataGenerator.newCustomer();
+            Customers.add(newCustomer);
+
+            ISupplier newSupplier = DataGenerator.newSupplier();
+            Suppliers.add(newSupplier);
+
+            Inventory.add(bookId, 10);
+
+            Counter<IBook> books = new Counter<IBook>();
+            books.Set(newBook, 2);
+
+            Supply.add(new SimpleSupply()
+            {
+                Id = 0,
+                Books = books,
+                Supplier = newSupplier,
+                Price = 50,
+                DateTime = DateTime.Now
+            });
+
+            Inventory.add(bookId, 2);
+
+            Invoices.add(new SimpleInvoice()
+            {
+                Id = 0,
+                Books = books,
+                Customer = newCustomer,
+                Price = 100,
+                DateTime = DateTime.Now
+            });
+
+            Inventory.remove(bookId, 2);
+
         }
     }
 }

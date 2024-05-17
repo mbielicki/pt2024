@@ -1,6 +1,5 @@
 ﻿using Bookshop.Data.API;
-using Bookshop.Data.InMemoryStorage;
-using Bookshop.Data.Model;
+using Bookshop.Data.Database;
 using Bookshop.Data.Model.Entities;
 using Bookshop.Logic.Catalogue;
 using System.Collections.ObjectModel;
@@ -17,7 +16,7 @@ namespace Bookshop.ViewModel
         {
             _catalogue = new ObservableCollection<IBook>();
 
-            IBookshopStorage storage = new InMemoryBookshopStorage();
+            IBookshopStorage storage = new DatabaseBookshopStorage();
             CatalogueService service = new CatalogueService(storage);
 
             IEnumerable<int> ids = service.getIds();

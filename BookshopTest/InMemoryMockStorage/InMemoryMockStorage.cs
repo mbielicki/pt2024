@@ -2,9 +2,9 @@
 using Bookshop.Data.Model;
 using Bookshop.Data.Model.Entities;
 
-namespace Bookshop.Data.InMemoryStorage
+namespace BookshopTest.Data.Mock
 {
-    public class InMemoryBookshopStorage : IBookshopStorage
+    public class InMemoryMockStorage : IBookshopStorage
     {
         Counter<int> inventory = new Counter<int>();
         List<IBook> catalogue = new List<IBook>();
@@ -21,7 +21,7 @@ namespace Bookshop.Data.InMemoryStorage
         public IStorageAPI<ISupply> Supply { get; }
 
 
-        public InMemoryBookshopStorage()
+        public InMemoryMockStorage()
         {
             Catalogue = new CatalogueAPI(catalogue);
             Customers = new CustomersAPI(customers);

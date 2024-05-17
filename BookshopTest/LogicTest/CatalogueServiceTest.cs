@@ -2,6 +2,7 @@
 using Bookshop.Data.Model.Entities;
 using Bookshop.Logic;
 using Bookshop.Logic.Catalogue;
+using BookshopTest.Data.InMemoryMockStorage;
 using BookshopTest.Data.SampleMockStorage;
 
 namespace BookshopTest.LogicTest
@@ -12,7 +13,8 @@ namespace BookshopTest.LogicTest
         [TestMethod]
         public void testAddGet()
         {
-            IBookshopStorage storage = new SampleMockStorage();
+            //IBookshopStorage storage = new SampleMockStorage();
+            IBookshopStorage storage = new InMemoryMockStorage();
             CatalogueService catalogue = new CatalogueService(storage);
 
             IBook book = DataGenerator.newBook();
@@ -31,7 +33,8 @@ namespace BookshopTest.LogicTest
         [TestMethod]
         public void testUpdateRemove()
         {
-            IBookshopStorage storage = new SampleMockStorage();
+            //IBookshopStorage storage = new SampleMockStorage();
+            IBookshopStorage storage = new InMemoryMockStorage();
             CatalogueService catalogue = new CatalogueService(storage);
 
             IBook book = DataGenerator.newBook();
@@ -51,9 +54,10 @@ namespace BookshopTest.LogicTest
             Assert.ThrowsException<ItemIdNotFound>(() => catalogue.remove(id));
         }
         [TestMethod]
-        public void testIdsDifferent() 
+        public void testIdsDifferent()
         {
-            IBookshopStorage storage = new SampleMockStorage();
+            //IBookshopStorage storage = new SampleMockStorage();
+            IBookshopStorage storage = new InMemoryMockStorage();
             CatalogueService catalogue = new CatalogueService(storage);
 
             IBook book1 = DataGenerator.newBook();

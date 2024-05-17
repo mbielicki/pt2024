@@ -5,6 +5,7 @@ using Bookshop.Data.Model.Entities;
 using Bookshop.Logic;
 using Bookshop.Logic.Catalogue;
 using Bookshop.Logic.Suppliers;
+using BookshopTest.Data.InMemoryMockStorage;
 
 namespace BookshopTest.LogicTest
 {
@@ -14,7 +15,8 @@ namespace BookshopTest.LogicTest
         [TestMethod]
         public void testSupplyNewBook()
         {
-            IBookshopStorage storage = new SampleMockStorage();
+            //IBookshopStorage storage = new SampleMockStorage();
+            IBookshopStorage storage = new InMemoryMockStorage();
             InventoryService inventory = new InventoryService(storage);
             CatalogueService catalogue = new CatalogueService(storage);
             SuppliersService suppliers = new SuppliersService(storage);

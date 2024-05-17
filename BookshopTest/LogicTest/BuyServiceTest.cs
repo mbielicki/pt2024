@@ -6,6 +6,7 @@ using Bookshop.Logic;
 using Bookshop.Logic.Catalogue;
 using Bookshop.Logic.Customers;
 using Bookshop.Logic.Suppliers;
+using BookshopTest.Data.InMemoryMockStorage;
 
 namespace BookshopTest.LogicTest
 {
@@ -15,7 +16,8 @@ namespace BookshopTest.LogicTest
         [TestMethod]
         public void testCheckPrice()
         {
-            IBookshopStorage storage = new SampleMockStorage();
+            //IBookshopStorage storage = new SampleMockStorage();
+            IBookshopStorage storage = new InMemoryMockStorage();
             CatalogueService catalogue = new CatalogueService(storage);
             BuyService buyService = new BuyService(storage);
 
@@ -39,7 +41,8 @@ namespace BookshopTest.LogicTest
         [TestMethod]
         public void testBuy()
         {
-            IBookshopStorage storage = new SampleMockStorage();
+            //IBookshopStorage storage = new SampleMockStorage();
+            IBookshopStorage storage = new InMemoryMockStorage();
             CatalogueService catalogue = new CatalogueService(storage);
             CustomersService customersService = new CustomersService(storage);
             InventoryService inventoryService = new InventoryService(storage);

@@ -2,6 +2,7 @@
 using Bookshop.Data.API;
 using Bookshop.Data.Model.Entities;
 using Bookshop.Logic;
+using BookshopTest.Data.InMemoryMockStorage;
 
 namespace BookshopTest.LogicTest
 {
@@ -11,7 +12,8 @@ namespace BookshopTest.LogicTest
         [TestMethod]
         public void testGet()
         {
-            IBookshopStorage storage = new SampleMockStorage();
+            //IBookshopStorage storage = new SampleMockStorage();
+            IBookshopStorage storage = new InMemoryMockStorage();
             InvoicesService invoices = new InvoicesService(storage);
 
 

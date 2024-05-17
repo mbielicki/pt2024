@@ -2,6 +2,7 @@
 using Bookshop.Data.Model.Entities;
 using Bookshop.Logic;
 using Bookshop.Logic.Customers;
+using BookshopTest.Data.InMemoryMockStorage;
 using BookshopTest.Data.SampleMockStorage;
 
 namespace BookshopTest.LogicTest
@@ -12,7 +13,8 @@ namespace BookshopTest.LogicTest
         [TestMethod]
         public void testAddGet()
         {
-            IBookshopStorage storage = new SampleMockStorage();
+            //IBookshopStorage storage = new SampleMockStorage();
+            IBookshopStorage storage = new InMemoryMockStorage();
             CustomersService customers = new CustomersService(storage);
 
             ICustomer customer = DataGenerator.newCustomer();
@@ -32,7 +34,8 @@ namespace BookshopTest.LogicTest
         [TestMethod]
         public void testUpdateRemove()
         {
-            IBookshopStorage storage = new SampleMockStorage();
+            //IBookshopStorage storage = new SampleMockStorage();
+            IBookshopStorage storage = new InMemoryMockStorage();
             CustomersService customers = new CustomersService(storage);
 
             ICustomer customer = DataGenerator.newCustomer();

@@ -211,7 +211,7 @@ namespace Bookshop.Data.Database
                     database.SubmitChanges();
                 } catch (Exception ex)
                 {
-                    throw new ItemIdNotFound();
+                    throw new InvalidOperationException();
                 }
             }
         }

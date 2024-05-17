@@ -1,4 +1,4 @@
-﻿using BookshopTest.Data.Mock;
+﻿using BookshopTest.Data.SampleMockStorage;
 using Bookshop.Data.API;
 using Bookshop.Data.Model;
 using Bookshop.Data.Model.Entities;
@@ -14,7 +14,7 @@ namespace BookshopTest.LogicTest
         [TestMethod]
         public void testSupplyNewBook()
         {
-            IBookshopStorage storage = new InMemoryMockStorage();
+            IBookshopStorage storage = new SampleMockStorage();
             InventoryService inventory = new InventoryService(storage);
             CatalogueService catalogue = new CatalogueService(storage);
             SuppliersService suppliers = new SuppliersService(storage);

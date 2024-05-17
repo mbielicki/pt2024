@@ -1,8 +1,8 @@
 ﻿using Bookshop.Data.Model.Entities;
 
-namespace BookshopTest.Data.InMemoryMockStorage
+namespace BookshopTest.Data.SampleMockStorage
 {
-    internal class SupplyAPI : IInMemoryStorage<ISupply>
+    internal class SupplyAPI : ISampleStorage<ISupply>
     {
         public SupplyAPI(List<ISupply> document) : base(document)
         {

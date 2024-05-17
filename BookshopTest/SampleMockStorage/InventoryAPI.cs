@@ -1,7 +1,7 @@
 ﻿using Bookshop.Data.API;
 using Bookshop.Data.Model;
 
-namespace BookshopTest.Data.InMemoryMockStorage
+namespace BookshopTest.Data.SampleMockStorage
 {
     internal class InventoryAPI : IInventoryAPI
     {

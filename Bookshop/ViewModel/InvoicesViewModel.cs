@@ -2,52 +2,52 @@
 using Bookshop.Data.API;
 using Bookshop.Data.Database;
 using Bookshop.Data.Model.Entities;
-using Bookshop.Logic.Suppliers;
+using Bookshop.Logic;
 using Bookshop.Stores;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
 
 namespace Bookshop.ViewModel
 {
-    class SuppliersViewModel : ViewModelBase
+    class InvoicesViewModel : ViewModelBase
     {
-        private readonly ObservableCollection<ISupplier> _suppliers;
-        private ISupplier? _currentSupplier;
+        private readonly ObservableCollection<IInvoice> _invoices;
+        private IInvoice? _currentInvoice;
 
-        public IEnumerable<ISupplier> Suppliers => _suppliers;
+        public IEnumerable<IInvoice> Invoices => _invoices;
 
-        public ISupplier? CurrentSupplier
+        public IInvoice? CurrentInvoice
         {
-            get => _currentSupplier;
+            get => _currentInvoice;
             set
             {
-                _currentSupplier = value;
+                _currentInvoice = value;
                 OnPropertyChanged();
             }
         }
 
         public ICommand NavigateCatalogueCommand { get; }
         public ICommand NavigateCustomersCommand { get; }
-        public ICommand NavigateInvoicesCommand { get; }
+        public ICommand NavigateSuppliersCommand { get; }
 
-        public SuppliersViewModel(NavigationStore navigationStore)
+        public InvoicesViewModel(NavigationStore navigationStore)
         {
             NavigateCatalogueCommand = new NavigateCommand<CatalogueViewModel>(
                 navigationStore, () => new CatalogueViewModel(navigationStore));
             NavigateCustomersCommand = new NavigateCommand<CustomersViewModel>(
                 navigationStore, () => new CustomersViewModel(navigationStore));
-            NavigateInvoicesCommand = new NavigateCommand<InvoicesViewModel>(
-                navigationStore, () => new InvoicesViewModel(navigationStore));
+            NavigateSuppliersCommand = new NavigateCommand<SuppliersViewModel>(
+                navigationStore, () => new SuppliersViewModel(navigationStore));
 
-            _suppliers = new ObservableCollection<ISupplier>();
+            _invoices = new ObservableCollection<IInvoice>();
 
             IBookshopStorage storage = new DatabaseBookshopStorage();
-            SuppliersService service = new SuppliersService(storage);
+            InvoicesService service = new InvoicesService(storage);
 
             IEnumerable<int> ids = service.getIds();
             foreach (int id in ids)
             {
-                _suppliers.Add(service.get(id));
+                _invoices.Add(service.get(id));
             }
         }
     }

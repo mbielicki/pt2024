@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="Bookshop.View.SuppliersView"
+﻿<UserControl x:Class="Bookshop.View.InvoicesView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -23,11 +23,11 @@
             <TextBlock
             Margin="10 10 10 0"
             Style="{StaticResource Header}"
-            Text="Suppliers" />
+            Text="Invoices" />
 
             <Button Content="Catalogue" Command="{Binding NavigateCatalogueCommand}"/>
             <Button Content="Customers" Command="{Binding NavigateCustomersCommand}"/>
-            <Button Content="Invoices" Command="{Binding NavigateInvoicesCommand}"/>
+            <Button Content="Customers" Command="{Binding NavigateSuppliersCommand}"/>
 
         </StackPanel>
 
@@ -37,8 +37,8 @@
             Margin="10 0 0 0"
             HorizontalScrollBarVisibility="Auto">
             <ListView
-            ItemsSource="{Binding Suppliers}"
-            SelectedItem="{Binding CurrentSupplier}">
+            ItemsSource="{Binding Invoices}"
+            SelectedItem="{Binding CurrentInvoice}">
                 <ListView.ItemContainerStyle>
                     <Style TargetType="ListViewItem">
                         <Setter Property="HorizontalContentAlignment" Value="Stretch" />
@@ -54,34 +54,34 @@
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
 
-                        <GridViewColumn Header="Company Name">
+                        <GridViewColumn Header="Customer">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
-                                    <TextBlock Padding="0 0 20 0" Text="{Binding CompanyName}" />
+                                    <TextBlock Padding="0 0 20 0" Text="{Binding Customer.Id}" />
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
 
-                        <GridViewColumn Header="First Name">
+                        <GridViewColumn Header="Price">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
-                                    <TextBlock Padding="0 0 20 0" Text="{Binding FirstName}" />
+                                    <TextBlock Padding="0 0 20 0" Text="{Binding Price}" />
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
 
-                        <GridViewColumn Header="Last Name">
+                        <GridViewColumn Header="Date">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
-                                    <TextBlock Padding="0 0 20 0" Text="{Binding LastName}" />
+                                    <TextBlock Padding="0 0 20 0" Text="{Binding DateTime}" />
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
 
-                        <GridViewColumn Header="Contact Info">
+                        <GridViewColumn Header="Books Number">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
-                                    <TextBlock Padding="0 0 20 0" Text="{Binding ContactInfo}" />
+                                    <TextBlock Padding="0 0 20 0" Text="{Binding Books.Count}" />
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
@@ -99,17 +99,15 @@
             </StackPanel.Resources>
 
             <Label Content="Id"/>
-            <TextBox Text="{Binding CurrentSupplier.Id}"/>
-            <Label Content="Company Name"/>
-            <TextBox Text="{Binding CurrentSupplier.CompanyName}" />
-            <Label Content="First Name"/>
-            <TextBox Text="{Binding CurrentSupplier.FirstName}" />
-            <Label Content="Last Name"/>
-            <TextBox Text="{Binding CurrentSupplier.LastName}" />
-            <Label Content="Address"/>
-            <TextBox Text="{Binding CurrentSupplier.Address}" />
-            <Label Content="Contact Info"/>
-            <TextBox Text="{Binding CurrentSupplier.ContactInfo}" TextWrapping="Wrap"/>
+            <TextBox Text="{Binding CurrentInvoice.Id}"/>
+            <Label Content="Customer"/>
+            <TextBox Text="{Binding CurrentInvoice.Customer}" />
+            <Label Content="Books"/>
+            <TextBox Text="{Binding CurrentInvoice.Books}" />
+            <Label Content="Price"/>
+            <TextBox Text="{Binding CurrentInvoice.Price}" />
+            <Label Content="DateTime"/>
+            <TextBox Text="{Binding CurrentInvoice.DateTime}" />
         </StackPanel>
     </Grid>
 </UserControl>

@@ -27,6 +27,7 @@
 
             <Button Content="Customers" Command="{Binding NavigateCustomersCommand}"/>
             <Button Content="Suppliers" Command="{Binding NavigateSuppliersCommand}"/>
+            <Button Content="Invoices" Command="{Binding NavigateInvoicesCommand}"/>
 
         </StackPanel>
         <ScrollViewer

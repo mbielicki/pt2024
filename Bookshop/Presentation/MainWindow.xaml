@@ -26,6 +26,10 @@
             <DataTemplate DataType="{x:Type viewmodel:InvoicesViewModel}" >
                 <view:InvoicesView />
             </DataTemplate>
+
+            <DataTemplate DataType="{x:Type viewmodel:SupplyViewModel}" >
+                <view:SupplyView />
+            </DataTemplate>
             
         </ContentControl.Resources>
     </ContentControl>

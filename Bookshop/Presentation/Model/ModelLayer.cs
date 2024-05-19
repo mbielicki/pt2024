@@ -14,7 +14,7 @@ namespace Bookshop.Model
         ObservableCollection<ICustomer> getCustomersObservable();
         ObservableCollection<IInvoice> getInvoicesObservable();
         ObservableCollection<ISupplier> getSuppliersObservable();
-
+        ObservableCollection<ISupply> getSuppliesObservable();
     }
     class ModelLayer : IModelLayer
     {
@@ -25,6 +25,18 @@ namespace Bookshop.Model
             _logic = logicLayer;
         }
 
+        public ObservableCollection<ISupply> getSuppliesObservable()
+        {
+            ObservableCollection<ISupply> supplies = new ObservableCollection<ISupply>();
+
+            IEnumerable<int> ids = _logic.SupplyService.getIds();
+            foreach (int id in ids)
+            {
+                supplies.Add(_logic.SupplyService.get(id));
+            }
+
+            return supplies;
+        }
         public ObservableCollection<IBook> getBooksObservable()
         {
             ObservableCollection<IBook> books = new ObservableCollection<IBook>();

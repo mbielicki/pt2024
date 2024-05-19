@@ -37,6 +37,9 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Bookshop.dbml</DependentUpon>
     </Compile>
+    <Compile Update="Presentation\View\SupplyView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Properties\Settings.Designer.cs">
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <AutoGen>True</AutoGen>

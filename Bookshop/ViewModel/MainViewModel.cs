@@ -12,7 +12,7 @@ namespace Bookshop.ViewModel
 
         public MainViewModel()
         {
-            CurrentViewModel = new CatalogueViewModel();
+            CurrentViewModel = new CustomersViewModel();
         }
     }
 }

@@ -9,16 +9,16 @@ namespace Bookshop.ViewModel
     class CatalogueViewModel : ViewModelBase
     {
         private readonly ObservableCollection<IBook> _catalogue;
-        private IBook? _currentUser;
+        private IBook? _currentBook;
 
         public IEnumerable<IBook> Catalogue => _catalogue;
 
         public IBook? CurrentBook
         {
-            get => _currentUser;
+            get => _currentBook;
             set
             {
-                _currentUser = value;
+                _currentBook = value;
                 OnPropertyChanged();
             }
         }

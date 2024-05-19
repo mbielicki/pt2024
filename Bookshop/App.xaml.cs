@@ -1,11 +1,11 @@
 ﻿using Bookshop.Data.API;
 using Bookshop.Data.Database;
 using Bookshop.Logic;
-using Bookshop.Model;
+using Bookshop.Presentation.Model;
 using Bookshop.Presentation.Services;
+using Bookshop.Presentation.Stores;
 using Bookshop.Presentation.ViewModel;
-using Bookshop.Stores;
-using Bookshop.ViewModel;
+using Bookshop.Presentation.ViewModel;
 using System.Windows;
 
 namespace Bookshop

@@ -5,8 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Bookshop"
         mc:Ignorable="d"
-        xmlns:view="clr-namespace:Bookshop.View"
-        xmlns:viewmodel="clr-namespace:Bookshop.ViewModel"
+        xmlns:view="clr-namespace:Bookshop.Presentation.View"
+        xmlns:viewmodel="clr-namespace:Bookshop.Presentation.ViewModel"
         Title="MainWindow" Height="450" Width="800">
     <ContentControl Content="{Binding CurrentViewModel}" >
         <ContentControl.Resources>

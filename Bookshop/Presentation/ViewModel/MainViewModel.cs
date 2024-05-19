@@ -1,11 +1,11 @@
-﻿using Bookshop.Stores;
+﻿using Bookshop.Presentation.Stores;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Bookshop.ViewModel
+namespace Bookshop.Presentation.ViewModel
 {
     class MainViewModel : ViewModelBase
     {

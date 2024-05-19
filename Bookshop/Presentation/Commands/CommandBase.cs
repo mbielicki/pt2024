@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 
-namespace Bookshop.Commands
+namespace Bookshop.Presentation.Commands
 {
     public abstract class CommandBase : ICommand
     {

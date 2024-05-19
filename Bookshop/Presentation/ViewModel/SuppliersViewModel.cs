@@ -1,13 +1,13 @@
-﻿using Bookshop.Commands;
+﻿using Bookshop.Presentation.Commands;
 using Bookshop.Data.Model.Entities;
-using Bookshop.Model;
+using Bookshop.Presentation.Model;
 using Bookshop.Presentation.Services;
 using Bookshop.Presentation.ViewModel;
-using Bookshop.Stores;
+using Bookshop.Presentation.Stores;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
 
-namespace Bookshop.ViewModel
+namespace Bookshop.Presentation.ViewModel
 {
     public class SuppliersViewModel : ViewModelBase
     {

@@ -1,5 +1,5 @@
-﻿using Bookshop.Stores;
-using Bookshop.ViewModel;
+﻿using Bookshop.Presentation.Stores;
+using Bookshop.Presentation.ViewModel;
 
 namespace Bookshop.Presentation.Services
 {

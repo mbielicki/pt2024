@@ -1,7 +1,7 @@
 ﻿using Bookshop.Presentation.Services;
-using Bookshop.ViewModel;
+using Bookshop.Presentation.ViewModel;
 
-namespace Bookshop.Commands
+namespace Bookshop.Presentation.Commands
 {
     public class NavigateCommand<TViewModel> : CommandBase
         where TViewModel : ViewModelBase

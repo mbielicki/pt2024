@@ -6,7 +6,7 @@ using Bookshop.Logic.Customers;
 using Bookshop.Logic.Suppliers;
 using System.Collections.ObjectModel;
 
-namespace Bookshop.Model
+namespace Bookshop.Presentation.Model
 {
     public interface IModelLayer
     {

@@ -13,6 +13,7 @@
             <ColumnDefinition Width="auto"/>
             <ColumnDefinition Width="auto"/>
             <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="auto"/>
         </Grid.ColumnDefinitions>
 
         <Button 
@@ -39,6 +40,11 @@
             Grid.Column="4" 
             Content="Supply" 
             Command="{Binding NavigateSupplyCommand}" />
+        
+        <Button 
+            Grid.Column="5" 
+            Content="Inventory" 
+            Command="{Binding NavigateInventoryCommand}" />
         
     </Grid>
 </UserControl>

@@ -45,6 +45,22 @@ namespace Bookshop.Logic
 
             _storage.Supply.add(registerEntry);
         }
+        public IEnumerable<IInventoryEntry> getAll()
+        {
+            CatalogueService catalogue = new CatalogueService(_storage);
+
+            List<IInventoryEntry> wholeInventory = new List<IInventoryEntry> ();
+
+            foreach(int bookId in _storage.Inventory.getIds())
+            {
+                wholeInventory.Add(new SimpleInventoryEntry()
+                {
+                    Book = catalogue.get(bookId), 
+                    Count = _storage.Inventory.count(bookId)
+                });
+            }
+            return wholeInventory;
+        }
 
     }
 }

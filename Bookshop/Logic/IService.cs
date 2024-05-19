@@ -1,4 +1,5 @@
 ﻿using Bookshop.Data.Model;
+using Bookshop.Data.Model.Entities;
 
 namespace Bookshop.Logic
 {
@@ -16,6 +17,7 @@ namespace Bookshop.Logic
         int count(int bookId);
         void supply(int bookId, int supplierId, double price);
         void supply(Counter<int> bookIds, int supplierId, double price);
+        IEnumerable<IInventoryEntry> getAll();
     }
 
     public interface IEventService<T>

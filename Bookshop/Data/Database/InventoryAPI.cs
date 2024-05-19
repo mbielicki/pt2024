@@ -91,5 +91,16 @@ namespace Bookshop.Data.Database
         {
             return remove(id, 1);
         }
+
+        public IEnumerable<int> getIds()
+        {
+            using (BookshopDataContext database = new BookshopDataContext())
+            {
+
+                var inventoryQuery = from i in database.Inventories
+                                     select i.Book;
+                return inventoryQuery.ToList();
+            }
+        }
     }
 }

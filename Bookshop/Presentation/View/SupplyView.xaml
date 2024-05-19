@@ -25,7 +25,8 @@
             Grid.Row="1"
             Grid.Column="0"
             Margin="10 0 0 0"
-            HorizontalScrollBarVisibility="Auto">
+            HorizontalScrollBarVisibility="Auto"
+            VerticalScrollBarVisibility="Auto">
             <ListView
             ItemsSource="{Binding Supplies}"
             SelectedItem="{Binding CurrentSupply}">
@@ -93,7 +94,9 @@
             <Label Content="Customer"/>
             <TextBox Text="{Binding CurrentSupply.Supplier.Id}" />
             <Label Content="Books"/>
-            <ScrollViewer>
+            <ScrollViewer 
+                MaxHeight="90"
+                VerticalScrollBarVisibility="Auto">
                 <ListView
                     ItemsSource="{Binding CurrentSupply.Books}">
                     <ListView.View>

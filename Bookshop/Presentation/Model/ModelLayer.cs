@@ -1,17 +1,16 @@
-﻿using Bookshop.Data.API;
-using Bookshop.Data.Database;
+﻿using Bookshop.Data.Model;
 using Bookshop.Data.Model.Entities;
 using Bookshop.Logic;
-using Bookshop.Logic.Customers;
-using Bookshop.Logic.Suppliers;
 using System.Collections.ObjectModel;
 
 namespace Bookshop.Presentation.Model
 {
     public interface IModelLayer
     {
+        IBook? getBook(int key);
         ObservableCollection<IBook> getBooksObservable();
         ObservableCollection<ICustomer> getCustomersObservable();
+        ObservableCollection<IInventoryEntry> getInventoryObservable();
         ObservableCollection<IInvoice> getInvoicesObservable();
         ObservableCollection<ISupplier> getSuppliersObservable();
         ObservableCollection<ISupply> getSuppliesObservable();
@@ -53,13 +52,10 @@ namespace Bookshop.Presentation.Model
         {
             ObservableCollection<ICustomer> customers = new ObservableCollection<ICustomer>();
 
-            IDataLayer storage = new DatabaseBookshopStorage();
-            CustomersService service = new CustomersService(storage);
-
-            IEnumerable<int> ids = service.getIds();
+            IEnumerable<int> ids = _logic.CustomersService.getIds();
             foreach (int id in ids)
             {
-                customers.Add(service.get(id));
+                customers.Add(_logic.CustomersService.get(id));
             }
 
             return customers;
@@ -68,13 +64,10 @@ namespace Bookshop.Presentation.Model
         {
             ObservableCollection<IInvoice> invoices = new ObservableCollection<IInvoice>();
 
-            IDataLayer storage = new DatabaseBookshopStorage();
-            InvoicesService service = new InvoicesService(storage);
-
-            IEnumerable<int> ids = service.getIds();
+            IEnumerable<int> ids = _logic.InvoicesService.getIds();
             foreach (int id in ids)
             {
-                invoices.Add(service.get(id));
+                invoices.Add(_logic.InvoicesService.get(id));
             }
 
             return invoices;
@@ -83,15 +76,23 @@ namespace Bookshop.Presentation.Model
         {
             ObservableCollection<ISupplier> suppliers = new ObservableCollection<ISupplier>();
 
-            IDataLayer storage = new DatabaseBookshopStorage();
-            SuppliersService service = new SuppliersService(storage);
-
-            IEnumerable<int> ids = service.getIds();
+            IEnumerable<int> ids = _logic.SuppliersService.getIds();
             foreach (int id in ids)
             {
-                suppliers.Add(service.get(id));
+                suppliers.Add(_logic.SuppliersService.get(id));
             }
             return suppliers;
+        }
+
+        public ObservableCollection<IInventoryEntry> getInventoryObservable()
+        {
+            ObservableCollection<IInventoryEntry> inventory = [.. _logic.InventoryService.getAll()];
+            return inventory;
+        }
+
+        public IBook? getBook(int id)
+        {
+            return _logic.CatalogueService.get(id);
         }
     }
 }

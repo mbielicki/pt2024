@@ -7,5 +7,6 @@
         bool removeOne(int item);
         bool remove(int id, int numberToBuy);
         int count(int item);
+        IEnumerable<int> getIds();
     }
 }

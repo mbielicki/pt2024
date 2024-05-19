@@ -31,10 +31,18 @@ namespace Bookshop
                 CreateCustomersNavigationService(),
                 CreateSuppliersNavigationService(),
                 CreateInvoicesNavigationService(),
-                CreateSupplyNavigationService()
+                CreateSupplyNavigationService(),
+                CreateInventoryNavigationService()
                 );
         }
 
+        private NavigationService<InventoryViewModel> CreateInventoryNavigationService()
+        {
+            return new NavigationService<InventoryViewModel>(
+                _navigationStore,
+                () => new InventoryViewModel(_navigationBarViewModel, _modelLayer)
+                );
+        }
 
         protected override void OnStartup(StartupEventArgs e)
         {

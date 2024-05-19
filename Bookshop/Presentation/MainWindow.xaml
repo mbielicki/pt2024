@@ -30,6 +30,10 @@
             <DataTemplate DataType="{x:Type viewmodel:SupplyViewModel}" >
                 <view:SupplyView />
             </DataTemplate>
+
+            <DataTemplate DataType="{x:Type viewmodel:InventoryViewModel}" >
+                <view:InventoryView />
+            </DataTemplate>
             
         </ContentControl.Resources>
     </ContentControl>

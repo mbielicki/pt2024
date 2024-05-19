@@ -101,9 +101,19 @@
             <Label Content="Id"/>
             <TextBox Text="{Binding CurrentInvoice.Id}"/>
             <Label Content="Customer"/>
-            <TextBox Text="{Binding CurrentInvoice.Customer}" />
+            <TextBox Text="{Binding CurrentInvoice.Customer.Id}" />
             <Label Content="Books"/>
-            <TextBox Text="{Binding CurrentInvoice.Books}" />
+            <ScrollViewer>
+                <ListView
+                    ItemsSource="{Binding CurrentInvoice.Books}">
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn DisplayMemberBinding="{Binding Key.Id}" Header="ID"/>
+                            <GridViewColumn DisplayMemberBinding="{Binding Value}" Header="Count"/>
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+            </ScrollViewer>
             <Label Content="Price"/>
             <TextBox Text="{Binding CurrentInvoice.Price}" />
             <Label Content="DateTime"/>

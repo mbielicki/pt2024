@@ -20,7 +20,7 @@ namespace Bookshop
             IModelLayer modelLayer = new ModelLayer(logicLayer);
 
             NavigationStore navigationStore = new NavigationStore();
-            navigationStore.CurrentViewModel = new CustomersViewModel(navigationStore, modelLayer);
+            navigationStore.CurrentViewModel = new InvoicesViewModel(navigationStore, modelLayer);
 
             MainWindow = new MainWindow()
             {

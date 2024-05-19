@@ -20,12 +20,13 @@
             Grid.Row="0"
             Grid.Column="0">
 
+            <Button Content="Catalogue" Command="{Binding NavigateCatalogueCommand}"/>
+
             <TextBlock
             Margin="10 10 10 0"
             Style="{StaticResource Header}"
             Text="Customers" />
-
-            <Button Content="Catalogue" Command="{Binding NavigateCatalogueCommand}"/>
+            
             <Button Content="Suppliers" Command="{Binding NavigateSuppliersCommand}"/>
             <Button Content="Invoices" Command="{Binding NavigateInvoicesCommand}"/>
 

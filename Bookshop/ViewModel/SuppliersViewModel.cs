@@ -1,8 +1,6 @@
 ﻿using Bookshop.Commands;
-using Bookshop.Data.API;
-using Bookshop.Data.Database;
 using Bookshop.Data.Model.Entities;
-using Bookshop.Logic.Suppliers;
+using Bookshop.Model;
 using Bookshop.Stores;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
@@ -39,16 +37,7 @@ namespace Bookshop.ViewModel
             NavigateInvoicesCommand = new NavigateCommand<InvoicesViewModel>(
                 navigationStore, () => new InvoicesViewModel(navigationStore));
 
-            _suppliers = new ObservableCollection<ISupplier>();
-
-            IBookshopStorage storage = new DatabaseBookshopStorage();
-            SuppliersService service = new SuppliersService(storage);
-
-            IEnumerable<int> ids = service.getIds();
-            foreach (int id in ids)
-            {
-                _suppliers.Add(service.get(id));
-            }
+            _suppliers = SuppliersLoader.loadSuppliers();
         }
     }
 }

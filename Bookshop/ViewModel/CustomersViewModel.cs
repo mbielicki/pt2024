@@ -4,6 +4,7 @@ using Bookshop.Data.Database;
 using Bookshop.Data.Model.Entities;
 using Bookshop.Logic.Catalogue;
 using Bookshop.Logic.Customers;
+using Bookshop.Model;
 using Bookshop.Stores;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
@@ -40,16 +41,7 @@ namespace Bookshop.ViewModel
             NavigateInvoicesCommand = new NavigateCommand<InvoicesViewModel>(
                 navigationStore, () => new InvoicesViewModel(navigationStore));
 
-            _customers = new ObservableCollection<ICustomer>();
-
-            IBookshopStorage storage = new DatabaseBookshopStorage();
-            CustomersService service = new CustomersService(storage);
-
-            IEnumerable<int> ids = service.getIds();
-            foreach (int id in ids)
-            {
-                _customers.Add(service.get(id));
-            }
+            _customers = CustomersLoader.loadCustomers();
         }
     }
 }

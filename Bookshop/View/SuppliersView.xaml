@@ -19,14 +19,15 @@
             Orientation="Horizontal"
             Grid.Row="0"
             Grid.Column="0">
+            
+            <Button Content="Catalogue" Command="{Binding NavigateCatalogueCommand}"/>
+            <Button Content="Customers" Command="{Binding NavigateCustomersCommand}"/>
 
             <TextBlock
             Margin="10 10 10 0"
             Style="{StaticResource Header}"
             Text="Suppliers" />
 
-            <Button Content="Catalogue" Command="{Binding NavigateCatalogueCommand}"/>
-            <Button Content="Customers" Command="{Binding NavigateCustomersCommand}"/>
             <Button Content="Invoices" Command="{Binding NavigateInvoicesCommand}"/>
 
         </StackPanel>

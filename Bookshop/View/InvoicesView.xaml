@@ -20,15 +20,15 @@
             Grid.Row="0"
             Grid.Column="0">
 
+            <Button Content="Catalogue" Command="{Binding NavigateCatalogueCommand}"/>
+            <Button Content="Customers" Command="{Binding NavigateCustomersCommand}"/>
+            <Button Content="Suppliers" Command="{Binding NavigateSuppliersCommand}"/>
+
             <TextBlock
             Margin="10 10 10 0"
             Style="{StaticResource Header}"
             Text="Invoices" />
-
-            <Button Content="Catalogue" Command="{Binding NavigateCatalogueCommand}"/>
-            <Button Content="Customers" Command="{Binding NavigateCustomersCommand}"/>
-            <Button Content="Customers" Command="{Binding NavigateSuppliersCommand}"/>
-
+            
         </StackPanel>
 
         <ScrollViewer

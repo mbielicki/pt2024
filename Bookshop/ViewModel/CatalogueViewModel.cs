@@ -1,8 +1,11 @@
-﻿using Bookshop.Data.API;
+﻿using Bookshop.Commands;
+using Bookshop.Data.API;
 using Bookshop.Data.Database;
 using Bookshop.Data.Model.Entities;
 using Bookshop.Logic.Catalogue;
+using Bookshop.Stores;
 using System.Collections.ObjectModel;
+using System.Windows.Input;
 
 namespace Bookshop.ViewModel
 {
@@ -23,8 +26,12 @@ namespace Bookshop.ViewModel
             }
         }
 
-        public CatalogueViewModel()
+        public ICommand NavigateCustomersCommand { get; }
+
+        public CatalogueViewModel(NavigationStore navigationStore)
         {
+            NavigateCustomersCommand = new NavigateCommand<CustomersViewModel>(navigationStore, () => new CustomersViewModel(navigationStore));
+
             _catalogue = new ObservableCollection<IBook>();
 
             IBookshopStorage storage = new DatabaseBookshopStorage();

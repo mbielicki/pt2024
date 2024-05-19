@@ -1,4 +1,5 @@
-﻿using Bookshop.ViewModel;
+﻿using Bookshop.Stores;
+using Bookshop.ViewModel;
 using System.Windows;
 
 namespace Bookshop
@@ -10,9 +11,12 @@ namespace Bookshop
     {
         protected override void OnStartup(StartupEventArgs e)
         {
+            NavigationStore navigationStore = new NavigationStore();
+            navigationStore.CurrentViewModel = new CustomersViewModel(navigationStore);
+
             MainWindow = new MainWindow()
             {
-                DataContext = new MainViewModel()
+                DataContext = new MainViewModel(navigationStore)
             };
             MainWindow.Show();
 

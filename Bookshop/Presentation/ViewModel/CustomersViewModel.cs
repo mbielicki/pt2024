@@ -2,13 +2,14 @@
 using Bookshop.Data.Model.Entities;
 using Bookshop.Model;
 using Bookshop.Presentation.Services;
+using Bookshop.Presentation.ViewModel;
 using Bookshop.Stores;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
 
 namespace Bookshop.ViewModel
 {
-    class CustomersViewModel : ViewModelBase
+    public class CustomersViewModel : ViewModelBase
     {
         private IModelLayer _modelLayer;
         private readonly ObservableCollection<ICustomer> _customers;
@@ -26,29 +27,15 @@ namespace Bookshop.ViewModel
             }
         }
 
-        public ICommand NavigateCatalogueCommand { get; }
-        public ICommand NavigateSuppliersCommand { get; }
-        public ICommand NavigateInvoicesCommand { get; }
+        public NavigationBarViewModel NavigationBarViewModel { get; }
 
-        public CustomersViewModel(NavigationStore navigationStore, IModelLayer modelLayer)
+
+        public CustomersViewModel(NavigationBarViewModel navigationBarViewModel, IModelLayer modelLayer)
         {
-            NavigateCatalogueCommand = new NavigateCommand<CatalogueViewModel>(
-                new NavigationService<CatalogueViewModel>(
-                    navigationStore, () => new CatalogueViewModel(navigationStore, modelLayer)
-            ));
-
-            NavigateSuppliersCommand = new NavigateCommand<SuppliersViewModel>(
-                new NavigationService<SuppliersViewModel>(
-                    navigationStore, () => new SuppliersViewModel(navigationStore, modelLayer)
-            ));
-
-            NavigateInvoicesCommand = new NavigateCommand<InvoicesViewModel>(
-                new NavigationService<InvoicesViewModel>(
-                    navigationStore, () => new InvoicesViewModel(navigationStore, modelLayer)
-            ));
+            NavigationBarViewModel = navigationBarViewModel;
 
             _modelLayer = modelLayer;
-            _customers = modelLayer.getCustomersObservable();
+            _customers = _modelLayer.getCustomersObservable();
         }
     }
 }

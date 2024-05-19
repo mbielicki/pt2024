@@ -2,6 +2,8 @@
 using Bookshop.Data.Database;
 using Bookshop.Logic;
 using Bookshop.Model;
+using Bookshop.Presentation.Services;
+using Bookshop.Presentation.ViewModel;
 using Bookshop.Stores;
 using Bookshop.ViewModel;
 using System.Windows;
@@ -13,23 +15,69 @@ namespace Bookshop
     /// </summary>
     public partial class App : Application
     {
-        protected override void OnStartup(StartupEventArgs e)
+        private readonly IModelLayer _modelLayer;
+        private readonly NavigationStore _navigationStore;
+        private NavigationBarViewModel _navigationBarViewModel;
+
+        public App()
         {
             IDataLayer dataLayer = new DatabaseBookshopStorage();
             ILogicLayer logicLayer = new LogicLayer(dataLayer);
-            IModelLayer modelLayer = new ModelLayer(logicLayer);
+            _modelLayer = new ModelLayer(logicLayer);
 
-            NavigationStore navigationStore = new NavigationStore();
-            navigationStore.CurrentViewModel = new SupplyViewModel(navigationStore, modelLayer);
+            _navigationStore = new NavigationStore();
+            _navigationBarViewModel = new NavigationBarViewModel(
+                CreateCatalogueNavigationService(),
+                CreateCustomersNavigationService(),
+                CreateSuppliersNavigationService(),
+                CreateInvoicesNavigationService()
+                );
+        }
+
+        protected override void OnStartup(StartupEventArgs e)
+        {
+            NavigationService<CatalogueViewModel> catalogueNavigationService = CreateCatalogueNavigationService();
+            catalogueNavigationService.Navigate();
 
             MainWindow = new MainWindow()
             {
-                DataContext = new MainViewModel(navigationStore)
+                DataContext = new MainViewModel(_navigationStore)
             };
             MainWindow.Show();
 
             base.OnStartup(e);
         }
+
+        private NavigationService<CatalogueViewModel> CreateCatalogueNavigationService()
+        {
+            return new NavigationService<CatalogueViewModel>(
+                _navigationStore,
+                () => new CatalogueViewModel(_navigationBarViewModel, _modelLayer)
+                );
+        }
+        private NavigationService<CustomersViewModel> CreateCustomersNavigationService()
+        {
+            return new NavigationService<CustomersViewModel>(
+                _navigationStore,
+                () => new CustomersViewModel(_navigationBarViewModel, _modelLayer)
+                );
+        }
+        private NavigationService<InvoicesViewModel> CreateInvoicesNavigationService()
+        {
+            return new NavigationService<InvoicesViewModel>(
+                _navigationStore,
+                () => new InvoicesViewModel(_navigationBarViewModel, _modelLayer)
+                );
+        }
+
+        private NavigationService<SuppliersViewModel> CreateSuppliersNavigationService()
+        {
+            return new NavigationService<SuppliersViewModel>(
+                _navigationStore,
+                () => new SuppliersViewModel(_navigationBarViewModel, _modelLayer)
+                );
+        }
+
     }
 
 }

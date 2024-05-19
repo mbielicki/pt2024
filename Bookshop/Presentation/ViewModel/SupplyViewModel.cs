@@ -2,6 +2,7 @@
 using Bookshop.Data.Model.Entities;
 using Bookshop.Model;
 using Bookshop.Presentation.Services;
+using Bookshop.Presentation.ViewModel;
 using Bookshop.Stores;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
@@ -26,24 +27,12 @@ namespace Bookshop.ViewModel
             }
         }
 
-        public ICommand NavigateCatalogueCommand { get; }
-        public ICommand NavigateCustomersCommand { get; }
-        public ICommand NavigateSuppliersCommand { get; }
+        public NavigationBarViewModel NavigationBarViewModel { get; }
 
-        public SupplyViewModel(NavigationStore navigationStore, IModelLayer modelLayer)
+
+        public SupplyViewModel(NavigationBarViewModel navigationBarViewModel, IModelLayer modelLayer)
         {
-            NavigateCatalogueCommand = new NavigateCommand<CatalogueViewModel>(
-                new NavigationService<CatalogueViewModel>(
-                    navigationStore, () => new CatalogueViewModel(navigationStore, modelLayer)
-            ));
-            NavigateCustomersCommand = new NavigateCommand<CustomersViewModel>(
-                new NavigationService<CustomersViewModel>(
-                    navigationStore, () => new CustomersViewModel(navigationStore, modelLayer)
-            ));
-            NavigateSuppliersCommand = new NavigateCommand<SuppliersViewModel>(
-                new NavigationService<SuppliersViewModel>(
-                    navigationStore, () => new SuppliersViewModel(navigationStore, modelLayer)
-            ));
+            NavigationBarViewModel = navigationBarViewModel;
 
             _modelLayer = modelLayer;
             _supplies = _modelLayer.getSuppliesObservable();

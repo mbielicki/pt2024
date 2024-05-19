@@ -2,35 +2,24 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:components="clr-namespace:Bookshop.Presentation.Components"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="1*" />
-            <RowDefinition Height="5*" />
+            <RowDefinition Height="30" />
+            <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="2*" />
             <ColumnDefinition Width="1*" />
         </Grid.ColumnDefinitions>
 
-        <StackPanel 
-            Orientation="Horizontal"
+        <components:NavigationBar 
             Grid.Row="0"
-            Grid.Column="0">
-
-            <Button Content="Catalogue" Command="{Binding NavigateCatalogueCommand}"/>
-            <Button Content="Customers" Command="{Binding NavigateCustomersCommand}"/>
-            <Button Content="Suppliers" Command="{Binding NavigateSuppliersCommand}"/>
-            <Button Content="Invoices" Command="{Binding NavigateInvoicesCommand}"/>
-
-            <TextBlock
-            Margin="10 10 10 0"
-            Style="{StaticResource Header}"
-            Text="Supply" />
-            
-        </StackPanel>
+            Grid.Column="0"
+            DataContext="{Binding NavigationBarViewModel}"/>
 
         <ScrollViewer
             Grid.Row="1"

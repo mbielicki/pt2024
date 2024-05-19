@@ -2,13 +2,14 @@
 using Bookshop.Data.Model.Entities;
 using Bookshop.Model;
 using Bookshop.Presentation.Services;
+using Bookshop.Presentation.ViewModel;
 using Bookshop.Stores;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
 
 namespace Bookshop.ViewModel
 {
-    class CatalogueViewModel : ViewModelBase
+    public class CatalogueViewModel : ViewModelBase
     {
         private readonly ObservableCollection<IBook> _catalogue;
         private IBook? _currentBook;
@@ -26,25 +27,12 @@ namespace Bookshop.ViewModel
             }
         }
 
-        public ICommand NavigateCustomersCommand { get; }
-        public ICommand NavigateSuppliersCommand { get; }
-        public ICommand NavigateInvoicesCommand { get; }
+        public NavigationBarViewModel NavigationBarViewModel { get; }
 
 
-        public CatalogueViewModel(NavigationStore navigationStore, IModelLayer modelLayer)
+        public CatalogueViewModel(NavigationBarViewModel navigationBarViewModel, IModelLayer modelLayer)
         {
-            NavigateCustomersCommand = new NavigateCommand<CustomersViewModel>(
-                new NavigationService<CustomersViewModel>(
-                    navigationStore, () => new CustomersViewModel(navigationStore, modelLayer)
-            ));
-            NavigateSuppliersCommand = new NavigateCommand<SuppliersViewModel>(
-                new NavigationService<SuppliersViewModel>(
-                    navigationStore, () => new SuppliersViewModel(navigationStore, modelLayer)
-            ));
-            NavigateInvoicesCommand = new NavigateCommand<InvoicesViewModel>(
-                new NavigationService<InvoicesViewModel>(
-                    navigationStore, () => new InvoicesViewModel(navigationStore, modelLayer)
-            ));
+            NavigationBarViewModel = navigationBarViewModel;
 
             _modelLayer = modelLayer;
             _catalogue = _modelLayer.getBooksObservable();

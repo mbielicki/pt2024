@@ -13,6 +13,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Page Include="App.xaml" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Update="Data\Database\Model\Bookshop.dbml">
       <Generator>MSLinqToSQLGenerator</Generator>
       <LastGenOutput>Bookshop.designer.cs</LastGenOutput>
@@ -38,13 +42,13 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
-    <Compile Update="View\InvoicesView.xaml.cs">
+    <Compile Update="Presentation\View\InvoicesView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="View\SuppliersView.xaml.cs">
+    <Compile Update="Presentation\View\SuppliersView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="View\CustomersView.xaml.cs">
+    <Compile Update="Presentation\View\CustomersView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>

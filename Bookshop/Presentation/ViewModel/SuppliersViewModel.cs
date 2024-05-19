@@ -1,6 +1,7 @@
 ﻿using Bookshop.Commands;
 using Bookshop.Data.Model.Entities;
 using Bookshop.Model;
+using Bookshop.Presentation.Services;
 using Bookshop.Stores;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
@@ -32,11 +33,17 @@ namespace Bookshop.ViewModel
         public SuppliersViewModel(NavigationStore navigationStore, IModelLayer modelLayer)
         {
             NavigateCatalogueCommand = new NavigateCommand<CatalogueViewModel>(
-                navigationStore, () => new CatalogueViewModel(navigationStore, modelLayer));
+                new NavigationService<CatalogueViewModel>(
+                    navigationStore, () => new CatalogueViewModel(navigationStore, modelLayer)
+            ));
             NavigateCustomersCommand = new NavigateCommand<CustomersViewModel>(
-                navigationStore, () => new CustomersViewModel(navigationStore, modelLayer));
+                new NavigationService<CustomersViewModel>(
+                    navigationStore, () => new CustomersViewModel(navigationStore, modelLayer)
+            ));
             NavigateInvoicesCommand = new NavigateCommand<InvoicesViewModel>(
-                navigationStore, () => new InvoicesViewModel(navigationStore, modelLayer));
+                new NavigationService<InvoicesViewModel>(
+                    navigationStore, () => new InvoicesViewModel(navigationStore, modelLayer)
+            ));
 
             _modelLayer = modelLayer;
             _suppliers = _modelLayer.getSuppliersObservable();

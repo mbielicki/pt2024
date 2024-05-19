@@ -5,9 +5,9 @@ namespace Bookshop.Logic.Catalogue
 {
     internal class BookValidator
     {
-        private IBookshopStorage _storage;
+        private IDataLayer _storage;
 
-        public BookValidator(IBookshopStorage storage)
+        public BookValidator(IDataLayer storage)
         {
             _storage = storage;
         }

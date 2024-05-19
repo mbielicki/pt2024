@@ -3,7 +3,6 @@ using Bookshop.Data.Model.Entities;
 using Bookshop.Logic;
 using Bookshop.Logic.Catalogue;
 using BookshopTest.Data.InMemoryMockStorage;
-using BookshopTest.Data.SampleMockStorage;
 
 namespace BookshopTest.LogicTest
 {
@@ -13,9 +12,10 @@ namespace BookshopTest.LogicTest
         [TestMethod]
         public void testAddGet()
         {
-            //IBookshopStorage storage = new SampleMockStorage();
-            IBookshopStorage storage = new InMemoryMockStorage();
-            CatalogueService catalogue = new CatalogueService(storage);
+            //IDataLayer dataLayer = new SampleMockDataLayer();
+            IDataLayer dataLayer = new InMemoryMockDataLayer();
+            ILogicLayer logic = new LogicLayer(dataLayer);
+            IService<IBook> catalogue = logic.CatalogueService;
 
             IBook book = DataGenerator.newBook();
             int id = catalogue.add(book);
@@ -33,9 +33,10 @@ namespace BookshopTest.LogicTest
         [TestMethod]
         public void testUpdateRemove()
         {
-            //IBookshopStorage storage = new SampleMockStorage();
-            IBookshopStorage storage = new InMemoryMockStorage();
-            CatalogueService catalogue = new CatalogueService(storage);
+            //IDataLayer dataLayer = new SampleMockDataLayer();
+            IDataLayer dataLayer = new InMemoryMockDataLayer();
+            ILogicLayer logic = new LogicLayer(dataLayer);
+            IService<IBook> catalogue = logic.CatalogueService;
 
             IBook book = DataGenerator.newBook();
             int id = catalogue.add(book);
@@ -56,9 +57,10 @@ namespace BookshopTest.LogicTest
         [TestMethod]
         public void testIdsDifferent()
         {
-            //IBookshopStorage storage = new SampleMockStorage();
-            IBookshopStorage storage = new InMemoryMockStorage();
-            CatalogueService catalogue = new CatalogueService(storage);
+            //IDataLayer dataLayer = new SampleMockDataLayer();
+            IDataLayer dataLayer = new InMemoryMockDataLayer();
+            ILogicLayer logic = new LogicLayer(dataLayer);
+            IService<IBook> catalogue = logic.CatalogueService;
 
             IBook book1 = DataGenerator.newBook();
             int id1 = catalogue.add(book1);

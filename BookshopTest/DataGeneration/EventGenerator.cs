@@ -7,7 +7,7 @@ namespace BookshopTest
 {
     internal static class EventGenerator
     {
-        public static IEnumerable<IInvoice> newInvoicesRandom(IBookshopStorage storage)
+        public static IEnumerable<IInvoice> newInvoicesRandom(IDataLayer storage)
         {
             return new List<IInvoice>() {
                 new RandomInvoice(storage),
@@ -15,7 +15,7 @@ namespace BookshopTest
                 new RandomInvoice(storage)
             };
         }
-        public static IEnumerable<IInvoice> newInvoicesHardCoded(IBookshopStorage storage)
+        public static IEnumerable<IInvoice> newInvoicesHardCoded(IDataLayer storage)
         {
             return new List<IInvoice>() {
                 new InvoiceCustomizable(storage, 20, DateTime.Parse("20/03/2022 10:00:00")),
@@ -30,7 +30,7 @@ namespace BookshopTest
             public double Price { get; set; }
             public DateTime DateTime { get; set; }
             public Counter<IBook> Books { get; set; }
-            public RandomInvoice(IBookshopStorage storage)
+            public RandomInvoice(IDataLayer storage)
             {
                 Random r = new Random();
                 Books = newBooks(storage);
@@ -47,7 +47,7 @@ namespace BookshopTest
             public double Price { get; set; }
             public DateTime DateTime { get; set; }
             public Counter<IBook> Books { get; set; }
-            public InvoiceCustomizable(IBookshopStorage storage, double price, DateTime time)
+            public InvoiceCustomizable(IDataLayer storage, double price, DateTime time)
             {
                 Id = null;
                 Books = newBooks(storage);

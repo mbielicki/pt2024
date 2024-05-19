@@ -1,5 +1,4 @@
-﻿using BookshopTest.Data.SampleMockStorage;
-using Bookshop.Data.API;
+﻿using Bookshop.Data.API;
 using Bookshop.Data.Model;
 using Bookshop.Data.Model.Entities;
 using Bookshop.Logic;
@@ -16,10 +15,11 @@ namespace BookshopTest.LogicTest
         [TestMethod]
         public void testCheckPrice()
         {
-            //IBookshopStorage storage = new SampleMockStorage();
-            IBookshopStorage storage = new InMemoryMockStorage();
-            CatalogueService catalogue = new CatalogueService(storage);
-            BuyService buyService = new BuyService(storage);
+            //IDataLayer dataLayer = new SampleMockDataLayer();
+            IDataLayer dataLayer = new InMemoryMockDataLayer();
+            ILogicLayer logic = new LogicLayer(dataLayer);
+            IService<IBook> catalogue = logic.CatalogueService;
+            IBuyService buyService = logic.BuyService;
 
             IBook book1 = DataGenerator.newBook();
             int id1 = catalogue.add(book1);
@@ -41,13 +41,14 @@ namespace BookshopTest.LogicTest
         [TestMethod]
         public void testBuy()
         {
-            //IBookshopStorage storage = new SampleMockStorage();
-            IBookshopStorage storage = new InMemoryMockStorage();
-            CatalogueService catalogue = new CatalogueService(storage);
-            CustomersService customersService = new CustomersService(storage);
-            InventoryService inventoryService = new InventoryService(storage);
-            SuppliersService suppliersService = new SuppliersService(storage);
-            BuyService buyService = new BuyService(storage);
+            //IDataLayer dataLayer = new SampleMockDataLayer();
+            IDataLayer dataLayer = new InMemoryMockDataLayer();
+            ILogicLayer logic = new LogicLayer(dataLayer);
+            IService<IBook> catalogue = logic.CatalogueService;
+            IBuyService buyService = logic.BuyService;
+            IService<ICustomer> customersService = logic.CustomersService;
+            IInventoryService inventoryService = logic.InventoryService;
+            IService<ISupplier> suppliersService = logic.SuppliersService;
 
             // Make shopping list
             IBook book1 = DataGenerator.newBook();
@@ -82,8 +83,7 @@ namespace BookshopTest.LogicTest
             int invoiceId = buyService.buy(customerId, books);
 
             // Check invoice
-            InvoicesService invoicesService = new InvoicesService(storage);
-            IInvoice invoice = invoicesService.get(invoiceId);
+            IInvoice invoice = logic.InvoicesService.get(invoiceId);
 
             double price = buyService.checkPrice(books);
             Assert.AreEqual(price, invoice.Price);

@@ -12,16 +12,17 @@ namespace BookshopTest.LogicTest
         [TestMethod]
         public void testGet()
         {
-            //IBookshopStorage storage = new SampleMockStorage();
-            IBookshopStorage storage = new InMemoryMockStorage();
-            InvoicesService invoices = new InvoicesService(storage);
+            //IDataLayer dataLayer = new SampleMockDataLayer();
+            IDataLayer dataLayer = new InMemoryMockDataLayer();
+            ILogicLayer logic = new LogicLayer(dataLayer);
+            IEventService<IInvoice> invoices = logic.InvoicesService;
 
 
-            //IEnumerable<IInvoice> invoicesList = EventGenerator.newInvoicesRandom(storage);
-            IEnumerable<IInvoice> invoicesList = EventGenerator.newInvoicesHardCoded(storage);
+            //IEnumerable<IInvoice> invoicesList = EventGenerator.newInvoicesRandom(dataLayer);
+            IEnumerable<IInvoice> invoicesList = EventGenerator.newInvoicesHardCoded(dataLayer);
 
             IInvoice firstInvoice = invoicesList.First();
-            firstInvoice.Id = storage.Invoices.add(firstInvoice);
+            firstInvoice.Id = dataLayer.Invoices.add(firstInvoice);
 
             Assert.AreEqual(firstInvoice.Price, invoices.get((int) firstInvoice.Id).Price);
         }

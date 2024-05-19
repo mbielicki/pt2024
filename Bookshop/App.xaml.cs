@@ -1,4 +1,8 @@
-﻿using Bookshop.Stores;
+﻿using Bookshop.Data.API;
+using Bookshop.Data.Database;
+using Bookshop.Logic;
+using Bookshop.Model;
+using Bookshop.Stores;
 using Bookshop.ViewModel;
 using System.Windows;
 
@@ -11,8 +15,12 @@ namespace Bookshop
     {
         protected override void OnStartup(StartupEventArgs e)
         {
+            IDataLayer dataLayer = new DatabaseBookshopStorage();
+            ILogicLayer logicLayer = new LogicLayer(dataLayer);
+            IModelLayer modelLayer = new ModelLayer(logicLayer);
+
             NavigationStore navigationStore = new NavigationStore();
-            navigationStore.CurrentViewModel = new CustomersViewModel(navigationStore);
+            navigationStore.CurrentViewModel = new CustomersViewModel(navigationStore, modelLayer);
 
             MainWindow = new MainWindow()
             {

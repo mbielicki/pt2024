@@ -1,13 +1,12 @@
 ﻿using Bookshop.Data.API;
-using Bookshop.Data.Model;
 using Bookshop.Data.Model.Entities;
 
 namespace Bookshop.Logic
 {
-    public class SupplyRegisterService
+    public class SupplyService : IEventService<ISupply>
     {
-        IBookshopStorage _storage;
-        public SupplyRegisterService(IBookshopStorage storage) { _storage = storage; }
+        IDataLayer _storage;
+        public SupplyService(IDataLayer storage) { _storage = storage; }
         public ISupply get(int id)
         {
             ISupply? result = _storage.Supply.get(i => i.Id.Equals(id));

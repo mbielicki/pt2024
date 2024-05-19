@@ -3,7 +3,7 @@ using Bookshop.Data.Model.Entities;
 
 namespace Bookshop.Data.Database
 {
-    public class DatabaseBookshopStorage : IBookshopStorage
+    public class DatabaseBookshopStorage : IDataLayer
     {
         public IInventoryAPI Inventory { get; }
         public IStorageAPI<IBook> Catalogue { get; }

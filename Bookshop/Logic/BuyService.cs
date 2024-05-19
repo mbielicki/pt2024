@@ -6,10 +6,10 @@ using Bookshop.Logic.Customers;
 
 namespace Bookshop.Logic
 {
-    public class BuyService
+    public class BuyService : IBuyService
     {
-        IBookshopStorage _storage;
-        public BuyService(IBookshopStorage storage) { _storage = storage; }
+        IDataLayer _storage;
+        public BuyService(IDataLayer storage) { _storage = storage; }
         public int buy(int customerId, Counter<int> books)
         {
             CustomersService customers = new CustomersService(_storage);

@@ -5,9 +5,9 @@ namespace Bookshop.Logic.Catalogue
 {
     public class CatalogueService : IService<IBook>
     {
-        private IBookshopStorage _storage;
+        private IDataLayer _storage;
         private BookValidator _validator;
-        public CatalogueService(IBookshopStorage storage)
+        public CatalogueService(IDataLayer storage)
         {
             _storage = storage;
             _validator = new BookValidator(storage);

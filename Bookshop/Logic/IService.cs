@@ -1,4 +1,6 @@
-﻿namespace Bookshop.Logic
+﻿using Bookshop.Data.Model;
+
+namespace Bookshop.Logic
 {
     public interface IService<T>
     {
@@ -7,5 +9,24 @@
         T get(int id);
         void update(T newItem);
         List<int> getIds();
+    }
+
+    public interface IInventoryService
+    {
+        int count(int bookId);
+        void supply(int bookId, int supplierId, double price);
+        void supply(Counter<int> bookIds, int supplierId, double price);
+    }
+
+    public interface IEventService<T>
+    {
+        T get(int id);
+        List<int> getIds();
+    }
+
+    public interface IBuyService
+    {
+        int buy(int customerId, Counter<int> books);
+        double checkPrice(Counter<int> books);
     }
 }

@@ -19,7 +19,7 @@ namespace BookshopTest.DataTest.DatabaseTest
 
             SimpleInvoice invoice = new SimpleInvoice(null, books, customer, price, dateTime);
 
-            IBookshopStorage storage = new DatabaseBookshopStorage();
+            IDataLayer storage = new DatabaseBookshopStorage();
 
             storage.Customers.add(customer);
             foreach (var book in books)
@@ -41,7 +41,7 @@ namespace BookshopTest.DataTest.DatabaseTest
 
             SimpleInvoice invoice = new SimpleInvoice(null, books, customer, price, dateTime);
 
-            IBookshopStorage storage = new DatabaseBookshopStorage();
+            IDataLayer storage = new DatabaseBookshopStorage();
 
             storage.Customers.add(customer);
             foreach (var book in books)
@@ -63,7 +63,7 @@ namespace BookshopTest.DataTest.DatabaseTest
 
             SimpleInvoice invoice = new SimpleInvoice(null, books, customer, price, dateTime);
 
-            IBookshopStorage storage = new DatabaseBookshopStorage();
+            IDataLayer storage = new DatabaseBookshopStorage();
 
             storage.Customers.add(customer);
             foreach (var book in books)

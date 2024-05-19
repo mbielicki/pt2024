@@ -1,8 +1,5 @@
 ﻿using Bookshop.Commands;
-using Bookshop.Data.API;
-using Bookshop.Data.Database;
 using Bookshop.Data.Model.Entities;
-using Bookshop.Logic;
 using Bookshop.Model;
 using Bookshop.Stores;
 using System.Collections.ObjectModel;
@@ -14,6 +11,7 @@ namespace Bookshop.ViewModel
     {
         private readonly ObservableCollection<IInvoice> _invoices;
         private IInvoice? _currentInvoice;
+        private IModelLayer _modelLayer;
 
         public IEnumerable<IInvoice> Invoices => _invoices;
 
@@ -31,16 +29,17 @@ namespace Bookshop.ViewModel
         public ICommand NavigateCustomersCommand { get; }
         public ICommand NavigateSuppliersCommand { get; }
 
-        public InvoicesViewModel(NavigationStore navigationStore)
+        public InvoicesViewModel(NavigationStore navigationStore, IModelLayer modelLayer)
         {
             NavigateCatalogueCommand = new NavigateCommand<CatalogueViewModel>(
-                navigationStore, () => new CatalogueViewModel(navigationStore));
+                navigationStore, () => new CatalogueViewModel(navigationStore, modelLayer));
             NavigateCustomersCommand = new NavigateCommand<CustomersViewModel>(
-                navigationStore, () => new CustomersViewModel(navigationStore));
+                navigationStore, () => new CustomersViewModel(navigationStore, modelLayer));
             NavigateSuppliersCommand = new NavigateCommand<SuppliersViewModel>(
-                navigationStore, () => new SuppliersViewModel(navigationStore));
+                navigationStore, () => new SuppliersViewModel(navigationStore, modelLayer));
 
-            _invoices = InvoicesLoader.loadInvoices();
+            _modelLayer = modelLayer;
+            _invoices = _modelLayer.getInvoicesObservable();
         }
     }
 }

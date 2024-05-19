@@ -2,7 +2,7 @@
 
 namespace Bookshop.Data.API
 {
-    public interface IBookshopStorage
+    public interface IDataLayer
     {
         IStorageAPI<IBook> Catalogue { get; }
         IStorageAPI<ICustomer> Customers { get; }

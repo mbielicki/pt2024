@@ -6,10 +6,10 @@ using Bookshop.Logic.Suppliers;
 
 namespace Bookshop.Logic
 {
-    public class InventoryService
+    public class InventoryService : IInventoryService
     {
-        IBookshopStorage _storage;
-        public InventoryService(IBookshopStorage storage) { _storage = storage; }
+        IDataLayer _storage;
+        public InventoryService(IDataLayer storage) { _storage = storage; }
         public int count(int bookId)
         {
             return _storage.Inventory.count(bookId);

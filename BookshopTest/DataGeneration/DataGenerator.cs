@@ -7,13 +7,13 @@ namespace BookshopTest
 {
     internal static class DataGenerator
     {
-        public static ICustomer newCustomer(IBookshopStorage storage)
+        public static ICustomer newCustomer(IDataLayer storage)
         {
             SimpleCustomer customer = newCustomer();
             customer.Id = storage.Customers.add(customer);
             return customer;
         }
-        public static Counter<IBook> newBooks(IBookshopStorage storage)
+        public static Counter<IBook> newBooks(IDataLayer storage)
         {
             Counter<IBook> books = new Counter<IBook>();
             Random r = new Random();

@@ -3,8 +3,6 @@ using Bookshop.Data.API;
 using Bookshop.Data.Model;
 using Bookshop.Data.Model.Entities;
 using Bookshop.Logic;
-using Bookshop.Logic.Catalogue;
-using Bookshop.Logic.Suppliers;
 using BookshopTest.Data.InMemoryMockStorage;
 
 namespace BookshopTest.LogicTest
@@ -15,11 +13,12 @@ namespace BookshopTest.LogicTest
         [TestMethod]
         public void testSupplyNewBook()
         {
-            //IBookshopStorage storage = new SampleMockStorage();
-            IBookshopStorage storage = new InMemoryMockStorage();
-            InventoryService inventory = new InventoryService(storage);
-            CatalogueService catalogue = new CatalogueService(storage);
-            SuppliersService suppliers = new SuppliersService(storage);
+            //IDataLayer dataLayer = new SampleMockDataLayer();
+            IDataLayer dataLayer = new InMemoryMockDataLayer();
+            ILogicLayer logic = new LogicLayer(dataLayer);
+            IService<IBook> catalogue = logic.CatalogueService;
+            IInventoryService inventory = logic.InventoryService;
+            IService<ISupplier> suppliers = logic.SuppliersService;
 
             // Books
             Counter<int> books = new Counter<int>();

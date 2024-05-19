@@ -11,6 +11,7 @@ namespace Bookshop.ViewModel
     {
         private readonly ObservableCollection<ISupplier> _suppliers;
         private ISupplier? _currentSupplier;
+        private IModelLayer _modelLayer;
 
         public IEnumerable<ISupplier> Suppliers => _suppliers;
 
@@ -28,16 +29,17 @@ namespace Bookshop.ViewModel
         public ICommand NavigateCustomersCommand { get; }
         public ICommand NavigateInvoicesCommand { get; }
 
-        public SuppliersViewModel(NavigationStore navigationStore)
+        public SuppliersViewModel(NavigationStore navigationStore, IModelLayer modelLayer)
         {
             NavigateCatalogueCommand = new NavigateCommand<CatalogueViewModel>(
-                navigationStore, () => new CatalogueViewModel(navigationStore));
+                navigationStore, () => new CatalogueViewModel(navigationStore, modelLayer));
             NavigateCustomersCommand = new NavigateCommand<CustomersViewModel>(
-                navigationStore, () => new CustomersViewModel(navigationStore));
+                navigationStore, () => new CustomersViewModel(navigationStore, modelLayer));
             NavigateInvoicesCommand = new NavigateCommand<InvoicesViewModel>(
-                navigationStore, () => new InvoicesViewModel(navigationStore));
+                navigationStore, () => new InvoicesViewModel(navigationStore, modelLayer));
 
-            _suppliers = SuppliersLoader.loadSuppliers();
+            _modelLayer = modelLayer;
+            _suppliers = _modelLayer.getSuppliersObservable();
         }
     }
 }

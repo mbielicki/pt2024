@@ -4,7 +4,7 @@ using Bookshop.Data.Model.Entities;
 
 namespace BookshopTest.Data.SampleMockStorage
 {
-    public class SampleMockStorage : IBookshopStorage
+    public class SampleMockDataLayer : IDataLayer
     {
         Counter<int> inventory = new Counter<int>();
         List<IBook> catalogue = new List<IBook>();
@@ -21,7 +21,7 @@ namespace BookshopTest.Data.SampleMockStorage
         public IStorageAPI<ISupply> Supply { get; }
 
 
-        public SampleMockStorage()
+        public SampleMockDataLayer()
         {
             Catalogue = new CatalogueAPI(catalogue);
             Customers = new CustomersAPI(customers);

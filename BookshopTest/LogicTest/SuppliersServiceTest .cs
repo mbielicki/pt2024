@@ -13,9 +13,10 @@ namespace BookshopTest.LogicTest
         [TestMethod]
         public void testAddGet()
         {
-            //IBookshopStorage storage = new SampleMockStorage();
-            IBookshopStorage storage = new InMemoryMockStorage();
-            SuppliersService suppliers = new SuppliersService(storage);
+            //IDataLayer dataLayer = new SampleMockDataLayer();
+            IDataLayer dataLayer = new InMemoryMockDataLayer();
+            ILogicLayer logic = new LogicLayer(dataLayer);
+            IService<ISupplier> suppliers = logic.SuppliersService;
 
             ISupplier supplier = DataGenerator.newSupplier();
 
@@ -34,9 +35,10 @@ namespace BookshopTest.LogicTest
         [TestMethod]
         public void testUpdateRemove()
         {
-            //IBookshopStorage storage = new SampleMockStorage();
-            IBookshopStorage storage = new InMemoryMockStorage();
-            SuppliersService suppliers = new SuppliersService(storage);
+            //IDataLayer dataLayer = new SampleMockDataLayer();
+            IDataLayer dataLayer = new InMemoryMockDataLayer();
+            ILogicLayer logic = new LogicLayer(dataLayer);
+            IService<ISupplier> suppliers = logic.SuppliersService;
 
             ISupplier supplier = DataGenerator.newSupplier();
             int id = suppliers.add(supplier);

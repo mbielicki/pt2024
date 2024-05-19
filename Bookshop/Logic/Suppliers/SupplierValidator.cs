@@ -5,9 +5,9 @@ namespace Bookshop.Logic.Suppliers
 {
     internal class SupplierValidator
     {
-        private IBookshopStorage _storage;
+        private IDataLayer _storage;
 
-        public SupplierValidator(IBookshopStorage storage)
+        public SupplierValidator(IDataLayer storage)
         {
             _storage = storage;
         }

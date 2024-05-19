@@ -10,18 +10,20 @@ namespace BookshopTest.DataTest.DatabaseTest
         [TestMethod]
         public void testAddGet()
         {
-            IBookshopStorage storage = new DatabaseBookshopStorage();
+            IDataLayer storage = new DatabaseBookshopStorage();
 
             ICustomer customer = DataGenerator.newCustomer();
             int customerId = storage.Customers.add(customer);
 
             Assert.AreEqual(customer.LastName, storage.Customers.get(c => c.Id.Equals(customerId)).LastName);
+
+            storage.Customers.remove(customerId);
         }
 
         [TestMethod]
         public void testRemove()
         {
-            IBookshopStorage storage = new DatabaseBookshopStorage();
+            IDataLayer storage = new DatabaseBookshopStorage();
 
             ICustomer customer = DataGenerator.newCustomer();
             int customerId = storage.Customers.add(customer);
@@ -34,7 +36,7 @@ namespace BookshopTest.DataTest.DatabaseTest
         [TestMethod]
         public void testUpdate()
         {
-            IBookshopStorage storage = new DatabaseBookshopStorage();
+            IDataLayer storage = new DatabaseBookshopStorage();
 
             ICustomer customer = DataGenerator.newCustomer();
             int customerId = storage.Customers.add(customer);
@@ -44,6 +46,8 @@ namespace BookshopTest.DataTest.DatabaseTest
 
             storage.Customers.update(newCustomer);
             Assert.AreEqual(newCustomer.ContactInfo, storage.Customers.get(c => c.Id.Equals(customerId)).ContactInfo);
+
+            storage.Customers.remove(customerId);
         }
     }
 }

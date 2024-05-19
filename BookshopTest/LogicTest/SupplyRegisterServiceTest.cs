@@ -1,5 +1,4 @@
-﻿using BookshopTest.Data.SampleMockStorage;
-using Bookshop.Data.API;
+﻿using Bookshop.Data.API;
 using Bookshop.Data.Model;
 using Bookshop.Data.Model.Entities;
 using Bookshop.Logic;
@@ -13,14 +12,15 @@ namespace BookshopTest.LogicTest
         [TestMethod]
         public void testGet()
         {
-            //IBookshopStorage storage = new SampleMockStorage();
-            IBookshopStorage storage = new InMemoryMockStorage();
-            SupplyRegisterService register = new SupplyRegisterService(storage);
+            //IDataLayer dataLayer = new SampleMockDataLayer();
+            IDataLayer dataLayer = new InMemoryMockDataLayer();
+            ILogicLayer logic = new LogicLayer(dataLayer);
+            IEventService<ISupply> register = logic.SupplyService;
 
             ISupplier supplier = DataGenerator.newSupplier();
-            supplier.Id = storage.Suppliers.add(supplier);
+            supplier.Id = dataLayer.Suppliers.add(supplier);
             IBook book = DataGenerator.newBook();
-            int bookId = storage.Catalogue.add(book);
+            int bookId = dataLayer.Catalogue.add(book);
 
             Counter<IBook> books = new Counter<IBook>();
             double price = 50;
@@ -28,7 +28,7 @@ namespace BookshopTest.LogicTest
 
             books.Add(book);
             SimpleSupply entry = new SimpleSupply(null, books, supplier, price, now);
-            int id = storage.Supply.add(entry);
+            int id = dataLayer.Supply.add(entry);
 
 
             Assert.AreEqual(price, register.get(id).Price);

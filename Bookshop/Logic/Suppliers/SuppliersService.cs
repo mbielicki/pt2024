@@ -7,9 +7,9 @@ namespace Bookshop.Logic.Suppliers
 {
     public class SuppliersService : IService<ISupplier>
     {
-        private IBookshopStorage _storage;
+        private IDataLayer _storage;
         private SupplierValidator _validator;
-        public SuppliersService(IBookshopStorage storage)
+        public SuppliersService(IDataLayer storage)
         {
             _storage = storage;
             _validator = new SupplierValidator(storage);

@@ -10,12 +10,19 @@
         Title="MainWindow" Height="450" Width="800">
     <ContentControl Content="{Binding CurrentViewModel}" >
         <ContentControl.Resources>
+            
             <DataTemplate DataType="{x:Type viewmodel:CatalogueViewModel}" >
                 <view:CatalogueView />
             </DataTemplate>
+            
             <DataTemplate DataType="{x:Type viewmodel:CustomersViewModel}" >
                 <view:CustomersView />
             </DataTemplate>
+            
+            <DataTemplate DataType="{x:Type viewmodel:SuppliersViewModel}" >
+                <view:SuppliersView />
+            </DataTemplate>
+            
         </ContentControl.Resources>
     </ContentControl>
 </Window>

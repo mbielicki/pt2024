@@ -38,6 +38,9 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
+    <Compile Update="View\SuppliersView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="View\CustomersView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>

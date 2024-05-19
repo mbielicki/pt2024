@@ -27,10 +27,14 @@ namespace Bookshop.ViewModel
         }
 
         public ICommand NavigateCustomersCommand { get; }
+        public ICommand NavigateSuppliersCommand { get; }
 
         public CatalogueViewModel(NavigationStore navigationStore)
         {
-            NavigateCustomersCommand = new NavigateCommand<CustomersViewModel>(navigationStore, () => new CustomersViewModel(navigationStore));
+            NavigateCustomersCommand = new NavigateCommand<CustomersViewModel>(
+                navigationStore, () => new CustomersViewModel(navigationStore));
+            NavigateSuppliersCommand = new NavigateCommand<SuppliersViewModel>(
+                navigationStore, () => new SuppliersViewModel(navigationStore));
 
             _catalogue = new ObservableCollection<IBook>();
 

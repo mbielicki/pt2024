@@ -26,6 +26,7 @@
             Text="Customers" />
 
             <Button Content="Catalogue" Command="{Binding NavigateCatalogueCommand}"/>
+            <Button Content="Suppliers" Command="{Binding NavigateSuppliersCommand}"/>
 
         </StackPanel>
 

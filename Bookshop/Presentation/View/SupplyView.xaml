@@ -44,7 +44,7 @@
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
 
-                        <GridViewColumn Header="Customer">
+                        <GridViewColumn Header="Supplier">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
                                     <TextBlock Padding="0 0 20 0" Text="{Binding Supplier.CompanyName}" />

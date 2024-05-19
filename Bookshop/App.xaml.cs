@@ -30,9 +30,11 @@ namespace Bookshop
                 CreateCatalogueNavigationService(),
                 CreateCustomersNavigationService(),
                 CreateSuppliersNavigationService(),
-                CreateInvoicesNavigationService()
+                CreateInvoicesNavigationService(),
+                CreateSupplyNavigationService()
                 );
         }
+
 
         protected override void OnStartup(StartupEventArgs e)
         {
@@ -75,6 +77,13 @@ namespace Bookshop
             return new NavigationService<SuppliersViewModel>(
                 _navigationStore,
                 () => new SuppliersViewModel(_navigationBarViewModel, _modelLayer)
+                );
+        }
+        private NavigationService<SupplyViewModel> CreateSupplyNavigationService()
+        {
+            return new NavigationService<SupplyViewModel>(
+                _navigationStore,
+                () => new SupplyViewModel(_navigationBarViewModel, _modelLayer)
                 );
         }
 

@@ -5,7 +5,7 @@ using System.Collections.ObjectModel;
 
 namespace Bookshop.Presentation.ViewModel
 {
-    class SupplyViewModel : ViewModelBase
+    public class SupplyViewModel : ViewModelBase
     {
         private readonly ObservableCollection<ISupply> _supplies;
         private ISupply? _currentSupply;

@@ -9,8 +9,19 @@ namespace Bookshop.ViewModel
     class CatalogueViewModel : ViewModelBase
     {
         private readonly ObservableCollection<IBook> _catalogue;
+        private IBook? _currentUser;
 
         public IEnumerable<IBook> Catalogue => _catalogue;
+
+        public IBook? CurrentBook
+        {
+            get => _currentUser;
+            set
+            {
+                _currentUser = value;
+                OnPropertyChanged();
+            }
+        }
 
         public CatalogueViewModel()
         {

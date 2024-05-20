@@ -11,7 +11,8 @@ namespace BookshopTest.ViewModelTest
         [TestMethod]
         public void creatorTest()
         {
-            IModelLayer modelLayer = new InMemoryMockModelLayer();
+            //IModelLayer modelLayer = new InMemoryMockModelLayer();
+            IModelLayer modelLayer = new SampleMockModelLayer();
             NavigationFactory navigation = new NavigationFactory(modelLayer);
             CatalogueViewModel vm = new CatalogueViewModel(navigation.NavigationBarViewModel, modelLayer);
 

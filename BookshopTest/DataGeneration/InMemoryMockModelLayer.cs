@@ -7,79 +7,124 @@ namespace BookshopTest.DataGeneration
 {
     public class InMemoryMockModelLayer : IModelLayer
     {
+        ObservableCollection<IBook> _books;
+        ObservableCollection<ICustomer> _customers;
+        ObservableCollection<ISupplier> _suppliers;
+        ObservableCollection<IInventoryEntry> _inventory;
+        ObservableCollection<IInvoice> _invoices;
+        ObservableCollection<ISupply> _supplies;
+        public InMemoryMockModelLayer()
+        {
+            _books =
+            [
+                DataGenerator.newBook(),
+                DataGenerator.newBook(),
+                DataGenerator.newBook(),
+                DataGenerator.newBook(),
+                DataGenerator.newBook(),
+                DataGenerator.newBook(),
+                DataGenerator.newBook(),
+            ];
+
+            int i = 0;
+            foreach (var book in _books)
+            {
+                book.Id = i++;
+            }
+
+            _customers =
+            [
+                DataGenerator.newCustomer(),
+                DataGenerator.newCustomer(),
+                DataGenerator.newCustomer(),
+                DataGenerator.newCustomer(),
+                DataGenerator.newCustomer()
+            ];
+            i = 0;
+            foreach (var customer in _customers)
+            {
+                customer.Id = i++;
+            }
+
+
+            _suppliers =
+            [
+                DataGenerator.newSupplier(),
+                DataGenerator.newSupplier(),
+                DataGenerator.newSupplier(),
+                DataGenerator.newSupplier(),
+                DataGenerator.newSupplier()
+            ];
+            i = 0;
+            foreach (var supplier in _suppliers)
+            {
+                supplier.Id = i++;
+            }
+
+
+
+            _inventory =
+            [
+                new SimpleInventoryEntry()
+                {
+                    Book = DataGenerator.newBook(),
+                    Count = 2
+                },
+                new SimpleInventoryEntry()
+                {
+                    Book = DataGenerator.newBook(),
+                    Count = 2
+                },
+            ];
+
+
+            var newInvoices = EventGenerator.newInvoicesRandom(new InMemoryMockDataLayer());
+            _invoices = [.. newInvoices];
+
+            var newSupplies = EventGenerator.newSuppliesRandom(new InMemoryMockDataLayer());
+            _supplies = [.. newSupplies];
+
+        }
         public IBook? getBook(int key)
         {
-            IBook book = DataGenerator.newBook();
-            book.Id = key;
-            return book;
+            try
+            {
+                return _books[key];
+            }
+            catch (ArgumentOutOfRangeException)
+            {
+                return null;
+            }
         }
 
         public ObservableCollection<IBook> getBooksObservable()
         {
-            ObservableCollection<IBook> books = new();
-            books.Add(getBook(0));
-            books.Add(getBook(1));
-            return books;
+            return _books;
         }
 
         public ObservableCollection<ICustomer> getCustomersObservable()
         {
-            ObservableCollection<ICustomer> customers = new();
-
-            ICustomer customer1 = DataGenerator.newCustomer();
-            customer1.Id = 0;
-            customers.Add(customer1);
-
-            ICustomer customer2 = DataGenerator.newCustomer();
-            customer2.Id = 1;
-            customers.Add(customer2);
-
-            return customers;
+            return _customers;
         }
 
         public ObservableCollection<IInventoryEntry> getInventoryObservable()
         {
-            ObservableCollection<IInventoryEntry> inventory = new();
-
-            inventory.Add(new SimpleInventoryEntry()
-            {
-                Book = DataGenerator.newBook(),
-                Count = 2
-            });
-            inventory.Add(new SimpleInventoryEntry()
-            {
-                Book = DataGenerator.newBook(),
-                Count = 2
-            });
-
-            return inventory;
+            return _inventory;
         }
 
         public ObservableCollection<IInvoice> getInvoicesObservable()
         {
-            var newInvoices = EventGenerator.newInvoicesRandom(new InMemoryMockDataLayer());
-            return [..newInvoices];
+            return _invoices;
         }
 
         public ObservableCollection<ISupplier> getSuppliersObservable()
         {
-            ObservableCollection<ISupplier> suppliers = new();
-
-            ISupplier supplier1 = DataGenerator.newSupplier();
-            supplier1.Id = 0;
-            suppliers.Add(supplier1);
-
-            ISupplier supplier2 = DataGenerator.newSupplier();
-            supplier2.Id = 1;
-            suppliers.Add(supplier2);
-
-            return suppliers;
+            return _suppliers;
         }
 
         public ObservableCollection<ISupply> getSuppliesObservable()
         {
-            var newSupplies = EventGenerator.newSuppliesRandom(new InMemoryMockDataLayer());
-            return [.. newSupplies];
+            return _supplies;
         }
     }
 }

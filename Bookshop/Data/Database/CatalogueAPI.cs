@@ -73,13 +73,15 @@ namespace Bookshop.Data.Database
             using (BookshopDataContext database = new BookshopDataContext())
             {
 
-                var result = from book in database.Books
+                var query = from book in database.Books
                                     where book.BookId == id
                                     select book;
 
+                //var query = database.Books.Where(b => b.BookId == id).Select(b => b);
+
                 try
                 {
-                    database.Books.DeleteOnSubmit(result.Single());
+                    database.Books.DeleteOnSubmit(query.Single());
                     database.SubmitChanges();
                 }
                 catch (Exception ex)
@@ -94,9 +96,11 @@ namespace Bookshop.Data.Database
         {
             using (BookshopDataContext database = new BookshopDataContext())
             {
-                var query = from b in database.Books
-                             where b.BookId == book.Id
-                             select b;
+                //var query = from b in database.Books
+                //             where b.BookId == book.Id
+                //             select b;
+
+                var query = database.Books.Where(b => b.BookId == book.Id).Select(b => b);
 
                 try
                 {

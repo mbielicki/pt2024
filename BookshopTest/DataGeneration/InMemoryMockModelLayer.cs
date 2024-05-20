@@ -88,17 +88,17 @@ namespace BookshopTest.DataGeneration
 
         public void addBook(IBook book)
         {
-            throw new NotImplementedException();
+            _books.Add(book);
         }
 
         public void addCustomer(ICustomer customer)
         {
-            throw new NotImplementedException();
+            _customers.Add(customer);
         }
 
         public void addSupplier(ISupplier supplier)
         {
-            throw new NotImplementedException();
+            _suppliers.Add(supplier);
         }
 
         public IBook? getBook(int key)
@@ -145,17 +145,17 @@ namespace BookshopTest.DataGeneration
 
         public void updateBook(IBook book)
         {
-            throw new NotImplementedException();
+            _books[(int)book.Id] = book;
         }
 
         public void updateCustomer(ICustomer customer)
         {
-            throw new NotImplementedException();
+            _customers[(int)customer.Id] = customer;
         }
 
         public void updateSupplier(ISupplier supplier)
         {
-            throw new NotImplementedException();
+            _suppliers[(int)supplier.Id] = supplier;
         }
     }
 }

@@ -7,6 +7,21 @@ namespace BookshopTest.DataGeneration
 {
     public class SampleMockModelLayer : IModelLayer
     {
+        public void addBook(IBook book)
+        {
+
+        }
+
+        public void addCustomer(ICustomer customer)
+        {
+
+        }
+
+        public void addSupplier(ISupplier supplier)
+        {
+
+        }
+
         public IBook? getBook(int key)
         {
             IBook book = DataGenerator.newBook();
@@ -80,6 +95,21 @@ namespace BookshopTest.DataGeneration
         {
             var newSupplies = EventGenerator.newSuppliesRandom(new InMemoryMockDataLayer());
             return [.. newSupplies];
+        }
+
+        public void updateBook(IBook book)
+        {
+
+        }
+
+        public void updateCustomer(ICustomer customer)
+        {
+
+        }
+
+        public void updateSupplier(ISupplier supplier)
+        {
+
         }
     }
 }

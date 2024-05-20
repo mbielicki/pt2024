@@ -27,7 +27,7 @@ namespace Bookshop.Logic.Catalogue
         {
             IBook? result = _dataLayer.Catalogue.get(b => b.Id.Equals(bookId));
             if (result == null)
-                throw new ItemIdNotFound();
+                throw new BookIdNotFound();
             return result;
         }
 

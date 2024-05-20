@@ -23,13 +23,26 @@
 
         <StackPanel 
             Orientation="Vertical"
-            Grid.Row="1"
+            Grid.Row="0"
             Grid.Column="1">
             <Button
             Content="Buy" 
             Command="{Binding BuyCommand}" />
         </StackPanel>
-        
+
+        <StackPanel
+            Orientation="Vertical"
+            Grid.Row="1"
+            Grid.Column="1">
+            <Label Content="Book ID" />
+            <TextBox 
+                Text="{Binding SelectedItem.Book.Id}" />
+            <Label Content="Count" />
+            <TextBox 
+                Text="{Binding SelectedItem.Count}" />
+            
+        </StackPanel>
+
 
         <StackPanel Orientation="Vertical" Grid.Row="1" Grid.Column="0" Margin="20 0 20 0">
             <StackPanel.Resources>
@@ -42,23 +55,32 @@
             </StackPanel.Resources>
 
             <Label Content="Customer"/>
-            <TextBox Text="{Binding ShoppingCart.Customer.Id}" />
-            <Label Content="Books"/>
+            <TextBox Text="{Binding Customer}" />
+
+            <StackPanel
+                Orientation="Horizontal" >
+                <Label Content="Books"/>
+                <Button
+                    Content="Add"
+                    Command="{Binding AddBookToCartCommand}" />
+            </StackPanel>
+            
             <ScrollViewer 
                 MaxHeight="90"
                 VerticalScrollBarVisibility="Auto">
                 <ListView
-                    ItemsSource="{Binding ShoppingCart.Books}">
+                    ItemsSource="{Binding ShoppingCart}"
+                    SelectedItem="{Binding SelectedItem}">
                     <ListView.View>
                         <GridView>
-                            <GridViewColumn DisplayMemberBinding="{Binding Key.Id}" Header="ID"/>
-                            <GridViewColumn DisplayMemberBinding="{Binding Value}" Header="Count"/>
+                            <GridViewColumn DisplayMemberBinding="{Binding Book.Id}" Header="ID"/>
+                            <GridViewColumn DisplayMemberBinding="{Binding Count}" Header="Count"/>
                         </GridView>
                     </ListView.View>
                 </ListView>
             </ScrollViewer>
             <Label Content="Price"/>
-            <TextBlock Text="{Binding ShoppingCart.Price}" />
+            <TextBlock Text="{Binding Price}" />
         </StackPanel>
     </Grid>
 </UserControl>

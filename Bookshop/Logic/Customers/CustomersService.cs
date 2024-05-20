@@ -28,7 +28,7 @@ namespace Bookshop.Logic.Customers
         {
             ICustomer? result = _dataLayer.Customers.get(c => c.Id.Equals(customerId));
             if (result == null)
-                throw new ItemIdNotFound();
+                throw new CustomerIdNotFound();
             return result;
         }
 

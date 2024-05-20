@@ -23,7 +23,7 @@ namespace Bookshop.Logic
                 int numberInStock = _dataLayer.Inventory.count(id);
 
                 if (numberToBuy > numberInStock)
-                    throw new NotEnoughItemsInInventory();
+                    throw new NotEnoughItemsInInventory(id);
             }
 
             foreach (var idToNumber in books)

@@ -1,5 +1,7 @@
-﻿using Bookshop.Presentation.Model;
+﻿using Bookshop.Logic;
+using Bookshop.Presentation.Model;
 using Bookshop.Presentation.ViewModel;
+using System.Windows;
 
 namespace Bookshop.Presentation.Commands
 {
@@ -14,7 +16,31 @@ namespace Bookshop.Presentation.Commands
         }
         public override void Execute(object parameter)
         {
-            throw new NotImplementedException();
+            if (_vm.Price == 0)
+            {
+                MessageBox.Show("Select books to buy.");
+                return;
+            }
+            try
+            {
+                _modelLayer.Buy(_vm.Customer, _vm.ShoppingCart);
+            }
+            catch (CustomerIdNotFound)
+            {
+                MessageBox.Show($"No Customer with id {_vm.Customer} exists.");
+            }
+            catch (BookIdNotFound)
+            {
+                MessageBox.Show($"No Book with id {_vm.SelectedItem.Book.Id} exists.");
+            }
+            catch (NotEnoughItemsInInventory e)
+            {
+                MessageBox.Show($"Not enough items {_modelLayer.getBook(e.Id).Title} in inventory.");
+            }
+            finally
+            {
+                _vm.Clear();
+            }
         }
     }
 }

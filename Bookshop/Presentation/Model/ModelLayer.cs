@@ -1,4 +1,5 @@
-﻿using Bookshop.Data.Model;
+﻿using Bookshop.Data.Database.Model;
+using Bookshop.Data.Model;
 using Bookshop.Data.Model.Entities;
 using Bookshop.Logic;
 using System.Collections.ObjectModel;
@@ -20,6 +21,8 @@ namespace Bookshop.Presentation.Model
         void addCustomer(ICustomer customer);
         void updateSupplier(ISupplier supplier);
         void addSupplier(ISupplier supplier);
+        void Buy(int customer, IEnumerable<IInventoryEntry> shoppingCart);
+        double CheckPrice(ObservableCollection<IInventoryEntry> shoppingCart);
     }
     class ModelLayer : IModelLayer
     {
@@ -125,6 +128,34 @@ namespace Bookshop.Presentation.Model
         public void addSupplier(ISupplier supplier)
         {
             _logic.SuppliersService.add(supplier);
+        }
+
+        public void Buy(int customer, IEnumerable<IInventoryEntry> shoppingCart)
+        {
+            Counter<int> books = new Counter<int>();
+            foreach(var bookNumber in shoppingCart)
+            {
+                int book = (int)bookNumber.Book.Id;
+                int count = bookNumber.Count;
+
+                books.Set(book, count);
+            }
+
+            _logic.BuyService.buy(customer, books);
+        }
+
+        public double CheckPrice(ObservableCollection<IInventoryEntry> shoppingCart)
+        {
+            Counter<int> books = new Counter<int>();
+            foreach (var bookNumber in shoppingCart)
+            {
+                int book = (int)bookNumber.Book.Id;
+                int count = bookNumber.Count;
+
+                books.Set(book, count);
+            }
+
+            return _logic.BuyService.checkPrice(books);
         }
     }
 }

@@ -1,9 +1,6 @@
 ﻿using Bookshop.Presentation.Commands;
 using Bookshop.Data.Model.Entities;
 using Bookshop.Presentation.Model;
-using Bookshop.Presentation.Services;
-using Bookshop.Presentation.ViewModel;
-using Bookshop.Presentation.Stores;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
 
@@ -14,6 +11,9 @@ namespace Bookshop.Presentation.ViewModel
         private IModelLayer _modelLayer;
         private readonly ObservableCollection<ICustomer> _customers;
         private ICustomer? _currentCustomer;
+
+        public ICommand UpdateCommand { get; }
+        public ICommand AddCommand { get; }
 
         public IEnumerable<ICustomer> Customers => _customers;
 
@@ -36,6 +36,19 @@ namespace Bookshop.Presentation.ViewModel
 
             _modelLayer = modelLayer;
             _customers = _modelLayer.getCustomersObservable();
+
+
+            UpdateCommand = new UpdateCustomerCommand(this, _modelLayer);
+            AddCommand = new AddCustomerCommand(this, _modelLayer);
+        }
+
+        internal void AddEmptyRow()
+        {
+            _customers.Add(new SimpleCustomer()
+            {
+                Id = _customers.Count
+            });
+            OnPropertyChanged(nameof(Customers));
         }
     }
 }

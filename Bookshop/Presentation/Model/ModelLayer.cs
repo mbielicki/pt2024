@@ -16,6 +16,10 @@ namespace Bookshop.Presentation.Model
         ObservableCollection<ISupplier> getSuppliersObservable();
         ObservableCollection<ISupply> getSuppliesObservable();
         void updateBook(IBook book);
+        void updateCustomer(ICustomer customer);
+        void addCustomer(ICustomer customer);
+        void updateSupplier(ISupplier supplier);
+        void addSupplier(ISupplier supplier);
     }
     class ModelLayer : IModelLayer
     {
@@ -105,6 +109,22 @@ namespace Bookshop.Presentation.Model
         public void addBook(IBook book)
         {
             _logic.CatalogueService.add(book);
+        }
+        public void updateCustomer(ICustomer customer)
+        {
+            _logic.CustomersService.update(customer);
+        }
+        public void addCustomer(ICustomer customer)
+        {
+            _logic.CustomersService.add(customer);
+        }
+        public void updateSupplier(ISupplier supplier)
+        {
+            _logic.SuppliersService.update(supplier);
+        }
+        public void addSupplier(ISupplier supplier)
+        {
+            _logic.SuppliersService.add(supplier);
         }
     }
 }

@@ -121,21 +121,15 @@ namespace Bookshop.Data.Database
                              where i.SupplierId == modelItem.Id
                              select i;
 
-                try
-                {
-                    Supplier dbSupplier = query.Single();
+                Supplier dbSupplier = query.Single();
 
-                    dbSupplier.FirstName = modelItem.FirstName;
-                    dbSupplier.LastName = modelItem.LastName;
-                    dbSupplier.CompanyName = modelItem.CompanyName;
-                    dbSupplier.Address = modelItem.Address;
-                    dbSupplier.ContactInfo = modelItem.ContactInfo;
+                dbSupplier.FirstName = modelItem.FirstName;
+                dbSupplier.LastName = modelItem.LastName;
+                dbSupplier.CompanyName = modelItem.CompanyName;
+                dbSupplier.Address = modelItem.Address;
+                dbSupplier.ContactInfo = modelItem.ContactInfo;
 
-                    database.SubmitChanges();
-                } catch (Exception ex)
-                {
-
-                }
+                database.SubmitChanges();
             }
         }
     }

@@ -85,6 +85,22 @@ namespace BookshopTest.DataGeneration
             _supplies = [.. newSupplies];
 
         }
+
+        public void addBook(IBook book)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void addCustomer(ICustomer customer)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void addSupplier(ISupplier supplier)
+        {
+            throw new NotImplementedException();
+        }
+
         public IBook? getBook(int key)
         {
             try
@@ -125,6 +141,21 @@ namespace BookshopTest.DataGeneration
         public ObservableCollection<ISupply> getSuppliesObservable()
         {
             return _supplies;
+        }
+
+        public void updateBook(IBook book)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void updateCustomer(ICustomer customer)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void updateSupplier(ISupplier supplier)
+        {
+            throw new NotImplementedException();
         }
     }
 }

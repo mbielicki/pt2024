@@ -102,20 +102,14 @@ namespace Bookshop.Data.Database
 
                 var query = database.Books.Where(b => b.BookId == book.Id).Select(b => b);
 
-                try
-                {
-                    Book dbBook = query.Single();
+                Book dbBook = query.Single();
 
-                    dbBook.Title = book.Title;
-                    dbBook.Description = book.Description;
-                    dbBook.Author = book.Author;
-                    dbBook.Price = book.Price;
+                dbBook.Title = book.Title;
+                dbBook.Description = book.Description;
+                dbBook.Author = book.Author;
+                dbBook.Price = book.Price;
 
-                    database.SubmitChanges();
-                } catch (Exception ex)
-                {
-
-                }
+                database.SubmitChanges();
             }
         }
     }

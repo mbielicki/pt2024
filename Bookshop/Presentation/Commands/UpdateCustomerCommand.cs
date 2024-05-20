@@ -1,5 +1,4 @@
-﻿using Bookshop.Data.Model.Entities;
-using Bookshop.Logic;
+﻿using Bookshop.Logic;
 using Bookshop.Presentation.Model;
 using Bookshop.Presentation.ViewModel;
 using System.ComponentModel;
@@ -7,11 +6,11 @@ using System.Windows;
 
 namespace Bookshop.Presentation.Commands
 {
-    public class UpdateBookCommand : CommandBase
+    public class UpdateCustomerCommand : CommandBase
     {
         private readonly IModelLayer _modelLayer;
-        private readonly CatalogueViewModel _vm;
-        public UpdateBookCommand(CatalogueViewModel vm, IModelLayer modelLayer)
+        private readonly CustomersViewModel _vm;
+        public UpdateCustomerCommand(CustomersViewModel vm, IModelLayer modelLayer)
         {
             _vm = vm;
             _modelLayer = modelLayer;
@@ -21,7 +20,7 @@ namespace Bookshop.Presentation.Commands
 
         private void OnViewModelPropertyChanged(object? sender, PropertyChangedEventArgs e)
         {
-            if (e.PropertyName == nameof(_vm.CurrentBook))
+            if (e.PropertyName == nameof(_vm.CurrentCustomer))
                 OnCanExecuteChanged();
         }
 
@@ -31,11 +30,11 @@ namespace Bookshop.Presentation.Commands
             {
                 try
                 {
-                    _modelLayer.updateBook(_vm.CurrentBook);
+                    _modelLayer.updateCustomer(_vm.CurrentCustomer);
                 }
                 catch (InvalidOperationException)
                 {
-                    _modelLayer.addBook(_vm.CurrentBook);
+                    _modelLayer.addCustomer(_vm.CurrentCustomer);
                 }
             }
             catch (InvalidItemProperties)
@@ -45,7 +44,7 @@ namespace Bookshop.Presentation.Commands
         }
         public override bool CanExecute(object parameter)
         {
-            return _vm.CurrentBook != null;
+            return _vm.CurrentCustomer != null;
         }
     }
 }

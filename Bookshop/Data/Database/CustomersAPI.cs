@@ -100,20 +100,14 @@ namespace Bookshop.Data.Database
                              where i.CustomerId == modelItem.Id
                              select i;
 
-                try
-                {
-                    Customer dbCustomer = query.Single();
+                Customer dbCustomer = query.Single();
 
-                    dbCustomer.FirstName = modelItem.FirstName;
-                    dbCustomer.LastName = modelItem.LastName;
-                    dbCustomer.Address = modelItem.Address;
-                    dbCustomer.ContactInfo = modelItem.ContactInfo;
+                dbCustomer.FirstName = modelItem.FirstName;
+                dbCustomer.LastName = modelItem.LastName;
+                dbCustomer.Address = modelItem.Address;
+                dbCustomer.ContactInfo = modelItem.ContactInfo;
 
-                    database.SubmitChanges();
-                } catch (Exception ex)
-                {
-
-                }
+                database.SubmitChanges();
             }
         }
     }

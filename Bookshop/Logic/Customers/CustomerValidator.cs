@@ -41,6 +41,7 @@ namespace Bookshop.Logic.Customers
             if (customer.FirstName == null || customer.FirstName == string.Empty) return true;
             if (customer.LastName == null || customer.LastName == string.Empty) return true;
             if (customer.Address == null || customer.Address == string.Empty) return true;
+            if (customer.ContactInfo == null) customer.ContactInfo = string.Empty;
             return false;
         }
     }

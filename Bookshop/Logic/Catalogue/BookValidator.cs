@@ -41,6 +41,7 @@ namespace Bookshop.Logic.Catalogue
             if (book.Title == null || book.Title == string.Empty) return true;
             if (book.Author == null || book.Author == string.Empty) return true;
             if (book.Price == null || book.Price <= 0) return true;
+            if (book.Description == null) book.Description = string.Empty;
             return false;
         }
     }

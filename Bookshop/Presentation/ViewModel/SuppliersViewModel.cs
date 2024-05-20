@@ -6,6 +6,7 @@ using Bookshop.Presentation.ViewModel;
 using Bookshop.Presentation.Stores;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
+using Bookshop.Data.Database.Model;
 
 namespace Bookshop.Presentation.ViewModel
 {
@@ -15,6 +16,8 @@ namespace Bookshop.Presentation.ViewModel
         private ISupplier? _currentSupplier;
         private IModelLayer _modelLayer;
 
+        public ICommand UpdateCommand { get; }
+        public ICommand AddCommand { get; }
         public IEnumerable<ISupplier> Suppliers => _suppliers;
 
         public ISupplier? CurrentSupplier
@@ -36,6 +39,18 @@ namespace Bookshop.Presentation.ViewModel
 
             _modelLayer = modelLayer;
             _suppliers = _modelLayer.getSuppliersObservable();
+
+            UpdateCommand = new UpdateSupplierCommand(this, _modelLayer);
+            AddCommand = new AddSupplierCommand(this, _modelLayer);
+        }
+
+        internal void AddEmptyRow()
+        {
+            _suppliers.Add(new SimpleSupplier()
+            {
+                Id = _suppliers.Count
+            });
+            OnPropertyChanged(nameof(Suppliers));
         }
     }
 }

@@ -5,6 +5,13 @@ namespace Bookshop.Data.Database
 {
     internal class InventoryAPI : IInventoryAPI
     {
+        private string _connectionString;
+
+        public InventoryAPI(string connectionString)
+        {
+            _connectionString = connectionString;
+        }
+
         public void addOne(int item)
         {
             add(item, 1);
@@ -12,7 +19,7 @@ namespace Bookshop.Data.Database
 
         public void add(int item, int numberToSupply)
         {
-            using (BookshopDataContext database = new BookshopDataContext(ConnectionString.Get()))
+            using (BookshopDataContext database = new BookshopDataContext(_connectionString))
             {
                 var inventoryQuery = from i in database.Inventories
                                      where i.Book == item
@@ -45,7 +52,7 @@ namespace Bookshop.Data.Database
 
         public int count(int item)
         {
-            using (BookshopDataContext database = new BookshopDataContext(ConnectionString.Get()))
+            using (BookshopDataContext database = new BookshopDataContext(_connectionString))
             {
                 var inventoryQuery = from i in database.Inventories
                                      where i.Book == item
@@ -65,7 +72,7 @@ namespace Bookshop.Data.Database
 
         public bool remove(int item, int numberToBuy)
         {
-            using (BookshopDataContext database = new BookshopDataContext(ConnectionString.Get()))
+            using (BookshopDataContext database = new BookshopDataContext(_connectionString))
             {
                 var inventoryQuery = from i in database.Inventories
                                      where i.Book == item
@@ -94,7 +101,7 @@ namespace Bookshop.Data.Database
 
         public IEnumerable<int> getIds()
         {
-            using (BookshopDataContext database = new BookshopDataContext(ConnectionString.Get()))
+            using (BookshopDataContext database = new BookshopDataContext(_connectionString))
             {
 
                 var inventoryQuery = from i in database.Inventories

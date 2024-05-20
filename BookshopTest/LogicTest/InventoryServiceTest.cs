@@ -40,7 +40,7 @@ namespace BookshopTest.LogicTest
             IBook wrongBook = DataGenerator.copy(book);
             int wrongId = id + 1;
 
-            Assert.ThrowsException<ItemIdNotFound>(() =>
+            Assert.ThrowsException<BookIdNotFound>(() =>
             {
                 inventory.supply(wrongId, supplierId, 100);
             });  

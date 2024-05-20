@@ -21,7 +21,7 @@ namespace Bookshop
 
         public App()
         {
-            IDataLayer dataLayer = new DatabaseDataLayer();
+            IDataLayer dataLayer = new DatabaseDataLayer(ConnectionString.Get());
             ILogicLayer logicLayer = new LogicLayer(dataLayer);
             _modelLayer = new ModelLayer(logicLayer);
 

@@ -12,7 +12,7 @@ namespace BookshopTest.DataTest.DatabaseTest
         {
             SimpleBook book = DataGenerator.newBook();
 
-            IDataLayer dataLayer = new DatabaseDataLayer();
+            IDataLayer dataLayer = new DatabaseDataLayer(TestConnectionString.Get());
 
             int bookId = dataLayer.Catalogue.add(book);
             Assert.AreEqual(book.Description, dataLayer.Catalogue.get(b => b.Id.Equals(bookId)).Description);
@@ -25,7 +25,7 @@ namespace BookshopTest.DataTest.DatabaseTest
         {
             SimpleBook book = DataGenerator.newBook();
 
-            IDataLayer dataLayer = new DatabaseDataLayer();
+            IDataLayer dataLayer = new DatabaseDataLayer(TestConnectionString.Get());
             int bookId = dataLayer.Catalogue.add(book);
             dataLayer.Catalogue.remove(bookId);
             Assert.IsNull(dataLayer.Catalogue.get(b => b.Id.Equals(bookId)));
@@ -36,7 +36,7 @@ namespace BookshopTest.DataTest.DatabaseTest
         {
             SimpleBook book = DataGenerator.newBook();
 
-            IDataLayer datalayer = new DatabaseDataLayer();
+            IDataLayer datalayer = new DatabaseDataLayer(TestConnectionString.Get());
             int bookId = datalayer.Catalogue.add(book);
 
             double newPrice = 20;

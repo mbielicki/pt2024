@@ -8,9 +8,16 @@ namespace Bookshop.Data.Database
 {
     internal class SupplyAPI : IStorageAPI<ISupply>
     {
+        private string _connectionString;
+
+        public SupplyAPI(string connectionString)
+        {
+            _connectionString = connectionString;
+        }
+
         public int add(ISupply modelItem)
         {
-            using (BookshopDataContext database = new BookshopDataContext(ConnectionString.Get()))
+            using (BookshopDataContext database = new BookshopDataContext(_connectionString))
             {
                 int newSupplyId;
                 try
@@ -59,7 +66,7 @@ namespace Bookshop.Data.Database
 
         public ISupply? get(Predicate<ISupply> query)
         {
-            using (BookshopDataContext database = new BookshopDataContext(ConnectionString.Get()))
+            using (BookshopDataContext database = new BookshopDataContext(_connectionString))
             {
                 Func<Supply, bool> predicate = (item) =>
                 {
@@ -82,7 +89,7 @@ namespace Bookshop.Data.Database
 
         private ISupply toISupply(Supply item)
         {
-            using (BookshopDataContext database = new BookshopDataContext(ConnectionString.Get()))
+            using (BookshopDataContext database = new BookshopDataContext(_connectionString))
             {
                 Counter<IBook> bookCounter = new Counter<IBook>();
 
@@ -128,7 +135,7 @@ namespace Bookshop.Data.Database
 
         public List<ISupply> getAll(Predicate<ISupply> query)
         {
-            using (BookshopDataContext database = new BookshopDataContext(ConnectionString.Get()))
+            using (BookshopDataContext database = new BookshopDataContext(_connectionString))
             {
                 Func<Supply, bool> predicate = (item) =>
                 {
@@ -142,7 +149,7 @@ namespace Bookshop.Data.Database
 
         public bool remove(int id)
         {
-            using (BookshopDataContext database = new BookshopDataContext(ConnectionString.Get()))
+            using (BookshopDataContext database = new BookshopDataContext(_connectionString))
             {
                 var bookListEntries = from entry in database.SupplyBookLists
                                where entry.Supply == id
@@ -171,7 +178,7 @@ namespace Bookshop.Data.Database
 
         public void update(ISupply modelItem)
         {
-            using (BookshopDataContext database = new BookshopDataContext(ConnectionString.Get()))
+            using (BookshopDataContext database = new BookshopDataContext(_connectionString))
             {
                 var query = from i in database.Supplies
                              where i.SupplyId == modelItem.Id

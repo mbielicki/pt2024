@@ -19,7 +19,7 @@ namespace BookshopTest.DataTest.DatabaseTest
 
             SimpleInvoice invoice = new SimpleInvoice(null, books, customer, price, dateTime);
 
-            IDataLayer dataLayer = new DatabaseDataLayer();
+            IDataLayer dataLayer = new DatabaseDataLayer(TestConnectionString.Get());
 
             dataLayer.Customers.add(customer);
             foreach (var book in books)
@@ -41,7 +41,7 @@ namespace BookshopTest.DataTest.DatabaseTest
 
             SimpleInvoice invoice = new SimpleInvoice(null, books, customer, price, dateTime);
 
-            IDataLayer dataLayer = new DatabaseDataLayer();
+            IDataLayer dataLayer = new DatabaseDataLayer(TestConnectionString.Get());
 
             dataLayer.Customers.add(customer);
             foreach (var book in books)
@@ -63,7 +63,7 @@ namespace BookshopTest.DataTest.DatabaseTest
 
             SimpleInvoice invoice = new SimpleInvoice(null, books, customer, price, dateTime);
 
-            IDataLayer dataLayer = new DatabaseDataLayer();
+            IDataLayer dataLayer = new DatabaseDataLayer(TestConnectionString.Get());
 
             dataLayer.Customers.add(customer);
             foreach (var book in books)

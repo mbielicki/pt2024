@@ -10,7 +10,7 @@ namespace BookshopTest.DataTest.DatabaseTest
         [TestMethod]
         public void testAddGet()
         {
-            IDataLayer dataLayer = new DatabaseDataLayer();
+            IDataLayer dataLayer = new DatabaseDataLayer(TestConnectionString.Get());
 
             ICustomer customer = DataGenerator.newCustomer();
             int customerId = dataLayer.Customers.add(customer);
@@ -23,7 +23,7 @@ namespace BookshopTest.DataTest.DatabaseTest
         [TestMethod]
         public void testRemove()
         {
-            IDataLayer dataLayer = new DatabaseDataLayer();
+            IDataLayer dataLayer = new DatabaseDataLayer(TestConnectionString.Get());
 
             ICustomer customer = DataGenerator.newCustomer();
             int customerId = dataLayer.Customers.add(customer);
@@ -36,7 +36,7 @@ namespace BookshopTest.DataTest.DatabaseTest
         [TestMethod]
         public void testUpdate()
         {
-            IDataLayer dataLayer = new DatabaseDataLayer();
+            IDataLayer dataLayer = new DatabaseDataLayer(TestConnectionString.Get());
 
             ICustomer customer = DataGenerator.newCustomer();
             int customerId = dataLayer.Customers.add(customer);

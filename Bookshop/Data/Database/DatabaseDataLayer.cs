@@ -13,14 +13,14 @@ namespace Bookshop.Data.Database
         public IStorageAPI<ISupply> Supply { get; }
 
 
-        public DatabaseDataLayer()
+        public DatabaseDataLayer(string connectionString)
         {
-            Catalogue = new CatalogueAPI();
-            Customers = new CustomersAPI();
-            Suppliers = new SuppliersAPI();
-            Invoices = new InvoicesAPI();
-            Supply = new SupplyAPI();
-            Inventory = new InventoryAPI();
+            Catalogue = new CatalogueAPI(connectionString);
+            Customers = new CustomersAPI(connectionString);
+            Suppliers = new SuppliersAPI(connectionString);
+            Invoices = new InvoicesAPI(connectionString);
+            Supply = new SupplyAPI(connectionString);
+            Inventory = new InventoryAPI(connectionString);
         }
     }
 }

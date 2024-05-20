@@ -15,7 +15,7 @@ namespace BookshopTest.DataTest.DatabaseTest
             IBook book2 = DataGenerator.newBook();
             IBook book3 = DataGenerator.newBook();
 
-            IDataLayer dataLayer = new DatabaseDataLayer();
+            IDataLayer dataLayer = new DatabaseDataLayer(TestConnectionString.Get());
 
             dataLayer.Catalogue.add(book1);
             dataLayer.Catalogue.add(book2);
@@ -36,7 +36,7 @@ namespace BookshopTest.DataTest.DatabaseTest
             IBook book1 = DataGenerator.newBook();
             IBook book2 = DataGenerator.newBook();
 
-            IDataLayer dataLayer = new DatabaseDataLayer();
+            IDataLayer dataLayer = new DatabaseDataLayer(TestConnectionString.Get());
 
             dataLayer.Catalogue.add(book1);
             dataLayer.Catalogue.add(book2);

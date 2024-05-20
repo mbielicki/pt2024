@@ -6,10 +6,16 @@ namespace Bookshop.Data.Database
 {
     internal class SuppliersAPI : IStorageAPI<ISupplier>
     {
+        private string _connectionString;
+
+        public SuppliersAPI(string connectionString)
+        {
+            _connectionString = connectionString;
+        }
 
         public int add(ISupplier modelItem)
         {
-            using (BookshopDataContext database = new BookshopDataContext(ConnectionString.Get()))
+            using (BookshopDataContext database = new BookshopDataContext(_connectionString))
             {
                 int newId = database.Suppliers.Max(i => i.SupplierId) + 1;
                 Supplier newItem = new Supplier()
@@ -33,7 +39,7 @@ namespace Bookshop.Data.Database
 
         public ISupplier? get(Predicate<ISupplier> query)
         {
-            using (BookshopDataContext database = new BookshopDataContext(ConnectionString.Get()))
+            using (BookshopDataContext database = new BookshopDataContext(_connectionString))
             {
                 Func<Supplier, bool> predicate = (item) =>
                 {
@@ -79,7 +85,7 @@ namespace Bookshop.Data.Database
 
         public List<ISupplier> getAll(Predicate<ISupplier> query)
         {
-            using (BookshopDataContext database = new BookshopDataContext(ConnectionString.Get()))
+            using (BookshopDataContext database = new BookshopDataContext(_connectionString))
             {
                 Func<Supplier, bool> predicate = (item) =>
                 {
@@ -93,7 +99,7 @@ namespace Bookshop.Data.Database
 
         public bool remove(int id)
         {
-            using (BookshopDataContext database = new BookshopDataContext(ConnectionString.Get()))
+            using (BookshopDataContext database = new BookshopDataContext(_connectionString))
             {
                 var result = from item in database.Suppliers
                                     where item.SupplierId == id
@@ -114,7 +120,7 @@ namespace Bookshop.Data.Database
 
         public void update(ISupplier modelItem)
         {
-            using (BookshopDataContext database = new BookshopDataContext(ConnectionString.Get()))
+            using (BookshopDataContext database = new BookshopDataContext(_connectionString))
             {
                 var query = from i in database.Suppliers
                              where i.SupplierId == modelItem.Id

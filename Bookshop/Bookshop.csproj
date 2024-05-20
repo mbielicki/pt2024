@@ -40,6 +40,9 @@
     <Compile Update="Presentation\View\InventoryView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Presentation\View\BuyView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Presentation\View\SupplyView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>

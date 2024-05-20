@@ -12,13 +12,15 @@ namespace Bookshop.Presentation.ViewModel
         public ICommand NavigateInvoicesCommand { get; }
         public ICommand NavigateSupplyCommand { get; }
         public ICommand NavigateInventoryCommand { get; }
+        public ICommand NavigateBuyCommand { get; }
         public NavigationBarViewModel(
             NavigationService<CatalogueViewModel> catalogueNavigationService, 
             NavigationService<CustomersViewModel> customersNavigationService, 
             NavigationService<SuppliersViewModel> suppliersNavigationService, 
             NavigationService<InvoicesViewModel> invoicesNavigationService,
             NavigationService<SupplyViewModel> supplyNavigationService,
-            NavigationService<InventoryViewModel> inventoryNavigationService)
+            NavigationService<InventoryViewModel> inventoryNavigationService,
+            NavigationService<BuyViewModel> buyNavigationService)
         {
             NavigateCatalogueCommand = new NavigateCommand<CatalogueViewModel>(catalogueNavigationService);
             NavigateCustomersCommand = new NavigateCommand<CustomersViewModel>(customersNavigationService);
@@ -26,6 +28,7 @@ namespace Bookshop.Presentation.ViewModel
             NavigateInvoicesCommand = new NavigateCommand<InvoicesViewModel>(invoicesNavigationService);
             NavigateSupplyCommand = new NavigateCommand<SupplyViewModel>(supplyNavigationService);
             NavigateInventoryCommand = new NavigateCommand<InventoryViewModel>(inventoryNavigationService);
+            NavigateBuyCommand = new NavigateCommand<BuyViewModel>(buyNavigationService);
         }
     }
 }

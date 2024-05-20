@@ -26,8 +26,8 @@
             Grid.Row="0"
             Grid.Column="1">
             <Button
-            Content="Buy" 
-            Command="{Binding Command}" />
+            Content="Supply" 
+            Command="{Binding SupplyCommand}" />
         </StackPanel>
 
         <StackPanel
@@ -54,8 +54,8 @@
                 </Style>
             </StackPanel.Resources>
 
-            <Label Content="Customer"/>
-            <TextBox Text="{Binding Customer}" />
+            <Label Content="Supplier"/>
+            <TextBox Text="{Binding Supplier}" />
 
             <StackPanel
                 Orientation="Horizontal" >
@@ -80,7 +80,7 @@
                 </ListView>
             </ScrollViewer>
             <Label Content="Price"/>
-            <TextBlock Text="{Binding Price}" />
+            <TextBox Text="{Binding Price}" />
         </StackPanel>
     </Grid>
 </UserControl>

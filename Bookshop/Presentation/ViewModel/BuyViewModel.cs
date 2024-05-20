@@ -8,7 +8,7 @@ using System.Windows;
 
 namespace Bookshop.Presentation.ViewModel
 {
-    public class BuyViewModel : ViewModelBase
+    public class BuyViewModel : ViewModelBase, IShoppingCartViewModel
     {
         private ObservableCollection<IInventoryEntry> _shoppingCart;
         private IModelLayer _modelLayer;
@@ -57,7 +57,7 @@ namespace Bookshop.Presentation.ViewModel
             AddBookToCartCommand = new AddBookToCartCommand(this);
         }
 
-        internal void AddEmptyRow()
+        public void AddEmptyRow()
         {
             _shoppingCart.Add(new PropertyChangeInventoryEntry(() => OnPropertyChanged(nameof(Price)))
             {

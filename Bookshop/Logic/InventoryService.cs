@@ -1,8 +1,10 @@
 ﻿using Bookshop.Data.API;
+using Bookshop.Data.Database.Model;
 using Bookshop.Data.Model;
 using Bookshop.Data.Model.Entities;
 using Bookshop.Logic.Catalogue;
 using Bookshop.Logic.Suppliers;
+using System.Numerics;
 
 namespace Bookshop.Logic
 {
@@ -27,12 +29,27 @@ namespace Bookshop.Logic
 
             CatalogueService catalogue = new CatalogueService(_dataLayer);
 
+            if (bookIds.Count() == 0)
+                throw new EmptyBookCounterException();
+
+            foreach (var bookToNumber in bookIds)
+            {
+                int book = bookToNumber.Key;
+                int number = bookToNumber.Value;
+
+                if (number <= 0)
+                {
+                    throw new BookWithCountZeroInCounterException(book);
+                }
+            }
+
             Counter<IBook> books = new Counter<IBook>();
 
             foreach (var bookToNumber in bookIds)
             {
                 int book = bookToNumber.Key;
                 int number = bookToNumber.Value;
+
 
                 books.Set(catalogue.get(book), number);
 

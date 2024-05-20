@@ -23,6 +23,7 @@ namespace Bookshop.Presentation.Model
         void addSupplier(ISupplier supplier);
         void Buy(int customer, IEnumerable<IInventoryEntry> shoppingCart);
         double CheckPrice(ObservableCollection<IInventoryEntry> shoppingCart);
+        void Supply(int supplier, IEnumerable<IInventoryEntry> shoppingCart, double price);
     }
     class ModelLayer : IModelLayer
     {
@@ -156,6 +157,20 @@ namespace Bookshop.Presentation.Model
             }
 
             return _logic.BuyService.checkPrice(books);
+        }
+
+        public void Supply(int supplier, IEnumerable<IInventoryEntry> shoppingCart, double price)
+        {
+            Counter<int> books = new Counter<int>();
+            foreach (var bookNumber in shoppingCart)
+            {
+                int book = (int)bookNumber.Book.Id;
+                int count = bookNumber.Count;
+
+                books.Set(book, count);
+            }
+
+            _logic.InventoryService.supply(books, supplier, price);
         }
     }
 }

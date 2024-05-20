@@ -5,8 +5,8 @@ namespace Bookshop.Presentation.Commands
 {
     internal class AddBookToCartCommand : CommandBase
     {
-        private readonly BuyViewModel _vm;
-        public AddBookToCartCommand(BuyViewModel vm)
+        private readonly IShoppingCartViewModel _vm;
+        public AddBookToCartCommand(IShoppingCartViewModel vm)
         {
             _vm = vm;
         }

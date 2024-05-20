@@ -1,7 +1,9 @@
 ﻿using Bookshop.Data.Model.Entities;
+using Bookshop.Logic;
 using Bookshop.Presentation.Model;
 using Bookshop.Presentation.ViewModel;
 using System.ComponentModel;
+using System.Windows;
 
 namespace Bookshop.Presentation.Commands
 {
@@ -25,7 +27,14 @@ namespace Bookshop.Presentation.Commands
 
         public override void Execute(object parameter)
         {
-            _modelLayer.updateBook(_vm.CurrentBook);
+            try
+            {
+                _modelLayer.updateBook(_vm.CurrentBook);
+            } 
+            catch (InvalidItemProperties)
+            {
+                MessageBox.Show("Item cannot be created because it has incorrect properties.");
+            }
         }
         public override bool CanExecute(object parameter)
         {

@@ -1,7 +1,7 @@
 ﻿using Bookshop.Data.API;
 using Bookshop.Data.Model;
 
-namespace BookshopTest.Data.InMemoryMockStorage
+namespace BookshopTest.Data.InMemoryMockDataLayer
 {
     internal class InventoryAPI : IInventoryAPI
     {
@@ -49,6 +49,11 @@ namespace BookshopTest.Data.InMemoryMockStorage
                 return false;
             }
             return true;
+        }
+
+        public IEnumerable<int> getIds()
+        {
+            return _document.Keys;
         }
     }
 }

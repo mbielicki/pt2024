@@ -1,6 +1,6 @@
 ﻿using Bookshop.Data.Model.Entities;
 
-namespace BookshopTest.Data.InMemoryMockStorage
+namespace BookshopTest.Data.InMemoryMockDataLayer
 {
     internal class SupplyAPI : IInMemoryStorage<ISupply>
     {

@@ -12,12 +12,12 @@ namespace BookshopTest.DataTest.DatabaseTest
         {
             SimpleBook book = DataGenerator.newBook();
 
-            IDataLayer storage = new DatabaseBookshopStorage();
+            IDataLayer dataLayer = new DatabaseDataLayer();
 
-            int bookId = storage.Catalogue.add(book);
-            Assert.AreEqual(book.Description, storage.Catalogue.get(b => b.Id.Equals(bookId)).Description);
+            int bookId = dataLayer.Catalogue.add(book);
+            Assert.AreEqual(book.Description, dataLayer.Catalogue.get(b => b.Id.Equals(bookId)).Description);
 
-            storage.Catalogue.remove(bookId);
+            dataLayer.Catalogue.remove(bookId);
         }
 
         [TestMethod]
@@ -25,10 +25,10 @@ namespace BookshopTest.DataTest.DatabaseTest
         {
             SimpleBook book = DataGenerator.newBook();
 
-            IDataLayer storage = new DatabaseBookshopStorage();
-            int bookId = storage.Catalogue.add(book);
-            storage.Catalogue.remove(bookId);
-            Assert.IsNull(storage.Catalogue.get(b => b.Id.Equals(bookId)));
+            IDataLayer dataLayer = new DatabaseDataLayer();
+            int bookId = dataLayer.Catalogue.add(book);
+            dataLayer.Catalogue.remove(bookId);
+            Assert.IsNull(dataLayer.Catalogue.get(b => b.Id.Equals(bookId)));
         }
 
         [TestMethod]
@@ -36,15 +36,15 @@ namespace BookshopTest.DataTest.DatabaseTest
         {
             SimpleBook book = DataGenerator.newBook();
 
-            IDataLayer storage = new DatabaseBookshopStorage();
-            int bookId = storage.Catalogue.add(book);
+            IDataLayer datalayer = new DatabaseDataLayer();
+            int bookId = datalayer.Catalogue.add(book);
 
             double newPrice = 20;
             SimpleBook newBook = new SimpleBook(bookId, book.Title, book.Author, book.Description, newPrice);
-            storage.Catalogue.update(newBook);
-            Assert.AreEqual(newPrice, storage.Catalogue.get(b => b.Id.Equals(bookId)).Price);
+            datalayer.Catalogue.update(newBook);
+            Assert.AreEqual(newPrice, datalayer.Catalogue.get(b => b.Id.Equals(bookId)).Price);
 
-            storage.Catalogue.remove(bookId);
+            datalayer.Catalogue.remove(bookId);
         }
     }
 }

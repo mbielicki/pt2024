@@ -6,11 +6,11 @@ namespace Bookshop.Logic
 {
     public class InvoicesService : IEventService<IInvoice>
     {
-        IDataLayer _storage;
-        public InvoicesService(IDataLayer storage) { _storage = storage; }
+        IDataLayer _dataLayer;
+        public InvoicesService(IDataLayer dataLayer) { _dataLayer = dataLayer; }
         public IInvoice get(int id)
         {
-            IInvoice? result = _storage.Invoices.get(i => i.Id.Equals(id));
+            IInvoice? result = _dataLayer.Invoices.get(i => i.Id.Equals(id));
             if (result == null)
                 throw new ItemIdNotFound();
             return result;
@@ -18,7 +18,7 @@ namespace Bookshop.Logic
 
         public List<int> getIds()
         {
-            return _storage.Invoices.getAll((i) => true).ConvertAll(i => (int) i.Id);
+            return _dataLayer.Invoices.getAll((i) => true).ConvertAll(i => (int) i.Id);
 
         }
     }

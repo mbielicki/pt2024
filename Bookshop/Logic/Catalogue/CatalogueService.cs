@@ -5,12 +5,12 @@ namespace Bookshop.Logic.Catalogue
 {
     public class CatalogueService : IService<IBook>
     {
-        private IDataLayer _storage;
+        private IDataLayer _dataLayer;
         private BookValidator _validator;
-        public CatalogueService(IDataLayer storage)
+        public CatalogueService(IDataLayer dataLayer)
         {
-            _storage = storage;
-            _validator = new BookValidator(storage);
+            _dataLayer = dataLayer;
+            _validator = new BookValidator(dataLayer);
         }
         public int add(IBook book)
         {
@@ -20,12 +20,12 @@ namespace Bookshop.Logic.Catalogue
             if (_validator.alreadyInCatalogue(book))
                 throw new ItemAlreadyExists();
 
-            return _storage.Catalogue.add(book);
+            return _dataLayer.Catalogue.add(book);
         }
 
         public IBook get(int bookId)
         {
-            IBook? result = _storage.Catalogue.get(b => b.Id.Equals(bookId));
+            IBook? result = _dataLayer.Catalogue.get(b => b.Id.Equals(bookId));
             if (result == null)
                 throw new ItemIdNotFound();
             return result;
@@ -33,13 +33,13 @@ namespace Bookshop.Logic.Catalogue
 
         public List<int> getIds()
         {
-            return _storage.Catalogue.getAll((i) => true).ConvertAll(i => (int) i.Id);
+            return _dataLayer.Catalogue.getAll((i) => true).ConvertAll(i => (int) i.Id);
 
         }
 
         public void remove(int bookId)
         {
-            if (_storage.Catalogue.remove(bookId)) return;
+            if (_dataLayer.Catalogue.remove(bookId)) return;
             throw new ItemIdNotFound();
         }
 
@@ -49,7 +49,7 @@ namespace Bookshop.Logic.Catalogue
                 throw new InvalidItemProperties();
             try
             {
-                _storage.Catalogue.update(newBook);
+                _dataLayer.Catalogue.update(newBook);
 
             }
             catch (NullReferenceException)

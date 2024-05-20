@@ -21,7 +21,7 @@ namespace Bookshop
 
         public App()
         {
-            IDataLayer dataLayer = new DatabaseBookshopStorage();
+            IDataLayer dataLayer = new DatabaseDataLayer();
             ILogicLayer logicLayer = new LogicLayer(dataLayer);
             _modelLayer = new ModelLayer(logicLayer);
 

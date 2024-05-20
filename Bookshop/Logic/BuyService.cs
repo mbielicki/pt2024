@@ -8,19 +8,19 @@ namespace Bookshop.Logic
 {
     public class BuyService : IBuyService
     {
-        IDataLayer _storage;
-        public BuyService(IDataLayer storage) { _storage = storage; }
+        IDataLayer _dataLayer;
+        public BuyService(IDataLayer dataLayer) { _dataLayer = dataLayer; }
         public int buy(int customerId, Counter<int> books)
         {
-            CustomersService customers = new CustomersService(_storage);
-            CatalogueService catalogue = new CatalogueService(_storage);
+            CustomersService customers = new CustomersService(_dataLayer);
+            CatalogueService catalogue = new CatalogueService(_dataLayer);
             ICustomer customer = customers.get(customerId);
 
             foreach (var idToNumber in books)
             {
                 int id = idToNumber.Key;
                 int numberToBuy = idToNumber.Value;
-                int numberInStock = _storage.Inventory.count(id);
+                int numberInStock = _dataLayer.Inventory.count(id);
 
                 if (numberToBuy > numberInStock)
                     throw new NotEnoughItemsInInventory();
@@ -31,7 +31,7 @@ namespace Bookshop.Logic
                 int id = idToNumber.Key;
                 int numberToBuy = idToNumber.Value;
 
-                _storage.Inventory.remove(id, numberToBuy);
+                _dataLayer.Inventory.remove(id, numberToBuy);
             }
 
             Counter<IBook> bookRefs = new Counter<IBook>();
@@ -45,12 +45,12 @@ namespace Bookshop.Logic
 
             double price = checkPrice(books);
             SimpleInvoice invoice = new SimpleInvoice(null, bookRefs, customer, price, DateTime.Now);
-            return _storage.Invoices.add(invoice);
+            return _dataLayer.Invoices.add(invoice);
         }
         public double checkPrice(Counter<int> books)
         {
             double totalPrice = 0;
-            CatalogueService catalogue = new CatalogueService(_storage);
+            CatalogueService catalogue = new CatalogueService(_dataLayer);
 
             foreach (var idToNumber in books)
             {

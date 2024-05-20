@@ -1,9 +1,9 @@
-﻿using BookshopTest.Data.SampleMockStorage;
+﻿using BookshopTest.Data.SampleMockDataLayer;
 using Bookshop.Data.API;
 using Bookshop.Data.Model.Entities;
 using Bookshop.Logic;
 using Bookshop.Logic.Suppliers;
-using BookshopTest.Data.InMemoryMockStorage;
+using BookshopTest.Data.InMemoryMockDataLayer;
 
 namespace BookshopTest.LogicTest
 {

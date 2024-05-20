@@ -5,11 +5,11 @@ namespace Bookshop.Logic.Catalogue
 {
     internal class BookValidator
     {
-        private IDataLayer _storage;
+        private IDataLayer _dataLayer;
 
-        public BookValidator(IDataLayer storage)
+        public BookValidator(IDataLayer dataLayer)
         {
-            _storage = storage;
+            _dataLayer = dataLayer;
         }
         public bool haveSameProperties(IBook? a, IBook? b)
         {
@@ -33,7 +33,7 @@ namespace Bookshop.Logic.Catalogue
 
         internal bool alreadyInCatalogue(IBook book)
         {
-            return _storage.Catalogue.get(b => haveSameProperties(book, b)) != null;
+            return _dataLayer.Catalogue.get(b => haveSameProperties(book, b)) != null;
         }
 
         internal bool incorrectProperties(IBook book)

@@ -1,7 +1,7 @@
 ﻿using Bookshop.Data.API;
 using Bookshop.Data.Model;
 
-namespace BookshopTest.Data.SampleMockStorage
+namespace BookshopTest.Data.SampleMockDataLayer
 {
     internal abstract class ISampleStorage<T> : IStorageAPI<T> where T : IHasId
     {

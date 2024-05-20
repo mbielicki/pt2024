@@ -2,7 +2,7 @@
 using Bookshop.Data.Model;
 using Bookshop.Data.Model.Entities;
 
-namespace BookshopTest.Data.InMemoryMockStorage
+namespace BookshopTest.Data.InMemoryMockDataLayer
 {
     public class InMemoryMockDataLayer : IDataLayer
     {

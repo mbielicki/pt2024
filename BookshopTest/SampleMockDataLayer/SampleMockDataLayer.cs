@@ -2,7 +2,7 @@
 using Bookshop.Data.Model;
 using Bookshop.Data.Model.Entities;
 
-namespace BookshopTest.Data.SampleMockStorage
+namespace BookshopTest.Data.SampleMockDataLayer
 {
     public class SampleMockDataLayer : IDataLayer
     {

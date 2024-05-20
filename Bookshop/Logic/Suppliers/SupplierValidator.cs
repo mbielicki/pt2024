@@ -5,11 +5,11 @@ namespace Bookshop.Logic.Suppliers
 {
     internal class SupplierValidator
     {
-        private IDataLayer _storage;
+        private IDataLayer _dataLayer;
 
-        public SupplierValidator(IDataLayer storage)
+        public SupplierValidator(IDataLayer dataLayer)
         {
-            _storage = storage;
+            _dataLayer = dataLayer;
         }
         public bool haveSameProperties(ISupplier? a, ISupplier? b)
         {
@@ -34,7 +34,7 @@ namespace Bookshop.Logic.Suppliers
 
         internal bool alreadyInStorage(ISupplier supplier)
         {
-            return _storage.Suppliers.get(s => haveSameProperties(supplier, s)) != null;
+            return _dataLayer.Suppliers.get(s => haveSameProperties(supplier, s)) != null;
         }
 
         internal bool incorrectProperties(ISupplier supplier)

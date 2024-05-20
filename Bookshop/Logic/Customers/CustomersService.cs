@@ -5,12 +5,12 @@ namespace Bookshop.Logic.Customers
 {
     public class CustomersService : IService<ICustomer>
     {
-        private IDataLayer _storage;
+        private IDataLayer _dataLayer;
         private CustomerValidator _validator;
-        public CustomersService(IDataLayer storage)
+        public CustomersService(IDataLayer dataLayer)
         {
-            _storage = storage;
-            _validator = new CustomerValidator(storage);
+            _dataLayer = dataLayer;
+            _validator = new CustomerValidator(dataLayer);
         }
 
         public int add(ICustomer customer)
@@ -21,12 +21,12 @@ namespace Bookshop.Logic.Customers
             if (_validator.alreadyInStorage(customer))
                 throw new ItemAlreadyExists();
 
-            return _storage.Customers.add(customer);
+            return _dataLayer.Customers.add(customer);
         }
 
         public ICustomer get(int customerId)
         {
-            ICustomer? result = _storage.Customers.get(c => c.Id.Equals(customerId));
+            ICustomer? result = _dataLayer.Customers.get(c => c.Id.Equals(customerId));
             if (result == null)
                 throw new ItemIdNotFound();
             return result;
@@ -34,13 +34,13 @@ namespace Bookshop.Logic.Customers
 
         public List<int> getIds() 
         {
-            return _storage.Customers.getAll((i) => true).ConvertAll(i => (int) i.Id);
+            return _dataLayer.Customers.getAll((i) => true).ConvertAll(i => (int) i.Id);
 
         }
 
         public void remove(int customerId)
         {
-            if (_storage.Customers.remove(customerId)) return;
+            if (_dataLayer.Customers.remove(customerId)) return;
             throw new ItemIdNotFound();
         }
 
@@ -50,7 +50,7 @@ namespace Bookshop.Logic.Customers
                 throw new InvalidItemProperties();
             try
             {
-                _storage.Customers.update(newCustomer);
+                _dataLayer.Customers.update(newCustomer);
             }
             catch (NullReferenceException)
             {

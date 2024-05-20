@@ -5,11 +5,11 @@ namespace Bookshop.Logic
 {
     public class SupplyService : IEventService<ISupply>
     {
-        IDataLayer _storage;
-        public SupplyService(IDataLayer storage) { _storage = storage; }
+        IDataLayer _dataLayer;
+        public SupplyService(IDataLayer dataLayer) { _dataLayer = dataLayer; }
         public ISupply get(int id)
         {
-            ISupply? result = _storage.Supply.get(i => i.Id.Equals(id));
+            ISupply? result = _dataLayer.Supply.get(i => i.Id.Equals(id));
             if (result == null)
                 throw new ItemIdNotFound();
             return result;
@@ -17,7 +17,7 @@ namespace Bookshop.Logic
 
         public List<int> getIds()
         {
-            return _storage.Supply.getAll((i) => true).ConvertAll(i => (int) i.Id);
+            return _dataLayer.Supply.getAll((i) => true).ConvertAll(i => (int) i.Id);
 
         }
     }

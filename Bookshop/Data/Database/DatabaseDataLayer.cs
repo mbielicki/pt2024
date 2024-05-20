@@ -3,7 +3,7 @@ using Bookshop.Data.Model.Entities;
 
 namespace Bookshop.Data.Database
 {
-    public class DatabaseBookshopStorage : IDataLayer
+    public class DatabaseDataLayer : IDataLayer
     {
         public IInventoryAPI Inventory { get; }
         public IStorageAPI<IBook> Catalogue { get; }
@@ -13,7 +13,7 @@ namespace Bookshop.Data.Database
         public IStorageAPI<ISupply> Supply { get; }
 
 
-        public DatabaseBookshopStorage()
+        public DatabaseDataLayer()
         {
             Catalogue = new CatalogueAPI();
             Customers = new CustomersAPI();

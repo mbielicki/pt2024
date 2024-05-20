@@ -5,7 +5,7 @@ using Bookshop.Logic;
 using Bookshop.Logic.Catalogue;
 using Bookshop.Logic.Customers;
 using Bookshop.Logic.Suppliers;
-using BookshopTest.Data.InMemoryMockStorage;
+using BookshopTest.Data.InMemoryMockDataLayer;
 
 namespace BookshopTest.LogicTest
 {

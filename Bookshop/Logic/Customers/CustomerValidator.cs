@@ -5,11 +5,11 @@ namespace Bookshop.Logic.Customers
 {
     internal class CustomerValidator
     {
-        private IDataLayer _storage;
+        private IDataLayer _dataLayer;
 
-        public CustomerValidator(IDataLayer storage)
+        public CustomerValidator(IDataLayer dataLayer)
         {
-            _storage = storage;
+            _dataLayer = dataLayer;
         }
         public bool haveSameProperties(ICustomer? a, ICustomer? b)
         {
@@ -33,7 +33,7 @@ namespace Bookshop.Logic.Customers
 
         internal bool alreadyInStorage(ICustomer customer)
         {
-            return _storage.Customers.get(c => haveSameProperties(customer, c)) != null;
+            return _dataLayer.Customers.get(c => haveSameProperties(customer, c)) != null;
         }
 
         internal bool incorrectProperties(ICustomer customer)

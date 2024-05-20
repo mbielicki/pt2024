@@ -8,11 +8,11 @@ namespace Bookshop.Logic
 {
     public class InventoryService : IInventoryService
     {
-        IDataLayer _storage;
-        public InventoryService(IDataLayer storage) { _storage = storage; }
+        IDataLayer _dataLayer;
+        public InventoryService(IDataLayer dataLayer) { _dataLayer = dataLayer; }
         public int count(int bookId)
         {
-            return _storage.Inventory.count(bookId);
+            return _dataLayer.Inventory.count(bookId);
         }
         public void supply(int bookId, int supplierId, double price)
         {
@@ -22,10 +22,10 @@ namespace Bookshop.Logic
         }
         public void supply(Counter<int> bookIds, int supplierId, double price)
         {
-            SuppliersService suppliers = new SuppliersService(_storage);
+            SuppliersService suppliers = new SuppliersService(_dataLayer);
             ISupplier supplier = suppliers.get(supplierId);
 
-            CatalogueService catalogue = new CatalogueService(_storage);
+            CatalogueService catalogue = new CatalogueService(_dataLayer);
 
             Counter<IBook> books = new Counter<IBook>();
 
@@ -36,27 +36,27 @@ namespace Bookshop.Logic
 
                 books.Set(catalogue.get(book), number);
 
-                _storage.Inventory.add(book, number);
+                _dataLayer.Inventory.add(book, number);
             }
 
 
             SimpleSupply registerEntry = new SimpleSupply(
                 null, books, supplier, price, DateTime.Now);
 
-            _storage.Supply.add(registerEntry);
+            _dataLayer.Supply.add(registerEntry);
         }
         public IEnumerable<IInventoryEntry> getAll()
         {
-            CatalogueService catalogue = new CatalogueService(_storage);
+            CatalogueService catalogue = new CatalogueService(_dataLayer);
 
             List<IInventoryEntry> wholeInventory = new List<IInventoryEntry> ();
 
-            foreach(int bookId in _storage.Inventory.getIds())
+            foreach(int bookId in _dataLayer.Inventory.getIds())
             {
                 wholeInventory.Add(new SimpleInventoryEntry()
                 {
                     Book = catalogue.get(bookId), 
-                    Count = _storage.Inventory.count(bookId)
+                    Count = _dataLayer.Inventory.count(bookId)
                 });
             }
             return wholeInventory;

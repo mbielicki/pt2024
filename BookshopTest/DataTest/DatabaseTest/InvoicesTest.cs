@@ -19,15 +19,15 @@ namespace BookshopTest.DataTest.DatabaseTest
 
             SimpleInvoice invoice = new SimpleInvoice(null, books, customer, price, dateTime);
 
-            IDataLayer storage = new DatabaseBookshopStorage();
+            IDataLayer dataLayer = new DatabaseDataLayer();
 
-            storage.Customers.add(customer);
+            dataLayer.Customers.add(customer);
             foreach (var book in books)
-                storage.Catalogue.add(book.Key);
+                dataLayer.Catalogue.add(book.Key);
 
-            int invoiceId = storage.Invoices.add(invoice);
+            int invoiceId = dataLayer.Invoices.add(invoice);
 
-            Assert.AreEqual(invoice.DateTime.ToString(), storage.Invoices.get(i => i.Id.Equals(invoiceId)).DateTime.ToString());
+            Assert.AreEqual(invoice.DateTime.ToString(), dataLayer.Invoices.get(i => i.Id.Equals(invoiceId)).DateTime.ToString());
         }
 
         [TestMethod]
@@ -41,15 +41,15 @@ namespace BookshopTest.DataTest.DatabaseTest
 
             SimpleInvoice invoice = new SimpleInvoice(null, books, customer, price, dateTime);
 
-            IDataLayer storage = new DatabaseBookshopStorage();
+            IDataLayer dataLayer = new DatabaseDataLayer();
 
-            storage.Customers.add(customer);
+            dataLayer.Customers.add(customer);
             foreach (var book in books)
-                storage.Catalogue.add(book.Key);
+                dataLayer.Catalogue.add(book.Key);
 
-            int invoiceId = storage.Invoices.add(invoice);
-            storage.Invoices.remove(invoiceId);
-            Assert.IsNull(storage.Invoices.get(i => i.Id.Equals(invoiceId)));
+            int invoiceId = dataLayer.Invoices.add(invoice);
+            dataLayer.Invoices.remove(invoiceId);
+            Assert.IsNull(dataLayer.Invoices.get(i => i.Id.Equals(invoiceId)));
         }
 
         [TestMethod]
@@ -63,19 +63,19 @@ namespace BookshopTest.DataTest.DatabaseTest
 
             SimpleInvoice invoice = new SimpleInvoice(null, books, customer, price, dateTime);
 
-            IDataLayer storage = new DatabaseBookshopStorage();
+            IDataLayer dataLayer = new DatabaseDataLayer();
 
-            storage.Customers.add(customer);
+            dataLayer.Customers.add(customer);
             foreach (var book in books)
-                storage.Catalogue.add(book.Key);
+                dataLayer.Catalogue.add(book.Key);
 
-            int invoiceId = storage.Invoices.add(invoice);
+            int invoiceId = dataLayer.Invoices.add(invoice);
 
             double newPrice = 40;
             SimpleInvoice newInvoice = new SimpleInvoice(invoiceId, books, customer, newPrice, dateTime);
 
-            storage.Invoices.update(newInvoice);
-            Assert.AreEqual(newPrice, storage.Invoices.get(i => i.Id.Equals(invoiceId)).Price);
+            dataLayer.Invoices.update(newInvoice);
+            Assert.AreEqual(newPrice, dataLayer.Invoices.get(i => i.Id.Equals(invoiceId)).Price);
         }
     }
 }

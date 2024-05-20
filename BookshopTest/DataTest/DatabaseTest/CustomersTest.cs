@@ -10,44 +10,44 @@ namespace BookshopTest.DataTest.DatabaseTest
         [TestMethod]
         public void testAddGet()
         {
-            IDataLayer storage = new DatabaseBookshopStorage();
+            IDataLayer dataLayer = new DatabaseDataLayer();
 
             ICustomer customer = DataGenerator.newCustomer();
-            int customerId = storage.Customers.add(customer);
+            int customerId = dataLayer.Customers.add(customer);
 
-            Assert.AreEqual(customer.LastName, storage.Customers.get(c => c.Id.Equals(customerId)).LastName);
+            Assert.AreEqual(customer.LastName, dataLayer.Customers.get(c => c.Id.Equals(customerId)).LastName);
 
-            storage.Customers.remove(customerId);
+            dataLayer.Customers.remove(customerId);
         }
 
         [TestMethod]
         public void testRemove()
         {
-            IDataLayer storage = new DatabaseBookshopStorage();
+            IDataLayer dataLayer = new DatabaseDataLayer();
 
             ICustomer customer = DataGenerator.newCustomer();
-            int customerId = storage.Customers.add(customer);
+            int customerId = dataLayer.Customers.add(customer);
 
-            storage.Customers.remove(customerId);
+            dataLayer.Customers.remove(customerId);
 
-            Assert.IsNull(storage.Customers.get(c => c.Id.Equals(customerId)));
+            Assert.IsNull(dataLayer.Customers.get(c => c.Id.Equals(customerId)));
         }
 
         [TestMethod]
         public void testUpdate()
         {
-            IDataLayer storage = new DatabaseBookshopStorage();
+            IDataLayer dataLayer = new DatabaseDataLayer();
 
             ICustomer customer = DataGenerator.newCustomer();
-            int customerId = storage.Customers.add(customer);
+            int customerId = dataLayer.Customers.add(customer);
 
             ICustomer newCustomer = DataGenerator.copy(customer);
             newCustomer.ContactInfo = "john.doe@example.com";
 
-            storage.Customers.update(newCustomer);
-            Assert.AreEqual(newCustomer.ContactInfo, storage.Customers.get(c => c.Id.Equals(customerId)).ContactInfo);
+            dataLayer.Customers.update(newCustomer);
+            Assert.AreEqual(newCustomer.ContactInfo, dataLayer.Customers.get(c => c.Id.Equals(customerId)).ContactInfo);
 
-            storage.Customers.remove(customerId);
+            dataLayer.Customers.remove(customerId);
         }
     }
 }

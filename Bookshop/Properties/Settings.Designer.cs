@@ -26,8 +26,8 @@ namespace Bookshop.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
-        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=(localDb)\\Local3db6;Initial Catalog=bookshop;Trusted_Connection=True;" +
-            "")]
+        [global::System.Configuration.DefaultSettingValueAttribute("Server=(localDb)\\Local3db6;AttachDbFilename=Database\\bookshop.mdf;Database=booksh" +
+            "op;Trusted_Connection=Yes;")]
         public string bookshopConnectionString {
             get {
                 return ((string)(this["bookshopConnectionString"]));

@@ -10,7 +10,7 @@ namespace Bookshop.Data.Database
 
         public int add(ICustomer item)
         {
-            using (BookshopDataContext database = new BookshopDataContext())
+            using (BookshopDataContext database = new BookshopDataContext(ConnectionString.Get()))
             {
                 int newId = database.Customers.Max(i => i.CustomerId) + 1;
                 Customer newItem = new Customer()
@@ -33,7 +33,7 @@ namespace Bookshop.Data.Database
 
         public ICustomer? get(Predicate<ICustomer> query)
         {
-            using(BookshopDataContext database = new BookshopDataContext())
+            using (BookshopDataContext database = new BookshopDataContext(ConnectionString.Get()))
             {
                 Func<Customer, bool> predicate = (item) =>
                 {
@@ -57,7 +57,7 @@ namespace Bookshop.Data.Database
 
         public List<ICustomer> getAll(Predicate<ICustomer> query)
         {
-            using (BookshopDataContext database = new BookshopDataContext())
+            using (BookshopDataContext database = new BookshopDataContext(ConnectionString.Get()))
             {
                 Func<Customer, bool> predicate = (item) =>
                 {
@@ -72,7 +72,7 @@ namespace Bookshop.Data.Database
 
         public bool remove(int id)
         {
-            using (BookshopDataContext database = new BookshopDataContext())
+            using (BookshopDataContext database = new BookshopDataContext(ConnectionString.Get()))
             {
 
                 var result = from item in database.Customers
@@ -94,7 +94,7 @@ namespace Bookshop.Data.Database
 
         public void update(ICustomer modelItem)
         {
-            using (BookshopDataContext database = new BookshopDataContext())
+            using (BookshopDataContext database = new BookshopDataContext(ConnectionString.Get()))
             {
                 var query = from i in database.Customers
                              where i.CustomerId == modelItem.Id

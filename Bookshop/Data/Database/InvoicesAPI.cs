@@ -11,7 +11,7 @@ namespace Bookshop.Data.Database
     {
         public int add(IInvoice modelItem)
         {
-            using (BookshopDataContext database = new BookshopDataContext())
+            using (BookshopDataContext database = new BookshopDataContext(ConnectionString.Get()))
             {
                 int newInvoiceId;
                 try
@@ -59,7 +59,7 @@ namespace Bookshop.Data.Database
 
         public IInvoice? get(Predicate<IInvoice> query)
         {
-            using(BookshopDataContext database = new BookshopDataContext())
+            using (BookshopDataContext database = new BookshopDataContext(ConnectionString.Get()))
             {
                 Func<Invoice, bool> predicate = (item) =>
                 {
@@ -82,7 +82,7 @@ namespace Bookshop.Data.Database
 
         private IInvoice toIInvoice(Invoice item)
         {
-            using (BookshopDataContext database = new BookshopDataContext())
+            using (BookshopDataContext database = new BookshopDataContext(ConnectionString.Get()))
             {
                 Counter<IBook> bookCounter = new Counter<IBook>();
 
@@ -128,7 +128,7 @@ namespace Bookshop.Data.Database
 
         public List<IInvoice> getAll(Predicate<IInvoice> query)
         {
-            using (BookshopDataContext database = new BookshopDataContext())
+            using (BookshopDataContext database = new BookshopDataContext(ConnectionString.Get()))
             {
                 Func<Invoice, bool> predicate = (item) =>
                 {
@@ -142,7 +142,7 @@ namespace Bookshop.Data.Database
 
         public bool remove(int id)
         {
-            using (BookshopDataContext database = new BookshopDataContext())
+            using (BookshopDataContext database = new BookshopDataContext(ConnectionString.Get()))
             {
                 var bookListEntries = from entry in database.InvoiceBookLists
                                where entry.Invoice == id
@@ -171,8 +171,7 @@ namespace Bookshop.Data.Database
 
         public void update(IInvoice modelItem)
         {
-
-            using (BookshopDataContext database = new BookshopDataContext())
+            using (BookshopDataContext database = new BookshopDataContext(ConnectionString.Get()))
             {
                 var query = from i in database.Invoices
                              where i.InvoiceId == modelItem.Id

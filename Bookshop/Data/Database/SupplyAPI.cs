@@ -10,7 +10,7 @@ namespace Bookshop.Data.Database
     {
         public int add(ISupply modelItem)
         {
-            using (BookshopDataContext database = new BookshopDataContext())
+            using (BookshopDataContext database = new BookshopDataContext(ConnectionString.Get()))
             {
                 int newSupplyId;
                 try
@@ -59,7 +59,7 @@ namespace Bookshop.Data.Database
 
         public ISupply? get(Predicate<ISupply> query)
         {
-            using(BookshopDataContext database = new BookshopDataContext())
+            using (BookshopDataContext database = new BookshopDataContext(ConnectionString.Get()))
             {
                 Func<Supply, bool> predicate = (item) =>
                 {
@@ -82,7 +82,7 @@ namespace Bookshop.Data.Database
 
         private ISupply toISupply(Supply item)
         {
-            using (BookshopDataContext database = new BookshopDataContext())
+            using (BookshopDataContext database = new BookshopDataContext(ConnectionString.Get()))
             {
                 Counter<IBook> bookCounter = new Counter<IBook>();
 
@@ -128,7 +128,7 @@ namespace Bookshop.Data.Database
 
         public List<ISupply> getAll(Predicate<ISupply> query)
         {
-            using (BookshopDataContext database = new BookshopDataContext())
+            using (BookshopDataContext database = new BookshopDataContext(ConnectionString.Get()))
             {
                 Func<Supply, bool> predicate = (item) =>
                 {
@@ -142,7 +142,7 @@ namespace Bookshop.Data.Database
 
         public bool remove(int id)
         {
-            using (BookshopDataContext database = new BookshopDataContext())
+            using (BookshopDataContext database = new BookshopDataContext(ConnectionString.Get()))
             {
                 var bookListEntries = from entry in database.SupplyBookLists
                                where entry.Supply == id
@@ -171,8 +171,7 @@ namespace Bookshop.Data.Database
 
         public void update(ISupply modelItem)
         {
-
-            using (BookshopDataContext database = new BookshopDataContext())
+            using (BookshopDataContext database = new BookshopDataContext(ConnectionString.Get()))
             {
                 var query = from i in database.Supplies
                              where i.SupplyId == modelItem.Id

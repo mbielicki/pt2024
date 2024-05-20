@@ -9,7 +9,7 @@ namespace Bookshop.Data.Database
 
         public int add(ISupplier modelItem)
         {
-            using (BookshopDataContext database = new BookshopDataContext())
+            using (BookshopDataContext database = new BookshopDataContext(ConnectionString.Get()))
             {
                 int newId = database.Suppliers.Max(i => i.SupplierId) + 1;
                 Supplier newItem = new Supplier()
@@ -33,7 +33,7 @@ namespace Bookshop.Data.Database
 
         public ISupplier? get(Predicate<ISupplier> query)
         {
-            using(BookshopDataContext database = new BookshopDataContext())
+            using (BookshopDataContext database = new BookshopDataContext(ConnectionString.Get()))
             {
                 Func<Supplier, bool> predicate = (item) =>
                 {
@@ -79,7 +79,7 @@ namespace Bookshop.Data.Database
 
         public List<ISupplier> getAll(Predicate<ISupplier> query)
         {
-            using (BookshopDataContext database = new BookshopDataContext())
+            using (BookshopDataContext database = new BookshopDataContext(ConnectionString.Get()))
             {
                 Func<Supplier, bool> predicate = (item) =>
                 {
@@ -93,9 +93,8 @@ namespace Bookshop.Data.Database
 
         public bool remove(int id)
         {
-            using (BookshopDataContext database = new BookshopDataContext())
+            using (BookshopDataContext database = new BookshopDataContext(ConnectionString.Get()))
             {
-
                 var result = from item in database.Suppliers
                                     where item.SupplierId == id
                                     select item;
@@ -115,7 +114,7 @@ namespace Bookshop.Data.Database
 
         public void update(ISupplier modelItem)
         {
-            using (BookshopDataContext database = new BookshopDataContext())
+            using (BookshopDataContext database = new BookshopDataContext(ConnectionString.Get()))
             {
                 var query = from i in database.Suppliers
                              where i.SupplierId == modelItem.Id

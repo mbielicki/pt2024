@@ -101,6 +101,28 @@ namespace BookshopTest.DataGeneration
             _suppliers.Add(supplier);
         }
 
+        public void Buy(int customer, IEnumerable<IInventoryEntry> shoppingCart)
+        {
+            foreach (var item in shoppingCart)
+            {
+                foreach (var i in _inventory)
+                {
+                    if (item.Book.Id == i.Book.Id)
+                        i.Count -= item.Count;
+                }
+            }
+        }
+
+        public double CheckPrice(ObservableCollection<IInventoryEntry> shoppingCart)
+        {
+            double result = 0;
+            foreach (var item in shoppingCart)
+            {
+                result += getBook((int)item.Book.Id).Price;
+            }
+            return result;
+        }
+
         public IBook? getBook(int key)
         {
             try
@@ -141,6 +163,18 @@ namespace BookshopTest.DataGeneration
         public ObservableCollection<ISupply> getSuppliesObservable()
         {
             return _supplies;
+        }
+
+        public void Supply(int supplier, IEnumerable<IInventoryEntry> shoppingCart, double price)
+        {
+            foreach (var item in shoppingCart)
+            {
+                foreach (var i in _inventory)
+                {
+                    if (item.Book.Id == i.Book.Id)
+                        i.Count += item.Count;
+                }
+            }
         }
 
         public void updateBook(IBook book)

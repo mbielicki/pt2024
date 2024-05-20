@@ -7,21 +7,6 @@ namespace BookshopTest.DataGeneration
 {
     public class SampleMockModelLayer : IModelLayer
     {
-        public void addBook(IBook book)
-        {
-
-        }
-
-        public void addCustomer(ICustomer customer)
-        {
-
-        }
-
-        public void addSupplier(ISupplier supplier)
-        {
-
-        }
-
         public IBook? getBook(int key)
         {
             IBook book = DataGenerator.newBook();
@@ -97,6 +82,11 @@ namespace BookshopTest.DataGeneration
             return [.. newSupplies];
         }
 
+        public void Supply(int supplier, IEnumerable<IInventoryEntry> shoppingCart, double price)
+        {
+
+        }
+
         public void updateBook(IBook book)
         {
 
@@ -111,5 +101,29 @@ namespace BookshopTest.DataGeneration
         {
 
         }
+        public void addBook(IBook book)
+        {
+
+        }
+
+        public void addCustomer(ICustomer customer)
+        {
+
+        }
+
+        public void addSupplier(ISupplier supplier)
+        {
+
+        }
+
+        public void Buy(int customer, IEnumerable<IInventoryEntry> shoppingCart)
+        {
+        }
+
+        public double CheckPrice(ObservableCollection<IInventoryEntry> shoppingCart)
+        {
+            return 0;
+        }
+
     }
 }

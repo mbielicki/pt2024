@@ -2,10 +2,7 @@
 using Bookshop.Data.Model;
 using Bookshop.Data.Model.Entities;
 using Bookshop.Logic;
-using Bookshop.Logic.Catalogue;
-using Bookshop.Logic.Customers;
-using Bookshop.Logic.Suppliers;
-using BookshopTest.Data.InMemoryMockDataLayer;
+using BookshopTest.DataGeneration.MockDataLayerInMemory;
 
 namespace BookshopTest.LogicTest
 {

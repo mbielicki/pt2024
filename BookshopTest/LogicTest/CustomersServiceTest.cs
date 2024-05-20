@@ -1,9 +1,7 @@
 ﻿using Bookshop.Data.API;
 using Bookshop.Data.Model.Entities;
 using Bookshop.Logic;
-using Bookshop.Logic.Customers;
-using BookshopTest.Data.InMemoryMockDataLayer;
-using BookshopTest.Data.SampleMockDataLayer;
+using BookshopTest.DataGeneration.MockDataLayerInMemory;
 
 namespace BookshopTest.LogicTest
 {

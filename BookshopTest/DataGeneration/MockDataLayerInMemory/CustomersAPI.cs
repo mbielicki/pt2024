@@ -1,8 +1,8 @@
 ﻿using Bookshop.Data.Model.Entities;
 
-namespace BookshopTest.Data.SampleMockDataLayer
+namespace BookshopTest.DataGeneration.MockDataLayerInMemory
 {
-    internal class CustomersAPI : ISampleStorage<ICustomer>
+    internal class CustomersAPI : IInMemoryStorage<ICustomer>
     {
         public CustomersAPI(List<ICustomer> document) : base(document)
         {

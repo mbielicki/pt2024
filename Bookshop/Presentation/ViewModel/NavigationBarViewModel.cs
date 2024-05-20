@@ -1,6 +1,5 @@
 ﻿using Bookshop.Presentation.Commands;
 using Bookshop.Presentation.Services;
-using Bookshop.Presentation.ViewModel;
 using System.Windows.Input;
 
 namespace Bookshop.Presentation.ViewModel

@@ -5,7 +5,6 @@ using Bookshop.Presentation.Services;
 using Bookshop.Presentation.ViewModel;
 using Bookshop.Presentation.Stores;
 using System.Collections.ObjectModel;
-using System.Windows.Input;
 
 namespace Bookshop.Presentation.ViewModel
 {

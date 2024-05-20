@@ -1,6 +1,6 @@
 ﻿using Bookshop.Data.Model.Entities;
 
-namespace BookshopTest.Data.SampleMockDataLayer
+namespace BookshopTest.DataGeneration.MockDataLayerSample
 {
     internal class SuppliersAPI : ISampleStorage<ISupplier>
     {

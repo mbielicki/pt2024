@@ -1,6 +1,7 @@
 ﻿using Bookshop.Data.API;
 using Bookshop.Data.Model;
 using Bookshop.Data.Model.Entities;
+using BookshopTest.DataGeneration.MockDataLayerInMemory;
 using static BookshopTest.DataGenerator;
 
 namespace BookshopTest
@@ -23,6 +24,34 @@ namespace BookshopTest
                 new InvoiceCustomizable(dataLayer, 100, DateTime.Parse("10/05/2024 12:00:00"))
             };
         }
+
+        internal static IEnumerable<ISupply> newSuppliesRandom(IDataLayer dataLayer)
+        {
+            return new List<ISupply>() {
+                new RandomSupply(dataLayer),
+                new RandomSupply(dataLayer),
+                new RandomSupply(dataLayer)
+            };
+        }
+        private class RandomSupply : ISupply
+        {
+            public int? Id { get; set; }
+            public ISupplier Supplier { get; set; }
+            public double Price { get; set; }
+            public DateTime DateTime { get; set; }
+            public Counter<IBook> Books { get; set; }
+            public RandomSupply(IDataLayer dataLayer)
+            {
+                Random r = new Random();
+                Books = newBooks(dataLayer);
+                Supplier = newSupplier(dataLayer);
+                Price = r.NextDouble() * 100 + 10;
+                DateTime = DateTime.Now;
+                Id = dataLayer.Supply.add(this);
+            }
+        }
+
+
         private class RandomInvoice : IInvoice
         {
             public int? Id { get; set; }

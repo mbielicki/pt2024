@@ -1,14 +1,14 @@
 ﻿using Bookshop.Data.API;
 using Bookshop.Data.Model;
 
-namespace BookshopTest.Data.SampleMockDataLayer
+namespace BookshopTest.DataGeneration.MockDataLayerInMemory
 {
-    internal abstract class ISampleStorage<T> : IStorageAPI<T> where T : IHasId
+    internal abstract class IInMemoryStorage<T> : IStorageAPI<T> where T : IHasId
     {
         protected List<T> _document;
         int nextId = 0;
 
-        public ISampleStorage(List<T> document)
+        public IInMemoryStorage(List<T> document)
         {
             _document = document;
         }

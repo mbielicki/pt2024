@@ -13,6 +13,12 @@ namespace BookshopTest
             customer.Id = dataLayer.Customers.add(customer);
             return customer;
         }
+        public static ISupplier newSupplier(IDataLayer dataLayer)
+        {
+            SimpleSupplier supplier = newSupplier();
+            supplier.Id = dataLayer.Suppliers.add(supplier);
+            return supplier;
+        }
         public static Counter<IBook> newBooks(IDataLayer dataLayer)
         {
             Counter<IBook> books = new Counter<IBook>();

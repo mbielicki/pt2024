@@ -1,6 +1,7 @@
 ﻿using Bookshop.Data.API;
 using Bookshop.Data.Database;
 using Bookshop.Logic;
+using Bookshop.Presentation.Factories;
 using Bookshop.Presentation.Model;
 using Bookshop.Presentation.Services;
 using Bookshop.Presentation.Stores;
@@ -16,8 +17,7 @@ namespace Bookshop
     public partial class App : Application
     {
         private readonly IModelLayer _modelLayer;
-        private readonly NavigationStore _navigationStore;
-        private NavigationBarViewModel _navigationBarViewModel;
+        private readonly NavigationFactory _navigationFactory;
 
         public App()
         {
@@ -25,74 +25,22 @@ namespace Bookshop
             ILogicLayer logicLayer = new LogicLayer(dataLayer);
             _modelLayer = new ModelLayer(logicLayer);
 
-            _navigationStore = new NavigationStore();
-            _navigationBarViewModel = new NavigationBarViewModel(
-                CreateCatalogueNavigationService(),
-                CreateCustomersNavigationService(),
-                CreateSuppliersNavigationService(),
-                CreateInvoicesNavigationService(),
-                CreateSupplyNavigationService(),
-                CreateInventoryNavigationService()
-                );
-        }
-
-        private NavigationService<InventoryViewModel> CreateInventoryNavigationService()
-        {
-            return new NavigationService<InventoryViewModel>(
-                _navigationStore,
-                () => new InventoryViewModel(_navigationBarViewModel, _modelLayer)
-                );
+            _navigationFactory = new NavigationFactory(_modelLayer);
         }
 
         protected override void OnStartup(StartupEventArgs e)
         {
-            NavigationService<CatalogueViewModel> catalogueNavigationService = CreateCatalogueNavigationService();
+            NavigationService<CatalogueViewModel> catalogueNavigationService 
+                = _navigationFactory.CreateCatalogueNavigationService();
             catalogueNavigationService.Navigate();
 
             MainWindow = new MainWindow()
             {
-                DataContext = new MainViewModel(_navigationStore)
+                DataContext = new MainViewModel(_navigationFactory.NavigationStore)
             };
             MainWindow.Show();
 
             base.OnStartup(e);
-        }
-
-        private NavigationService<CatalogueViewModel> CreateCatalogueNavigationService()
-        {
-            return new NavigationService<CatalogueViewModel>(
-                _navigationStore,
-                () => new CatalogueViewModel(_navigationBarViewModel, _modelLayer)
-                );
-        }
-        private NavigationService<CustomersViewModel> CreateCustomersNavigationService()
-        {
-            return new NavigationService<CustomersViewModel>(
-                _navigationStore,
-                () => new CustomersViewModel(_navigationBarViewModel, _modelLayer)
-                );
-        }
-        private NavigationService<InvoicesViewModel> CreateInvoicesNavigationService()
-        {
-            return new NavigationService<InvoicesViewModel>(
-                _navigationStore,
-                () => new InvoicesViewModel(_navigationBarViewModel, _modelLayer)
-                );
-        }
-
-        private NavigationService<SuppliersViewModel> CreateSuppliersNavigationService()
-        {
-            return new NavigationService<SuppliersViewModel>(
-                _navigationStore,
-                () => new SuppliersViewModel(_navigationBarViewModel, _modelLayer)
-                );
-        }
-        private NavigationService<SupplyViewModel> CreateSupplyNavigationService()
-        {
-            return new NavigationService<SupplyViewModel>(
-                _navigationStore,
-                () => new SupplyViewModel(_navigationBarViewModel, _modelLayer)
-                );
         }
 
     }

@@ -21,6 +21,12 @@
             Grid.Column="0"
             DataContext="{Binding NavigationBarViewModel}"/>
 
+        <Button
+            Grid.Row="0"
+            Grid.Column="1"
+            Content="Update" 
+            Command="{Binding UpdateBookCommand}" />
+
         <ScrollViewer
             Grid.Row="1"
             Grid.Column="0"

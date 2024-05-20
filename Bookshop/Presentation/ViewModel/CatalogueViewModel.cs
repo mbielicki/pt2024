@@ -5,6 +5,7 @@ using Bookshop.Presentation.Services;
 using Bookshop.Presentation.ViewModel;
 using Bookshop.Presentation.Stores;
 using System.Collections.ObjectModel;
+using System.Windows.Input;
 
 namespace Bookshop.Presentation.ViewModel
 {
@@ -13,6 +14,8 @@ namespace Bookshop.Presentation.ViewModel
         private readonly ObservableCollection<IBook> _catalogue;
         private IBook? _currentBook;
         private IModelLayer _modelLayer;
+
+        public ICommand UpdateBookCommand { get; }
 
         public IEnumerable<IBook> Catalogue => _catalogue;
 
@@ -35,6 +38,8 @@ namespace Bookshop.Presentation.ViewModel
 
             _modelLayer = modelLayer;
             _catalogue = _modelLayer.getBooksObservable();
+
+            UpdateBookCommand = new UpdateBookCommand(this, _modelLayer);
         }
     }
 }

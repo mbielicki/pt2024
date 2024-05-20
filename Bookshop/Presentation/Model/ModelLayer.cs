@@ -14,6 +14,7 @@ namespace Bookshop.Presentation.Model
         ObservableCollection<IInvoice> getInvoicesObservable();
         ObservableCollection<ISupplier> getSuppliersObservable();
         ObservableCollection<ISupply> getSuppliesObservable();
+        void updateBook(IBook book);
     }
     class ModelLayer : IModelLayer
     {
@@ -93,6 +94,11 @@ namespace Bookshop.Presentation.Model
         public IBook? getBook(int id)
         {
             return _logic.CatalogueService.get(id);
+        }
+
+        public void updateBook(IBook book)
+        {
+            _logic.CatalogueService.update(book);
         }
     }
 }

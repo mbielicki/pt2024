@@ -7,6 +7,7 @@ namespace Bookshop.Presentation.Model
 {
     public interface IModelLayer
     {
+        void addBook(IBook book);
         IBook? getBook(int key);
         ObservableCollection<IBook> getBooksObservable();
         ObservableCollection<ICustomer> getCustomersObservable();
@@ -99,6 +100,11 @@ namespace Bookshop.Presentation.Model
         public void updateBook(IBook book)
         {
             _logic.CatalogueService.update(book);
+        }
+
+        public void addBook(IBook book)
+        {
+            _logic.CatalogueService.add(book);
         }
     }
 }

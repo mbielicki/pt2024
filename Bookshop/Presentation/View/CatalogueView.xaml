@@ -21,11 +21,19 @@
             Grid.Column="0"
             DataContext="{Binding NavigationBarViewModel}"/>
 
-        <Button
+        <StackPanel 
+            Orientation="Horizontal"
             Grid.Row="0"
-            Grid.Column="1"
+            Grid.Column="1">
+            <Button
             Content="Update" 
             Command="{Binding UpdateBookCommand}" />
+            <Button
+            Content="Add" 
+            Command="{Binding AddBookCommand}" />
+            
+        </StackPanel>
+            
 
         <ScrollViewer
             Grid.Row="1"

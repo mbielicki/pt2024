@@ -17,9 +17,10 @@ namespace Bookshop.Presentation.Factories
                 CreateCustomersNavigationService(),
                 CreateSuppliersNavigationService(),
                 CreateInvoicesNavigationService(),
-                CreateSupplyNavigationService(),
+                CreateSuppliesNavigationService(),
                 CreateInventoryNavigationService(),
-                CreateBuyNavigationService()
+                CreateBuyNavigationService(),
+                CreateSupplyNavigationService()
                 );
         }
 
@@ -69,11 +70,11 @@ namespace Bookshop.Presentation.Factories
                 () => new SuppliersViewModel(_navigationBarViewModel, _modelLayer)
                 );
         }
-        public NavigationService<SupplyViewModel> CreateSupplyNavigationService()
+        public NavigationService<SuppliesViewModel> CreateSuppliesNavigationService()
         {
-            return new NavigationService<SupplyViewModel>(
+            return new NavigationService<SuppliesViewModel>(
                 _navigationStore,
-                () => new SupplyViewModel(_navigationBarViewModel, _modelLayer)
+                () => new SuppliesViewModel(_navigationBarViewModel, _modelLayer)
                 );
         }
         
@@ -82,6 +83,14 @@ namespace Bookshop.Presentation.Factories
             return new NavigationService<BuyViewModel>(
                 _navigationStore,
                 () => new BuyViewModel(_navigationBarViewModel, _modelLayer)
+                );
+        }
+        
+        public NavigationService<SupplyViewModel> CreateSupplyNavigationService()
+        {
+            return new NavigationService<SupplyViewModel>(
+                _navigationStore,
+                () => new SupplyViewModel(_navigationBarViewModel, _modelLayer)
                 );
         }
 

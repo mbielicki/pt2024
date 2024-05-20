@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         xmlns:view="clr-namespace:Bookshop.Presentation.View"
         xmlns:viewmodel="clr-namespace:Bookshop.Presentation.ViewModel"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="450" Width="900">
     <ContentControl Content="{Binding CurrentViewModel}" >
         <ContentControl.Resources>
             
@@ -27,8 +27,8 @@
                 <view:InvoicesView />
             </DataTemplate>
 
-            <DataTemplate DataType="{x:Type viewmodel:SupplyViewModel}" >
-                <view:SupplyView />
+            <DataTemplate DataType="{x:Type viewmodel:SuppliesViewModel}" >
+                <view:SuppliesView />
             </DataTemplate>
 
             <DataTemplate DataType="{x:Type viewmodel:InventoryViewModel}" >
@@ -37,6 +37,10 @@
 
             <DataTemplate DataType="{x:Type viewmodel:BuyViewModel}" >
                 <view:BuyView />
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type viewmodel:SupplyViewModel}" >
+                <view:SupplyView />
             </DataTemplate>
             
         </ContentControl.Resources>

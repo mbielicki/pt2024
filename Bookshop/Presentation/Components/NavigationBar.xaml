@@ -15,6 +15,7 @@
             <ColumnDefinition Width="auto"/>
             <ColumnDefinition Width="auto"/>
             <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="auto"/>
         </Grid.ColumnDefinitions>
 
         <Button 
@@ -39,8 +40,8 @@
         
         <Button 
             Grid.Column="4" 
-            Content="Supply" 
-            Command="{Binding NavigateSupplyCommand}" />
+            Content="Supplies" 
+            Command="{Binding NavigateSuppliesCommand}" />
         
         <Button 
             Grid.Column="5" 
@@ -51,6 +52,11 @@
             Grid.Column="6" 
             Content="Buy" 
             Command="{Binding NavigateBuyCommand}" />
+        
+        <Button 
+            Grid.Column="7" 
+            Content="Supply" 
+            Command="{Binding NavigateSupplyCommand}" />
         
     </Grid>
 </UserControl>

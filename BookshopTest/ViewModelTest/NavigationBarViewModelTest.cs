@@ -22,7 +22,7 @@ namespace BookshopTest.ViewModelTest
             Assert.IsTrue(vm.NavigateSuppliersCommand.CanExecute(null));
             Assert.IsTrue(vm.NavigateInventoryCommand.CanExecute(null));
             Assert.IsTrue(vm.NavigateInvoicesCommand.CanExecute(null));
-            Assert.IsTrue(vm.NavigateSupplyCommand.CanExecute(null));
+            Assert.IsTrue(vm.NavigateSuppliesCommand.CanExecute(null));
 
             vm.NavigateCatalogueCommand.Execute(null);
             Assert.IsInstanceOfType<CatalogueViewModel>(navigation.NavigationStore.CurrentViewModel);
@@ -34,8 +34,8 @@ namespace BookshopTest.ViewModelTest
             Assert.IsInstanceOfType<InventoryViewModel>(navigation.NavigationStore.CurrentViewModel);
             vm.NavigateInvoicesCommand.Execute(null);
             Assert.IsInstanceOfType<InvoicesViewModel>(navigation.NavigationStore.CurrentViewModel);
-            vm.NavigateSupplyCommand.Execute(null);
-            Assert.IsInstanceOfType<SupplyViewModel>(navigation.NavigationStore.CurrentViewModel);
+            vm.NavigateSuppliesCommand.Execute(null);
+            Assert.IsInstanceOfType<SuppliesViewModel>(navigation.NavigationStore.CurrentViewModel);
         }
     }
 }

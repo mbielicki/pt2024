@@ -1,5 +1,5 @@
-﻿using Data.Model;
-using Data.Model.Entities;
+﻿using Model.Model;
+using Model.Model.Entities;
 using Logic;
 using System.Collections.ObjectModel;
 

@@ -1,4 +1,4 @@
-﻿namespace Data.Model.Entities
+﻿namespace Model.Model.Entities
 {
     public interface ISupply : IEvent
     {

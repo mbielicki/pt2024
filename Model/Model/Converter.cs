@@ -1,7 +1,7 @@
 ﻿
-using Data.Model.Entities;
+using Model.Model.Entities;
 
-namespace Data.Model
+namespace Model.Model
 {
     internal static class Converter
     {

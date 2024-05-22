@@ -1,6 +1,6 @@
 ﻿using System.Collections;
 
-namespace Data.Model
+namespace Model.Model
 {
     public class Counter<E> : IEnumerable<KeyValuePair<E, int>>
     {

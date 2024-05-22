@@ -1,4 +1,4 @@
-﻿namespace Data.Model
+﻿namespace Model.Model
 {
     public interface IHasId
     {

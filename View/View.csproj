@@ -1,0 +1,48 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Data\Data.csproj" />
+    <ProjectReference Include="..\Logic\Logic.csproj" />
+    <ProjectReference Include="..\Model\Model.csproj" />
+    <ProjectReference Include="..\ViewModel\ViewModel.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ApplicationDefinition Update="App.xaml">
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="View\BuyView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\CustomersView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\InventoryView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\InvoicesView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\SuppliersView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\SuppliesView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\SupplyView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,33 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="netstandard-System.Data.Linq" Version="1.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Database\Model\Bookshop.designer.cs">
+      <DependentUpon>Bookshop.dbml</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Database\Model\Bookshop.dbml">
+      <SubType>Designer</SubType>
+      <LastGenOutput>Bookshop.designer.cs</LastGenOutput>
+      <Generator>MSLinqToSQLGenerator</Generator>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Service Include="{3259aa49-8aa1-44d3-9025-a0b520596a8c}" />
+  </ItemGroup>
+
+</Project>

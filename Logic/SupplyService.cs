@@ -1,18 +1,19 @@
 ﻿using Data.API;
 using Data.Model.Entities;
+using Logic.Model;
 
 namespace Logic
 {
-    public class SupplyService : IEventService<ISupply>
+    public class SupplyService : IEventService<Model.Entities.ISupply>
     {
         IDataLayer _dataLayer;
         public SupplyService(IDataLayer dataLayer) { _dataLayer = dataLayer; }
-        public ISupply get(int id)
+        public Model.Entities.ISupply get(int id)
         {
             ISupply? result = _dataLayer.Supply.get(i => i.Id.Equals(id));
             if (result == null)
                 throw new ItemIdNotFound();
-            return result;
+            return result.ToLogic();
         }
 
         public List<int> getIds()

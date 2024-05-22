@@ -1,11 +1,9 @@
 ﻿using Data.API;
-using Data.Model;
-using Data.Model.Entities;
-using Logic;
+using Logic.Model;
 
 namespace Logic.Suppliers
 {
-    public class SuppliersService : IService<ISupplier>
+    public class SuppliersService : IService<Model.Entities.ISupplier>
     {
         private IDataLayer _dataLayer;
         private SupplierValidator _validator;
@@ -15,23 +13,23 @@ namespace Logic.Suppliers
             _validator = new SupplierValidator(dataLayer);
         }
 
-        public int add(ISupplier supplier)
+        public int add(Model.Entities.ISupplier supplier)
         {
-            if (_validator.incorrectProperties(supplier))
+            if (_validator.incorrectProperties(supplier.ToData()))
                 throw new InvalidItemProperties();
 
-            if (_validator.alreadyInStorage(supplier))
+            if (_validator.alreadyInStorage(supplier.ToData()))
                 throw new ItemAlreadyExists();
 
-            return _dataLayer.Suppliers.add(supplier);
+            return _dataLayer.Suppliers.add(supplier.ToData());
         }
 
-        public ISupplier get(int supplierId)
+        public Model.Entities.ISupplier get(int supplierId)
         {
-            ISupplier? result = _dataLayer.Suppliers.get(s => s.Id.Equals(supplierId));
+            Data.Model.Entities.ISupplier? result = _dataLayer.Suppliers.get(s => s.Id.Equals(supplierId));
             if (result == null)
                 throw new ItemIdNotFound();
-            return result;
+            return result.ToLogic();
         }
 
         public List<int> getIds()
@@ -46,13 +44,13 @@ namespace Logic.Suppliers
             throw new ItemIdNotFound();
         }
 
-        public void update(ISupplier newSupplier)
+        public void update(Model.Entities.ISupplier newSupplier)
         {
-            if (_validator.incorrectProperties(newSupplier))
+            if (_validator.incorrectProperties(newSupplier.ToData()))
                 throw new InvalidItemProperties();
             try
             {
-                _dataLayer.Suppliers.update(newSupplier);
+                _dataLayer.Suppliers.update(newSupplier.ToData());
             }
             catch (NullReferenceException)
             {

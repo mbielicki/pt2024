@@ -1,9 +1,9 @@
 ﻿using Data.API;
-using Data.Model.Entities;
+using Logic.Model;
 
 namespace Logic.Customers
 {
-    public class CustomersService : IService<ICustomer>
+    public class CustomersService : IService<Model.Entities.ICustomer>
     {
         private IDataLayer _dataLayer;
         private CustomerValidator _validator;
@@ -13,23 +13,23 @@ namespace Logic.Customers
             _validator = new CustomerValidator(dataLayer);
         }
 
-        public int add(ICustomer customer)
+        public int add(Model.Entities.ICustomer customer)
         {
-            if (_validator.incorrectProperties(customer))
+            if (_validator.incorrectProperties(customer.ToData()))
                 throw new InvalidItemProperties();
 
-            if (_validator.alreadyInStorage(customer))
+            if (_validator.alreadyInStorage(customer.ToData()))
                 throw new ItemAlreadyExists();
 
-            return _dataLayer.Customers.add(customer);
+            return _dataLayer.Customers.add(customer.ToData());
         }
 
-        public ICustomer get(int customerId)
+        public Model.Entities.ICustomer get(int customerId)
         {
-            ICustomer? result = _dataLayer.Customers.get(c => c.Id.Equals(customerId));
+            Data.Model.Entities.ICustomer? result = _dataLayer.Customers.get(c => c.Id.Equals(customerId));
             if (result == null)
                 throw new CustomerIdNotFound();
-            return result;
+            return result.ToLogic();
         }
 
         public List<int> getIds() 
@@ -44,13 +44,13 @@ namespace Logic.Customers
             throw new ItemIdNotFound();
         }
 
-        public void update(ICustomer newCustomer)
+        public void update(Model.Entities.ICustomer newCustomer)
         {
-            if (_validator.incorrectProperties(newCustomer))
+            if (_validator.incorrectProperties(newCustomer.ToData()))
                 throw new InvalidItemProperties();
             try
             {
-                _dataLayer.Customers.update(newCustomer);
+                _dataLayer.Customers.update(newCustomer.ToData());
             }
             catch (NullReferenceException)
             {

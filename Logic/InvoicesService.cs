@@ -1,19 +1,19 @@
 ﻿using Data.API;
-using Data.Model;
 using Data.Model.Entities;
+using Logic.Model;
 
 namespace Logic
 {
-    public class InvoicesService : IEventService<IInvoice>
+    public class InvoicesService : IEventService<Model.Entities.IInvoice>
     {
         IDataLayer _dataLayer;
         public InvoicesService(IDataLayer dataLayer) { _dataLayer = dataLayer; }
-        public IInvoice get(int id)
+        public Model.Entities.IInvoice get(int id)
         {
             IInvoice? result = _dataLayer.Invoices.get(i => i.Id.Equals(id));
             if (result == null)
                 throw new ItemIdNotFound();
-            return result;
+            return result.ToLogic();
         }
 
         public List<int> getIds()

@@ -1,8 +1,8 @@
 ﻿using Data.API;
-using Data.Model;
-using Data.Model.Entities;
 using Logic.Catalogue;
 using Logic.Customers;
+using Logic.Model;
+using Logic.Model.Entities;
 
 namespace Logic
 {
@@ -45,7 +45,7 @@ namespace Logic
 
             double price = checkPrice(books);
             SimpleInvoice invoice = new SimpleInvoice(null, bookRefs, customer, price, DateTime.Now);
-            return _dataLayer.Invoices.add(invoice);
+            return _dataLayer.Invoices.add(invoice.ToData());
         }
         public double checkPrice(Counter<int> books)
         {

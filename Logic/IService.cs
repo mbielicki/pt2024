@@ -1,5 +1,5 @@
-﻿using Data.Model;
-using Data.Model.Entities;
+﻿using Logic.Model;
+using Logic.Model.Entities;
 
 namespace Logic
 {

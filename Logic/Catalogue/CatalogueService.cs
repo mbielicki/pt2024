@@ -1,9 +1,9 @@
 ﻿using Data.API;
-using Data.Model.Entities;
+using Logic.Model;
 
 namespace Logic.Catalogue
 {
-    public class CatalogueService : IService<IBook>
+    public class CatalogueService : IService<Model.Entities.IBook>
     {
         private IDataLayer _dataLayer;
         private BookValidator _validator;
@@ -12,23 +12,23 @@ namespace Logic.Catalogue
             _dataLayer = dataLayer;
             _validator = new BookValidator(dataLayer);
         }
-        public int add(IBook book)
+        public int add(Model.Entities.IBook book)
         {
-            if (_validator.incorrectProperties(book))
+            if (_validator.incorrectProperties(book.ToData()))
                 throw new InvalidItemProperties();
 
-            if (_validator.alreadyInCatalogue(book))
+            if (_validator.alreadyInCatalogue(book.ToData()))
                 throw new ItemAlreadyExists();
 
-            return _dataLayer.Catalogue.add(book);
+            return _dataLayer.Catalogue.add(book.ToData());
         }
 
-        public IBook get(int bookId)
+        public Model.Entities.IBook get(int bookId)
         {
-            IBook? result = _dataLayer.Catalogue.get(b => b.Id.Equals(bookId));
+            Data.Model.Entities.IBook? result = _dataLayer.Catalogue.get(b => b.Id.Equals(bookId));
             if (result == null)
                 throw new BookIdNotFound();
-            return result;
+            return result.ToLogic();
         }
 
         public List<int> getIds()
@@ -43,13 +43,13 @@ namespace Logic.Catalogue
             throw new ItemIdNotFound();
         }
 
-        public void update(IBook newBook)
+        public void update(Model.Entities.IBook newBook)
         {
-            if (_validator.incorrectProperties(newBook))
+            if (_validator.incorrectProperties(newBook.ToData()))
                 throw new InvalidItemProperties();
             try
             {
-                _dataLayer.Catalogue.update(newBook);
+                _dataLayer.Catalogue.update(newBook.ToData());
 
             }
             catch (NullReferenceException)

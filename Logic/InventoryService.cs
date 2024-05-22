@@ -1,6 +1,6 @@
 ﻿using Data.API;
-using Data.Model;
-using Data.Model.Entities;
+using Logic.Model;
+using Logic.Model.Entities;
 using Logic.Catalogue;
 using Logic.Suppliers;
 
@@ -58,7 +58,7 @@ namespace Logic
             SimpleSupply registerEntry = new SimpleSupply(
                 null, books, supplier, price, DateTime.Now);
 
-            _dataLayer.Supply.add(registerEntry);
+            _dataLayer.Supply.add(registerEntry.ToData());
         }
         public IEnumerable<IInventoryEntry> getAll()
         {

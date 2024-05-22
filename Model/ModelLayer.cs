@@ -40,7 +40,7 @@ namespace Presentation.Model
             IEnumerable<int> ids = _logic.SupplyService.getIds();
             foreach (int id in ids)
             {
-                supplies.Add(_logic.SupplyService.get(id));
+                supplies.Add(_logic.SupplyService.get(id).ToData());
             }
 
             return supplies;
@@ -52,7 +52,7 @@ namespace Presentation.Model
             IEnumerable<int> ids = _logic.CatalogueService.getIds();
             foreach (int id in ids)
             {
-                books.Add(_logic.CatalogueService.get(id));
+                books.Add(_logic.CatalogueService.get(id).ToData());
             }
 
             return books;
@@ -64,7 +64,7 @@ namespace Presentation.Model
             IEnumerable<int> ids = _logic.CustomersService.getIds();
             foreach (int id in ids)
             {
-                customers.Add(_logic.CustomersService.get(id));
+                customers.Add(_logic.CustomersService.get(id).ToData());
             }
 
             return customers;
@@ -76,7 +76,7 @@ namespace Presentation.Model
             IEnumerable<int> ids = _logic.InvoicesService.getIds();
             foreach (int id in ids)
             {
-                invoices.Add(_logic.InvoicesService.get(id));
+                invoices.Add(_logic.InvoicesService.get(id).ToData());
             }
 
             return invoices;
@@ -88,46 +88,46 @@ namespace Presentation.Model
             IEnumerable<int> ids = _logic.SuppliersService.getIds();
             foreach (int id in ids)
             {
-                suppliers.Add(_logic.SuppliersService.get(id));
+                suppliers.Add(_logic.SuppliersService.get(id).ToData());
             }
             return suppliers;
         }
 
         public ObservableCollection<IInventoryEntry> getInventoryObservable()
         {
-            ObservableCollection<IInventoryEntry> inventory = [.. _logic.InventoryService.getAll()];
+            ObservableCollection<IInventoryEntry> inventory = [.. _logic.InventoryService.getAll().ToData()];
             return inventory;
         }
 
         public IBook? getBook(int id)
         {
-            return _logic.CatalogueService.get(id);
+            return _logic.CatalogueService.get(id).ToData();
         }
 
         public void updateBook(IBook book)
         {
-            _logic.CatalogueService.update(book);
+            _logic.CatalogueService.update(book.ToLogic());
         }
 
         public void addBook(IBook book)
         {
-            _logic.CatalogueService.add(book);
+            _logic.CatalogueService.add(book.ToLogic());
         }
         public void updateCustomer(ICustomer customer)
         {
-            _logic.CustomersService.update(customer);
+            _logic.CustomersService.update(customer.ToLogic());
         }
         public void addCustomer(ICustomer customer)
         {
-            _logic.CustomersService.add(customer);
+            _logic.CustomersService.add(customer.ToLogic());
         }
         public void updateSupplier(ISupplier supplier)
         {
-            _logic.SuppliersService.update(supplier);
+            _logic.SuppliersService.update(supplier.ToLogic());
         }
         public void addSupplier(ISupplier supplier)
         {
-            _logic.SuppliersService.add(supplier);
+            _logic.SuppliersService.add(supplier.ToLogic());
         }
 
         public void Buy(int customer, IEnumerable<IInventoryEntry> shoppingCart)
@@ -141,7 +141,7 @@ namespace Presentation.Model
                 books.Set(book, count);
             }
 
-            _logic.BuyService.buy(customer, books);
+            _logic.BuyService.buy(customer, books.ToLogic());
         }
 
         public double CheckPrice(ObservableCollection<IInventoryEntry> shoppingCart)
@@ -155,7 +155,7 @@ namespace Presentation.Model
                 books.Set(book, count);
             }
 
-            return _logic.BuyService.checkPrice(books);
+            return _logic.BuyService.checkPrice(books.ToLogic());
         }
 
         public void Supply(int supplier, IEnumerable<IInventoryEntry> shoppingCart, double price)
@@ -169,7 +169,7 @@ namespace Presentation.Model
                 books.Set(book, count);
             }
 
-            _logic.InventoryService.supply(books, supplier, price);
+            _logic.InventoryService.supply(books.ToLogic(), supplier, price);
         }
     }
 }

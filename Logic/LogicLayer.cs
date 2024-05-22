@@ -1,5 +1,5 @@
 ﻿using Data.API;
-using Data.Model.Entities;
+using Logic.Model.Entities;
 using Logic.Catalogue;
 using Logic.Customers;
 using Logic.Suppliers;

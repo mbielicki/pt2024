@@ -1,12 +1,12 @@
 ﻿using Data.API;
 using Data.Model;
 using Data.Model.Entities;
-
+using Logic.Model;
 namespace BookshopTest.DataGeneration.MockDataLayerSample
 {
     public class SampleMockDataLayer : IDataLayer
     {
-        Counter<int> inventory = new Counter<int>();
+        Data.Model.Counter<int> inventory = new Data.Model.Counter<int>();
         List<IBook> catalogue = new List<IBook>();
         List<ICustomer> customers = new List<ICustomer>();
         List<ISupplier> suppliers = new List<ISupplier>();
@@ -35,18 +35,18 @@ namespace BookshopTest.DataGeneration.MockDataLayerSample
 
         private void AddSampleMockData()
         {
-            IBook newBook = DataGenerator.newBook();
+            IBook newBook = DataGenerator.newBook().ToData();
             int bookId = Catalogue.add(newBook);
 
-            ICustomer newCustomer = DataGenerator.newCustomer();
+            ICustomer newCustomer = DataGenerator.newCustomer().ToData();
             Customers.add(newCustomer);
 
-            ISupplier newSupplier = DataGenerator.newSupplier();
+            ISupplier newSupplier = DataGenerator.newSupplier().ToData();
             Suppliers.add(newSupplier);
 
             Inventory.add(bookId, 10);
 
-            Counter<IBook> books = new Counter<IBook>();
+            Data.Model.Counter<IBook> books = new Data.Model.Counter<IBook>();
             books.Set(newBook, 2);
 
             Supply.add(new SimpleSupply()

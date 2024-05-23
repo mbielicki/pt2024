@@ -1,7 +1,8 @@
 ﻿using Data.API;
-using Data.Model.Entities;
+using Logic.Model.Entities;
 using Logic;
 using BookshopTest.DataGeneration.MockDataLayerInMemory;
+using Logic.Model;
 
 namespace BookshopTest.LogicTest
 {
@@ -21,7 +22,7 @@ namespace BookshopTest.LogicTest
             IEnumerable<IInvoice> invoicesList = EventGenerator.newInvoicesHardCoded(dataLayer);
 
             IInvoice firstInvoice = invoicesList.First();
-            firstInvoice.Id = dataLayer.Invoices.add(firstInvoice);
+            firstInvoice.Id = dataLayer.Invoices.add(firstInvoice.ToData());
 
             Assert.AreEqual(firstInvoice.Price, invoices.get((int) firstInvoice.Id).Price);
         }

@@ -1,10 +1,9 @@
 ﻿using Data.API;
 using Data.Model;
 using Data.Model.Entities;
-using BookshopTest.DataGeneration.MockDataLayerInMemory;
-using static BookshopTest.DataGenerator;
+using static DataTest.DataGenerator;
 
-namespace BookshopTest
+namespace DataTest
 {
     internal static class EventGenerator
     {

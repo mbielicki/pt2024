@@ -1,5 +1,5 @@
 ﻿using Presentation.Commands;
-using Data.Model.Entities;
+using Model.Model.Entities;
 using Presentation.Model;
 using Presentation.Services;
 using Presentation.ViewModel;

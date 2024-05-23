@@ -1,6 +1,4 @@
-﻿using Data.Model.Entities;
-using Logic;
-using Presentation.Model;
+﻿using Presentation.Model;
 using Presentation.ViewModel;
 using System.ComponentModel;
 using System.Windows;

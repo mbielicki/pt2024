@@ -1,7 +1,7 @@
 ﻿
 namespace Logic.Model
 {
-    internal static class Converter
+    public static class Converter
     {
         public static Data.Model.Entities.IBook ToData(this Entities.IBook entity)
         {

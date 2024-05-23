@@ -1,6 +1,6 @@
 ﻿using Data.API;
-using Data.Model;
-using Data.Model.Entities;
+using Logic.Model;
+using Logic.Model.Entities;
 using Logic;
 using BookshopTest.DataGeneration.MockDataLayerInMemory;
 

@@ -1,6 +1,5 @@
-﻿using Data.Model.Entities;
+﻿using Model.Model.Entities;
 using Presentation.Model;
-using Presentation.ViewModel;
 using System.Collections.ObjectModel;
 
 namespace Presentation.ViewModel

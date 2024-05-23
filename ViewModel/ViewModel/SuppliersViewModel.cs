@@ -1,12 +1,8 @@
 ﻿using Presentation.Commands;
-using Data.Model.Entities;
+using Model.Model.Entities;
 using Presentation.Model;
-using Presentation.Services;
-using Presentation.ViewModel;
-using Presentation.Stores;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
-using Data.Database.Model;
 
 namespace Presentation.ViewModel
 {

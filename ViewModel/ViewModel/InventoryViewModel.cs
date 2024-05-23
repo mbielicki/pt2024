@@ -1,4 +1,4 @@
-﻿using Data.Model.Entities;
+﻿using Model.Model.Entities;
 using Presentation.Model;
 using System.Collections.ObjectModel;
 

@@ -1,38 +1,11 @@
-﻿using Data.API;
-using Data.Model;
-using Data.Model.Entities;
+﻿using Model.Model;
+using Model.Model.Entities;
 using System.Text;
 
 namespace BookshopTest
 {
     internal static class DataGenerator
     {
-        public static ICustomer newCustomer(IDataLayer dataLayer)
-        {
-            SimpleCustomer customer = newCustomer();
-            customer.Id = dataLayer.Customers.add(customer);
-            return customer;
-        }
-        public static ISupplier newSupplier(IDataLayer dataLayer)
-        {
-            SimpleSupplier supplier = newSupplier();
-            supplier.Id = dataLayer.Suppliers.add(supplier);
-            return supplier;
-        }
-        public static Counter<IBook> newBooks(IDataLayer dataLayer)
-        {
-            Counter<IBook> books = new Counter<IBook>();
-            Random r = new Random();
-            int num = r.Next(2, 6);
-
-            for (int i = 0; i < num; i++)
-            {
-                SimpleBook book = newBook();
-                book.Id = dataLayer.Catalogue.add(book);
-                books.Set(book, r.Next(1, 5));
-            }
-            return books;
-        }
         public static Counter<IBook> newBooks()
         {
             Counter<IBook> books = new Counter<IBook>();

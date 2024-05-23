@@ -1,10 +1,9 @@
 ﻿using Presentation.Commands;
-using Data.Model.Entities;
 using Presentation.Model;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
-using Logic;
 using System.Windows;
+using Model.Model.Entities;
 
 namespace Presentation.ViewModel
 {

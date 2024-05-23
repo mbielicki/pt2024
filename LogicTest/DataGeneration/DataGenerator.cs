@@ -1,6 +1,7 @@
 ﻿using Data.API;
-using Data.Model;
-using Data.Model.Entities;
+using Logic.Model;
+using Logic.Model.Entities;
+using static Logic.Model.Converter;
 using System.Text;
 
 namespace BookshopTest
@@ -10,13 +11,13 @@ namespace BookshopTest
         public static ICustomer newCustomer(IDataLayer dataLayer)
         {
             SimpleCustomer customer = newCustomer();
-            customer.Id = dataLayer.Customers.add(customer);
+            customer.Id = dataLayer.Customers.add(customer.ToData());
             return customer;
         }
         public static ISupplier newSupplier(IDataLayer dataLayer)
         {
             SimpleSupplier supplier = newSupplier();
-            supplier.Id = dataLayer.Suppliers.add(supplier);
+            supplier.Id = dataLayer.Suppliers.add(supplier.ToData());
             return supplier;
         }
         public static Counter<IBook> newBooks(IDataLayer dataLayer)
@@ -28,7 +29,7 @@ namespace BookshopTest
             for (int i = 0; i < num; i++)
             {
                 SimpleBook book = newBook();
-                book.Id = dataLayer.Catalogue.add(book);
+                book.Id = dataLayer.Catalogue.add(book.ToData());
                 books.Set(book, r.Next(1, 5));
             }
             return books;

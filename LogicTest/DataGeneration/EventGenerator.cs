@@ -1,6 +1,6 @@
 ﻿using Data.API;
-using Data.Model;
-using Data.Model.Entities;
+using Logic.Model;
+using Logic.Model.Entities;
 using BookshopTest.DataGeneration.MockDataLayerInMemory;
 using static BookshopTest.DataGenerator;
 
@@ -47,7 +47,7 @@ namespace BookshopTest
                 Supplier = newSupplier(dataLayer);
                 Price = r.NextDouble() * 100 + 10;
                 DateTime = DateTime.Now;
-                Id = dataLayer.Supply.add(this);
+                Id = dataLayer.Supply.add(this.ToData());
             }
         }
 
@@ -66,7 +66,7 @@ namespace BookshopTest
                 Customer = newCustomer(dataLayer);
                 Price = r.NextDouble() * 100 + 10;
                 DateTime = DateTime.Now;
-                Id = dataLayer.Invoices.add(this);
+                Id = dataLayer.Invoices.add(this.ToData());
             }
         }
         private class InvoiceCustomizable : IInvoice

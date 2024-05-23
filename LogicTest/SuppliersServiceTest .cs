@@ -1,5 +1,5 @@
 ﻿using Data.API;
-using Data.Model.Entities;
+using Logic.Model.Entities;
 using Logic;
 using BookshopTest.DataGeneration.MockDataLayerInMemory;
 
@@ -40,6 +40,7 @@ namespace BookshopTest.LogicTest
 
             ISupplier supplier = DataGenerator.newSupplier();
             int id = suppliers.add(supplier);
+            supplier.Id = id;
 
             ISupplier newSupplier = DataGenerator.copy(supplier);
             newSupplier.ContactInfo = "supplier@company.com";

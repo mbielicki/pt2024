@@ -3,7 +3,7 @@ using Data.Model;
 using Data.Model.Entities;
 using System.Text;
 
-namespace BookshopTest
+namespace DataTest
 {
     internal static class DataGenerator
     {

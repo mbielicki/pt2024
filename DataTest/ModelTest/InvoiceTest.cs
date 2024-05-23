@@ -1,5 +1,6 @@
 ﻿using Data.Model;
 using Data.Model.Entities;
+using DataTest;
 
 namespace BookshopTest.DataTest.ModelTest
 {

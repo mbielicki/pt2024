@@ -3,6 +3,7 @@ using Logic.Model.Entities;
 using Logic.Catalogue;
 using Logic.Customers;
 using Logic.Suppliers;
+using Data.Database;
 
 namespace Logic
 {
@@ -31,5 +32,10 @@ namespace Logic
         public IInventoryService InventoryService { get; }
 
         public IBuyService BuyService { get; }
+
+        public static ILogicLayer GetInstance()
+        {
+            return new LogicLayer(new DatabaseDataLayer(ConnectionString.Get()));
+        }
     }
 }

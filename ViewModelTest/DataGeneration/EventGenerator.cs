@@ -1,36 +1,34 @@
-﻿using Data.API;
-using Data.Model;
-using Data.Model.Entities;
-using BookshopTest.DataGeneration.MockDataLayerInMemory;
+﻿using Model.Model;
+using Model.Model.Entities;
 using static BookshopTest.DataGenerator;
 
 namespace BookshopTest
 {
     internal static class EventGenerator
     {
-        public static IEnumerable<IInvoice> newInvoicesRandom(IDataLayer dataLayer)
+        public static IEnumerable<IInvoice> newInvoicesRandom()
         {
             return new List<IInvoice>() {
-                new RandomInvoice(dataLayer),
-                new RandomInvoice(dataLayer),
-                new RandomInvoice(dataLayer)
+                new RandomInvoice(),
+                new RandomInvoice(),
+                new RandomInvoice()
             };
         }
-        public static IEnumerable<IInvoice> newInvoicesHardCoded(IDataLayer dataLayer)
+        public static IEnumerable<IInvoice> newInvoicesHardCoded()
         {
             return new List<IInvoice>() {
-                new InvoiceCustomizable(dataLayer, 20, DateTime.Parse("20/03/2022 10:00:00")),
-                new InvoiceCustomizable(dataLayer, 30, DateTime.Parse("25/04/2023 16:00:00")),
-                new InvoiceCustomizable(dataLayer, 100, DateTime.Parse("10/05/2024 12:00:00"))
+                new InvoiceCustomizable(20, DateTime.Parse("20/03/2022 10:00:00")),
+                new InvoiceCustomizable(30, DateTime.Parse("25/04/2023 16:00:00")),
+                new InvoiceCustomizable(100, DateTime.Parse("10/05/2024 12:00:00"))
             };
         }
 
-        internal static IEnumerable<ISupply> newSuppliesRandom(IDataLayer dataLayer)
+        internal static IEnumerable<ISupply> newSuppliesRandom()
         {
             return new List<ISupply>() {
-                new RandomSupply(dataLayer),
-                new RandomSupply(dataLayer),
-                new RandomSupply(dataLayer)
+                new RandomSupply(),
+                new RandomSupply(),
+                new RandomSupply()
             };
         }
         private class RandomSupply : ISupply
@@ -40,14 +38,14 @@ namespace BookshopTest
             public double Price { get; set; }
             public DateTime DateTime { get; set; }
             public Counter<IBook> Books { get; set; }
-            public RandomSupply(IDataLayer dataLayer)
+            public RandomSupply()
             {
                 Random r = new Random();
-                Books = newBooks(dataLayer);
-                Supplier = newSupplier(dataLayer);
+                Books = newBooks();
+                Supplier = newSupplier();
                 Price = r.NextDouble() * 100 + 10;
                 DateTime = DateTime.Now;
-                Id = dataLayer.Supply.add(this);
+                Id = 0;
             }
         }
 
@@ -59,14 +57,13 @@ namespace BookshopTest
             public double Price { get; set; }
             public DateTime DateTime { get; set; }
             public Counter<IBook> Books { get; set; }
-            public RandomInvoice(IDataLayer dataLayer)
+            public RandomInvoice()
             {
                 Random r = new Random();
-                Books = newBooks(dataLayer);
-                Customer = newCustomer(dataLayer);
+                Books = newBooks();
+                Customer = newCustomer();
                 Price = r.NextDouble() * 100 + 10;
                 DateTime = DateTime.Now;
-                Id = dataLayer.Invoices.add(this);
             }
         }
         private class InvoiceCustomizable : IInvoice
@@ -76,11 +73,11 @@ namespace BookshopTest
             public double Price { get; set; }
             public DateTime DateTime { get; set; }
             public Counter<IBook> Books { get; set; }
-            public InvoiceCustomizable(IDataLayer dataLayer, double price, DateTime time)
+            public InvoiceCustomizable(double price, DateTime time)
             {
                 Id = null;
-                Books = newBooks(dataLayer);
-                Customer = newCustomer(dataLayer);
+                Books = newBooks();
+                Customer = newCustomer();
                 Price = price;
                 DateTime = time;
             }

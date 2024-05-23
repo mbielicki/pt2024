@@ -1,7 +1,6 @@
-﻿using Data.Model.Entities;
+﻿using Model.Model.Entities;
 using Presentation.Model;
 using System.Collections.ObjectModel;
-using BookshopTest.DataGeneration.MockDataLayerInMemory;
 
 namespace BookshopTest.DataGeneration
 {
@@ -78,10 +77,10 @@ namespace BookshopTest.DataGeneration
             ];
 
 
-            var newInvoices = EventGenerator.newInvoicesRandom(new InMemoryMockDataLayer());
+            var newInvoices = EventGenerator.newInvoicesRandom();
             _invoices = [.. newInvoices];
 
-            var newSupplies = EventGenerator.newSuppliesRandom(new InMemoryMockDataLayer());
+            var newSupplies = EventGenerator.newSuppliesRandom();
             _supplies = [.. newSupplies];
 
         }

@@ -141,7 +141,22 @@ namespace Presentation.Model
                 books.Set(book, count);
             }
 
-            _logic.BuyService.buy(customer, books.ToLogic());
+            try
+            {
+                _logic.BuyService.buy(customer, books.ToLogic());
+            }
+            catch (Logic.CustomerIdNotFound)
+            {
+                throw new Model.CustomerIdNotFound();
+            }
+            catch (Logic.BookIdNotFound)
+            {
+                throw new Model.BookIdNotFound();
+            }
+            catch (Logic.NotEnoughItemsInInventory e)
+            {
+                throw new Model.NotEnoughItemsInInventory(e.Id);
+            }
         }
 
         public double CheckPrice(ObservableCollection<IInventoryEntry> shoppingCart)
@@ -169,7 +184,31 @@ namespace Presentation.Model
                 books.Set(book, count);
             }
 
-            _logic.InventoryService.supply(books.ToLogic(), supplier, price);
+            try
+            {
+                _logic.InventoryService.supply(books.ToLogic(), supplier, price);
+            }
+            catch (Logic.CustomerIdNotFound)
+            {
+                throw new CustomerIdNotFound();
+            }
+            catch (Logic.BookIdNotFound)
+            {
+                throw new BookIdNotFound();
+            }
+            catch (Logic.EmptyBookCounterException)
+            {
+                throw new EmptyBookCounterException();
+            }
+            catch (Logic.BookWithCountZeroInCounterException e)
+            {
+                throw new BookWithCountZeroInCounterException(e.Id);
+            }
+        }
+
+        public static IModelLayer GetInstance()
+        {
+            return new ModelLayer(LogicLayer.GetInstance());
         }
     }
 }

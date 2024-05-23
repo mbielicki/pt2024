@@ -1,7 +1,6 @@
-﻿using Data.Model.Entities;
+﻿using Model.Model.Entities;
 using Presentation.Model;
 using System.Collections.ObjectModel;
-using BookshopTest.DataGeneration.MockDataLayerInMemory;
 
 namespace BookshopTest.DataGeneration
 {
@@ -57,7 +56,7 @@ namespace BookshopTest.DataGeneration
 
         public ObservableCollection<IInvoice> getInvoicesObservable()
         {
-            var newInvoices = EventGenerator.newInvoicesRandom(new InMemoryMockDataLayer());
+            var newInvoices = EventGenerator.newInvoicesRandom();
             return [..newInvoices];
         }
 
@@ -78,7 +77,7 @@ namespace BookshopTest.DataGeneration
 
         public ObservableCollection<ISupply> getSuppliesObservable()
         {
-            var newSupplies = EventGenerator.newSuppliesRandom(new InMemoryMockDataLayer());
+            var newSupplies = EventGenerator.newSuppliesRandom();
             return [.. newSupplies];
         }
 
@@ -113,7 +112,6 @@ namespace BookshopTest.DataGeneration
 
         public void addSupplier(ISupplier supplier)
         {
-
         }
 
         public void Buy(int customer, IEnumerable<IInventoryEntry> shoppingCart)
